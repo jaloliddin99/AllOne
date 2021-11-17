@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="@dimen/margin_padding_8dp"
+    android:layout_marginBottom="32dp"
+    android:background="@drawable/background_grey"
+    android:layout_marginTop="@dimen/margin_padding_8dp"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.viewpager.widget.ViewPager
+        android:layout_width="match_parent"
+        android:id="@+id/viewPager"
+        android:layout_height="200dp"/>
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/indicator"
+        app:ci_drawable_unselected="@drawable/image_unselected"
+        app:ci_drawable="@drawable/image_selected"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/placeName"
+        android:text="Жемчужина Азии"
+        android:textSize="@dimen/text_size_18sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:orientation="horizontal">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/destinationName"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Место: Кайраташ "/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/time"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Место: Кайраташ "/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/numberOfPeople"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Место: Кайраташ "/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:id="@+id/transport"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:text="Место: Кайраташ "/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Цена: 230 000 сум/человек"
+        android:textColor="@color/green"
+        android:id="@+id/mony"
+        android:textSize="@dimen/text_size_15sp"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginTop="@dimen/margin_padding_12dp"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/back"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/more_details"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

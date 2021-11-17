@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.taxiCity.stations.FragmentStations"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/margin_padding_4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_24dp"
+            android:paddingVertical="@dimen/margin_padding_8dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/stationss"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/icon_size_20dp"
+                android:src="@drawable/ic_metka" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_8dp"
+                android:layout_weight="11"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/startAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/inter_medium"
+                    android:maxLines="1"
+                    android:text="Абдуллы Кадыри 33"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/margin_padding_16"
+                    android:background="@color/dark_grey" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:clipToPadding="false"
+            android:overScrollMode="never" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/newStation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_16"
+            android:drawableStart="@drawable/ic_img2"
+            android:drawablePadding="@dimen/dimens_10dp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/enter_station"
+            android:textColor="@color/green"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.legacy.widget.Space
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/dimens_0dp" />
+
+
+            <View
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/margin_padding_8dp"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:layout_weight="11"
+                android:background="@color/dark_grey" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_16"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/icon_size_20dp"
+                android:src="@drawable/ic_location" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/endAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_padding_8dp"
+                android:layout_weight="10"
+                android:fontFamily="@font/inter_regular"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Домой"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/delete_station"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_delete" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</RelativeLayout>

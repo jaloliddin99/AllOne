@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    tools:context=".fragments.medTurism.search.FragmentMedSearch"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height_56dp"
+            android:id="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_medium"
+                android:id="@+id/title"
+                android:text="Выберите категорию"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/margin_padding_16"
+                android:layout_height="@dimen/margin_padding_16"
+                android:layout_alignParentEnd="true"
+                android:src="@drawable/ic_ix_shape"
+                android:background="?android:selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_padding_24dp"
+                app:tint="@color/black"
+                android:id="@+id/cancel"/>
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:background="@drawable/bg_grey_rounded"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="@string/search" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:text="Весь Узбекистан"
+
+            android:layout_marginVertical="@dimen/margin_padding_12dp"
+            android:textSize="@dimen/text_size_15sp"
+            android:drawablePadding="@dimen/margin_padding_12dp"
+            android:id="@+id/headerText"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="#1A272727"/>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            app:layout_constraintTop_toBottomOf="@id/search_view"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            tools:listitem="@layout/layout_clinic_dropdown_item"
+            android:id="@+id/recyclerView"/>
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <include layout="@layout/loader_lottie"
+       android:id="@+id/loader"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

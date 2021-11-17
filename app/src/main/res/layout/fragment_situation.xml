@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".fragments.taxiCity.situation.FragmentSituation"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/situation"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:background="@drawable/bg_grey_rounded">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:drawableStart="@drawable/ic_air_contidionar_city"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/air_conditioner"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:checked="true"
+            android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:thumb="@drawable/thumb2_no_block"
+            app:track="@drawable/thumb_bg" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:background="@drawable/bg_grey_rounded">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_24dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:drawableStart="@drawable/ic_this_is_a_man"
+            android:drawablePadding="15dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/order_for_your_friend"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="15sp" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:thumb="@drawable/thumb2_no_block"
+            app:track="@drawable/thumb_bg" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/other"
+        android:textColor="@color/black"
+        android:layout_marginStart="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_4dp"
+        android:textSize="@dimen/text_size_13sp"
+        android:fontFamily="@font/inter_bold"
+        android:layout_centerInParent="true"/>
+
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="@drawable/bg_grey_rounded"
+        android:layout_marginTop="@dimen/margin_padding_4dp"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:hint="@string/type_something"
+        android:padding="@dimen/margin_padding_12dp"
+        android:gravity="start"
+        android:max="500"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/margin_padding_16"
+    android:background="@drawable/white_background_top_corner"
+    android:paddingTop="@dimen/margin_padding_24dp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/text_size_18sp"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/receiver"
+        android:textColor="@color/black"/>
+
+    <com.santalu.maskara.widget.MaskEditText
+        android:id="@+id/receiverName"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_56dp"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:animateLayoutChanges="true"
+        android:background="@drawable/bg_grey_rounded"
+        android:drawableEnd="@drawable/ic_line_and_contact"
+        android:fontFamily="@font/inter_regular"
+        android:hint="@string/enterSomething"
+        android:imeOptions="actionDone"
+        android:importantForAutofill="no"
+        android:inputType="phone"
+        android:paddingHorizontal="@dimen/margin_padding_24dp"
+        android:textSize="@dimen/text_size_14sp"
+        app:mask="+998 9_ ___ __ __" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/comments"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_15sp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:id="@+id/receiverComment"
+        android:background="@drawable/bg_grey_rounded"
+        android:gravity="start"
+        android:fontFamily="@font/inter_regular"
+        android:hint="@string/type_something"
+        android:max="500"
+        android:padding="@dimen/margin_padding_12dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_56dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:id="@+id/order"
+        android:layout_marginVertical="@dimen/margin_padding_24dp">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_18sp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/orders"
+                android:textColor="@color/white"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price"
+                android:layout_gravity="center_horizontal"
+                android:text="24000сум"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13sp"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+
+
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Гастроэнтерология"
+        android:layout_marginVertical="@dimen/margin_padding_12dp"
+        android:textSize="@dimen/text_size_15sp"
+        android:drawablePadding="@dimen/margin_padding_12dp"
+        android:id="@+id/textView"
+        android:drawableEnd="@drawable/ic_hhhhhhhhhhhhhhh"
+        android:fontFamily="@font/inter_regular"
+        android:textColor="@color/black"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="#1A272727"/>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

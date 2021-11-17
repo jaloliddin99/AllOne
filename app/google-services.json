@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "497163977715",
+    "project_id": "allone-ca92c",
+    "storage_bucket": "allone-ca92c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497163977715:android:e8ad4422cb170630ea0886",
+        "android_client_info": {
+          "package_name": "com.tesseract.AllOneClient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497163977715-b4hcrfhnga8fiq4otga3otas9k8u0qb9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6IvugyV6OSzhM68qDHAuBPJBgcezFtf4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497163977715-b4hcrfhnga8fiq4otga3otas9k8u0qb9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.order.aboutDriver.FragmentOrderAboutDriver"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/aboutDriver"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintBottom_toTopOf="@id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimens_0dp"
+        android:layout_below="@id/toolbar"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:backgroundTint="@color/grey"
+                android:elevation="0dp"
+                app:cardCornerRadius="@dimen/margin_padding_12dp"
+                app:cardElevation="0dp">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginHorizontal="@dimen/margin_padding_16"
+                    android:layout_marginVertical="@dimen/margin_padding_12dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        app:cardCornerRadius="22.5dp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:src="@drawable/driver_photo" />
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_padding_8dp"
+                        android:layout_weight="5"
+                        android:orientation="vertical">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_padding_4dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/name"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_15sp"
+                            />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_star_green"
+                            android:drawablePadding="@dimen/margin_padding_8dp"
+                            android:drawableTint="@color/yellow"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="2.6"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_15sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_change_phone_num" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/nomer_taxi"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp" />
+
+                    <TextView
+                        android:id="@+id/phoneNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:textColor="@color/black"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/driver_number"
+                        android:textSize="@dimen/text_size_15sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_car_icon" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/telegram"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp" />
+
+                    <TextView
+                        android:id="@+id/telegram"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/telegram"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+
+            <LinearLayout
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_car_icon" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/automobile"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp" />
+
+                    <TextView
+                        android:id="@+id/car"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/white_cobalt"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp"
+                        />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:text="@string/car_photo"
+                android:textSize="@dimen/text_size_18sp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_16"
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:id="@+id/post_car_photos"/>
+
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <include layout="@layout/layout_cancel_call_chat_telegram_reusable"
+            android:id="@+id/reusable"/>
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height_56dp"
+            android:insetBottom="@dimen/dimens_0dp"
+            android:insetTop="@dimen/dimens_0dp"
+            app:cornerRadius="@dimen/margin_padding_12dp"
+            android:id="@+id/back"
+            android:layout_marginBottom="@dimen/margin_padding_24dp"
+            android:text="@string/back"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/inter_bold"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

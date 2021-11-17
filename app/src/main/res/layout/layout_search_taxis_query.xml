@@ -1,0 +1,250 @@
+<com.google.android.material.card.MaterialCardView android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/blue_item"
+    app:cardElevation="0dp"
+    app:rippleColor="@android:color/transparent"
+    android:id="@+id/userRequestedResponse"
+    android:layout_marginTop="@dimen/margin_padding_12dp"
+    app:cardCornerRadius="@dimen/margin_padding_12dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_padding_16"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/driver_car"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/car_name"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/driver_car"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="@dimen/margin_padding_8dp"
+                android:id="@+id/driver_location"
+                android:drawableTint="@color/light_gray"
+                android:fontFamily="@font/inter_regular"
+                android:text="От Вас 24 км."
+                android:textColor="@color/light_gray"
+                android:textSize="@dimen/text_size_13sp" />
+
+            <RelativeLayout
+                android:layout_width="@dimen/margin_padding_16"
+                android:layout_height="match_parent">
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:background="@color/dark_grey" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_snow"
+                android:drawablePadding="@dimen/margin_padding_8dp"
+                android:id="@+id/has_conditioner"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/has_air_conditioner"
+                android:textColor="@color/light_gray"
+                android:textSize="@dimen/text_size_13sp"
+                app:drawableTint="@color/blue" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:background="@color/dark_grey" />
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/icon_size_20dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_seat" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="6">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/free_seat"
+                    android:layout_marginEnd="@dimen/margin_padding_4dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/number_of_seats"
+                    android:id="@+id/freePlacesNumber"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rec1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="2dp"
+                    android:src="@drawable/ic_rec1" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rec2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rec1"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/ic_rec2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rec3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rec1"
+                    android:layout_marginEnd="2dp"
+                    android:layout_toStartOf="@id/rec2"
+                    android:src="@drawable/ic_rec2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/rec4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/rec1"
+                    android:layout_marginEnd="2dp"
+                    android:layout_toStartOf="@id/rec3"
+                    android:src="@drawable/ic_rec2" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/icon_size_20dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_car_icon_horizontal" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_weight="8">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/topBaggage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/luggage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/baggage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/all"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:orientation="horizontal">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="@dimen/icon_size_20dp"
+                android:layout_height="@dimen/icon_size_20dp"
+                android:layout_gravity="center"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_car_icon" />
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="8">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/has_luggage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/large_baggage"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+            </RelativeLayout>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/show_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_16"
+            android:drawableEnd="@drawable/ic_arrow_right_green"
+            android:drawablePadding="@dimen/margin_padding_8dp"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/more"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_15sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</com.google.android.material.card.MaterialCardView>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".fragments.medTurism.clinicInfo.tabItems.FragmentMedTurServices"
+    android:layout_height="match_parent">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/services"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:textSize="@dimen/text_size_18sp"
+        app:fontFamily="@font/inter_semibold"
+
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:textColor="@color/black"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:paddingTop="3dp"
+        android:overScrollMode="never"
+        android:clipToPadding="false"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

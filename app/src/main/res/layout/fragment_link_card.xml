@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.profile.addcard.storeActivate.LinkCardFragment">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/margin_padding_4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/link_card"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="@dimen/margin_padding_24dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/enter_card_data"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_18sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="@dimen/margin_padding_16dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/card_title"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="@dimen/margin_padding_8dp"
+                    android:background="@drawable/rename_card_shape"
+                    android:drawableStart="@drawable/ic_cardd"
+                    android:drawablePadding="@dimen/margin_padding_16"
+                    android:hint="Карта №4"
+                    android:id="@+id/cardName"
+                    android:inputType="text"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="@dimen/margin_padding_16dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="@dimen/margin_padding_16dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/card_num"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/cardNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="@dimen/margin_padding_8dp"
+                    android:background="@drawable/rename_card_shape"
+                    android:drawableStart="@drawable/ic_cardd"
+                    android:drawablePadding="@dimen/margin_padding_16"
+                    android:hint="@string/xxxx_xxxx_xxxx_xxxx"
+                    android:inputType="number"
+                    android:maxLength="19"
+                    android:maxLines="1"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="@dimen/margin_padding_16dp"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_16sp" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="@dimen/margin_padding_16dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/expirity_date"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/margin_padding_16dp"
+                    android:orientation="horizontal"
+                    android:padding="2dp">
+
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/expirityDate"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_8dp"
+                        android:layout_marginEnd="@dimen/margin_padding_16dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/rename_card_shape"
+                        android:drawableStart="@drawable/ic_calendar"
+                        android:drawablePadding="@dimen/margin_padding_16"
+                        android:hint="12/12"
+                        android:inputType="number"
+                        android:maxLength="5"
+                        android:maxLines="1"
+                        android:paddingHorizontal="18dp"
+                        android:paddingVertical="@dimen/margin_padding_16dp"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_16sp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="@dimen/margin_padding_16dp"
+                        android:layout_marginTop="@dimen/margin_padding_8dp"
+                        android:layout_weight="1"
+                        android:paddingVertical="@dimen/margin_padding_16dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:id="@+id/linearLayout"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="32dp"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/enter_code"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="@dimen/margin_padding_8dp"
+                    android:layout_marginEnd="64dp"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="На ваш номер +998 90 *** ** 15 отправлен SMS с кодом"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="@dimen/margin_padding_36dp">
+
+
+<!--                    <com.mukesh.OtpView-->
+<!--                        android:id="@+id/codeField"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="fill_parent"-->
+<!--                        android:layout_marginStart="@dimen/margin_padding_16"-->
+<!--                        android:layout_marginTop="@dimen/margin_padding_36dp"-->
+<!--                        android:inputType="number"-->
+<!--                        android:textColor="@color/green"-->
+<!--                        app:OtpItemCount="6"-->
+<!--                        android:textSize="@dimen/text_size_20sp"-->
+<!--                        android:focusableInTouchMode="true"-->
+<!--                        android:fontFamily="@font/inter_bold"-->
+<!--                        app:OtpLineColor="@color/green"-->
+<!--                        app:OtpViewType="line"-->
+<!--                        />-->
+                    <androidx.appcompat.widget.AppCompatEditText
+                        android:id="@+id/codeField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_padding_16dp"
+                        android:layout_marginEnd="@dimen/margin_padding_36dp"
+                        android:background="@android:color/transparent"
+                        android:inputType="number"
+                        android:letterSpacing="0.999"
+                        android:maxLength="6"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/text_size_30sp" />
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginLeft="@dimen/margin_padding_16dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:src="@drawable/ic_green_line" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:src="@drawable/ic_green_line" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:src="@drawable/ic_green_line" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:src="@drawable/ic_green_line" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:src="@drawable/ic_green_line" />
+
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_green_line" />
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </FrameLayout>
+
+
+                <TextView
+                    android:id="@+id/incorrectCode"
+                    android:visibility="gone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="9dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/wrong_code"
+                    android:textColor="@color/red"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="9dp"
+                    android:drawablePadding="@dimen/margin_padding_16"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/make_phone_call"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_15sp"
+                    app:drawableEndCompat="@drawable/ic_right" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/getCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:background="@drawable/background_white_corner_12"
+                android:backgroundTint="@color/green"
+                android:padding="@dimen/margin_padding_16dp"
+                android:text="@string/enter_cod"
+                android:textAppearance="@style/boldStyleLight"
+                android:textSize="@dimen/text_size_18sp" />
+
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+
+        android:layout_marginBottom="@dimen/margin_padding_16dp"
+        android:orientation="horizontal">
+
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_weight="1"
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="@color/green"
+            android:padding="@dimen/margin_padding_16dp"
+            android:alpha="0.5"
+            android:text="@string/save"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

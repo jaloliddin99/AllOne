@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:transitionName="taxi_regions"
+    android:orientation="vertical"
+    tools:context=".fragments.main.home.routeTariffs.FragmentTaxiRegionsSelection">
+
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/margin_padding_4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="0dp"
+            android:id="@+id/toolbarTitle"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_toStartOf="@id/notification"
+            android:layout_toEndOf="@id/backToHome"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/taxi_region"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_padding_12dp"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_bell" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btnTariffOrder"
+        android:layout_below="@id/toolbar"
+
+        android:layout_marginStart="@dimen/margin_padding_16dp"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:layout_marginEnd="@dimen/margin_padding_16dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:backgroundTint="@color/grey"
+            app:cardCornerRadius="@dimen/margin_padding_12dp"
+            app:strokeColor="@color/dark_grey"
+            app:strokeWidth="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/margin_padding_8dp"
+                    android:layout_weight="1"
+                    android:paddingTop="@dimen/margin_padding_8dp"
+                    android:paddingBottom="@dimen/margin_padding_8dp"
+                    android:src="@drawable/ic_group_image" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="50"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/start_destination"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:text="@string/from_where"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/startDestinationChange"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:drawableEnd="@drawable/ic_arrow_right_green"
+                            android:drawablePadding="@dimen/margin_padding_12dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:gravity="end|center"
+                            android:text="@string/choose"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/text_size_13sp" />
+                    </LinearLayout>
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/margin_padding_8dp"
+                        android:layout_marginBottom="@dimen/margin_padding_8dp"
+                        android:background="@color/dark_grey" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/end_destination"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
+                            android:scrollHorizontally="true"
+                            android:text="@string/where"
+                            android:textColor="@color/black"
+                            android:textSize="15sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/endDestinationTextChange"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:drawableEnd="@drawable/ic_arrow_right_green"
+                            android:drawablePadding="@dimen/margin_padding_12dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:gravity="end|center"
+                            android:text="@string/choose"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/text_size_13sp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cardView"
+            android:layout_marginTop="@dimen/margin_padding_24dp"
+            android:layout_marginBottom="@dimen/margin_padding_8dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/tariff"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/btnTariffOrder"
+            android:layout_below="@+id/text">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/relativeView"
+                android:layout_width="match_parent"
+                android:layout_height="1200dp"
+                android:overScrollMode="never"
+                android:background="#CCffffff"
+                android:elevation="50dp"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/inter_bold"
+                    android:text="@string/choose_address"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_18sp" />
+            </androidx.core.widget.NestedScrollView>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_tariff"
+                android:overScrollMode="never"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnTariffOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/margin_padding_16"
+        android:layout_marginEnd="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/back"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+</RelativeLayout>

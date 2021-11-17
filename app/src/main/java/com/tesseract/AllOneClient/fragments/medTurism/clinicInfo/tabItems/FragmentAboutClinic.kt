@@ -1,0 +1,50 @@
+package com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.tabItems
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicImagesAdapter
+import com.tesseract.AllOneClient.databinding.FragmentMedTurAboutClinicBinding
+import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
+import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
+
+class FragmentAboutClinic:Fragment() {
+    private lateinit var binding:FragmentMedTurAboutClinicBinding
+    private val shareViewModel: ClinicsViewModel by activityViewModels()
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding= FragmentMedTurAboutClinicBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            shareViewModel.mutableSearchItem.observe(viewLifecycleOwner, {
+                recyclerView.apply {
+                    layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    adapter=ClinicImagesAdapter(it.content.gallery)
+                    addr.text=it.content.addr
+                    phoneNumber.text=it.content.phone_number
+                    telegram.text=it.content.telegram
+                    website.text=it.content.website
+                    workTime.text=it.content.work_time
+                    description.text=it.content.description
+
+                }
+            })
+
+        }
+
+
+    }
+}

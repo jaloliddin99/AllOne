@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:text="@string/aboutClinic"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:textSize="@dimen/text_size_18sp"
+        app:fontFamily="@font/inter_semibold"
+        android:textColor="@color/black"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/recyclerView"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:paddingTop="@dimen/margin_padding_12dp"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_padding_24dp"
+        tools:listitem="@layout/layout_med_tur_clinic"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.AppCompatCheckBox
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layoutDirection="rtl"
+    android:id="@+id/checkbox"
+    android:text="faifafoia"
+    android:fontFamily="@font/inter_medium"
+    android:textSize="@dimen/text_size_15sp"
+    android:textColor="@color/black"
+    android:checked="false"
+    android:button="@drawable/cancel_order"
+    android:layout_height="40dp">
+
+</androidx.appcompat.widget.AppCompatCheckBox>

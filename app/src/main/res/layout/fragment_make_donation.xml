@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.charity.MakeDonation.FragmentMakeDonation">
+
+
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/makeDonation"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:overScrollMode="never"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_padding_16"
+        android:id="@+id/recyclerView"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,1030 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.HomeMain.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home">
+
+
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentTaxiRegions"
+            app:destination="@id/fragmentTaxiRegions"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentCityMap"
+            app:destination="@id/fragmentCityMap"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentMainClinic"
+            app:destination="@id/fragmentMainClinic"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentTourismMain"
+            app:destination="@id/fragmentTourismMain"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_homeFragment_to_orderFragment"
+            app:destination="@id/orderFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentPostServiceSelection"
+            app:destination="@id/fragmentPostServiceSelection"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentNewsView2"
+            app:destination="@id/fragmentNewsView" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentAllNews"
+            app:destination="@id/fragmentAllNews" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_composeFragment"
+        app:destination="@+id/homeFragment"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_location_reverse"
+        app:destination="@+id/fragmentSelectLocation" />
+
+    <action
+        android:id="@+id/action_global_add_card_fragment"
+        app:destination="@+id/linkCardFragment" />
+
+
+    <fragment
+        android:id="@+id/orderFragment"
+        android:name="com.tesseract.AllOneClient.fragments.order.orderHome.OrderFragment"
+        android:label="fragment_order"
+        tools:layout="@layout/fragment_order">
+
+
+        <action
+            android:id="@+id/action_orderFragment_to_fragmentOrderParcelAboutTrip"
+            app:destination="@id/fragmentOrderParcelAboutTrip"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_orderFragment_to_fragmentOrderCityAboutTrip"
+            app:destination="@id/fragmentOrderCityAboutTrip"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_orderFragment_to_fragmentOrderRegionAboutTrip"
+            app:destination="@id/fragmentOrderRegionAboutTrip"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_bonusFragment2"
+            app:destination="@id/bonusFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_changeLanguageFragment"
+            app:destination="@id/changeLanguageFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_fragmentTechnicalSupport"
+            app:destination="@id/fragmentTechnicalSupport"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_addCardFragment2"
+            app:destination="@id/addCardFragment2"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_changeDataFragment"
+            app:destination="@id/changeDataFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_changePhoneFragment"
+            app:destination="@id/changePhoneFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutProgramFragment"
+            app:destination="@id/aboutProgramFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/slide_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/bonusFragment2"
+        android:name="com.tesseract.AllOneClient.fragments.profile.BonusFragment"
+        android:label="fragment_bonus"
+        tools:layout="@layout/fragment_bonus">
+        <action
+            android:id="@+id/action_bonusFragment2_to_fragmentGetBonusText"
+            app:destination="@id/fragmentGetBonusText" />
+    </fragment>
+    <fragment
+        android:id="@+id/changeLanguageFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.ChangeLanguageFragment"
+        android:label="fragment_change_language"
+        tools:layout="@layout/fragment_change_language" />
+    <fragment
+        android:id="@+id/fragmentTechnicalSupport"
+        android:name="com.tesseract.AllOneClient.fragments.profile.FragmentTechnicalSupport"
+        android:label="fragment_technical_support"
+        tools:layout="@layout/fragment_technical_support" />
+    <fragment
+        android:id="@+id/aboutProgramFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.settings.AboutProgramFragment"
+        android:label="fragment_about_program"
+        tools:layout="@layout/fragment_about_program" />
+    <fragment
+        android:id="@+id/changeDataFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.settings.changeData.ChangeDataFragment"
+        android:label="fragment_change_data"
+        tools:layout="@layout/fragment_change_data" />
+    <fragment
+        android:id="@+id/changePhoneFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.settings.changePhone.ChangePhoneFragment"
+        android:label="fragment_change_phone_number"
+        tools:layout="@layout/fragment_change_phone_number" />
+
+    <action
+        android:id="@+id/action_global_interarea_active_order"
+        app:destination="@+id/fragmentActiveInterAreaOrder" />
+    <fragment
+        android:id="@+id/fragmentActiveInterAreaOrder"
+        android:name="com.tesseract.AllOneClient.fragments.order.getActiveRegionOrder.FragmentActiveInterAreaOrder"
+        android:label="fragmentActiveInterAreaOrder"
+        tools:layout="@layout/fragment_active_interarea_order">
+
+        <action
+            android:id="@+id/action_fragmentOrderYourTaxi_to_fragmentRegionMapFirst"
+            app:destination="@id/fragmentRegionMapFirst" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="tariff"
+            app:argType="string" />
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_parcel_active_order"
+        app:destination="@+id/fragmentActiveParcelOrder"
+        app:enterAnim="@anim/slide_in_right_edited"
+        app:exitAnim="@anim/exit_out_left_edited"
+        app:popEnterAnim="@anim/slide_in_left_edited"
+        app:popExitAnim="@anim/exit_out_right_edited" />
+
+
+    <fragment
+        android:id="@+id/fragmentActiveParcelOrder"
+        android:name="com.tesseract.AllOneClient.fragments.order.getActiveParcelOrder.FragmentActiveParcelOrder"
+        android:label="fragment_order_posts"
+        tools:layout="@layout/fragment_active_parcel_order">
+        <argument
+            android:name="parcelId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTaxiRegions"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.routeTariffs.FragmentTaxiRegionsSelection"
+        android:label="fragment_tarif"
+        app:popUpTo="@id/homeFragment"
+        app:popUpToInclusive="true"
+        tools:layout="@layout/fragment_tarif">
+
+        <action
+            android:id="@+id/action_fragmentTaxiRegions_to_fragmentOrderTaxi2"
+            app:destination="@id/fragmentOrderTaxi2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <action
+            android:id="@+id/action_fragmentTaxiRegions_to_fragmentRegions"
+            app:destination="@id/fragmentRegions"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSearchDistrict"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.district.FragmentSearchDistrict"
+        android:label="fragment_destrict_search"
+        tools:layout="@layout/fragment_destrict_search">
+
+        <action
+            android:id="@+id/action_fragmentSearchDistrict_to_fragmentTaxiRegions"
+            app:destination="@id/fragmentTaxiRegions"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fragmentSearchDistrict_to_fragmentPostServiceSelection"
+            app:destination="@id/fragmentPostServiceSelection"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOrderTaxi2"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.orderTaxi.FragmentOrderTaxi"
+        android:label="fragment_order_taxi"
+        tools:layout="@layout/fragment_order_taxi">
+        <action
+            android:id="@+id/action_fragmentOrderTaxi2_to_fragmentPayment"
+            app:destination="@id/fragmentPayment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentLocation"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.SearchTaxi.FragmentLocation"
+        android:label="fragment_location"
+        tools:layout="@layout/fragment_location">
+
+        <action
+            android:id="@+id/action_fragmentLocation_to_fragmentSearchTaxi2"
+            app:destination="@id/fragmentSearchTaxi"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fragmentLocation_to_fragmentSearchCancelled"
+            app:destination="@id/fragmentSearchCancelled"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="fromWhichLayout"
+            app:argType="integer" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentLocation_to_fragmentParcelSearch"
+            app:destination="@id/fragmentParcelSearch" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPayment"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.payments.FragmentPayment"
+        android:label="fragment_payment"
+        tools:layout="@layout/fragment_payment">
+        <action
+            android:id="@+id/action_fragmentPayment_to_fragmentLocation"
+            app:destination="@id/fragmentLocation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+
+        <argument
+            android:name="fromWhichLayout"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSearchCancelled"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.FragmentSearchCancelled"
+        android:label="fragment_search_cancelled"
+        tools:layout="@layout/fragment_search_cancelled">
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegionDriverInfo"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.DriverInfo.FragmentRegionDriverInfo"
+        android:label="fragment_region_driwer_info"
+        tools:layout="@layout/fragment_region_driwer_info">
+        <action
+            android:id="@+id/action_fragmentRegionDriverInfo_to_fragmentRegionTaxiConfirmation"
+            app:destination="@id/fragmentRegionTaxiConfirmation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="selectedPosition"
+            app:argType="integer" />
+        <argument
+            android:name="isYourRequest"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegionTaxiConfirmation"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.FragmentRegionTaxiConfirmation"
+        android:label="fragment_region_taxi_confirmation"
+        tools:layout="@layout/fragment_region_taxi_confirmation">
+        <action
+            android:id="@+id/action_fragmentRegionTaxiConfirmation_to_fragmentRegionTaxiConfirmation2"
+            app:destination="@id/fragmentRegionTaxiConfirmation2"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentRegionTaxiConfirmation2"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.FragmentRegionTaxiConfirmation2"
+        android:label="fragment_region_taxi_confirmation2"
+        tools:layout="@layout/fragment_region_taxi_confirmation2">
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSearchTaxi"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.SearchTaxi.FragmentSearchTaxi"
+        android:label="fragment_search_taxis"
+        tools:layout="@layout/fragment_search_taxis">
+        <action
+            android:id="@+id/action_fragmentSearchTaxi_to_fragmentRegionDriverInfo"
+            app:destination="@id/fragmentRegionDriverInfo"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCardFragment2"
+        android:name="com.tesseract.AllOneClient.fragments.profile.addcard.getCards.AddCardFragment"
+        android:label="AddCardFragment"
+        tools:layout="@layout/fragment_add_card">
+
+        <action
+            android:id="@+id/action_addCardFragment2_to_renameCardsFragment"
+            app:destination="@id/renameCardsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/renameCardsFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.addcard.updateCard.RenameCardsFragment"
+        android:label="RenameCardsFragment"
+        tools:layout="@layout/fragment_rename_cards">
+        <argument
+            android:name="cardId"
+            app:argType="integer" />
+        <argument
+            android:name="cardExp"
+            app:argType="string" />
+        <argument
+            android:name="cardNum"
+            app:argType="string" />
+        <argument
+            android:name="cardName"
+            app:argType="string" />
+        <argument
+            android:name="cardType"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/linkCardFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.addcard.storeActivate.LinkCardFragment"
+        android:label="fragment_link_card"
+        tools:layout="@layout/fragment_link_card" />
+    <fragment
+        android:id="@+id/fragmentPostServiceSelection"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.parcelMain.FragmentParcelMain"
+        android:label="fragment_post_service_selection"
+        tools:layout="@layout/fragment_post_service_selection">
+
+        <action
+            android:id="@+id/action_fragmentPostServiceSelection_to_fragmentPayment"
+            app:destination="@id/fragmentPayment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_fragmentPostServiceSelection_to_fragmentRegions"
+            app:destination="@id/fragmentRegions"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragmentCityMap"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.main.FragmentCitySelectLocation"
+        android:label="fragment_city_map"
+        tools:layout="@layout/fragment_city_map">
+        <action
+            android:id="@+id/action_fragmentCityMap_to_fragmentCityOrderMaps"
+            app:destination="@id/fragmentCityOrderMaps" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCityOrderMaps"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.orderFragment.FragmentCityTariffs"
+        android:label="fragment_city_order_maps"
+        tools:layout="@layout/fragment_city_tariffs">
+        <action
+            android:id="@+id/action_fragmentCityOrderMaps_to_fragmentSituation"
+            app:destination="@id/fragmentSituation"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_fragmentCityOrderMaps_to_fragmentCityPaymentMethod"
+            app:destination="@id/fragmentCityPaymentMethod"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+        <argument
+            android:name="startLocation"
+            app:argType="string" />
+        <argument
+            android:name="endLocation"
+            app:argType="string" />
+        <argument
+            android:name="startName"
+            app:argType="string" />
+        <argument
+            android:name="endName"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSituation"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.situation.FragmentSituation"
+        android:label="fragment_situation"
+        tools:layout="@layout/fragment_situation" />
+    <fragment
+        android:id="@+id/fragmentCityPaymentMethod"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.paymentMethod.FragmentCityPaymentMethod"
+        android:label="fragment_city_payment_method"
+        tools:layout="@layout/fragment_city_payment_method" />
+
+    <fragment
+        android:id="@+id/mapsFragment"
+        android:name="com.tesseract.AllOneClient.fragments.order.mapActiveCity.FragmentCityActiveMap"
+        android:label="fragment_maps"
+        tools:layout="@layout/fragment_city_active_map">
+
+        <action
+            android:id="@+id/action_mapsFragment_to_fragmentCityPaymentMethod"
+            app:destination="@id/fragmentCityPaymentMethod"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_city_stations"
+        app:destination="@id/fragmentStations"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <fragment
+        android:id="@+id/fragmentCancelOrder"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.cancelOrder.FragmentCancelOrder"
+        android:label="fragment_city_cancel_taxi"
+        tools:layout="@layout/fragment_city_cancel_taxi">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_cancel_order"
+        app:destination="@id/fragmentCancelOrder"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <fragment
+        android:id="@+id/fragmentStations"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.stations.FragmentStations"
+        android:label="fragment_city_new_stations"
+        tools:layout="@layout/fragment_city_new_stations">
+        <argument
+            android:name="startLatLng"
+            app:argType="string" />
+        <argument
+            android:name="startDestination"
+            app:argType="string" />
+        <argument
+            android:name="endLatLng"
+            app:argType="string" />
+        <argument
+            android:name="endDestination"
+            app:argType="string" />
+        <argument
+            android:name="stationList"
+            app:argType="com.tesseract.AllOneClient.model.taxiCity.updateSaved.CityShareStationModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentContact"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.contact.FragmentContact"
+        android:label="fragment_client_contact_list"
+        tools:layout="@layout/fragment_client_contact_list" />
+
+    <action
+        android:id="@+id/action_global_contact"
+        app:destination="@+id/fragmentContact" />
+
+    <fragment
+        android:id="@+id/fragmentMainClinic"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.mainClinic.FragmentMainClinic"
+        android:label="fragment_med_turizm_entrance"
+        tools:layout="@layout/fragment_med_turizm_entrance">
+        <action
+            android:id="@+id/action_fragmentMainClinic_to_fragmentClinics"
+            app:destination="@id/fragmentClinics"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentClinics"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.clinics.FragmentClinics"
+        android:label="fragment_med_clinics"
+        tools:layout="@layout/fragment_med_clinics">
+        <action
+            android:id="@+id/action_fragmentClinics_to_fragmentMedSearch"
+            app:destination="@id/fragmentMedSearch"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"/>
+        <action
+            android:id="@+id/action_fragmentClinics_to_fragmentClinicInfo"
+            app:destination="@id/fragmentClinicInfo" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentTourismMain"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.mainTourism.FragmentTourismMain"
+        android:label="fragment_tourism_main"
+        tools:layout="@layout/fragment_tourism_main">
+        <action
+            android:id="@+id/action_fragmentTourismMain_to_fragmentTourPackets"
+            app:destination="@id/fragmentTourPackets"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_fragmentTourismMain_to_fragmentHiking"
+            app:destination="@id/fragmentHiking"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTourPackets"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.tourPackets.FragmentTourPackets"
+        android:label="fragment_tourism_tour_packet"
+        tools:layout="@layout/fragment_tourism_tour_packet">
+        <action
+            android:id="@+id/action_fragmentTourPackets_to_fragmentTour"
+            app:destination="@id/fragmentTour"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTour"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.tour.FragmentTour"
+        android:label="fragment_tourism_tour"
+        tools:layout="@layout/fragment_tourism_tour" />
+    <fragment
+        android:id="@+id/fragmentHiking"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.hiking.FragmentHiking"
+        android:label="fragment_tourism_hiking"
+        tools:layout="@layout/fragment_tourism_hiking">
+        <action
+            android:id="@+id/action_fragmentHiking_to_fragmentActiveTour"
+            app:destination="@id/fragmentActiveTour"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentActiveTour"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.activeTour.FragmentActiveTour"
+        android:label="fragment_active_tour"
+        tools:layout="@layout/fragment_active_tour" />
+    <fragment
+        android:id="@+id/fragmentRegionMapFirst"
+        android:name="com.tesseract.AllOneClient.fragments.order.mapActiveRegion.FragmentRegionActiveMap"
+        android:label="fragment_region_map_first"
+        tools:layout="@layout/fragment_region_map_first">
+        <argument
+            android:name="from_latLng"
+            app:argType="string" />
+        <argument
+            android:name="toLatLng"
+            app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSelectLocation"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.selectLocation.FragmentSelectLocation"
+        android:label="fragment_select_location"
+        tools:layout="@layout/fragment_select_location">
+        <argument
+            android:name="fromCity"
+            app:argType="boolean" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOrderRegionAboutTrip"
+        android:name="com.tesseract.AllOneClient.fragments.order.orderRegionHistory.FragmentOrderRegionAboutTrip"
+        android:label="fragment_order_region_about_trip"
+        tools:layout="@layout/fragment_order_region_about_trip">
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOrderParcelAboutTrip"
+        android:name="com.tesseract.AllOneClient.fragments.order.orderParcelHistory.FragmentOrderParcelAboutTrip"
+        android:label="fragment_order_about_parcel"
+        tools:layout="@layout/fragment_order_about_parcel">
+
+        <argument
+            android:name="id"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentOrderCityAboutTrip"
+        android:name="com.tesseract.AllOneClient.fragments.order.orderCityHistory.FragmentOrderCityAboutTrip"
+        android:label="fragment_order_city_about_trip"
+        tools:layout="@layout/fragment_order_city_about_trip">
+
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_about_driver"
+        app:destination="@+id/fragmentOrderAboutDriver"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/fragmentOrderAboutDriver"
+        android:name="com.tesseract.AllOneClient.fragments.order.aboutDriver.FragmentOrderAboutDriver"
+        android:label="fragment_order_about_driver"
+        tools:layout="@layout/fragment_order_about_driver">
+        <argument
+            android:name="driverId"
+            app:argType="integer" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="order_type"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragmentGetBonusText"
+        android:name="com.tesseract.AllOneClient.fragments.profile.FragmentGetBonusText"
+        android:label="fragment_get_bonus"
+        tools:layout="@layout/fragment_get_bonus" />
+
+    <action
+        android:id="@+id/action_global_show_from_map"
+        app:destination="@+id/fragmentShowFromMap"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <fragment
+        android:id="@+id/fragmentShowFromMap"
+        android:name="com.tesseract.AllOneClient.fragments.order.showFromMap.FragmentShowFromMap"
+        android:label="fragment_show_from_map"
+        tools:layout="@layout/fragment_show_from_map">
+        <argument
+            android:name="latLng"
+            app:argType="string" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/fragmentAddCommentToDriver"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.addComments.FragmentAddCommentToDriver"
+        android:label="fragment_add_comment_to_driwer"
+        tools:layout="@layout/fragment_add_comment_to_driwer" />
+    <action
+        android:id="@+id/action_global_add_comment"
+        app:destination="@id/fragmentAddCommentToDriver"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right" />
+
+    <fragment
+        android:id="@+id/fragmentRegions"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.regionList.FragmentRegions"
+        android:label="fragment_region_region"
+        tools:layout="@layout/fragment_region_region">
+
+        <action
+            android:id="@+id/action_fragmentRegions_to_fragmentSearchDistrict"
+            app:destination="@id/fragmentSearchDistrict"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentGoodMain"
+        android:name="com.tesseract.AllOneClient.fragments.charity.Main.FragmentCharityMain"
+        android:label="fragment_good"
+        tools:layout="@layout/fragment_good">
+        <action
+            android:id="@+id/action_fragmentGoodMain_to_fragmentDonationHistory"
+            app:destination="@id/fragmentDonationHistory" />
+        <action
+            android:id="@+id/action_fragmentGoodMain_to_fragmentMakeDonation"
+            app:destination="@id/fragmentMakeDonation" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDonationHistory"
+        android:name="com.tesseract.AllOneClient.fragments.charity.DonationHistory.FragmentDonationHistory"
+        android:label="fragment_donation_history"
+        tools:layout="@layout/fragment_donation_history" />
+    <fragment
+        android:id="@+id/fragmentMakeDonation"
+        android:name="com.tesseract.AllOneClient.fragments.charity.MakeDonation.FragmentMakeDonation"
+        android:label="fragment_make_donation"
+        tools:layout="@layout/fragment_make_donation">
+        <action
+            android:id="@+id/action_fragmentMakeDonation_to_fragmentPaymentCardSelection"
+            app:destination="@id/fragmentPaymentCardSelection" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentPaymentCardSelection"
+        android:name="com.tesseract.AllOneClient.fragments.charity.PaymentCard.FragmentPaymentCardSelection"
+        android:label="fragment_make_payment_card_selection"
+        tools:layout="@layout/fragment_make_payment_card_selection">
+        <action
+            android:id="@+id/action_fragmentPaymentCardSelection_to_fragmentChooseYourCars"
+            app:destination="@id/fragmentChooseYourCars" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentChooseYourCars"
+        android:name="com.tesseract.AllOneClient.fragments.charity.ChooseYourCard.FragmentChooseYourCars"
+        android:label="fragment_good_choose_your_card"
+        tools:layout="@layout/fragment_good_choose_your_card">
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="card_number"
+            app:argType="string" />
+        <argument
+            android:name="placeholderName"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="donationAmount"
+            app:argType="string" />
+        <argument
+            android:name="charity_project_card_id"
+            app:argType="integer" />
+        <argument
+            android:name="projectId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentChooseYourCars_to_fragmentDonationHistory"
+            app:destination="@id/fragmentDonationHistory" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentNewsView"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.news.newsView.FragmentNewsView"
+        android:label="fragment_news_view"
+        tools:layout="@layout/fragment_news_view">
+
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="description"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="integer" />
+        <argument
+            android:name="isFromHome"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllNews"
+        android:name="com.tesseract.AllOneClient.fragments.main.home.news.allNews.FragmentAllNews"
+        android:label="fragment_all_news"
+        tools:layout="@layout/fragment_all_news">
+        <action
+            android:id="@+id/action_fragmentAllNews_to_fragmentNewsView"
+            app:destination="@id/fragmentNewsView" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentParcelSearch"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.parcelSearch.FragmentParcelSearch"
+        android:label="fragment_parcel_search"
+        tools:layout="@layout/fragment_parcel_search">
+        <argument
+            android:name="parcelOrderId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentParcelSearch_to_fragmentParcelSelectedItem"
+            app:destination="@id/fragmentParcelSelectedItem" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentParcelSelectedItem"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.parcelSelectedItem.FragmentParcelSelectedItem"
+        android:label="fragment_parcel_selected_order"
+        tools:layout="@layout/fragment_parcel_selected_order">
+        <argument
+            android:name="isYourRequest"
+            app:argType="boolean" />
+        <argument
+            android:name="selectedPosition"
+            app:argType="integer" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentParcelSelectedItem_to_fragmentWaitingOrderAccept"
+            app:destination="@id/fragmentWaitingOrderAccept" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentWaitingOrderAccept"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.waiting.FragmentWaitingOrderAccept"
+        android:label="fragment_parcel_waiting_order_accept"
+        tools:layout="@layout/fragment_parcel_waiting_order_accept">
+        <argument
+            android:name="parcelOrderId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentWaitingOrderAccept_to_fragmentWaitingSuccess"
+            app:destination="@id/fragmentWaitingSuccess" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentWaitingSuccess"
+        android:name="com.tesseract.AllOneClient.fragments.parcel.waitingSuccess.FragmentWaitingSuccess"
+        android:label="fragment_parcel_waiting_success"
+        tools:layout="@layout/fragment_parcel_waiting_success">
+        <argument
+            android:name="parcelOrderId"
+            app:argType="integer" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSaveLocation"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.SavedLocations.FragmentSaveLocation"
+        android:label="fragment_save_location"
+        tools:layout="@layout/fragment_save_location">
+        <action
+            android:id="@+id/action_fragmentSaveLocation_to_fragmentCityMap"
+            app:destination="@id/fragmentCityMap"
+            app:popUpTo="@id/fragmentCityMap"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <action
+        android:id="@+id/action_global_saved_location_list"
+        app:destination="@+id/fragmentSaveLocation" />
+
+    <action
+        android:id="@+id/action_global_crud_location"
+        app:destination="@+id/fragmentSaveUpdateLocation" />
+
+    <fragment
+        android:id="@+id/fragmentSaveUpdateLocation"
+        android:name="com.tesseract.AllOneClient.fragments.taxiCity.saveUpdateLoc.FragmentSaveUpdateLocation"
+        android:label="fragment_save_selected_location"
+        tools:layout="@layout/fragment_save_selected_location">
+        <argument
+            android:name="shareSavedLoc"
+            app:argType="com.tesseract.AllOneClient.model.taxiCity.getSavedAddress.SavedLocationData"
+            app:nullable="true" />
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="latLng"
+            app:argType="string" />
+        <argument
+            android:name="address"
+            app:argType="string" />
+    </fragment>
+    <action
+        android:id="@+id/action_global_city_active_order"
+        app:destination="@id/mapsFragment" />
+    <fragment
+        android:id="@+id/fragmentMedSearch"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.search.FragmentMedSearch"
+        android:label="fragment_med_category"
+        tools:layout="@layout/fragment_med_category" >
+        <argument
+            android:name="content"
+            app:argType="com.tesseract.AllOneClient.model.medTourism.categories.ClinicsCategoriesModel" />
+        <argument
+            android:name="isCategories"
+            app:argType="boolean" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentClinicInfo"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.FragmentClinicInfo"
+        android:label="fragment_clinic_info"
+        tools:layout="@layout/fragment_clinic_info" >
+        <argument
+            android:name="clinic_id"
+            app:argType="integer" />
+    </fragment>
+
+
+</navigation>

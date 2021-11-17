@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.login.confirmPhone.ConfirmPhoneFragment">
+
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/insert_code"
+            android:textAppearance="@style/boldStyle"
+            android:textSize="@dimen/text_size_24sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/description"
+            android:layout_width="263dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_16dp"
+            android:gravity="center"
+            android:text="@string/_998_90_568_1015"
+            android:textAppearance="@style/mediumStyle"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <com.mukesh.OtpView
+            android:id="@+id/otp_view"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding_36dp"
+            android:focusableInTouchMode="true"
+            android:fontFamily="@font/inter_bold"
+            android:inputType="number"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_20sp"
+            app:OtpItemCount="6"
+            app:OtpLineColor="@color/green"
+            app:OtpViewType="line" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/margin_padding_36dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/margin_padding_16"
+            android:text="@string/sendAgain"
+            android:textColor="@color/green"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/confirm_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="@color/green"
+            android:padding="@dimen/margin_padding_16dp"
+            android:text="@string/nect"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</RelativeLayout>

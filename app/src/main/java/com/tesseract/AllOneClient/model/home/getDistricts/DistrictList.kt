@@ -1,0 +1,12 @@
+package com.tesseract.AllOneClient.model.home.getDistricts
+
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
+
+data class DistrictList(
+    @field:SerializedName("id")
+    var id: Int?=null,
+
+    @field:SerializedName("name")
+    var name: String?=null
+):Serializable

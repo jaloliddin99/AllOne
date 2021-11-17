@@ -1,0 +1,618 @@
+<resources>
+    <string name="app_name" translatable="false">AllOne</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
+
+    <string name="menu_home" translatable="false">Settings</string>
+    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="balance_double">Баланс:</string>
+    <string name="status">Статус:</string>
+    <string name="only_mail">Только почта</string>
+    <string name="time_on_line">Время на линии:</string>
+    <string name="requests_for_tomorrow">Запросы на завтра:</string>
+    <string name="intercity_mail">Почта межгород</string>
+    <string name="you_in_a_line">Вы на линии</string>
+    <string name="passenger_seat">Пассажирское место</string>
+
+    <string name="client">Клиент</string>
+    <string name="travel_date">Дата поездки</string>
+    <string name="date">Дата</string>
+    <string name="time">Время</string>
+    <string name="NoDate">Нет дата</string>
+    <string name="NoTime">Нет время</string>
+    <string name="collect_parcels">Собрать посылки</string>
+    <string name="parcel">Посылка</string>
+    <string name="envelope">Конверт</string>
+    <string name="volume">Объем:</string>
+    <string name="balance">Баланс</string>
+    <string name="notification">Уведомление</string>
+    <string name="chooseLanguage">Выберите язык</string>
+    <string name="allOne" translatable="false">AllOne</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="uzbek" translatable="false">O\'zbek</string>
+    <string name="enterToSystem">Войти в систему</string>
+    <string name="viaPhoneNumber">Через номер</string>
+    <string name="phoneNumber">Номер телефона</string>
+    <string name="enterSomething" translatable="false">+998</string>
+    <string name="signIn">Войти</string>
+    <string name="giveInfo">На ваш номер будет отрален SMS с кодом</string>
+    <string name="register">Регистрация</string>
+    <string name="entrance">Вход</string>
+    <string name="numberDoesntExist">В систему отсуствует такой номер</string>
+    <string name="enterCode">Введите код-пароль</string>
+    <string name="sendSMStoNum">На ваш номер +998-xx-xxx-xxxx отправлен SMS с кодом</string>
+    <string name="sendAgain"><u>Отправить заново</u></string>
+    <string name="continue_">Продолжите</string>
+    <string name="Active">Активность</string>
+    <string name="rating">Рейтинг:</string>
+    <string name="interest_rate">Процентная ставка:</string>
+    <string name="transport">Транспорт</string>
+    <string name="earning">Заработок</string>
+    <string name="night_mode">Ночной режим</string>
+    <string name="more_details">Подробнее</string>
+    <string name="card_brand">Марка авто:</string>
+    <string name="color">Цвет:</string>
+    <string name="number">Номер:</string>
+    <string name="year">Год:</string>
+    <string name="registration_date">Дата регистрации</string>
+    <string name="license_term">Срок лицензии</string>
+    <string name="license_number">Номер лицензии:</string>
+    <string name="general">Общее</string>
+    <string name="from_taxi">От Такси</string>
+    <string name="from_parcels">От посылок</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="client_card">Карта клиента:</string>
+    <string name="driver_card">Карта водителя:</string>
+    <string name="departure_date">Дата отбытия:</string>
+    <string name="passengers">Пасажиров:</string>
+    <string name="income">Заработок</string>
+    <string name="language">Язык</string>
+    <string name="settings">Настройки</string>
+    <string name="night_mod">Ночной режим</string>
+    <string name="logout">Выйти</string>
+    <string name="support">Тех поддержка</string>
+    <string name="change_location">Изменить постоянный маршрут</string>
+    <string name="navigator_settings">Настройки навигаторов</string>
+    <string name="show_card_in_new_order">Показать карту в новом заказе</string>
+    <string name="voice_notification">Голосовое уведомление</string>
+    <string name="payment_methods">Способы оплаты</string>
+    <string name="about_app">О программе</string>
+    <string name="from_where">Откуда:</string>
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet Ut sed viverra senectus ut accumsan in tempor</string>
+    <string name="back">Назад</string>
+    <string name="cash_method">Наличными</string>
+    <string name="corporate">Корпоративный</string>
+    <string name="inside_of_city">Такси внутри города</string>
+    <string name="tariff_inside">Внутри городской пакет</string>
+    <string name="mail_inside">Почта внутри города</string>
+    <string name="set_tariff">Настроить</string>
+    <string name="regional_tariff">Региональный пакет</string>
+    <string name="international_taxi">Международный такси</string>
+    <string name="international_mail">Междгородская почта</string>
+    <string name="more">Подробнее</string>
+    <string name="international_tariff">Международный пакет</string>
+    <string name="tariffs">Тарифы</string>
+    <string name="route">Маршрут</string>
+    <string name="lorem_ipsum_dolor" translatable="false">Lorem In augue quise feugiat enim nibh faucibus.</string>
+    <string name="delivery">Доставка</string>
+    <string name="women">Женский</string>
+    <string name="comfort">Комфорт</string>
+    <string name="economic">Эконом</string>
+    <string name="women_tariff">Женский тариф</string>
+    <string name="need_to_check">Вам требуется пройти проверку в наших центрах</string>
+    <string name="profile">Профиль</string>
+    <string name="history">Profil</string>
+    <string name="earnings">Заработок</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="choose_region">Выберите регион</string>
+    <string name="search">Поиск</string>
+    <string name="bonus_points">Бонусные баллы:</string>
+    <string name="go_to">Перейти</string>
+    <string name="collect_bonuses">Как набрать бонусы</string>
+    <string name="to_use">Как использовать</string>
+    <string name="your_gender">Ваш пол</string>
+    <string name="your_birthday">День вашего рождения</string>
+    <string name="change_my_details">Изменить мои данные</string>
+    <string name="change_my_phone">Изменить номер телефона</string>
+    <string name="change_my_photo">Изменить фото профиля</string>
+    <string name="language_app">Язык программы</string>
+    <string name="female">Женский</string>
+    <string name="male">Мужской</string>
+    <string name="choose_gender">Веберите пол</string>
+    <string name="orders_history">История заказов</string>
+    <string name="bonuses">Бонусы</string>
+    <string name="bind_card">Привязка карты</string>
+    <string name="info">Информация</string>
+    <string name="bonus_balls">Бонусные баллы</string>
+    <string name="how_to_get">Как получить?</string>
+    <string name="how_to_get_bonus">Как набрать бонусы</string>
+    <string name="how_to_use">Как использовать</string>
+    <string name="transaction_history">История транзакции</string>
+    <string name="card_binding">Привязать карту</string>
+    <string name="enter_card_data">Ввести данные карты</string>
+    <string name="card_title">Название карты</string>
+    <string name="change_route">Изменить постоянный маршрут</string>
+    <string name="tarifs">Тарифы</string>
+    <string name="show_map_order">Показать карту в новом заказе</string>
+    <string name="choose_time">Выберите время</string>
+    <string name="from">От</string>
+    <string name="enter_time">Введите время</string>
+    <string name="to">До</string>
+    <string name="accept">Принять</string>
+    <string name="card_number">Номер карты</string>
+    <string name="valid_date">Срок действия</string>
+    <string name="delete">Удалить</string>
+    <string name="save">Сохранить</string>
+    <string name="card_unavailable">*Отсутсвует такая карта</string>
+    <string name="fill_field_correct">*Заполните все данные корректно</string>
+    <string name="english" translatable="false">English</string>
+    <string name="user_details">Ваши данные</string>
+    <string name="your_name">Ваше имя</string>
+    <string name="enter_your_name">Введите ваше имя</string>
+    <string name="your_age">День вашего рождения</string>
+    <string name="birth_day">Дата рождения</string>
+    <string name="chose_gender">Веберите пол</string>
+    <string name="man">Мужской</string>
+    <string name="day_of_birth">Дата рождения</string>
+    <string name="month">месяц</string>
+    <string name="day">День</string>
+    <string name="welcome_A">Добрый день </string>
+    <string name="where_do_you_go">Куда вы хотите доехать?</string>
+    <string name="active_order">Ваши активные заказы</string>
+    <string name="tashkent" translatable="false">Ташкент</string>
+    <string name="samarkand" translatable="false">Самарканд</string>
+    <string name="news">Новости</string>
+    <string name="news_title" translatable="false">news</string>
+    <string name="news_description">С нами Ваша поездка веселее!</string>
+    <string name="user_name" translatable="false">Savannah Nguyen</string>
+    <string name="profile_user_phone_number" translatable="false">+998 90 010 61 86</string>
+    <string name="user_id" translatable="false">ID: 456–489</string>
+    <string name="dark_theme">Ночной режим</string>
+    <string name="taxi">Такси</string>
+    <string name="home">Главная</string>
+    <string name="order">Заказы</string>
+    <string name="active_order_actionbar">Активные заказы</string>
+    <string name="how_to_accept">Как получить?</string>
+    <string name="get_bonus">Как набрать бонусы</string>
+    <string name="change_user_info">Изменить мои данные</string>
+    <string name="change_phone_number">Изменить номер телефона</string>
+    <string name="change_photo">Изменить фото профиля</string>
+    <string name="change_language">Язык программы</string>
+    <string name="send">Оправить</string>
+    <string name="enter_code">Введите код-пароль</string>
+    <string name="make_phone_call">Оправить заново</string>
+    <string name="code_info">На ваш номер +998 90 568 1015 был отправлен SMS с кодом</string>
+    <string name="click_taxi" translatable="false">Сlick Taxi</string>
+    <string name="lorem_generate" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In augue quis facilisi congue fames viverra. Cursus arcu placerat ipsum at. Pharetra leo nisi, auctor viverra consectetur proin sed morbi. Vulputate adipiscing augue eget volutpat fermentum, lacus ac, suspendisse. Scelerisque vitae ut integer mi odio eu, dignissim est consectetur. In lacinia leo duis eget. Dignissim faucibus ac risus id leo suspendisse viverra. Porta nulla egestas maecenas gravida at scelerisque turpis erat. Mi tellus neque cras viverra tellus. Quis viverra nibh orci nisi. Vulputate sed congue nisi morbi lacus nulla duis. Nisi bibendum tincidunt ut lorem lectus habitasse non. Donec vel velit gravida nisi, arcu quis integer sagittis, et. Eu dolor eu blandit mi. Dignissim et urna, mollis tristique. Id suspendisse nec nulla a urna leo elit. Nulla suscipit ipsum vestibulum tristique aenean lacus, ac aliquam, justo. Lacus venenatis ut dictumst morbi turpis maecenas consectetur ut. Egestas pretium ut morbi sed cursus varius eget fames bibendum. Nunc facilisis amet curabitur montes, et aliquet nunc. Tristique in elementum eu commodo, est risus, ut aenean etiam. At sagittis hac ipsum lacus, non, aliquam ipsum urna velit. Consequat porttitor massa faucibus et. Dolor viverra ut ultrices mattis. Eu, nullam tellus ultrices volutpat pretium felis sit. Blandit donec arcu, feugiat enim nibh faucibus.</string>
+    <string name="log_out">Выйти</string>
+    <string name="driver_status">Статус таксиста</string>
+    <string name="car">Машина:</string>
+    <string name="car_number">Номер машины</string>
+    <string name="car_id_number" translatable="false">30 A 447 DB</string>
+    <string name="free_seats">Cвободных мест:</string>
+    <string name="raking">Рейтинг</string>
+    <string name="order_info">Инфомация о заказе</string>
+    <string name="my_location">Ваша локация</string>
+    <string name="_11" translatable="false">г.Ташкент, Чиланзар-11…</string>
+    <string name="price">Цена:</string>
+    <string name="money" translatable="false">120 000 сум</string>
+    <string name="bonus_money">Оплата бонусами</string>
+    <string name="summa" translatable="false">20 000 сум</string>
+    <string name="concret_summa">сумма</string>
+    <string name="summa1">сум</string>
+
+    <string name="econom_nexia">Эконом Nexia</string>
+    <string name="content_desc">Появится после бронирования</string>
+    <string name="white_gentra" translatable="false">Белый Gentra</string>
+    <string name="about_car">О машине</string>
+    <string name="free">Пустой</string>
+    <string name="luggage">Багаж:</string>
+    <string name="cancal">Отменить</string>
+    <string name="call">Позвонить</string>
+    <string name="telegram">Телеграм</string>
+    <string name="tech_support">Служба поддержки</string>
+    <string name="change_profile">Изменить данные</string>
+    <string name="change_phone_num">Изменить номер телефона</string>
+    <string name="about_prog">О программе</string>
+    <string name="your_driver">Ваш такси</string>
+    <string name="name" translatable="false">Акмал Шербоев</string>
+    <string name="lacette" translatable="false">Белый Lacette</string>
+    <string name="_0011" translatable="false">№0011</string>
+    <string name="zakaz">Поделиться заказом</string>
+    <string name="main">Вернуться на главную</string>
+    <string name="driver">Водитель</string>
+    <string name="driver_number" translatable="false">+99899 999 99 99</string>
+    <string name="nomer_taxi">Номер таксиста</string>
+    <string name="white_cobalt" translatable="false">Белый Cobalt 30 A 447 DB</string>
+    <string name="automobile">Автомобиль:</string>
+    <string name="status_order">Статус заказа</string>
+    <string name="order_description">Едет за Вашей посылкой</string>
+    <string name="car_photo">Фото такси</string>
+    <string name="order_num">Номер заказа</string>
+    <string name="type">Тип посылки</string>
+    <string name="type_description">Небольшой</string>
+    <string name="location_sbor">Локация сбора</string>
+    <string name="tashkent_namangan" translatable="false">г. Ташкенг, ул. Наманган…</string>
+    <string name="_40_000" translatable="false">40 000 сум</string>
+    <string name="where">Куда:</string>
+    <string name="namangan" translatable="false">Наманган…</string>
+    <string name="data">Дата отправления:</string>
+    <string name="start_end_time" translatable="false">23.05.2021 15:00–16:00</string>
+    <string name="_998_90_900_5995">Акмал +998 90 900 5995</string>
+    <string name="change">изменить</string>
+    <string name="premium">Премиум</string>
+    <string name="where_are_you_going">Куда едем?</string>
+    <string name="tariff">Тарифы</string>
+    <string name="standard_share">Данная услуга позволяет разделить поездку и стоимость проезда с другими пассажирами, которые следуют в том же направлении. Всего пассажирских мест: 4.</string>
+    <string name="premium_text">Данная услуга позволяет разделить поездку и стоимость проезда с другими пассажирами, которые следуют в том же направлении. Всего пассажирских мест: 4.</string>
+    <string name="female_class">Женский класс</string>
+    <string name="female_class_description">Женский класс – Share предназначен для перевозки только женщин и детей, позволяя разделить поездку и стоимость проезда с другими пассажирами, которые следуют в том же направлении. Всего пассажирских мест: 3</string>
+    <string name="not_big">Небольшой</string>
+    <string name="size">Размер</string>
+    <string name="weight">Вес</string>
+    <string name="till_this_amount">до 500 - Грамм</string>
+    <string name="sent">Цена</string>
+    <string name="free_besplatno">Бесплатно</string>
+    <string name="search_district">Выберите район</string>
+    <string name="address">Адрес</string>
+    <string name="total">Всего</string>
+    <string name="text">В данный момент нет такси в Самарканд</string>
+    <string name="text_2">Мы можем забронировать вам место как только такси появится по вашему маршруту</string>
+    <string name="operator">Оператор:</string>
+    <string name="payment">Способ оплаты:</string>
+    <string name="for_money">Наличные</string>
+    <string name="bcego">Всего</string>
+    <string name="_120_000" translatable="false">120 000 сум</string>
+    <string name="baggage">Багаж</string>
+    <string name="_0">0 сум</string>
+    <string name="bonus">Бонусы</string>
+    <string name="_20_000" translatable="false">-20 000 сум</string>
+    <string name="itogo">Итого:</string>
+    <string name="_100_000" translatable="false">100 000 сум</string>
+    <string name="payment_method">Способ оплаты:</string>
+    <string name="over">Всего</string>
+
+    <string name="_546879914" translatable="false">546879914</string>
+
+    <string name="xxx_xxx_xxx_xxx" translatable="false">XXX XXX XXX XXX</string>
+    <string name="card_num">Номер карты</string>
+    <string name="mm">MM/ГГ</string>
+    <string name="expirity_date">Срок действия</string>
+    <string name="code">Код подтверждения</string>
+    <string name="xxx_xxx" translatable="false">XXX XXX</string>
+    <string name="enter_cod">Получить код</string>
+    <string name="car_photos">Фото Автомобиля</string>
+    <string name="book">Забронировать</string>
+    <string name="book_now">Забронировать</string>
+    <string name="set_of_passangers">Набор пасажиров</string>
+    <string name="selected_locations">Выбранные места</string>
+    <string name="_4_120_000" translatable="false">№4 - 120 000 сум</string>
+    <string name="gathering_location">Локация сбора</string>
+    <string name="cancel">Отменить</string>
+    <string name="search_texi">Поиск такси</string>
+    <string name="dialing">Ожидайте подтверждения заказа от водителя</string>
+    <string name="consultation">Если водитель не примет запрос, вы можете забронировать другое такси.</string>
+    <string name="contact_with_driver">О водителе</string>
+    <string name="order_accepted">Заказ принят</string>
+    <string name="_3">Идёт набор пассажиров. После набора водитель свяжется с Вами. Осталось набрать: <strong>3 пассажира</strong></string>
+    <string name="your_location" translatable="false"><strong>Your location:</strong> Ташкентский обл., Янгиюль.</string>
+    <string name="taxi_location">Место отъезда: г. Ташкент Для точного адреса свяжитесь с водителем.</string>
+    <string name="see_order">Просмотреть заказ</string>
+    <string name="orderr">Подробнее о заказе</string>
+    <string name="your_taxi_on_the_way">Ваше такси в пути</string>
+    <string name="left">Осталось</string>
+    <string name="found_cars">Найдено 4 такси в Самарканд</string>
+    <string name="car_name" translatable="false">Белый Chevrolet Nexia - R3</string>
+    <string name="free_seat">Cвободных мест</string>
+    <string name="number_of_seats" translatable="false">4</string>
+    <string name="all">Полный</string>
+    <string name="in_query">По очереди</string>
+    <string name="large_baggage">С верхним багажом</string>
+    <string name="air_conditioner">Кондиционер</string>
+    <string name="air_conditioner_no">Нет конд.</string>
+    <string name="online_support">Чат онлайн поддержки:</string>
+    <string name="choose_address">Укажите адрес</string>
+    <string name="toast_msg">пожалуйста, сначала выберите тариф</string>
+    <string name="show_more">Узнать подробнее</string>
+    <string name="sum">сум</string>
+    <string name="sena">Цена:</string>
+    <string name="_12_1996" translatable="false">12 Март 1996</string>
+    <string name="nect">Продолжить</string>
+    <string name="insert_code">Введите код</string>
+    <string name="_998_90_568_1015">На ваш номер </string>
+    <string name="_88888888888888"> был отправлен код</string>
+    <string name="_998" translatable="false">+998</string>
+    <string name="addCard">Добавить карту</string>
+    <string name="link_card">Привязать карту</string>
+    <string name="daparture_date">Дата отправки</string>
+    <string name="hours">Часы</string>
+    <string name="minutes">Минуты</string>
+    <string name="departure_hours">Выберите время</string>
+    <string name="xxxx_xxxx_xxxx_xxxx" translatable="false">xxxx xxxx xxxx xxxx</string>
+    <string name="read_more_about">Подробнее о заказе</string>
+    <string name="send_post">Доставка посылки</string>
+    <string name="daparture_dates">Дата отправки</string>
+    <string name="big">Большой</string>
+    <string name="middle">Средний</string>
+    <string name="size_of_baggage">Обьём посылки</string>
+    <string name="select_region">Выберите область</string>
+    <string name="select_sity">Выберите город</string>
+    <string name="order_for_post">Заказ на посылку</string>
+    <string name="pending_delivery">Передача посылки в ожидании</string>
+    <string name="statuss">Статус</string>
+    <string name="post">Посылка</string>
+    <string name="taxi_region">Такси Область</string>
+    <string name="payment_for_schot">Счёт на оплату</string>
+    <string name="order_taxi">Заказ такси</string>
+    <string name="my_order">Мои заказы</string>
+    <string name="bonus_card">Бонусная карта</string>
+    <string name="wheRee">Откуда</string>
+    <string name="where_">Откуда?</string>
+    <string name="to_where_">Куда едем?</string>
+    <string name="where_going">Куда поедите?</string>
+    <string name="my_location1" translatable="false">Абдуллы Кадыри 33</string>
+    <string name="situation">Пожелания</string>
+    <string name="enter_home_address">Добавить адрес Дома</string>
+    <string name="enter_workplace">Добавить адрес Работы</string>
+    <string name="add_additional_place">Добавить другие адреса</string>
+    <string name="enter_your_name_please">пожалуйста введите имя</string>
+    <string name="enter_your_lastname_please">пожалуйста введите фамилию</string>
+    <string name="choose_your_gender">выберите свой пол</string>
+    <string name="enter_your_bday">выберите свой день рождения</string>
+
+
+    <string name="token" translatable="false">tokenValue</string>
+    <string name="saveUserId" translatable="false">saveUserId</string>
+    <string name="savePhone" translatable="false">savePhone</string>
+    <string name="saveName" translatable="false">saveName</string>
+    <string name="saveGender" translatable="false">saveGender</string>
+    <string name="saveBirthdate" translatable="false">saveBirthdate</string>
+    <string name="saveBalance" translatable="false">saveBalance</string>
+    <string name="createdTime" translatable="false">createdTime</string>
+    <string name="enter_your_phone">Введите Номер телефона</string>
+    <string name="saveNameOnly" translatable="false">saveNameOnly</string>
+    <string name="savePhone1" translatable="false">savePhone1</string>
+    <string name="orders">Заказать</string>
+    <string name="enter_station">Добавить остановки</string>
+    <string name="loggedInUser" translatable="false">loggedInUser</string>
+    <string name="order_for_your_friend">Заказать для другого</string>
+    <string name="price_text" translatable="false">2.000 сум</string>
+    <string name="for_first_km">За 1 км :</string>
+    <string name="waiting_a_minute">Ожидание 1 минут :</string>
+    <string name="free_dialing">Бесплатное ожидание :</string>
+    <string name="for_city">За городом :</string>
+    <string name="requirements">Требование:</string>
+    <string name="other">Другое:</string>
+    <string name="type_something">Введите что-то</string>
+    <string name="take_adventage_of_bonus">Воспользоваться бонусами</string>
+    <string name="used_balance">Воспользоваться:</string>
+    <string name="add_card"><u>Привязать карту</u></string>
+    <string name="stations">Остановку</string>
+    <string name="enter_stationn">Добавить остановки</string>
+    <string name="to_where">Куда</string>
+    <string name="via_chash">Наличные</string>
+    <string name="write">Написать</string>
+    <string name="cancal_taxi">Отменить такси</string>
+    <string name="ranking">Рейтинг</string>
+    <string name="about_trip">О поездке</string>
+    <string name="diatance">Дистанция</string>
+    <string name="rate_driver">Оцените водителя</string>
+    <string name="rate">Пропустить</string>
+    <string name="complain">Жалоба</string>
+    <string name="stationss">Остановки</string>
+    <string name="passanger_list">Пассажир</string>
+    <string name="med_turizm">Мед. туризм</string>
+    <string name="choose_direction">Выберите направление</string>
+    <string name="clinics">Клиники</string>
+    <string name="clinic">Клиника</string>
+    <string name="working_hours">Время работы</string>
+    <string name="address_">Адресс:</string>
+    <string name="doctors">Врачи</string>
+    <string name="clinics_">Клиника:</string>
+    <string name="whatsapp" translatable="false">WhatsApp</string>
+    <string name="tourism">Туризм</string>
+    <string name="tour_packet">Туризм</string>
+    <string name="tour">Тур</string>
+    <string name="on_the_map">На карте</string>
+    <string name="type_tour_">Тип тура:</string>
+    <string name="number_of_people">Кол-во человек:</string>
+    <string name="price_per_one">Стоимость на человека в USD :</string>
+    <string name="contact">Связаться</string>
+    <string name="about_tour">О туре</string>
+    <string name="large_text">За свою уникальную красоту и оздоровительные свойства Чимган по праву носит название «узбекской» Швейцарии. Склоны гор здесь покрыты реликтовыми арчовыми лесами. Горы и холмы изрезаны стремительными горными речками-саями. С вершины Чимганских гор открывается величественная панорама.</string>
+    <string name="what_include_in_tour">Что входить в тур:</string>
+    <string name="hiking">Походы</string>
+    <string name="active_tour">Активный тур</string>
+    <string name="tour_location">Место тура:</string>
+    <string name="gathering_place">Место сбора:</string>
+    <string name="date_and_time">Дата/время:</string>
+    <string name="about_place">О месте</string>
+    <string name="with_conditioner">С кондиционером</string>
+    <string name="no_place_selected">Не выбрано</string>
+    <string name="choose">Выбрать</string>
+    <string name="next">Продолжить</string>
+    <string name="add">Добавить</string>
+    <string name="women_class">Женский класс</string>
+    <string name="toMain">На главную</string>
+    <string name="leave_comment">Оставьте отзыв</string>
+    <string name="badInfo1">Водитель грубил</string>
+    <string name="badInfo2">Небезопасное вождение</string>
+    <string name="badInfo3">Поездка не состоялась</string>
+    <string name="badInfo4">Запах в машине</string>
+    <string name="badInfo5">Состояние автомобиля</string>
+    <string name="goodInfo1">Идеальный водитель</string>
+    <string name="goodInfo2">Комфортное вождение</string>
+    <string name="goodInfo3">Вежливость</string>
+    <string name="goodInfo4">Хорошее настроение</string>
+    <string name="goodInfo5">Приятная музыка</string>
+    <string name="write_us">Напишите нам</string>
+    <string name="have_a_question">Если возникли проблемы, свяжитесь с нами</string>
+    <string name="operator_">Оператор</string>
+    <string name="with_card">с картой</string>
+    <string name="null_money">0.0 сум</string>
+    <string name="nullMoney">Сумма: 0.0 сум</string>
+    <string name="balanceee">Баланс:</string>
+    <string name="sendData">Дата отправки</string>
+    <string name="select">Выбрать</string>
+    <string name="namee">Имя</string>
+    <string name="Recipient">Получатель</string>
+    <string name="post_photo">Фото посылки</string>
+    <string name="with_money">Наличными</string>
+    <string name="with_cardd">Картой</string>
+    <string name="take_adventage_of">Воспользоваться:</string>
+    <string name="use_bonus">Воспользоваться \nбонусами</string>
+    <string name="gps_not_enabled">GPS не включен!</string>
+    <string name="doyou_want_turnOn">" Хотите включить GPS?"</string>
+    <string name="yes">да</string>
+    <string name="no">нет</string>
+    <string name="not_selected">Не выбрано</string>
+    <string name="select_yourLocation_from_map">Укажите вашу локацию</string>
+    <string name="select_place">Выберите место</string>
+    <string name="placeNameNotFound">не найден</string>
+    <string name="enter_address">Введите адрес</string>
+    <string name="emptySpace">" "</string>
+    <string name="active">Активные</string>
+    <string name="letter_c">C</string>
+    <string name="po">По</string>
+    <string name="do_you_have_luggage">У вас есть багаж?</string>
+    <string name="no_lowercase">Нет</string>
+    <string name="taxi_city">Такси Город</string>
+    <string name="type_of_parcel">Тип посылки</string>
+    <string name="log_out_profile">Выйти из профиля</string>
+    <string name="how_to_get_bonuses">Как получить бонусы</string>
+    <string name="lorem_text" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        In augue quis facilisi congue fames viverra. Cursus arcu placerat ipsum at.
+        Pharetra leo nisi, auctor viverra consectetur proin sed morbi. Vulputate
+        adipiscing augue eget volutpat fermentum, lacus ac, suspendisse.
+        Scelerisque vitae ut integer mi odio eu, dignissim est consectetur.
+        In lacinia leo duis eget./n      Dignissim faucibus ac risus id leo suspendisse viverra.
+        Porta nulla egestas maecenas gravida at scelerisque turpis erat. Mi tellus neque cras
+        viverra tellus. Quis viverra nibh orci nisi. Vulputate sed congue nisi morbi lacus
+        nulla duis. Nisi bibendum tincidunt ut lorem lectus habitasse non. Donec vel velit
+        gravida nisi, arcu quis integer sagittis, et. Eu dolor eu blandit mi. Dignissim et urna,
+        mollis tristique. Id suspendisse nec nulla a urna leo elit. Nulla suscipit ipsum
+        vestibulum tristique aenean lacus, ac aliquam, justo. Lacus venenatis ut dictumst
+        morbi turpis maecenas consectetur ut.
+        Egestas pretium ut morbi sed cursus varius eget fames bibendum. Nunc facilisis amet
+        curabitur montes, et aliquet nunc. Tristique in elementum eu commodo, est risus,
+        ut aenean etiam. At sagittis hac ipsum lacus, non, aliquam ipsum urna velit. Consequat
+        porttitor massa faucibus et. Dolor viverra ut ultrices mattis. Eu, nullam tellus ultrices
+        volutpat pretium felis sit. Blandit donec arcu, feugiat enim nibh faucibus.
+</string>
+    <string name="aboutDriver">О водителе</string>
+    <string name="pick_image_intent_text" translatable="false">rasmlarrrr</string>
+    <string name="order_post_for_my_friend">Заказ другому человеку</string>
+    <string name="phone">Телефон</string>
+    <string name="showFromMap">Показать на карте</string>
+    <string name="taxi_photos">Фото такси</string>
+    <string name="selectOnTheMap">Выбрать на карте</string>
+    <string name="regions">Области</string>
+    <string name="see">Показать</string>
+    <string name="chooseType">Выберите тип доставки</string>
+    <string name="dapartureDate">Дата отправления:</string>
+    <string name="usUzbek" translatable="false">uzbekLanguage</string>
+    <string name="isEnglishLanguage" translatable="false">isEnglishLanguage</string>
+    <string name="isRussianLanguage" translatable="false">isRussianLanguage</string>
+    <string name="setLanguageForHeader" translatable="false">setLanguageForHeader</string>
+    <string name="wrong_code">Неверный код</string>
+    <string name="card">Карта</string>
+    <string name="your_seat">Ваше место</string>
+    <string name="chat">Чат</string>
+    <string name="standard">Стандарт:</string>
+    <string name="post_">Посылка: </string>
+    <string name="orderrr">Заказ</string>
+    <string name="smth_went_wrong">Что-то пошло не так. Пожалуйста, попытайтесь еще раз</string>
+    <string name="receiver">Получатель</string>
+    <string name="resent">Недавные</string>
+    <string name="saved">Сохраненные</string>
+    <string name="enterWorkAddress">Добавить адрес Работы</string>
+    <string name="result">Результаты</string>
+    <string name="add_address">Добавить адрес</string>
+    <string name="yourLocation">Ваше местоположение</string>
+    <string name="add_comment">Комментарий для водителя</string>
+    <string name="comments">Комментарий</string>
+    <string name="orderForFriend">Заказ другому человеку</string>
+    <string name="whereToPickup">Откуда забрать</string>
+    <string name="enter_your_address">Укажите вашу локацию</string>
+    <string name="number_of_clients">Выберите количество пассажиров:</string>
+    <string name="enter_district_city">Выберите город (район)</string>
+    <string name="good">Добро</string>
+    <string name="benevolent_man">Благодушный человек</string>
+    <string name="donated">Пожертвовано</string>
+    <string name="trips">Поездок</string>
+    <string name="totalDonationAmoubt">Общая сумма пожертвования</string>
+    <string name="donationHistory">История пожертвований</string>
+    <string name="passThroughBonus">Вы можете оплатить через бонусную сумму</string>
+    <string name="enter_summa">Введите сумму</string>
+    <string name="lastname">Фамилия</string>
+    <string name="gender">Пол</string>
+    <string name="all_time">Все</string>
+    <string name="fromTheTrip">От поездки</string>
+    <string name="makeDonation">Сделать пожертвование</string>
+    <string name="donationAmount">Cумма пожертвования</string>
+    <string name="min_100_sum">Мин. 1000 сум</string>
+    <string name="totlaPayable">Итого к оплате</string>
+    <string name="choose_card">Выберите карту</string>
+    <string name="pay">Оплатить</string>
+    <string name="returnHome">Вернуться</string>
+    <string name="allNews">Все новости</string>
+    <string name="international">Международное:</string>
+    <string name="License_agreement">Лицензионное соглашение</string>
+    <string name="PrivacyPolicy">Политика конфиденциальности</string>
+    <string name="foundOfBill">Денежные средства спишутся после посадки в такси</string>
+    <string name="accountNumber">Номер счёта</string>
+    <string name="forYourResponse">По вашему запросу</string>
+    <string name="otherOptions">Другие варианти</string>
+    <string name="has_air_conditioner">Есть кондиционер</string>
+    <string name="mesto">Место:</string>
+    <string name="placeNotAccording">Место не по вашему запросу</string>
+    <string name="taxi_locationn">Локация таксиста</string>
+    <string name="ready">Готово</string>
+    <string name="leave_review">Оставьте отзыв</string>
+    <string name="taxiArrived">Такси приехало</string>
+    <string name="imOut">Я выхожу</string>
+    <string name="otherr">Другое</string>
+    <string name="comment_for_driver">Комментарий для водителя</string>
+    <string name="goToTariff">Перейти к тарифам</string>
+    <string name="your_home">Ваш дом</string>
+    <string name="your_work_address">Мой адрес работы</string>
+    <string name="placeName">Название место</string>
+    <string name="delete_address">Удалить адрес</string>
+    <string name="taxi_internationall">Такси Международное</string>
+    <string name="yourAddress">Ваш адрес</string>
+    <string name="inCash">Наличными</string>
+    <string name="csd">У вас женский тариф. Вы должны перевозить пасажиров только женского пола и детей.\nЗа 1 км: 1 200сум\nБесплатное ожидание: 3 минут\nОжидание 1 минут: 300сум\nЗа городом: 1 500сум</string>
+    <string name="newCard">+ Новая карта</string>
+    <string name="confirm">Применить</string>
+    <string name="orderAgain">Заказать ещё</string>
+    <string name="order_cancelled_sorry">Извините, ваш заказ был отменен водителем.</string>
+    <string name="please_try_again">Пожалуйста, закажите еще раз</string>
+    <string name="order_again">Заказать еще раз</string>
+    <string name="categories">Санатории</string>
+    <string name="mySaved">Мое избранное</string>
+    <string name="ambulance_service">скорая помощь</string>
+    <string name="phone_line">Список телефонов</string>
+    <string name="moree">ПОДРОБНЕЕ</string>
+    <string name="famousClinics">Популярные клиники</string>
+    <string name="alll">Все</string>
+    <string name="famousDoctors">Популярные врачи</string>
+    <string name="by_popularity">По популярности</string>
+    <string name="allCategories">Все категории</string>
+    <string name="search_results">Найдено</string>
+    <string name="estimate">Оценить</string>
+    <string name="aboutClinic">О клинике</string>
+    <string name="services">Услуги</string>
+    <string name="desciption">Описание</string>
+    <string name="work_hours">Время работы:</string>
+    <string name="fotoGallery">Фотогалерея</string>
+
+
+</resources>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/today"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/text_size_18sp"
+        android:textStyle="bold"
+        android:id="@+id/date_of_issue"
+        android:fontFamily="@font/inter_medium"
+        android:layout_marginTop="@dimen/margin_padding_16dp"
+        android:layout_marginStart="@dimen/margin_padding_16dp" />
+
+    <include
+        layout="@layout/card_detail"
+        android:id="@+id/progress_card_item"
+        android:layout_marginStart="@dimen/margin_padding_16dp"
+        android:layout_marginEnd="@dimen/margin_padding_16dp"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_below="@+id/date_of_issue"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent" />
+
+
+</RelativeLayout>

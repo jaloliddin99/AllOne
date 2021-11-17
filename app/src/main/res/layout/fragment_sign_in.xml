@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.login.signIn.SignInFragment">
+
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/register"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:layout_marginTop="45dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/enterToSystem"
+            android:textAppearance="@style/boldStyle"
+            android:textSize="@dimen/text_size_24sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_16dp"
+            android:text="@string/viaPhoneNumber"
+            android:textAppearance="@style/mediumStyle"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginLeft="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_36dp"
+            android:paddingTop="@dimen/margin_padding_24dp"
+            android:text="@string/phoneNumber"
+            android:textAppearance="@style/boldStyle"
+            android:textSize="@dimen/text_size_14sp" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+            android:background="@drawable/bg_grey_rounded"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/txtSignIn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_padding_24dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="@dimen/margin_padding_24dp"
+                android:layout_marginBottom="20dp"
+                android:background="@null"
+                android:digits="0123456789+"
+                android:drawableEnd="@drawable/ic_phone"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:fontFamily="@font/inter_regular"
+                android:hint="@string/enterSomething"
+                android:imeOptions="actionDone"
+                android:inputType="phone"
+                android:maxLength="17"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_14sp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/signIn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="@dimen/margin_padding_16"
+        android:layout_marginEnd="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/nect"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+</RelativeLayout>

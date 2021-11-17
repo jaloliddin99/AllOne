@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="156dp"
+    app:cardCornerRadius="@dimen/margin_padding_12dp"
+    app:cardElevation="0dp"
+    android:elevation="0dp"
+    android:layout_marginEnd="@dimen/margin_padding_12dp"
+    android:layout_height="156dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:src="@drawable/baggage"
+        android:scaleType="centerCrop"
+        android:id="@+id/baggage_image"
+        android:layout_height="match_parent"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        app:backgroundTint="@color/white"
+        app:fabCustomSize="60dp"
+        android:layout_gravity="center"
+        android:elevation="0dp"
+        app:elevation="0dp"
+        android:id="@+id/delete_baggage"
+        app:tint="@color/red"
+        android:src="@drawable/ic_ix_shape"/>
+
+
+
+</com.google.android.material.card.MaterialCardView>

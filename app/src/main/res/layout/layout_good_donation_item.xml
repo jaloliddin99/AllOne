@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_height="wrap_content">
+        <androidx.appcompat.widget.AppCompatTextView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBaseline_toBaselineOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:id="@+id/title"
+            android:layout_height="wrap_content"
+            android:text="AJR loyihasi"
+            app:layout_constraintEnd_toStartOf="@id/amount"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="50 000 сум"
+            android:id="@+id/amount"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/inter_medium"
+            android:textColor="@color/black"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_4dp"
+            android:id="@+id/time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/amount"
+            android:text="18:00"
+            android:layout_alignParentEnd="true"
+            android:textSize="@dimen/text_size_12sp"
+            android:fontFamily="@font/inter_regular"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <View
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/dark_grey"/>
+</androidx.appcompat.widget.LinearLayoutCompat>

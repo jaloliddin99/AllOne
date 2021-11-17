@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.order.showFromMap.FragmentShowFromMap">
+
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"/>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:orientation="vertical"
+        android:background="@drawable/white_background_top_corner">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textSize="@dimen/text_size_18sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_24dp"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_location"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_marginStart="@dimen/margin_padding_12dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/locationWithDetail"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:fontFamily="@font/inter_regular"
+                    android:textColor="@color/black"
+                    android:text="evrsbidn"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/locationGlobal"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:fontFamily="@font/inter_regular"
+                    android:textColor="@color/hint_color"
+                    android:text="evrsbidn"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_16"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginBottom="@dimen/margin_padding_24dp"
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="@color/green"
+            android:padding="@dimen/margin_padding_16dp"
+            android:text="@string/back"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

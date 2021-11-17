@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/cancel"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_ix_shape"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:layout_marginEnd="@dimen/margin_padding_8dp"
+        android:layout_gravity="end"
+        android:padding="@dimen/margin_padding_8dp"
+
+        app:tint="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/write_us"
+        android:textSize="@dimen/text_size_20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:id="@+id/recyclerView"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:fontFamily="@font/inter_bold"
+        android:text="@string/otherr"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_13sp" />
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:id="@+id/comment"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:background="@drawable/bg_grey_rounded"
+        android:gravity="start"
+        android:fontFamily="@font/inter_regular"
+        android:hint="@string/type_something"
+        android:max="500"
+        android:padding="@dimen/margin_padding_12dp" />
+
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/send"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_16"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/send"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

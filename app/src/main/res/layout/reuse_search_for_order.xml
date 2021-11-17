@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="30"
+            android:layout_gravity="center"
+            android:layout_marginEnd="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_my_car_found" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="64"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:id="@+id/found"
+                android:text="@string/found_cars"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/text_2"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="0dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="#FFFDEA"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/location"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_medium"
+            android:padding="@dimen/margin_padding_16dp"
+
+            android:text="@string/your_location"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_car_icon"
+            android:drawablePadding="@dimen/margin_padding_12dp"
+            android:elevation="0dp"
+            android:fontFamily="@font/inter_medium"
+            android:paddingStart="@dimen/margin_padding_16dp"
+            android:paddingEnd="@dimen/margin_padding_16dp"
+            android:paddingBottom="@dimen/margin_padding_16dp"
+            android:text="@string/taxi_location"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15sp" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.appcompat.widget.LinearLayoutCompat>

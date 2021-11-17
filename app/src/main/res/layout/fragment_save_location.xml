@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.taxiCity.SavedLocations.FragmentSaveLocation"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/margin_padding_4dp">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/saved"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_56dp"
+        android:background="@drawable/rename_card_shape"
+        android:layout_marginHorizontal="@dimen/margin_padding_16">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:src="@drawable/ic_home_icon"
+            android:id="@+id/homeIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:src="@drawable/ic_img2"
+            android:id="@+id/homeAddEditIcon"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="@dimen/dimens_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/homeAddress"
+            app:layout_constraintEnd_toStartOf="@id/homeAddEditIcon"
+            app:layout_constraintStart_toEndOf="@id/homeIcon"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+
+            android:text="@string/your_home"
+            android:inputType="text"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size_16sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:layout_height="@dimen/item_height_56dp"
+        android:background="@drawable/rename_card_shape"
+        android:layout_marginHorizontal="@dimen/margin_padding_16">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:src="@drawable/ic_work_bag"
+            android:id="@+id/workIcon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:src="@drawable/ic_img2"
+            android:id="@+id/workAddEditIcon"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="@dimen/dimens_0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/workplace"
+            app:layout_constraintEnd_toStartOf="@id/workAddEditIcon"
+            app:layout_constraintStart_toEndOf="@id/workIcon"
+            android:maxLines="1"
+            android:ellipsize="end"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:text="@string/your_work_address"
+            android:inputType="text"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/text_size_16sp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:id="@+id/recyclerView"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_56dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:background="@drawable/rename_card_shape"
+        android:drawablePadding="@dimen/margin_padding_16"
+        android:id="@+id/addOtherAddresses"
+        android:text="@string/your_work_address"
+        android:drawableEnd="@drawable/ic_img2"
+        android:inputType="text"
+        android:paddingHorizontal="@dimen/margin_padding_16"
+        android:paddingVertical="@dimen/margin_padding_16dp"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/text_size_16sp" />
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/back"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

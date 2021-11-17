@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/background_white_corner_12"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_padding_12dp"
+        android:layout_marginTop="@dimen/margin_padding_16dp"
+        android:layout_marginEnd="@dimen/margin_padding_16dp"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="8" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="end"
+            android:id="@+id/cancel_img"
+            android:padding="@dimen/margin_padding_8dp"
+            android:src="@drawable/ic_shape" />
+    </LinearLayout>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/inter_medium"
+        android:gravity="center"
+        android:text="@string/departure_hours"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/text_size_20sp"
+        android:textStyle="bold" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/hours"
+            android:layout_toStartOf="@id/space"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+            android:text="@string/hours"/>
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:id="@+id/space"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/space"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:id="@+id/minutes"
+            android:text="@string/minutes"/>
+
+
+
+    </RelativeLayout>
+
+
+
+
+<!--    <com.ozcanalasalvar.library.view.timePicker.TimePicker-->
+<!--        android:id="@+id/timePicker"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_marginTop="@dimen/margin_padding_12dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginStart="@dimen/margin_padding_24dp"-->
+<!--        android:layout_marginEnd="@dimen/margin_padding_24dp"-->
+<!--        app:pickerMode="monthFirst"-->
+<!--        app:offset="3"-->
+<!--        app:textSize="20" />-->
+
+    <TimePicker
+        android:id="@+id/datePicker1"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_width="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_24dp"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:timePickerMode="spinner"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:layout_marginEnd="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_16dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="Принять"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+
+</LinearLayout>
+

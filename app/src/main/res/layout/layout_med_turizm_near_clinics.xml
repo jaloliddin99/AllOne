@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/background_white_corner_12"
+    android:padding="@dimen/margin_padding_8dp"
+    android:layout_marginTop="@dimen/margin_padding_12dp"
+    android:backgroundTint="@color/grey"
+    android:layout_height="wrap_content">
+
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        app:cardCornerRadius="@dimen/margin_padding_8dp"
+        app:cardElevation="@dimen/dimens_0dp">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/test_clinic"
+            android:scaleType="centerCrop"/>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/margin_padding_12dp"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shox International  Hospital"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15sp"
+            android:fontFamily="@font/inter_semibold"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="г. Ташкент, Узбекистан"
+            android:drawableStart="@drawable/ic_location_sma"
+            android:drawablePadding="6dp"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:textColor="#666F75"
+            android:textSize="@dimen/text_size_12sp"
+            android:fontFamily="@font/inter_regular"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 km"
+            android:drawablePadding="6dp"
+            android:paddingHorizontal="@dimen/margin_padding_4dp"
+            android:paddingVertical="@dimen/dimen_2dp"
+            android:background="@drawable/drawable_4dp_corner"
+            android:backgroundTint="@color/dark_grey"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_12sp"
+            android:fontFamily="@font/inter_medium"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

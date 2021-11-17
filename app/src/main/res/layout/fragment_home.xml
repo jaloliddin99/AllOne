@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context=".fragments.main.home.HomeMain.HomeFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/green"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:elevation="@dimen/margin_padding_4dp"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+            android:layout_height="?attr/actionBarSize">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/bell"
+                android:layout_alignParentEnd="true"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_bell_white"
+                android:layout_marginEnd="@dimen/margin_padding_4dp"
+                android:layout_centerVertical="true"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/mainImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_main_logo"
+                android:visibility="visible" />
+
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolbar"
+            android:id="@+id/nestedScrollView"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtNameField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginTop="60dp"
+                    android:text="@string/welcome_A"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_16sp" />
+
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/bonus_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="95dp"
+                    android:layout_marginStart="@dimen/margin_padding_16dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginEnd="@dimen/margin_padding_16dp"
+                    android:backgroundTint="@color/green"
+                    app:cardCornerRadius="@dimen/margin_padding_12dp"
+                    app:cardElevation="0dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Space
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4" />
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="6"
+                            android:orientation="horizontal">
+
+                            <FrameLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="32dp"
+                                android:background="@drawable/ic_wave_two" />
+
+                            <FrameLayout
+
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_wave_one" />
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_16dp"
+                            android:layout_marginTop="@dimen/margin_padding_12dp"
+                            android:layout_marginEnd="@dimen/margin_padding_16dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="@string/bonus_points"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_18sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/user_id"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_16dp"
+                            android:layout_marginTop="@dimen/margin_padding_12dp"
+                            android:layout_marginEnd="@dimen/margin_padding_16dp"
+                            android:layout_marginBottom="@dimen/margin_padding_16dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:id="@+id/balanceText"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/inter_bold"
+                                    android:text="34 000"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_size_24sp"
+                                    />
+
+                                <TextView
+
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/margin_padding_4dp"
+                                    android:text="@string/sum"
+                                    android:textColor="@color/white"
+                                    android:textSize="@dimen/text_size_18sp" />
+
+
+                            </LinearLayout>
+
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_weight="1"
+                                android:drawableEnd="@drawable/ic_arrow_right_white"
+                                android:drawablePadding="@dimen/margin_padding_12dp"
+                                android:text="@string/go_to"
+                                android:textAlignment="textEnd"
+                                android:textColor="@color/white"
+                                android:textSize="13sp"
+                                tools:ignore="RtlCompat" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:overScrollMode="never"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
+                    android:layout_marginEnd="@dimen/margin_padding_16"
+                    android:clipToPadding="false"
+                    android:id="@+id/recyclerViewOrders"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:background="@drawable/white_background_top_corner">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_16dp"
+                            android:layout_marginTop="@dimen/margin_padding_24dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="@string/active_order"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20sp"
+                            />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/margin_padding_16"
+                            android:layout_marginTop="@dimen/margin_padding_12dp"
+                            android:layout_marginBottom="@dimen/margin_padding_16"
+                            android:background="@drawable/background_grey">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/showMore"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:drawableStart="@drawable/ic_car_icon"
+                                android:drawableEnd="@drawable/ic_arrow_right"
+                                android:drawablePadding="@dimen/margin_padding_8dp"
+                                android:drawableTint="@color/green"
+                                android:fontFamily="@font/inter_medium"
+                                android:paddingHorizontal="@dimen/margin_padding_24dp"
+                                android:paddingVertical="20dp"
+                                android:text="Все активные заказы (10)"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_15sp" />
+                        </FrameLayout>
+
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_marginBottom="@dimen/margin_padding_24dp"
+                            android:layout_height="wrap_content">
+                            <TextView
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/margin_padding_16"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/news"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_18sp"
+                                />
+                            <TextView
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/margin_padding_16"
+                                android:fontFamily="@font/inter_medium"
+                                android:text="@string/allNews"
+                                android:id="@+id/allNews"
+                                android:textColor="@color/green"
+                                android:textSize="@dimen/text_size_15sp"
+                                />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/newsCardView"
+                            android:transitionName="newsImageMainView"
+                            android:layout_width="match_parent"
+                            android:layout_height="170dp"
+                            android:layout_marginHorizontal="@dimen/margin_padding_16"
+                            android:layout_marginBottom="@dimen/margin_padding_24dp"
+                            app:cardCornerRadius="@dimen/margin_padding_12dp"
+                            app:cardElevation="0dp"
+                            app:rippleColor="@android:color/transparent">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/newsImage"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end"
+                                android:layout_marginTop="@dimen/margin_padding_12dp"
+                                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="hello this is "
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_13sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/title"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:layout_marginStart="@dimen/margin_padding_12dp"
+                                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/text_size_13sp" />
+                        </com.google.android.material.card.MaterialCardView>
+
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+    </RelativeLayout>
+</RelativeLayout>

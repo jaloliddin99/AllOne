@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".fragments.medTurism.clinicInfo.FragmentClinicInfo"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height_56dp"
+            android:id="@+id/toolbar"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backToHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_padding_12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_arrow_left" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/save"
+                android:layout_width="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_savee" />
+
+        </RelativeLayout>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                app:cardCornerRadius="@dimen/dimens_6dp"
+                app:rippleColor="@android:color/transparent"
+                app:cardElevation="@dimen/dimens_0dp">
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
+                    android:layout_height="match_parent"
+                    android:id="@+id/poster"/>
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/icon_size_20dp"
+                android:orientation="vertical">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shox International Hospital "
+                    android:id="@+id/name"
+                    android:textSize="@dimen/text_size_20sp"
+                    android:textColor="@color/black"
+                    android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                    android:fontFamily="@font/inter_semibold"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Многопрофильная клиника"
+                    android:textColor="#119E46"
+                    android:id="@+id/type"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:fontFamily="@font/inter_medium"
+                    android:layout_marginTop="@dimen/margin_padding_4dp"/>
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Закрыто до завтра"
+                    android:id="@+id/closed_title"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:drawableStart="@drawable/ic_time_left_gray"
+                    android:textSize="@dimen/text_size_13sp"
+                    android:drawableTint="#EB3737"
+                    android:textColor="#EB3737"
+                    android:fontFamily="@font/inter_medium"
+                    android:drawablePadding="5dp"/>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/icon_size_20dp"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_marginEnd="@dimen/margin_padding_4dp"
+                android:layout_height="70dp"
+                android:background="@drawable/background_white_corner_12"
+                android:backgroundTint="#F6F6F6"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableStart="@drawable/ic_star_green"
+                            android:drawablePadding="@dimen/margin_padding_8dp"
+                            android:drawableTint="@color/yellow"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="4.5"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_20sp" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/review_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="@dimen/dimens_6dp"
+                            android:fontFamily="@font/inter_regular"
+                            android:text="(443)"
+                            android:textColor="#CC272727"
+                            android:textSize="@dimen/text_size_15sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/estimate"
+                        android:textColor="#E6272727"
+                        android:textSize="@dimen/text_size_13sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="70dp"
+                android:layout_marginStart="@dimen/margin_padding_4dp"
+                android:background="@drawable/background_white_corner_12"
+                android:backgroundTint="#F6F6F6"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/dimens_18dp"
+                        android:layout_height="@dimen/dimens_18dp"
+                        android:src="@drawable/ic_call"
+                        android:layout_gravity="center"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="@dimen/dimens_10dp"
+                        android:textColor="#E6272727"
+                        android:textSize="@dimen/text_size_13sp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/call"/>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/customTabLayout"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            app:tabIndicatorAnimationMode="elastic"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/black"
+            android:id="@+id/tab_layout"
+            app:tabIndicatorHeight="@dimen/margin_padding_4dp"
+            app:tabIndicator="@drawable/tab_indicator"
+            app:tabSelectedTextColor="@color/green"
+            android:layout_marginTop="@dimen/margin_padding_24dp">
+        </com.google.android.material.tabs.TabLayout>
+        <androidx.viewpager.widget.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/viewPager"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

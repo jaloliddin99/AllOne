@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:paddingBottom="100dp"
+    android:layout_marginHorizontal="@dimen/margin_padding_16"
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="9dp"
+        android:src="@drawable/ic_long_line" />
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/grey"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:padding="@dimen/margin_padding_16">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/someLayout"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Стандарт:"
+                android:textSize="@dimen/text_size_18sp"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"
+                android:id="@+id/tariff"/>
+            <androidx.legacy.widget.Space
+                android:layout_width="@dimen/margin_padding_4dp"
+                android:layout_height="wrap_content"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_size_18sp"
+                android:text="16 000 сум"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/green"
+                android:id="@+id/price"/>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_city_search_top"
+            app:layout_constraintTop_toBottomOf="@id/someLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:drawablePadding="@dimen/margin_padding_8dp"
+            android:text="@string/search_texi"
+            android:textSize="@dimen/text_size_15sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/inter_regular"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="@dimen/dimen_2dp"/>
+
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/ic_car_image_your_tax"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_metka" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/wheRee"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/pickup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="string/tashkent_namangan  "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:src="@drawable/ic_arrow_right_green" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#C8C8C8" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_locationn" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/to_where"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/toWhere"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="string/tashkent_namangan  "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_right_green" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#C8C8C8" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_small_money" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/payment_methods"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/payment_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Наличные"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_right_green" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#C8C8C8" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearOrderForOther"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_people" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/order_for_your_friend"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/orderForOther_other_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="Наличные"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_arrow_right_green" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/lineOrderForOtherPerson"
+        android:background="#C8C8C8" />
+
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearConditioner"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_snow" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/inter_regular"
+            android:text="@string/with_conditioner"
+            android:layout_weight="8"
+            android:textColor="@color/black"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:textSize="@dimen/text_size_15sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:id="@+id/lineConditioner"
+        android:background="#C8C8C8" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearComment"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:layout_marginBottom="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_8dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_chat_icon" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="8"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="@string/comment_for_driver"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="string/tashkent_namangan  "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            android:src="@drawable/ic_arrow_right_green" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

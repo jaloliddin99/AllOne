@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:animateLayoutChanges="true"
+    tools:context=".fragments.taxiCity.paymentMethod.FragmentCityPaymentMethod"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/payment_method"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/bonus_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:background="@drawable/bg_green_rounded"
+        tools:ignore="RtlSymmetry">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal">
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_wave_card" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
+            android:layout_width="0dp"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_marginEnd="@dimen/dimen_48dp"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/take_adventage_of_bonus"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_18sp"
+            app:layout_constraintEnd_toStartOf="@id/bonusAmount"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/bonusAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_padding_16"
+            android:thumb="@drawable/thumb2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:track="@drawable/thumb_bg_alone" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linearLayoutCompat3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_4dp"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            tools:layout_editor_absoluteX="16dp">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/balanceText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/balanceee"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView"
+                    android:layout_toEndOf="@+id/balanceText"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_padding_12dp">
+
+                <TextView
+                    android:id="@+id/balanceText1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/balanceText"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="@string/take_adventage_of"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/balanceText"
+                    android:layout_toEndOf="@+id/balanceText1"
+                    android:fontFamily="@font/inter_bold"
+                    android:textColor="@color/white" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cashCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_padding_4dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="@dimen/margin_padding_12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/green"
+            app:strokeWidth="2dp">
+
+            <RelativeLayout
+                android:id="@+id/withCash"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_week_green_rounded"
+                android:paddingStart="@dimen/margin_padding_12dp"
+                android:paddingBottom="@dimen/margin_padding_12dp"
+                tools:ignore="RtlSymmetry">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:src="@drawable/ic_mony" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/money"
+                    android:layout_marginTop="@dimen/margin_padding_16dp"
+                    android:text="Наличными"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <RadioButton
+                    android:id="@+id/withCashRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:buttonTint="@color/green"
+                    android:checked="true"
+                    android:gravity="center" />
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardCard"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_4dp"
+            android:layout_weight="1"
+            app:cardCornerRadius="@dimen/margin_padding_12dp"
+            app:cardElevation="0dp"
+            app:strokeColor="@color/grey"
+            app:strokeWidth="2dp">
+
+            <RelativeLayout
+                android:id="@+id/withCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_grey_rounded"
+                android:paddingStart="@dimen/margin_padding_12dp"
+                android:paddingBottom="@dimen/margin_padding_12dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/money1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:src="@drawable/ic_card" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/money1"
+                    android:layout_marginTop="@dimen/margin_padding_16dp"
+                    android:text="Картой"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
+
+                <RadioButton
+                    android:id="@+id/withCardRadio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:buttonTint="@color/green"
+                    android:gravity="center" />
+
+
+            </RelativeLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:animateLayoutChanges="true"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_marginBottom="@dimen/margin_padding_16"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="wrap_content">
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/choose_card"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/addNewCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:drawablePadding="@dimen/dimens_10dp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/newCard"
+                android:textColor="@color/green"
+                android:textSize="@dimen/text_size_15sp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_padding_12dp"
+            android:paddingEnd="@dimen/dimen_32dp"
+            android:clipToPadding="false"
+            android:id="@+id/recyclerView"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <androidx.legacy.widget.Space
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/item_height_56dp"
+        android:insetBottom="@dimen/dimens_0dp"
+        android:id="@+id/confirm"
+        android:insetTop="@dimen/dimens_0dp"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
+        app:cornerRadius="@dimen/margin_padding_12dp"
+        android:text="@string/confirm"
+        android:textSize="@dimen/text_size_18sp"
+        android:textAllCaps="false"
+        android:fontFamily="@font/inter_semibold"/>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

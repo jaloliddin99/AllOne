@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="yellow">#FFB802</color>
+    <color name="red">#FF6060</color>
+    <color name="red_full">#FF2E2E</color>
+    <color name="red_seat_color">#FFB0B0</color>
+    <color name="black">#272727</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="green">#02C65C</color>
+    <color name="grey">#F9F9F9</color>
+    <color name="dark_grey">#DBDFE0</color>
+    <color name="purple_200">#FFFBED</color>
+    <color name="purple_100">#FFF5F5</color>
+    <color name="blue">#00B2FF</color>
+    <color name="blue_item">#F0F0F0</color>
+    <color name="dark_grey_blur">#EAFFF2</color>
+
+    <color name="grey_2">#A9B4B8</color>
+    <color name="startGreen">#79FDB6</color>
+    
+    <color name="light_gray">#5C7080</color>
+
+    <color name="veryDarkColor">#A9B4B8</color>
+
+    <color name="hint_color">#7E848B</color>
+
+    <color name="clinic_color">#EB3737</color>
+
+
+    <color name="transparentColor">#66000000</color>
+    <color name="transparentColorHalf">#33000000</color>
+
+    <color name="system_ui_scrim_light">#E3ffffff</color>
+    <color name="system_ui_scrim_dark">#C3000000</color>
+
+    <color name="dark_black">#272727</color>
+
+    <color name="week_green">#E8FDF0</color>
+    <color name="statusbar_color">#15C657</color>
+
+    <color name="mdtp_accent_color">#02C65C</color>
+    <color name="mdtp_accent_color_dark">#02C65C</color>
+
+    <color name="darker_color">#484a48</color>
+
+</resources>

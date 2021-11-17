@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/background_white_corner_12"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/cancel"
+        android:src="@drawable/ic_ix_shape"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:layout_marginEnd="@dimen/margin_padding_8dp"
+        android:layout_gravity="end"
+        android:padding="@dimen/margin_padding_8dp"
+
+        app:tint="@color/black"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Удалить карту?"
+        android:textSize="@dimen/text_size_20sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardName"
+        android:text="Карта Uzcard"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:layout_marginStart="@dimen/margin_padding_16"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/inter_bold"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardNumber"
+        android:layout_marginHorizontal="16dp"
+        android:drawableTint="@color/green"
+        android:drawablePadding="@dimen/margin_padding_8dp"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:drawableStart="@drawable/ic_cardd"
+        android:text="8 6 0 0 **** **** 5 6 4 8"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/text_size_15sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/expDate"
+        android:layout_marginHorizontal="16dp"
+        android:drawableTint="@color/green"
+        android:drawablePadding="@dimen/margin_padding_8dp"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:drawableStart="@drawable/ic_calendar"
+        android:text="12/12"
+        android:fontFamily="@font/inter_medium"
+        android:textColor="?android:attr/textColorPrimary"
+        android:textSize="@dimen/text_size_15sp" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/delete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_16"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/red"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/delete"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

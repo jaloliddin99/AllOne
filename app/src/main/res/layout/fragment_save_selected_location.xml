@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    tools:context=".fragments.taxiCity.saveUpdateLoc.FragmentSaveUpdateLocation"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="@dimen/margin_padding_4dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
+            android:text="@string/enter_address"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:background="@drawable/rename_card_shape"
+        android:drawablePadding="@dimen/margin_padding_16"
+        android:id="@+id/address"
+        android:text="Олмазор-15, 86-6, 8 дОлмазор-15, 86-6, 8 домом"
+        android:drawableStart="@drawable/ic_metka"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingHorizontal="18dp"
+        android:paddingVertical="@dimen/margin_padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16sp" />
+    <androidx.appcompat.widget.AppCompatEditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:imeOptions="actionDone"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:background="@drawable/rename_card_shape"
+        android:id="@+id/placeName"
+        android:hint="@string/placeName"
+        android:paddingHorizontal="@dimen/margin_padding_16"
+        android:paddingVertical="@dimen/margin_padding_16dp"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16sp" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_padding_24dp"
+        android:text="@string/delete_address"
+        android:textSize="@dimen/text_size_15sp"
+        android:textColor="@color/red"
+        android:id="@+id/deleteAddress"
+        android:visibility="gone"
+        android:fontFamily="@font/inter_semibold"
+        android:drawableStart="@drawable/ic_delete"
+        android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+    <androidx.legacy.widget.Space
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dimens_0dp"
+        android:layout_weight="1"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/select"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
+        android:background="@drawable/background_white_corner_12"
+        android:backgroundTint="@color/green"
+        android:padding="@dimen/margin_padding_16dp"
+        android:text="@string/save"
+        android:layout_gravity="bottom"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textAppearance="@style/boldStyleLight"
+        android:textSize="@dimen/text_size_18sp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

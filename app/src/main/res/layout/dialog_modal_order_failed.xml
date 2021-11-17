@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="@drawable/white_background_top_corner"
+    android:layout_height="wrap_content">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginHorizontal="@dimen/margin_padding_36dp"
+        android:text="Sorry, your order failed"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_18sp"
+        android:fontFamily="@font/inter_bold"/>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:paddingBottom="40dp"
+        android:paddingTop="@dimen/dimen_32dp"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/margin_padding_36dp"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/dimens_0dp"
+            android:layout_height="@dimen/item_height_56dp"
+            android:insetTop="@dimen/dimens_0dp"
+            android:insetBottom="@dimen/dimens_0dp"
+            android:backgroundTint="@color/green"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            app:cornerRadius="@dimen/margin_padding_12dp"
+            android:text="Book Again"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_bold"
+            android:id="@+id/bookAgain"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="@dimen/dimens_0dp"
+            android:layout_height="@dimen/item_height_56dp"
+            android:insetTop="@dimen/dimens_0dp"
+            android:insetBottom="@dimen/dimens_0dp"
+            android:backgroundTint="@color/white"
+            android:layout_weight="1"
+
+            android:textColor="@color/black"
+            android:textAllCaps="false"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_bold"
+            android:layout_marginStart="@dimen/margin_padding_8dp"
+            app:cornerRadius="@dimen/margin_padding_12dp"
+            android:text="@string/cancel"
+            android:id="@+id/cancel"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

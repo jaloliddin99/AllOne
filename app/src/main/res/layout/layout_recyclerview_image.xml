@@ -1,0 +1,41 @@
+<RelativeLayout android:layout_width="156dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_toEndOf="@id/baggage_image_recycler"
+    android:layout_height="156dp"
+    android:elevation="0dp"
+    android:layout_marginEnd="@dimen/margin_padding_12dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addBaggageImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_gravity="center"
+        android:elevation="0dp"
+        android:src="@drawable/ic_plus"
+        app:backgroundTint="@color/white"
+        app:elevation="1dp"
+        app:fabCustomSize="60dp"
+        app:tint="@color/green" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2dp"
+        android:layout_below="@id/addBaggageImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin_padding_8dp"
+        android:fontFamily="@font/inter_medium"
+        android:text="@string/add"
+        android:textColor="#A9B4B8"
+        android:textSize="13sp" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:id="@+id/relativeLayout"
+        android:elevation="0dp"
+        android:src="@drawable/background_grey"/>
+</RelativeLayout>

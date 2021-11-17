@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.tourism.tour.FragmentTour"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tour"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp"
+            android:fontFamily="@font/inter_medium"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_padding_16"
+        android:scrollbars="none">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Тур Горы Ташкента 2021 однодневная экскурсия Чимган и Чарвак"
+                android:textSize="@dimen/text_size_20sp"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.viewpager.widget.ViewPager
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:id="@+id/viewPager"/>
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                app:ci_drawable_unselected="@drawable/image_unselected"
+                app:ci_drawable="@drawable/image_selected"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"/>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_location"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="6"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/address_"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Кайраташ"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/margin_padding_12dp"
+                    android:text="@string/on_the_map"
+                    android:textColor="@color/blue"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:fontFamily="@font/inter_regular"
+                    android:drawableTint="@color/blue"
+                    android:layout_gravity="center"
+                    android:drawableEnd="@drawable/ic_arrow_right"/>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_calendar"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/type_tour_"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Групповой тур "
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:src="@drawable/ic_happy_person"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/number_of_people"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="Кайраташ"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_marginBottom="@dimen/margin_padding_12dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|center_horizontal"
+                    android:layout_weight="1"
+                    android:layout_marginTop="@dimen/margin_padding_4dp"
+                    android:src="@drawable/ic_straight_moneyy"/>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="8"
+                    android:orientation="vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/price_per_one"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="15sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_padding_4dp"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="1"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="10$"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/inter_bold"/>
+                    </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#C8C8C8" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_padding_4dp"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="2"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="11$"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/inter_bold"/>
+                    </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#C8C8C8" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_padding_4dp"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="3-5"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="10$"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/inter_bold"/>
+                    </LinearLayout>
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="#C8C8C8" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/margin_padding_4dp"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="5-6"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/inter_bold"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:text="10$"
+                            android:textSize="@dimen/text_size_15sp"
+                            android:textColor="@color/blue"
+                            android:fontFamily="@font/inter_bold"/>
+                    </LinearLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="#C8C8C8" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:text="@string/contact"
+                android:textSize="@dimen/text_size_20sp"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="22dp"
+                android:paddingVertical="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:background="@drawable/purple_background_12dp_corner"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:id="@+id/call1"
+                    android:src="@drawable/ic_btn_call"/>
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+99899 999 99 99"
+                    android:layout_toEndOf="@id/call1"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
+                    android:textSize="@dimen/text_size_15sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_bold"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_toStartOf="@id/call"
+                    android:layout_marginStart="@dimen/margin_padding_24dp"
+                    android:src="@drawable/ic_telegram_call"/>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="40dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/call"
+                    android:layout_height="40dp"
+                    android:src="@drawable/ic_btn_call1"/>
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:text="@string/about_tour"
+                android:textSize="@dimen/text_size_18sp"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:text="@string/large_text"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"/>
+
+            <com.tesseract.AllOneClient.utils.TopMenuNavigation
+                android:id="@+id/topMenuNavigation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/what_include_in_tour"
+                android:textSize="@dimen/text_size_18sp"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Входные билеты на канатную дорогу;"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Русскоговорящий гид на экскурсию по программе;"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Комфортабельный транспорт с кондиционером: - 1-2 человека - Седан Chevrolet Lacetti/Cobalt (до 3-х мест); \n- 3-10 человек - Минивэн"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:text="Гостица:"
+                android:textSize="@dimen/text_size_18sp"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Дорога от Ташкента занимает 4 часа. Удивительно, что на фоне окружающих суровых гор, мегалиты выделяются отсутствием острых граней и прямых линий."
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Русскоговорящий гид на экскурсию по программе;"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Комфортабельный транспорт с кондиционером: - 1-2 человека - Седан Chevrolet Lacetti/Cobalt (до 3-х мест); \n- 3-10 человек - Минивэн"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Русскоговорящий гид на экскурсию по программе;"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_small_dot"
+                android:text="Комфортабельный транспорт с кондиционером: - 1-2 человека - Седан Chevrolet Lacetti/Cobalt (до 3-х мест); \n- 3-10 человек - Минивэн"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_13sp"
+                android:fontFamily="@font/inter_regular"
+                android:drawablePadding="@dimen/margin_padding_12dp"/>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:layout_marginBottom="@dimen/margin_padding_24dp"
+                android:background="@drawable/background_white_corner_12"
+                android:backgroundTint="@color/green"
+                android:padding="@dimen/margin_padding_16dp"
+                android:text="@string/book_now"
+                android:textAppearance="@style/boldStyleLight"
+                android:textSize="@dimen/text_size_18sp" />
+
+
+
+
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
