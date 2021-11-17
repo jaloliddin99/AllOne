@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragments.medTurism.doctors.FragmentMedTurDoctors">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@dimen/margin_padding_4dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/backToHome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_padding_12dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_arrow_left" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/doctors"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+
+        </RelativeLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:background="@drawable/bg_grey_rounded">
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_height="44dp"
+                app:iconifiedByDefault="false"
+                app:layout_constraintEnd_toStartOf="@id/location"
+                app:queryBackground="@null"
+                app:queryHint="@string/search" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/select_place"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:maxLength="20"
+                android:id="@+id/location"
+                android:drawableEnd="@drawable/ic_arrow_down_small"
+                android:textColor="@color/green"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
+                android:textSize="@dimen/text_size_13sp"
+                android:drawablePadding="@dimen/margin_padding_4dp"
+                android:drawableTint="@color/green"/>
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginVertical="@dimen/margin_padding_12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/by_popularity"
+                    android:background="@drawable/chip_drawable"
+                    android:textSize="@dimen/text_size_13sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_medium"
+                    android:drawablePadding="@dimen/margin_padding_8dp"
+                    android:drawableEnd="@drawable/ic_arrow_down_small"
+                    android:paddingHorizontal="@dimen/margin_padding_12dp"
+                    android:paddingVertical="@dimen/dimens_10dp"
+                    android:id="@+id/byPopularity"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/allCategories"
+                    android:background="@drawable/chip_drawable"
+                    android:textSize="@dimen/text_size_13sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:drawablePadding="@dimen/margin_padding_8dp"
+                    android:drawableEnd="@drawable/ic_arrow_down_small"
+                    android:paddingHorizontal="@dimen/margin_padding_12dp"
+                    android:paddingVertical="@dimen/dimens_10dp"
+                    android:id="@+id/byCategories"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </HorizontalScrollView>
+
+
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="wrap_content">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="@string/search_results"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text=": "
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_bold"
+                android:text="36"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_width="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="15dp"
+            tools:itemCount="9"
+            android:overScrollMode="never"
+            tools:listitem="@layout/layout_med_tur_clinic"
+            android:layout_height="wrap_content" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

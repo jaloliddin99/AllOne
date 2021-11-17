@@ -526,4 +526,16 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>
     ):Response<AmbulanceModel>
 
+
+    @GET("med_tourism/doctors")
+    suspend fun getDoctors(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") name:String,
+        @Query("category_id") category_id:Int,
+        @Query("city_id") city_id:Int,
+        @Query("page") page:Int
+    ):Response<ClinicsMainModel>
+
+
+
 }

@@ -96,8 +96,14 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance)
     }
 
     override fun onItemClick(position: Int) {
-        val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentClinics()
-        findNavController().navigate(action)
+        if (position==0){
+            val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentClinics()
+            findNavController().navigate(action)
+        }
+        if (position==2){
+            val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentMedTurDoctors()
+            findNavController().navigate(action)
+        }
     }
 
     override fun onChipClicked(position: Int) {

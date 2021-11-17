@@ -151,6 +151,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_med_search">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_global_parcel_active_order">
                     <value>
                       <LayoutPositions />
@@ -431,18 +436,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1351" />
-                            <option name="y" value="794" />
+                            <option name="x" value="-1165" />
+                            <option name="y" value="694" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
                             <entry key="action_fragmentClinics_to_fragmentClinicInfo">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_fragmentClinics_to_fragmentMedSearch">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -571,8 +571,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1094" />
-                            <option name="y" value="253" />
+                            <option name="x" value="-1535" />
+                            <option name="y" value="344" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -618,8 +618,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1419" />
-                            <option name="y" value="329" />
+                            <option name="x" value="-1164" />
+                            <option name="y" value="202" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -632,6 +632,18 @@
                           <Point>
                             <option name="x" value="-872" />
                             <option name="y" value="609" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentMedTurDoctors">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1562" />
+                            <option name="y" value="853" />
                           </Point>
                         </option>
                       </LayoutPositions>

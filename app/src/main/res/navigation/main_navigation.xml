@@ -600,19 +600,15 @@
         <action
             android:id="@+id/action_fragmentMainClinic_to_fragmentMedAmbulance"
             app:destination="@id/fragmentMedAmbulance" />
+        <action
+            android:id="@+id/action_fragmentMainClinic_to_fragmentMedTurDoctors"
+            app:destination="@id/fragmentMedTurDoctors" />
     </fragment>
     <fragment
         android:id="@+id/fragmentClinics"
         android:name="com.tesseract.AllOneClient.fragments.medTurism.clinics.FragmentClinics"
         android:label="fragment_med_clinics"
         tools:layout="@layout/fragment_med_clinics">
-        <action
-            android:id="@+id/action_fragmentClinics_to_fragmentMedSearch"
-            app:destination="@id/fragmentMedSearch"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right"/>
         <action
             android:id="@+id/action_fragmentClinics_to_fragmentClinicInfo"
             app:destination="@id/fragmentClinicInfo" />
@@ -1019,6 +1015,13 @@
             android:name="isCategories"
             app:argType="boolean" />
     </fragment>
+    <action android:id="@+id/action_global_med_search"
+        app:destination="@+id/fragmentMedSearch"
+        app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@anim/slide_out_left"
+        app:popEnterAnim="@anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_right"/>
+
     <fragment
         android:id="@+id/fragmentClinicInfo"
         android:name="com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.FragmentClinicInfo"
@@ -1033,10 +1036,13 @@
         android:name="com.tesseract.AllOneClient.fragments.medTurism.ambulance.FragmentMedAmbulance"
         android:label="fragment_med_ambulance"
         tools:layout="@layout/fragment_med_ambulance" >
-        <action
-            android:id="@+id/action_fragmentMedAmbulance_to_fragmentMedSearch"
-            app:destination="@id/fragmentMedSearch" />
+
     </fragment>
+    <fragment
+        android:id="@+id/fragmentMedTurDoctors"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.doctors.FragmentMedTurDoctors"
+        android:label="fragment_med_tur_doctors"
+        tools:layout="@layout/fragment_med_tur_doctors" />
 
 
 </navigation>

@@ -1,4 +1,4 @@
-package com.tesseract.AllOneClient.fragments.medTurism.clinics
+package com.tesseract.AllOneClient.fragments.medTurism.doctors
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicsAdapter
-import com.tesseract.AllOneClient.databinding.FragmentMedClinicsBinding
+import com.tesseract.AllOneClient.databinding.FragmentMedTurDoctorsBinding
 import com.tesseract.AllOneClient.model.home.getDistricts.DistrictList
 import com.tesseract.AllOneClient.model.medTourism.categories.ClinicsCategoriesModel
 import com.tesseract.AllOneClient.model.medTourism.categories.Content
@@ -22,10 +22,10 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
-    private var binding: FragmentMedClinicsBinding? = null
+class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
+    private lateinit var binding: FragmentMedTurDoctorsBinding
+    private lateinit var viewModel:DoctorsViewModel
 
-    private lateinit var viewModel: ClinicsViewModel
     private lateinit var adapter: ClinicsAdapter
     private var isCurrentFragment: Boolean = true
 
@@ -33,30 +33,28 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentMedClinicsBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(ClinicsViewModel::class.java)
-        return binding!!.root
+    ): View? {
+        binding= FragmentMedTurDoctorsBinding.inflate(inflater, container, false)
+        viewModel=ViewModelProvider(this).get(DoctorsViewModel::class.java)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Common.clinicsPaging = 1
-        binding?.backToHome?.setOnClickListener {
+        Common.doctorPaging = 1
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
         if (isCurrentFragment){
-            viewModel.startGetClinics(headerMapUniversal(requireContext()), "", content.id, district.id!!)
+            viewModel.startDoctors(headerMapUniversal(requireContext()), "", content.id, district.id!!)
         }
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
-
         adapter = ClinicsAdapter(mutableSetOf(), this)
 
-
-        binding?.apply {
+        binding.apply {
             loader.loader.visibility = View.VISIBLE
             val layoutManager2 =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -65,7 +63,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
             recyclerView.addOnScrollListener(object :
                 EndlessRecyclerViewScrollListener(layoutManager2) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                    viewModel.getClinics(
+                    viewModel.getDoctor(
                         headerMapUniversal(requireContext()),
                         "",
                         content.id,
@@ -77,7 +75,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
             byCategories.setOnClickListener {
                 if (isInitialized) {
                     findNavController().navigate(
-                        FragmentClinicsDirections.actionGlobalMedSearch(
+                        FragmentMedTurDoctorsDirections.actionGlobalMedSearch(
                             categoryList,
                             true
                         )
@@ -91,7 +89,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
 
             location.setOnClickListener {
                 findNavController().navigate(
-                    FragmentClinicsDirections.actionGlobalMedSearch(
+                    FragmentMedTurDoctorsDirections.actionGlobalMedSearch(
                         categoryList,
                         false
                     )
@@ -105,8 +103,8 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
     private fun clinicsAdapterSetter() {
 
         val arrayList:MutableSet<Data> =HashSet()
-        viewModel.clinicLists.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility = View.GONE
+        viewModel.getDoctorsObserver.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility = View.GONE
             for (i in it.indices) {
                 arrayList.addAll(it)
             }
@@ -117,45 +115,45 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         })
 
         getBackStackData<Content>("categoryMed", true) {
-            binding?.byCategories?.text = it.name
+            binding.byCategories.text = it.name
             content = it
             if (district.id != 1) {
-                binding?.location?.text = district.name
-                viewModel.startGetClinics(
+                binding.location.text = district.name
+                viewModel.startDoctors(
                     headerMapUniversal(requireContext()),
                     "",
                     content.id,
                     district.id!!
                 )
             } else {
-                viewModel.startGetClinics(headerMapUniversal(requireContext()), "", content.id, 1)
+                viewModel.startDoctors(headerMapUniversal(requireContext()), "", content.id, 1)
             }
-            Common.clinicsPaging = 1
-            binding?.loader?.loader?.visibility = View.VISIBLE
+            Common.doctorPaging = 1
+            binding.loader.loader.visibility = View.VISIBLE
         }
 
         getBackStackData<DistrictList>("districtSelected", true) {
-            binding?.location?.text = it.name
+            binding.location.text = it.name
             district = it
             Toast.makeText(context, content.name, Toast.LENGTH_SHORT).show()
             if (content.id != 1) {
-                binding?.byCategories?.text = content.name
-                viewModel.startGetClinics(
+                binding.byCategories.text = content.name
+                viewModel.startDoctors(
                     headerMapUniversal(requireContext()),
                     "",
                     content.id,
                     it.id!!
                 )
             } else {
-                viewModel.startGetClinics(headerMapUniversal(requireContext()), "", 1, it.id!!)
+                viewModel.startDoctors(headerMapUniversal(requireContext()), "", 1, it.id!!)
             }
-            Common.clinicsPaging = 1
-            binding?.loader?.loader?.visibility = View.VISIBLE
+            Common.doctorPaging = 1
+            binding.loader.loader.visibility = View.VISIBLE
 
         }
 
         viewModel.categories.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility = View.GONE
+            binding.loader.loader.visibility = View.GONE
             isInitialized = true
             categoryList = it
         })
@@ -170,8 +168,8 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
     private var isInitialized: Boolean = false
 
     override fun onChipClicked(position: Int) {
-        val action=FragmentClinicsDirections.actionFragmentClinicsToFragmentClinicInfo(position)
-        findNavController().navigate(action)
+//        val action=FragmentMedTurDoc.actionFragmentClinicsToFragmentClinicInfo(position)
+//        findNavController().navigate(action)
     }
 
     private fun <T> Fragment.getBackStackData(
