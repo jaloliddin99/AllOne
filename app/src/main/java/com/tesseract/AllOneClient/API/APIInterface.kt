@@ -27,6 +27,7 @@ import com.tesseract.AllOneClient.model.login.LoginModel
 import com.tesseract.AllOneClient.model.login.ModelClass
 import com.tesseract.AllOneClient.model.login.RegisterModel
 import com.tesseract.AllOneClient.model.medTourism.categories.ClinicsCategoriesModel
+import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.model.medTourism.clinics.ClinicsMainModel
 import com.tesseract.AllOneClient.model.order.aboutDriverModel.AboutDriverModel
@@ -503,5 +504,11 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>,
         @Query("id") id:Int
     ):Response<ClinicMainModel>
+
+    @POST("med_tourism/clinic/{id}/add_to_favorites")
+    suspend fun clinicAddToFavourite(
+        @HeaderMap headers: Map<String, String>,
+        @Query("id") id:Int
+    ):Response<ClinicAddToFavouriteModel>
 
 }

@@ -257,4 +257,7 @@ constructor(private val apiInterface: APIInterface){
     suspend fun getClinicView(
         token: Map<String, String>, id: Int
     )=apiInterface.getClinicView(token, id)
+    suspend fun clinicAddToFavourite(
+        token: Map<String, String>, id: Int
+    )=apiInterface.clinicAddToFavourite(token, id)
 }

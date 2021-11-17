@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
@@ -17,6 +18,7 @@ import com.tesseract.AllOneClient.databinding.FragmentClinicInfoBinding
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class FragmentClinicInfo:Fragment() {
@@ -29,7 +31,7 @@ class FragmentClinicInfo:Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding= FragmentClinicInfoBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(ClinicsViewModel::class.java)
         return binding.root
@@ -40,6 +42,8 @@ class FragmentClinicInfo:Fragment() {
         super.onViewCreated(view, savedInstanceState)
         viewModel.clinicMainModel(headerMapUniversal(requireContext()), args.clinicId)
 
+        var isFavourite=false
+
         viewModel.clinicMain.observe(viewLifecycleOwner, {
 
             shareViewModel.clinicInfo(it)
@@ -47,6 +51,17 @@ class FragmentClinicInfo:Fragment() {
             binding.loader.loader.visibility=View.GONE
 
             binding.apply {
+                backToHome.setOnClickListener {
+                    findNavController().popBackStack()
+                }
+
+                isFavourite=it.content.is_favorite
+                if (it.content.is_favorite){
+                    save.setImageResource(R.drawable.ic_saved)
+                }else{
+                    save.setImageResource(R.drawable.ic_savee)
+                }
+
                 closedTitle.text=it.content.closed_title
                 rating.text=it.content.rating
                 reviewCount.text="(${it.content.review_count})"
@@ -68,8 +83,24 @@ class FragmentClinicInfo:Fragment() {
                 val adapter = PagerAdapter(childFragmentManager, tabLayout.tabCount, requireContext())
                 viewPager.adapter = adapter
                 tabLayout.setupWithViewPager(viewPager)
+            }
+        })
+
+        binding.save.setOnClickListener { someId->
+            try {
+                if (!isFavourite){
+                    viewModel.addToFavouriteModel(headerMapUniversal(requireContext()), args.clinicId)
+                    binding.loader.loader.visibility=View.VISIBLE
+                }
+            }catch (e:Exception){
 
             }
+        }
+
+        viewModel.addTOFavourite.observe(viewLifecycleOwner, {
+            binding.save.setImageResource(R.drawable.ic_saved)
+            binding.loader.loader.visibility=View.GONE
+            isFavourite=true
         })
     }
 }
