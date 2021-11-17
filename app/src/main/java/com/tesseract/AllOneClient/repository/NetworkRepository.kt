@@ -362,4 +362,9 @@ constructor(private val apiInterface: APIInterface) {
         city_id: Int,
         page: Int
     ) = apiInterface.getDoctors(token, name, category_id, city_id, page)
+
+    suspend fun getDoctorView(
+        token: Map<String, String>,
+        id: Int
+    )=apiInterface.getDoctorView(token, id)
 }

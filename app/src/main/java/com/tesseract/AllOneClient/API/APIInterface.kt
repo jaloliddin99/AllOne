@@ -31,6 +31,7 @@ import com.tesseract.AllOneClient.model.medTourism.categories.ClinicsCategoriesM
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.model.medTourism.clinics.ClinicsMainModel
+import com.tesseract.AllOneClient.model.medTourism.doctorView.DoctorViewMainModel
 import com.tesseract.AllOneClient.model.order.aboutDriverModel.AboutDriverModel
 import com.tesseract.AllOneClient.model.order.getActiveOrderModel.GetActiveOrderModel
 import com.tesseract.AllOneClient.model.order.getActiveParcelOrdersModel.GetActiveParcelOrderModel
@@ -535,6 +536,13 @@ interface APIInterface {
         @Query("city_id") city_id:Int,
         @Query("page") page:Int
     ):Response<ClinicsMainModel>
+
+
+    @GET("med_tourism/doctor/{id}")
+    suspend fun getDoctorView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") id:Int
+    ):Response<DoctorViewMainModel>
 
 
 

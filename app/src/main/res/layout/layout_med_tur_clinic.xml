@@ -5,7 +5,7 @@
     android:background="@drawable/background_white_corner_12"
     android:padding="@dimen/margin_padding_8dp"
     android:layout_marginBottom="9dp"
-    android:backgroundTint="@color/grey"
+    android:backgroundTint="#F6F6F6"
     android:layout_height="wrap_content">
 
 
