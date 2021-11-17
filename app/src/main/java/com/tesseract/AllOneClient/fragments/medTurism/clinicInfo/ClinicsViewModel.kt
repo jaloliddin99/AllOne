@@ -1,5 +1,7 @@
 package com.tesseract.AllOneClient.fragments.medTurism.clinicInfo
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -18,6 +20,21 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
     val clinicMain=MutableLiveData<ClinicMainModel>()
 
     val addTOFavourite=MutableLiveData<ClinicAddToFavouriteModel>()
+
+    val ratingListener=MutableLiveData<ClinicAddToFavouriteModel>()
+
+    fun ratingObserver(token: Map<String, String>, id: Int, rating:Int, comment: String)=viewModelScope.launch {
+        try {
+            repository.clinicAddToFavourite(token, id, rating, comment).let {
+                if (it.isSuccessful){
+                    if (it.body()?.success==true){
+                        ratingListener.postValue(it.body())
+                    }
+                }
+            }
+        }catch (e:Exception){
+        }
+    }
 
     fun addToFavouriteModel(token: Map<String, String>, id: Int)=viewModelScope.launch {
         try {

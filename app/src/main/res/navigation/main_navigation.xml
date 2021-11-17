@@ -597,6 +597,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <action
+            android:id="@+id/action_fragmentMainClinic_to_fragmentMedAmbulance"
+            app:destination="@id/fragmentMedAmbulance" />
     </fragment>
     <fragment
         android:id="@+id/fragmentClinics"
@@ -1024,6 +1027,15 @@
         <argument
             android:name="clinic_id"
             app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMedAmbulance"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.ambulance.FragmentMedAmbulance"
+        android:label="fragment_med_ambulance"
+        tools:layout="@layout/fragment_med_ambulance" >
+        <action
+            android:id="@+id/action_fragmentMedAmbulance_to_fragmentMedSearch"
+            app:destination="@id/fragmentMedSearch" />
     </fragment>
 
 

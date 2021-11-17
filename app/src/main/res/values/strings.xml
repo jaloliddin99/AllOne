@@ -613,6 +613,7 @@
     <string name="desciption">Описание</string>
     <string name="work_hours">Время работы:</string>
     <string name="fotoGallery">Фотогалерея</string>
+    <string name="ambulance">Скорая помощь</string>
 
 
 </resources>

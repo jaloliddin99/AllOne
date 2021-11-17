@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.PagerAdapter
 import com.tesseract.AllOneClient.databinding.FragmentClinicInfoBinding
+import com.tesseract.AllOneClient.dialogs.medTur.DialogRate
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
@@ -86,6 +87,9 @@ class FragmentClinicInfo:Fragment() {
             }
         })
 
+        binding.rate.setOnClickListener {
+            DialogRate(args.clinicId).show(parentFragmentManager, tag)
+        }
         binding.save.setOnClickListener { someId->
             try {
                 if (!isFavourite){

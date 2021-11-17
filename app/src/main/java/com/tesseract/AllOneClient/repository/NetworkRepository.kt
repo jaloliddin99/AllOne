@@ -260,4 +260,9 @@ constructor(private val apiInterface: APIInterface){
     suspend fun clinicAddToFavourite(
         token: Map<String, String>, id: Int
     )=apiInterface.clinicAddToFavourite(token, id)
+
+    suspend fun clinicAddToFavourite(token: Map<String, String>, id: Int, rating:Int, comment: String)=
+        apiInterface.medTourismClinicRate(token, id, rating, comment)
+
+    suspend fun ambulance(token: Map<String, String>)=apiInterface.ambulance(token)
 }

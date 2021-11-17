@@ -47,6 +47,10 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance)
         binding?.recyclerView?.layoutManager= GridLayoutManager(requireContext(), 2)
         binding?.recyclerView?.setHasFixedSize(true)
 
+        binding?.ambulance?.setOnClickListener {
+            val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentMedAmbulance()
+            findNavController().navigate(action)
+        }
 
         binding?.apply {
             recyclerViewChip.apply {

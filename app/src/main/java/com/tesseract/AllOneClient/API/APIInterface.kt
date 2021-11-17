@@ -26,6 +26,7 @@ import com.tesseract.AllOneClient.model.home.updateNewOrder.NewOrderUpdateModel
 import com.tesseract.AllOneClient.model.login.LoginModel
 import com.tesseract.AllOneClient.model.login.ModelClass
 import com.tesseract.AllOneClient.model.login.RegisterModel
+import com.tesseract.AllOneClient.model.medTourism.ambulance.AmbulanceModel
 import com.tesseract.AllOneClient.model.medTourism.categories.ClinicsCategoriesModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
@@ -510,5 +511,19 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>,
         @Query("id") id:Int
     ):Response<ClinicAddToFavouriteModel>
+
+    @FormUrlEncoded
+    @POST("med_tourism/clinic/{id}/rate")
+    suspend fun medTourismClinicRate(
+        @HeaderMap headers: Map<String, String>,
+        @Query("id") id:Int,
+        @Field("rating") rating:Int,
+        @Field("comment") comment:String
+    ):Response<ClinicAddToFavouriteModel>
+
+    @GET("med_tourism/ambulance")
+    suspend fun ambulance(
+        @HeaderMap headers: Map<String, String>
+    ):Response<AmbulanceModel>
 
 }

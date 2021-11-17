@@ -73,6 +73,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/ambulance"
                 android:layout_marginHorizontal="@dimen/margin_padding_16"
                 android:layout_marginTop="@dimen/margin_padding_16"
                 android:background="@drawable/background_white_corner_12"
