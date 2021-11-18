@@ -1,24 +1,18 @@
-package com.tesseract.AllOneClient.adapter.medTourism.clinics
+package com.tesseract.AllOneClient.adapter.medTourism.doctors
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutMedTurClinicBinding
-import com.tesseract.AllOneClient.model.medTourism.Doctors
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.Doctor
-import com.tesseract.AllOneClient.model.medTourism.clinics.Data
-import java.util.*
-import kotlin.collections.ArrayList
+import com.tesseract.AllOneClient.model.medTourism.doctorView.Clinic
 
-class ClinicDoctorsAdapter (
-    private val arrayList: ArrayList<Doctor>,
+class DoctorsClinicAdapter(
+    private val arrayList: List<Clinic>,
     private val listener: OnClickListener
 )
-    : RecyclerView.Adapter<ClinicDoctorsAdapter.ClinicViewHolder>() {
+    : RecyclerView.Adapter<DoctorsClinicAdapter.ClinicViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClinicViewHolder {
         val binding=
@@ -27,9 +21,8 @@ class ClinicDoctorsAdapter (
         return ClinicViewHolder(binding)
 
     }
-
     override fun onBindViewHolder(holder: ClinicViewHolder, position: Int) {
-        val newsItem : Doctor =arrayList[position]
+        val newsItem : Clinic =arrayList.elementAt(position)
         holder.bind(newsItem)
     }
 
@@ -38,12 +31,10 @@ class ClinicDoctorsAdapter (
     inner class ClinicViewHolder(private val itemBinding: LayoutMedTurClinicBinding)
         : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
-        fun bind(data: Doctor) {
+        fun bind(data: Clinic) {
             itemBinding.rating.text=data.rating
             itemBinding.addr.text=data.addr
             itemBinding.name.text=data.name
-
-
             itemBinding.type.text=data.type
             itemBinding.workTime.text=data.work_time
             Picasso.get().load(data.poster).into(itemBinding.poster)
@@ -53,8 +44,8 @@ class ClinicDoctorsAdapter (
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {
-            val position:Int=arrayList[adapterPosition].id
-            if (position!= RecyclerView.NO_POSITION){
+            val position:Clinic=arrayList.elementAt(adapterPosition)
+            if (adapterPosition!= RecyclerView.NO_POSITION){
                 listener.onChipClicked(position)
             }
         }
@@ -62,7 +53,6 @@ class ClinicDoctorsAdapter (
     }
 
     interface OnClickListener{
-        fun onChipClicked(position: Int)
+        fun onChipClicked(position: Clinic)
     }
-
 }

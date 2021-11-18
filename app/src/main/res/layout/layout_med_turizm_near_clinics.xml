@@ -17,8 +17,8 @@
         app:cardElevation="@dimen/dimens_0dp">
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="match_parent"
+            android:id="@+id/poster"
             android:layout_height="match_parent"
-            android:src="@drawable/test_clinic"
             android:scaleType="centerCrop"/>
 
     </com.google.android.material.card.MaterialCardView>
@@ -34,16 +34,16 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Shox International  Hospital"
             android:textColor="@color/black"
+            android:id="@+id/name"
             android:textSize="@dimen/text_size_15sp"
             android:fontFamily="@font/inter_semibold"/>
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="г. Ташкент, Узбекистан"
             android:drawableStart="@drawable/ic_location_sma"
             android:drawablePadding="6dp"
+            android:id="@+id/addr"
             android:layout_marginTop="@dimen/margin_padding_8dp"
             android:textColor="#666F75"
             android:textSize="@dimen/text_size_12sp"
@@ -52,8 +52,8 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4 km"
             android:drawablePadding="6dp"
+            android:id="@+id/distance"
             android:paddingHorizontal="@dimen/margin_padding_4dp"
             android:paddingVertical="@dimen/dimen_2dp"
             android:background="@drawable/drawable_4dp_corner"

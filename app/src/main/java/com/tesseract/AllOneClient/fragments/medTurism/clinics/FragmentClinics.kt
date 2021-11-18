@@ -52,6 +52,11 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         }
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
+        viewModel.errorMCategory.observe(viewLifecycleOwner, {
+            binding?.loader?.loader?.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
 
         adapter = ClinicsAdapter(mutableSetOf(), this)
 
@@ -104,11 +109,16 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
 
     private fun clinicsAdapterSetter() {
 
+        viewModel.errorMessageClinic.observe(viewLifecycleOwner, {
+            binding?.loader?.loader?.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         val arrayList:MutableSet<Data> =HashSet()
         viewModel.clinicLists.observe(viewLifecycleOwner, {
             binding?.loader?.loader?.visibility = View.GONE
             for (i in it.indices) {
-                arrayList.addAll(it)
+                arrayList.add(it[i])
             }
             if (arrayList.size != 0) {
                 adapter.addList(arrayList)

@@ -20,8 +20,8 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:id="@+id/poster"
                 app:layout_constraintTop_toTopOf="parent"
-                android:src="@drawable/test_clinic"
                 android:scaleType="centerCrop"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_16"
             android:layout_marginHorizontal="@dimen/margin_padding_16"
-            android:text="Санжар Назаров"
+            android:id="@+id/name"
             android:fontFamily="@font/inter_semibold"
             android:textSize="@dimen/text_size_13sp"
             android:textColor="@color/black"/>
@@ -41,8 +41,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_12dp"
-            android:text="г. Ташкент, Узбекистан"
             android:layout_marginStart="@dimen/margin_padding_16"
+            android:id="@+id/profession"
             android:textColor="#119E46"
             android:textSize="@dimen/text_size_12sp"
             android:fontFamily="@font/inter_regular"/>
@@ -56,9 +56,9 @@
                android:layout_height="wrap_content"
                android:layout_marginTop="@dimen/dimens_10dp"
                android:layout_marginBottom="@dimen/margin_padding_16"
-               android:text="4.8"
                android:drawableStart="@drawable/ic_star"
                android:drawablePadding="6dp"
+               android:id="@+id/rating"
                android:layout_marginStart="@dimen/margin_padding_16"
                android:textColor="@color/black"
                android:textSize="@dimen/text_size_12sp"
@@ -67,8 +67,8 @@
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
                android:layout_marginTop="@dimen/dimens_10dp"
+               android:id="@+id/review_count"
                android:layout_marginBottom="@dimen/margin_padding_16"
-               android:text="(567)"
                android:layout_marginStart="2dp"
                android:textColor="@color/black"
                android:textSize="@dimen/text_size_12sp"

@@ -14,7 +14,7 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DialogRate(private val clinicId:Int) : BottomSheetDialogFragment() {
+class DialogRate(private val clinicId:Int, private val isClinic:Boolean) : BottomSheetDialogFragment() {
     private var binding: DialogRateClinicDriverBinding?=null
 
     private lateinit var viewModel:ClinicsViewModel
@@ -42,6 +42,15 @@ class DialogRate(private val clinicId:Int) : BottomSheetDialogFragment() {
 
 
         binding?.apply {
+            var name=""
+            if (isClinic){
+                title.text=getString(R.string.evalueate_clinic)
+                name="clinic"
+            }else{
+                title.text=getString(R.string.evaluate_doctor)
+                name="doctor"
+            }
+
             loader.loader.visibility=View.GONE
             ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
                 ratingBarItem=rating.toInt()
@@ -51,11 +60,16 @@ class DialogRate(private val clinicId:Int) : BottomSheetDialogFragment() {
                 commentText=comment.text.toString()
 
                 if (commentText.isNotEmpty()&&ratingBarItem!=-1){
-                    viewModel.ratingObserver(headerMapUniversal(requireContext()), clinicId, ratingBarItem, commentText)
+                    viewModel.ratingObserver(headerMapUniversal(requireContext()),name, clinicId, ratingBarItem, commentText)
                     loader.loader.visibility=View.VISIBLE
-
                 }
             }
+
+            viewModel.errorRating.observe(viewLifecycleOwner, {
+                binding?.loader?.loader?.visibility=View.GONE
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+
             viewModel.ratingListener.observe(viewLifecycleOwner, {
                 binding?.loader?.loader?.visibility=View.GONE
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()

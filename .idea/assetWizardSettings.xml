@@ -19,8 +19,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_earth" />
-                            <entry key="sourceFile" value="D:\jobs\AllOne\earth.svg" />
+                            <entry key="outputName" value="ic_saved_items" />
+                            <entry key="sourceFile" value="D:\jobs\AllOne\saved items.svg" />
                           </map>
                         </option>
                       </PersistentState>

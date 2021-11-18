@@ -52,6 +52,11 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
         }
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
+        viewModel.errorMessageDoctor.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         adapter = ClinicsAdapter(mutableSetOf(), this)
 
         binding.apply {
@@ -101,6 +106,11 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
     }
 
     private fun clinicsAdapterSetter() {
+
+        viewModel.errorClinicCategories.observe(viewLifecycleOwner,{
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
 
         val arrayList:MutableSet<Data> =HashSet()
         viewModel.getDoctorsObserver.observe(viewLifecycleOwner, {
@@ -168,8 +178,8 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
     private var isInitialized: Boolean = false
 
     override fun onChipClicked(position: Int) {
-//        val action=FragmentMedTurDoc.actionFragmentClinicsToFragmentClinicInfo(position)
-//        findNavController().navigate(action)
+        val action=FragmentMedTurDoctorsDirections.actionFragmentMedTurDoctorsToFragmentDoctorView(position)
+        findNavController().navigate(action)
     }
 
     private fun <T> Fragment.getBackStackData(

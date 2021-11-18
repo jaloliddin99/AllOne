@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -42,6 +43,11 @@ class FragmentClinicInfo:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.clinicMainModel(headerMapUniversal(requireContext()), args.clinicId)
+
+        viewModel.errorAction.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
 
         var isFavourite=false
 
@@ -88,12 +94,17 @@ class FragmentClinicInfo:Fragment() {
         })
 
         binding.rate.setOnClickListener {
-            DialogRate(args.clinicId).show(parentFragmentManager, tag)
+            DialogRate(args.clinicId, true).show(parentFragmentManager, tag)
         }
+
+        viewModel.errorFav.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
         binding.save.setOnClickListener { someId->
             try {
                 if (!isFavourite){
-                    viewModel.addToFavouriteModel(headerMapUniversal(requireContext()), args.clinicId)
+                    viewModel.addToFavouriteModel(headerMapUniversal(requireContext()),"clinic",  args.clinicId)
                     binding.loader.loader.visibility=View.VISIBLE
                 }
             }catch (e:Exception){

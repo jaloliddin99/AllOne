@@ -7,12 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicImagesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentMedTurAboutClinicBinding
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 
-class FragmentAboutClinic:Fragment() {
+class FragmentAboutClinic:Fragment(), MedPhoneAdapter.OnClickListener {
     private lateinit var binding:FragmentMedTurAboutClinicBinding
     private val shareViewModel: ClinicsViewModel by activityViewModels()
     override fun onCreateView(
@@ -34,7 +35,13 @@ class FragmentAboutClinic:Fragment() {
                     layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter=ClinicImagesAdapter(it.content.gallery)
                     addr.text=it.content.addr
-                    phoneNumber.text=it.content.phone_number
+
+
+                    recyclerViewPhones.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    recyclerViewPhones.adapter= MedPhoneAdapter(it.content.phone_number, this@FragmentAboutClinic)
+
+
+
                     telegram.text=it.content.telegram
                     website.text=it.content.website
                     workTime.text=it.content.work_time
@@ -45,6 +52,10 @@ class FragmentAboutClinic:Fragment() {
 
         }
 
+
+    }
+
+    override fun onChipClicked(position: String) {
 
     }
 }

@@ -10,7 +10,7 @@ data class Content(
     val id: Int,
     val is_favorite: Boolean,
     val name: String,
-    val phone_number: String,
+    val phone_number: List<String>,
     val poster: String,
     val rating: String,
     val review_count: Int,

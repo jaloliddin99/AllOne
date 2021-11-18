@@ -32,6 +32,8 @@ import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFav
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.model.medTourism.clinics.ClinicsMainModel
 import com.tesseract.AllOneClient.model.medTourism.doctorView.DoctorViewMainModel
+import com.tesseract.AllOneClient.model.medTourism.favourites.FavouritesModel
+import com.tesseract.AllOneClient.model.medTourism.medMain.MedTurMainModel
 import com.tesseract.AllOneClient.model.order.aboutDriverModel.AboutDriverModel
 import com.tesseract.AllOneClient.model.order.getActiveOrderModel.GetActiveOrderModel
 import com.tesseract.AllOneClient.model.order.getActiveParcelOrdersModel.GetActiveParcelOrderModel
@@ -507,17 +509,19 @@ interface APIInterface {
         @Query("id") id:Int
     ):Response<ClinicMainModel>
 
-    @POST("med_tourism/clinic/{id}/add_to_favorites")
+    @POST("med_tourism/{clinic}/{id}/add_to_favorites")
     suspend fun clinicAddToFavourite(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id:Int
+        @Path("clinic") name: String,
+        @Path("id") id:Int
     ):Response<ClinicAddToFavouriteModel>
 
     @FormUrlEncoded
-    @POST("med_tourism/clinic/{id}/rate")
+    @POST("med_tourism/{clinic}/{id}/rate")
     suspend fun medTourismClinicRate(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id:Int,
+        @Path("clinic") name: String,
+        @Path("id") id:Int,
         @Field("rating") rating:Int,
         @Field("comment") comment:String
     ):Response<ClinicAddToFavouriteModel>
@@ -537,12 +541,52 @@ interface APIInterface {
         @Query("page") page:Int
     ):Response<ClinicsMainModel>
 
+    @GET("med_tourism/doctors/categories")
+    suspend fun getDoctorsCategories(
+        @HeaderMap headers: Map<String, String>
+    ):Response<ClinicsCategoriesModel>
+
 
     @GET("med_tourism/doctor/{id}")
     suspend fun getDoctorView(
         @HeaderMap headers: Map<String, String>,
         @Path("id") id:Int
     ):Response<DoctorViewMainModel>
+
+//    @POST("med_tourism/doctor/{id}/add_to_favorites")
+//    suspend fun doctorAddToFavourite(
+//        @HeaderMap headers: Map<String, String>,
+//        @Path("id") id:Int
+//    ):Response<ClinicAddToFavouriteModel>
+//
+//    @FormUrlEncoded
+//    @POST("med_tourism/doctor/{id}/rate")
+//    suspend fun medTourismDoctorRate(
+//        @HeaderMap headers: Map<String, String>,
+//        @Path("id") id:Int,
+//        @Field("rating") rating:Int,
+//        @Field("comment") comment:String
+//    ):Response<ClinicAddToFavouriteModel>
+
+    @GET("med_tourism")
+    suspend fun getMedTurIndex(
+        @HeaderMap headers: Map<String, String>
+    ):Response<MedTurMainModel>
+
+    @GET("med_tourism/favorites")
+    suspend fun getFavourites(
+        @HeaderMap headers: Map<String, String>,
+        @Query("page") page:Int
+    ):Response<FavouritesModel>
+
+    @FormUrlEncoded
+    @POST("med_tourism/favorites/{id}/delete")
+    suspend fun deleteFromFavourites(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") itemId:Int,
+        @Field("type") type: String
+    ):Response<ClinicAddToFavouriteModel>
+
 
 
 

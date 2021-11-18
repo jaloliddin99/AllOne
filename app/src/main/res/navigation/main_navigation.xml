@@ -603,6 +603,9 @@
         <action
             android:id="@+id/action_fragmentMainClinic_to_fragmentMedTurDoctors"
             app:destination="@id/fragmentMedTurDoctors" />
+        <action
+            android:id="@+id/action_fragmentMainClinic_to_fragmentMedTurFavourite"
+            app:destination="@id/fragmentMedTurFavourite" />
     </fragment>
     <fragment
         android:id="@+id/fragmentClinics"
@@ -1042,7 +1045,24 @@
         android:id="@+id/fragmentMedTurDoctors"
         android:name="com.tesseract.AllOneClient.fragments.medTurism.doctors.FragmentMedTurDoctors"
         android:label="fragment_med_tur_doctors"
-        tools:layout="@layout/fragment_med_tur_doctors" />
+        tools:layout="@layout/fragment_med_tur_doctors" >
+        <action
+            android:id="@+id/action_fragmentMedTurDoctors_to_fragmentDoctorView"
+            app:destination="@id/fragmentDoctorView" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDoctorView"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.doctorView.FragmentDoctorView"
+        android:label="fragment_med_tur_doctor_view"
+        tools:layout="@layout/fragment_med_tur_doctor_view" >
+        <argument android:name="doctor_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentMedTurFavourite"
+        android:name="com.tesseract.AllOneClient.fragments.medTurism.saved.FragmentMedTurFavourite"
+        android:label="fragment_med_tur_favourite"
+        tools:layout="@layout/fragment_med_tur_favourite" />
 
 
 </navigation>

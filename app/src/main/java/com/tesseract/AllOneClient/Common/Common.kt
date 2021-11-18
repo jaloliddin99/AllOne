@@ -26,6 +26,8 @@ object Common {
 
     var doctorPaging=1
 
+    var favouritesPagingApi=1
+
     var questionNumbers: ArrayList<ImageModel> = ArrayList<ImageModel>()
 
     fun View.hideKeyboard() {

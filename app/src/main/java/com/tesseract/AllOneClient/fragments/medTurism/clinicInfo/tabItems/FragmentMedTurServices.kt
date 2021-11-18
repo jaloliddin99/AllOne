@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicsServicesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentMedTurServocesBinding
+import com.tesseract.AllOneClient.dialogs.medTur.DialogServices
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Service
 
@@ -36,13 +37,9 @@ class FragmentMedTurServices: Fragment(), ClinicsServicesAdapter.CategoriesClick
                 }
             })
         }
-
-
-
-
     }
 
     override fun onChipClicked(position: Service) {
-
+        DialogServices(position).show(parentFragmentManager, tag)
     }
 }

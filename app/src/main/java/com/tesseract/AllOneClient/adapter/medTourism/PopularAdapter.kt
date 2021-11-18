@@ -4,10 +4,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutMedTurizmPopularClinicsBinding
+import com.tesseract.AllOneClient.model.medTourism.medMain.PopularClinic
 
 class PopularAdapter (
-    private val listener: OnChipClickListener
+    private val listener: PopularClinics,
+    private val list:List<PopularClinic>
 )
     : RecyclerView.Adapter<PopularAdapter.ClinicViewHolder>() {
 
@@ -20,35 +23,39 @@ class PopularAdapter (
     }
 
     override fun onBindViewHolder(holder: ClinicViewHolder, position: Int) {
-//        val newsItem : MedClinicModel =addBaggageImageList[position]
-//        holder.bind(newsItem)
+        val newsItem : PopularClinic =list[position]
+        holder.bind(newsItem)
     }
 
-    override fun getItemCount()=8
+    override fun getItemCount()=list.size
 
     inner class ClinicViewHolder(private val itemBinding: LayoutMedTurizmPopularClinicsBinding)
         : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
 
-//        fun bind(newsItemBinding: MedClinicModel) {
-//            itemBinding.title.text=newsItemBinding.title
-//            itemBinding.description.text=newsItemBinding.description
-//            itemBinding.image.setImageResource(newsItemBinding.img)
-//        }
+        fun bind(newsItemBinding: PopularClinic) {
+            itemBinding.addr.text=newsItemBinding.addr
+            itemBinding.name.text=newsItemBinding.name
+            Picasso.get().load(newsItemBinding.poster).into(itemBinding.poster)
+            itemBinding.rating.text=newsItemBinding.rating
+            itemBinding.reviewCount.text="(${newsItemBinding.review_count.toString()})"
+            itemBinding.workTime.text=newsItemBinding.work_time
+            itemBinding.type.text=newsItemBinding.type
+        }
 
         init {
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {
-            val position:Int=adapterPosition
-            if (position!= RecyclerView.NO_POSITION){
-                listener.onChipClicked(position)
+            val position:PopularClinic=list[adapterPosition]
+            if (adapterPosition!= RecyclerView.NO_POSITION){
+                listener.onPopularClicked(position)
             }
         }
 
     }
 
-    interface OnChipClickListener{
-        fun onChipClicked(position: Int)
+    interface PopularClinics{
+        fun onPopularClicked(position: PopularClinic)
     }
 }

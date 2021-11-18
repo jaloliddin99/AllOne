@@ -23,6 +23,9 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
         getClinics(token, name, category_id, city_id)
     }
 
+    val errorMessageClinic=MutableLiveData<String>()
+    val errorMCategory=MutableLiveData<String>()
+
     fun getClinics(
         token: Map<String, String>,
         name: String,
@@ -35,11 +38,15 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         clinicLists.postValue(it.body()?.content?.data as ArrayList<Data>)
+                    }else{
+                        errorMessageClinic.postValue(it.body()?.message.toString())
                     }
+                }else{
+                    errorMessageClinic.postValue(it.body()?.message.toString())
                 }
             }
         }catch (e:Exception){
-
+            errorMessageClinic.postValue(e.message)
         }
     }
 
@@ -50,11 +57,15 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         categories.postValue(it.body())
+                    }else{
+                        errorMCategory.postValue(it.body()?.message.toString())
                     }
+                }else{
+                    errorMCategory.postValue(it.body()?.message.toString())
                 }
             }
         }catch (e:Exception){
-
+            errorMCategory.postValue(e.message)
         }
     }
 

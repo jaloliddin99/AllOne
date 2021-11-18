@@ -614,6 +614,12 @@
     <string name="work_hours">Время работы:</string>
     <string name="fotoGallery">Фотогалерея</string>
     <string name="ambulance">Скорая помощь</string>
+    <string name="evaluate_doctor">Оценить врача</string>
+    <string name="evalueate_clinic">Оценить клинику</string>
+    <string name="price_list">Прайс лист</string>
+    <string name="your_saved_item_is_empty">Ваше избранное пусто</string>
+    <string name="med_tur_saved_desc">Вы можете добавить клиники или врачей в избранное, нажав на иконку избранное в правом верхнем углу на странице просмотра клиник или врачей</string>
+    <string name="my_saveds">Мое избранное</string>
 
 
 </resources>

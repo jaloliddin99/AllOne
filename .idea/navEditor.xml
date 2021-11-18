@@ -464,6 +464,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentDoctorView">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1256" />
+                            <option name="y" value="1137" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentDonationHistory">
                     <value>
                       <LayoutPositions>
@@ -587,6 +599,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_fragmentMainClinic_to_fragmentMedTurDoctors">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -642,8 +659,29 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1562" />
-                            <option name="y" value="853" />
+                            <option name="x" value="-1691" />
+                            <option name="y" value="1118" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentMedTurDoctors_to_fragmentDoctorView">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentMedTurFavourite">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-1987" />
+                            <option name="y" value="562" />
                           </Point>
                         </option>
                       </LayoutPositions>

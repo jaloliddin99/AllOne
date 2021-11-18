@@ -138,6 +138,8 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_city_order_finished.xml" value="0.22" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_city_rate_driver.xml" value="0.25" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_city_receiver_modal_dialog.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_clinic_doctor.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_clinic_services.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_complain_driver.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_delete_card.xml" value="0.133984375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_driver_complaintment.xml" value="0.251953125" />
@@ -199,6 +201,8 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_about_clinic.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_doctor_view.xml" value="0.2" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_doctors.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_favourite.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_saved.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_tur_servoces.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_med_turizm_entrance.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_news_view.xml" value="0.251953125" />
@@ -268,6 +272,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_clinics.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_commentary_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_district_search_item.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_favourite_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_get_region_initial_items.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_get_region_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_get_region_search_item.xml" value="0.251953125" />
@@ -278,9 +283,11 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_line_reusable.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_make_donation_item.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_ambulance.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_phone_items.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tourism_doctor_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tourism_regions_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tur_clinic.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tur_clinic_services.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tur_district.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_tur_services_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_med_turism_main.xml" value="0.251953125" />

@@ -67,19 +67,16 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/icon_size_20dp"
                     android:layout_height="@dimen/icon_size_20dp"
+                    android:layout_gravity="center_vertical"
                     android:src="@drawable/ic_call"
                     android:layout_marginStart="@dimen/margin_padding_4dp"/>
 
-                <androidx.appcompat.widget.AppCompatTextView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:drawableTint="@color/green"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:id="@+id/phone_number"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/inter_medium"/>
-
+                    android:id="@+id/recyclerViewPhones"
+                    android:overScrollMode="never"
+                    android:clipToPadding="false"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View

@@ -9,8 +9,11 @@ import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicDoctorsAdapter
 import com.tesseract.AllOneClient.databinding.FragmentClinicDoctorsBinding
+import com.tesseract.AllOneClient.dialogs.medTur.DialogDoctorView
+import com.tesseract.AllOneClient.dialogs.medTur.DialogServices
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Doctor
+import com.tesseract.AllOneClient.model.medTourism.clinicServices.Service
 
 class FragmentClinicDoctors:Fragment(), ClinicDoctorsAdapter.OnClickListener {
     private lateinit var binding:FragmentClinicDoctorsBinding
@@ -40,7 +43,8 @@ class FragmentClinicDoctors:Fragment(), ClinicDoctorsAdapter.OnClickListener {
         }
     }
 
-    override fun onChipClicked(position: Int) {
 
+    override fun onChipClicked(position: Int) {
+        DialogDoctorView(position).show(parentFragmentManager, tag)
     }
 }

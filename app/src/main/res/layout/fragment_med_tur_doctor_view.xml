@@ -244,9 +244,16 @@
                         <androidx.appcompat.widget.AppCompatImageView
                             android:layout_width="@dimen/icon_size_20dp"
                             android:layout_height="@dimen/icon_size_20dp"
+                            android:layout_gravity="center_vertical"
                             android:src="@drawable/ic_call"
                             android:layout_marginStart="@dimen/margin_padding_4dp"/>
 
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/recyclerViewPhones"
+                            android:overScrollMode="never"
+                            android:clipToPadding="false"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -287,33 +294,6 @@
                             android:textColor="@color/black"/>
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/dimen_1dp"
-                        android:background="#1A272727"
-                        android:layout_marginVertical="@dimen/margin_padding_12dp"/>
-
-                    <androidx.appcompat.widget.LinearLayoutCompat
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:layout_width="@dimen/icon_size_20dp"
-                            android:layout_height="@dimen/icon_size_20dp"
-                            android:src="@drawable/ic_earth"
-                            android:layout_marginStart="@dimen/margin_padding_4dp"/>
-
-                        <androidx.appcompat.widget.AppCompatTextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_padding_16"
-                            android:drawableTint="@color/green"
-                            android:textSize="@dimen/text_size_15sp"
-                            android:id="@+id/website"
-                            android:text="www.google.com"
-                            android:fontFamily="@font/inter_medium"
-                            android:textColor="@color/black"/>
-                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <View
                         android:layout_width="match_parent"
@@ -370,14 +350,13 @@
                         android:fontFamily="@font/inter_semibold"
                         android:textColor="@color/black"/>
 
-                    <FrameLayout
+                    <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:id="@+id/recyclerView"
                         android:layout_marginTop="@dimen/margin_padding_8dp"
-                        android:id="@+id/frameLayout">
-                        <include layout="@layout/layout_med_tur_clinic"
-                            android:id="@+id/clinic"/>
-                    </FrameLayout>
+                        android:overScrollMode="never"
+                        android:clipToPadding="false"/>
 
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -394,6 +373,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/lorem_ipsum"
+                        android:id="@+id/description"
                         android:layout_marginTop="@dimen/margin_padding_8dp"
                         android:textSize="@dimen/text_size_15sp"
                         android:paddingBottom="@dimen/margin_padding_24dp"

@@ -1,18 +1,14 @@
 package com.tesseract.AllOneClient.fragments.medTurism.clinicInfo
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tesseract.AllOneClient.model.home.SearchModel.Content
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.repository.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,48 +16,65 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
     val clinicMain=MutableLiveData<ClinicMainModel>()
 
     val addTOFavourite=MutableLiveData<ClinicAddToFavouriteModel>()
-
     val ratingListener=MutableLiveData<ClinicAddToFavouriteModel>()
 
-    fun ratingObserver(token: Map<String, String>, id: Int, rating:Int, comment: String)=viewModelScope.launch {
+    val errorFav=MutableLiveData<String>()
+    val errorRating= MutableLiveData<String>()
+
+    fun ratingObserver(token: Map<String, String>, name: String, id: Int, rating:Int, comment: String)=viewModelScope.launch {
         try {
-            repository.clinicAddToFavourite(token, id, rating, comment).let {
+            repository.medTourismClinicRate(token,name, id, rating, comment).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         ratingListener.postValue(it.body())
+                    }else{
+                        errorRating.postValue(it.body()?.message)
                     }
+                }else{
+                    errorRating.postValue(it.body()?.message)
                 }
             }
         }catch (e:Exception){
+            errorRating.postValue(e.message)
         }
     }
 
-    fun addToFavouriteModel(token: Map<String, String>, id: Int)=viewModelScope.launch {
+    fun addToFavouriteModel(token: Map<String, String>, name:String, id: Int)=viewModelScope.launch {
         try {
-            repository.clinicAddToFavourite(token, id).let {
+            repository.clinicAddToFavourite(token,name,  id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         addTOFavourite.postValue(it.body())
+                    }else{
+                        errorFav.postValue(it.body()?.message)
                     }
+                }else{
+                    errorFav.postValue(it.body()?.message)
                 }
             }
         }catch (e:Exception){
-
+            errorFav.postValue(e.message)
         }
     }
 
 
+
+    val errorAction=MutableLiveData<String>()
     fun clinicMainModel(token:Map<String, String>, id:Int)=viewModelScope.launch {
         try {
             repository.getClinicView(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         clinicMain.postValue(it.body())
+                    }else{
+                        errorAction.postValue(it.body()?.message.toString())
                     }
+                }else{
+                    errorAction.postValue(it.body()?.message.toString())
                 }
             }
         }catch (e:Exception){
-
+            errorAction.postValue(e.message)
         }
     }
 

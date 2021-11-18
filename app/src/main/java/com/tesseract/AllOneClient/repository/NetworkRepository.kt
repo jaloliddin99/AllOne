@@ -342,16 +342,17 @@ constructor(private val apiInterface: APIInterface) {
     ) = apiInterface.getClinicView(token, id)
 
     suspend fun clinicAddToFavourite(
-        token: Map<String, String>, id: Int
-    ) = apiInterface.clinicAddToFavourite(token, id)
+        token: Map<String, String>, name: String, id: Int
+    ) = apiInterface.clinicAddToFavourite(token, name, id)
 
-    suspend fun clinicAddToFavourite(
+    suspend fun medTourismClinicRate(
         token: Map<String, String>,
+        name: String,
         id: Int,
         rating: Int,
         comment: String
     ) =
-        apiInterface.medTourismClinicRate(token, id, rating, comment)
+        apiInterface.medTourismClinicRate(token, name, id, rating, comment)
 
     suspend fun ambulance(token: Map<String, String>) = apiInterface.ambulance(token)
 
@@ -363,8 +364,35 @@ constructor(private val apiInterface: APIInterface) {
         page: Int
     ) = apiInterface.getDoctors(token, name, category_id, city_id, page)
 
+
+    suspend fun getDoctorsCategories(
+        token: Map<String, String>
+    )=apiInterface.getDoctorsCategories(token)
+
     suspend fun getDoctorView(
         token: Map<String, String>,
         id: Int
     )=apiInterface.getDoctorView(token, id)
+
+    suspend fun getMedTurIndex(
+        token: Map<String, String>
+    )=apiInterface.getMedTurIndex(token)
+
+    suspend fun getFavourites(token: Map<String, String>, page: Int)=apiInterface.getFavourites(token, page)
+
+    suspend fun deleteFromFavourites(token: Map<String, String>, pageId:Int, type: String)=apiInterface.deleteFromFavourites(token, pageId, type)
+
+//    suspend fun doctorAddToFavourite(
+//        token: Map<String, String>,
+//        id: Int
+//    ) = apiInterface.doctorAddToFavourite(token, id)
+//
+//    suspend fun medTourismDoctorRate(
+//        token: Map<String, String>,
+//        id: Int,
+//        rating: Int,
+//        comment: String
+//    ) =
+//        apiInterface.medTourismDoctorRate(token, id, rating, comment)
+
 }
