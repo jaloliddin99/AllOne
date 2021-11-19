@@ -6,6 +6,7 @@
     android:paddingVertical="@dimen/margin_padding_8dp"
     android:layout_marginStart="@dimen/margin_padding_8dp"
     android:layout_marginTop="@dimen/margin_padding_8dp"
+    android:backgroundTint="#F6F6F6"
     android:background="@drawable/background_grey"
     android:layout_height="wrap_content">
 
@@ -16,7 +17,7 @@
         android:id="@+id/clinic"
         android:textSize="@dimen/text_size_13sp"
         android:textColor="@color/black"
-        android:fontFamily="@font/inter_bold"/>
+        android:fontFamily="@font/inter_semibold"/>
 
 
     <androidx.appcompat.widget.AppCompatImageView

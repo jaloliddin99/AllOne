@@ -27,7 +27,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentAllNews:Fragment(), AllNewsAdapter.OnItemClickListener {
     private var isCurrentFragment: Boolean = true
     private lateinit var viewModel: AllNewsViewModel
-    var binding:FragmentAllNewsBinding?=null
+    private var _binding:FragmentAllNewsBinding?=null
+    private val binding get() = _binding!!
     private lateinit var allNewsAdapter: AllNewsAdapter
 
     override fun onCreateView(
@@ -35,9 +36,9 @@ class FragmentAllNews:Fragment(), AllNewsAdapter.OnItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentAllNewsBinding.inflate(inflater, container, false)
+        _binding= FragmentAllNewsBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(AllNewsViewModel::class.java)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,16 +52,16 @@ class FragmentAllNews:Fragment(), AllNewsAdapter.OnItemClickListener {
 
         allNewsAdapter= AllNewsAdapter(ArrayList(),this)
         val layoutManager2=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        binding?.recyclerView?.layoutManager=layoutManager2
-        binding?.recyclerView?.adapter=allNewsAdapter
-        binding?.recyclerView?.addOnScrollListener(object :
+        binding.recyclerView.layoutManager=layoutManager2
+        binding.recyclerView.adapter=allNewsAdapter
+        binding.recyclerView.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager2) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 viewModel.getAllData(headerMapUniversal(requireContext()))
             }
         })
 
-        binding?.apply {
+        binding.apply {
             backToHome.setOnClickListener {
                 findNavController().popBackStack()
             }
@@ -108,4 +109,8 @@ class FragmentAllNews:Fragment(), AllNewsAdapter.OnItemClickListener {
         findNavController().navigate(direction, extras)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

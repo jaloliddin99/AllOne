@@ -34,7 +34,8 @@ class FragmentMedSearch : Fragment(),
     ClinicCategoriesAdapter.CategoriesClickListener,
     RegionAdapter.OnItemClickListener,
     DistrictAdapter.OnItemClick {
-    private lateinit var binding: FragmentMedCategoryBinding
+    private var _binding: FragmentMedCategoryBinding?=null
+    private val binding get() = _binding!!
     private val args: FragmentMedSearchArgs by navArgs()
 
     private lateinit var viewModel: RegionViewModel
@@ -47,7 +48,7 @@ class FragmentMedSearch : Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMedCategoryBinding.inflate(inflater, container, false)
+        _binding = FragmentMedCategoryBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(RegionViewModel::class.java)
         districtVIewModel = ViewModelProvider(this).get(DistrictViewModel::class.java)
         return binding.root
@@ -130,5 +131,10 @@ class FragmentMedSearch : Fragment(),
 
     override fun onItemClick(district: DistrictList) {
         setBackStackData("districtSelected", district, true)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

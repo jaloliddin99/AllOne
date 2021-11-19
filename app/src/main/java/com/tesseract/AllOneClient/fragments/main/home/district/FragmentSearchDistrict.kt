@@ -1,39 +1,33 @@
 package com.tesseract.AllOneClient.fragments.main.home.district
 
-import android.app.Activity
 import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.animation.AnimationUtils
-import android.widget.SearchView
 import androidx.activity.OnBackPressedCallback
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.home.SearchDistrictAdapter
-import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentDestrictSearchBinding
-import com.tesseract.AllOneClient.fragments.main.home.routeTariffs.FragmentTaxiRegionsSelectionDirections
-import com.tesseract.AllOneClient.model.home.getDistricts.DistrictList
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
     SearchDistrictAdapter.OnItemClick {
 
 
-    private var binding: FragmentDestrictSearchBinding? = null
-
+    private var _binding: FragmentDestrictSearchBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DistrictViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,12 +43,18 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
     }
 
     private lateinit var searchDistrictAdapter: SearchDistrictAdapter
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentDestrictSearchBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val districtSearchBinding = FragmentDestrictSearchBinding.bind(view)
-        binding = districtSearchBinding
 
         viewModel = ViewModelProvider(this).get(DistrictViewModel::class.java)
 
@@ -173,6 +173,11 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
 
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
 

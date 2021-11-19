@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.fragments.tourism.activeTour.FragmentActiveTour
-import com.tesseract.AllOneClient.fragments.tourism.tour.FragmentTour
 import com.tesseract.AllOneClient.model.tourism.ImageModel
 
 class ActiveTourViewPager(

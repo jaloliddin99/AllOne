@@ -19,7 +19,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener{
-    private lateinit var binding:FragmentMedAmbulanceBinding
+    private  var _binding:FragmentMedAmbulanceBinding?=null
+    private val binding get() = _binding!!
     private lateinit var viewModel: AmbulanceViewModel
 
     override fun onCreateView(
@@ -27,7 +28,7 @@ class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentMedAmbulanceBinding.inflate(inflater, container, false)
+        _binding= FragmentMedAmbulanceBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(AmbulanceViewModel::class.java)
         return binding.root
     }
@@ -78,5 +79,8 @@ class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener
                 )
             }
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 }

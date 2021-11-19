@@ -41,10 +41,17 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private lateinit var homeOrderModel: List<HomeOrderModel>
 
-    private lateinit var fragmentHomeBinding: FragmentHomeBinding
+    private var _fragmentHomeBinding: FragmentHomeBinding?=null
+    private val fragmentHomeBinding get() = _fragmentHomeBinding!!
+
     private lateinit var activeOrderAdapter: ActiveOrderAdapter
     private lateinit var viewModel: OrderViewModel
     private lateinit var homeViewModel: HomeViewModel
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentHomeBinding = null
+    }
 
 
     override fun onCreateView(
@@ -52,7 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
+        _fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         return fragmentHomeBinding.root

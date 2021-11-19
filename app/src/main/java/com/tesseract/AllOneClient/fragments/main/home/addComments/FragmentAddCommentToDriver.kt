@@ -12,14 +12,15 @@ import com.tesseract.AllOneClient.databinding.FragmentAddCommentToDriwerBinding
 
 class FragmentAddCommentToDriver : Fragment(), AddCommentAdapter.CancelOrderListener {
 
-    private lateinit var binding:FragmentAddCommentToDriwerBinding
+    private var _binding:FragmentAddCommentToDriwerBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentAddCommentToDriwerBinding.inflate(inflater, container, false)
+        _binding=FragmentAddCommentToDriwerBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,5 +48,10 @@ class FragmentAddCommentToDriver : Fragment(), AddCommentAdapter.CancelOrderList
 
     override fun onItemClick(reason: String) {
         binding.comment.setText(reason)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

@@ -22,7 +22,8 @@ import kotlin.properties.Delegates
 class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, FavouritesAdapter.OnRemoveListener {
 
     private lateinit var viewModel: MedTurFavouriteViewModel
-    private lateinit var binding:FragmentMedTurFavouriteBinding
+    private  var _binding:FragmentMedTurFavouriteBinding?=null
+    private val binding get() = _binding!!
     private lateinit var adapter:FavouritesAdapter
 
     override fun onCreateView(
@@ -30,7 +31,7 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentMedTurFavouriteBinding.inflate(inflater, container, false)
+        _binding= FragmentMedTurFavouriteBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(MedTurFavouriteViewModel::class.java)
         return binding.root
     }
@@ -109,5 +110,11 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
         this.position=position
         viewModel.delete(headerMapUniversal(requireContext()), data.id, data.type)
 
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

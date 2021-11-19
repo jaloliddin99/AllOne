@@ -55,6 +55,8 @@ import com.tesseract.AllOneClient.model.taxiCity.newOrder.CityCreateNewOrder
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.CityTariffMainModel
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateSavedLocationModel
+import com.tesseract.AllOneClient.model.tourism.indexUzb.IndexUzbModel
+import com.tesseract.AllOneClient.model.tourism.main.index.TourismMainIndex
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -586,6 +588,27 @@ interface APIInterface {
         @Path("id") itemId:Int,
         @Field("type") type: String
     ):Response<ClinicAddToFavouriteModel>
+
+
+
+    //=======================================Tourism
+
+    @GET("tourism")
+    suspend fun getTourismIndex(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismMainIndex>
+
+
+    @GET("tourism/tour_packages/{location}")
+    suspend fun getIndexUzb(
+        @HeaderMap headers: Map<String, String>,
+        @Path("location") location: String,
+        @Query("q") query:String,
+        @Query("country_id") country_id: Int,
+        @Query("currency_id") currency_id: Int,
+        @Query("sort") sort:String,
+        @Query("page") page:Int
+    ):Response<IndexUzbModel>
 
 
 

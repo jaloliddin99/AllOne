@@ -34,7 +34,8 @@ import org.greenrobot.eventbus.ThreadMode
 class OrderFragment : Fragment(R.layout.fragment_order),
     DialogShowTime.OnDaySelectListener,
     DialogShowTime2.OnDaySelectListener {
-    private var fragmentOrderBinding: FragmentOrderBinding? = null
+    private var _fragmentOrderBinding: FragmentOrderBinding? = null
+    private val fragmentOrderBinding get() = _fragmentOrderBinding!!
     private lateinit var orderHistoryAdapter: OrderHistoryAdapter
     private lateinit var activeOrderAdapter: ActiveOrderAdapter
     private var startTime: String = ""
@@ -48,7 +49,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        fragmentOrderBinding = FragmentOrderBinding.inflate(inflater, container, false)
+        _fragmentOrderBinding = FragmentOrderBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         return fragmentOrderBinding!!.root
     }
@@ -66,15 +67,15 @@ class OrderFragment : Fragment(R.layout.fragment_order),
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext())
-        fragmentOrderBinding?.orderTaxiList?.layoutManager = layoutManager
-        fragmentOrderBinding?.orderTaxiList?.adapter = activeOrderAdapter
-        fragmentOrderBinding?.orderTaxiList?.setHasFixedSize(true)
+        fragmentOrderBinding.orderTaxiList.layoutManager = layoutManager
+        fragmentOrderBinding.orderTaxiList.adapter = activeOrderAdapter
+        fragmentOrderBinding.orderTaxiList.setHasFixedSize(true)
 
         val resId: Int = R.anim.layout_animation
         val animation = AnimationUtils.loadLayoutAnimation(context, resId)
         fragmentOrderBinding!!.orderTaxiList.layoutAnimation = animation
 
-        fragmentOrderBinding?.orderTaxiList?.addOnScrollListener(object :
+        fragmentOrderBinding.orderTaxiList.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 viewModel.activeNext(headerMapUniversal(requireContext()))
@@ -85,11 +86,11 @@ class OrderFragment : Fragment(R.layout.fragment_order),
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
         orderHistoryAdapter = OrderHistoryAdapter(ArrayList(), requireContext())
-        fragmentOrderBinding?.orderPackageList?.layoutManager = layoutManager2
-        fragmentOrderBinding?.orderPackageList?.adapter = orderHistoryAdapter
+        fragmentOrderBinding.orderPackageList.layoutManager = layoutManager2
+        fragmentOrderBinding.orderPackageList.adapter = orderHistoryAdapter
         fragmentOrderBinding!!.orderPackageList.layoutAnimation = animation
-        fragmentOrderBinding?.orderPackageList?.setHasFixedSize(true)
-        fragmentOrderBinding?.orderPackageList?.addOnScrollListener(object :
+        fragmentOrderBinding.orderPackageList.setHasFixedSize(true)
+        fragmentOrderBinding.orderPackageList.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager2) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                 viewModel.historyList(headerMapUniversal(requireContext()), "", "")
@@ -118,7 +119,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         }
         fragmentOrderBinding!!.datePickersLayouts.visibility = View.GONE
 
-        fragmentOrderBinding?.apply {
+        fragmentOrderBinding.apply {
             tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.active)))
             tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.history)))
 
@@ -198,7 +199,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     }
 
     override fun selectDayListener(time: String) {
-        fragmentOrderBinding?.date1?.text = time
+        fragmentOrderBinding.date1.text = time
         startTime = time
         if (startTime.isNotEmpty() && endTime.isNotEmpty()) {
             viewModel.historyList(headerMapUniversal(requireContext()), startTime, endTime)
@@ -207,7 +208,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     }
 
     override fun selectDayListener2(time: String) {
-        fragmentOrderBinding?.date2?.text = time
+        fragmentOrderBinding.date2.text = time
         endTime = time
         if (startTime.isNotEmpty() && endTime.isNotEmpty()) {
             viewModel.historyList(headerMapUniversal(requireContext()), startTime, endTime)
@@ -276,5 +277,10 @@ class OrderFragment : Fragment(R.layout.fragment_order),
                 isCurrentFragment = false
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentOrderBinding=null
     }
 }

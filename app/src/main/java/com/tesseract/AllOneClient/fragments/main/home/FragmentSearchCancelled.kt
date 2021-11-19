@@ -2,7 +2,9 @@ package com.tesseract.AllOneClient.fragments.main.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -12,21 +14,29 @@ import com.tesseract.AllOneClient.databinding.FragmentSearchCancelledBinding
 
 class FragmentSearchCancelled: Fragment(R.layout.fragment_search_cancelled) {
 
-    private var binding: FragmentSearchCancelledBinding?=null
-
+    private var _binding: FragmentSearchCancelledBinding?=null
+    private val binding get() = _binding!!
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentSearchCancelledBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
     @SuppressLint("UseCompatLoadingForColorStateLists")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val  searchCancelledBinding=FragmentSearchCancelledBinding.bind(view)
-        binding=searchCancelledBinding
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
-        binding?.bookNow?.backgroundTintList =
+        binding.bookNow.backgroundTintList =
             context?.resources?.getColorStateList(R.color.red)
 
 
@@ -37,14 +47,14 @@ class FragmentSearchCancelled: Fragment(R.layout.fragment_search_cancelled) {
             override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
                 when (newState) {
                     BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding?.bookNow?.backgroundTintList =
+                        binding.bookNow.backgroundTintList =
                             context?.resources?.getColorStateList(R.color.red)
-                        binding?.bookNow?.text=getString(R.string.cancel)
+                        binding.bookNow.text=getString(R.string.cancel)
                     }
                     BottomSheetBehavior.STATE_EXPANDED -> {
-                        binding?.bookNow?.backgroundTintList =
+                        binding.bookNow.backgroundTintList =
                             context?.resources?.getColorStateList(R.color.green)
-                        binding?.bookNow?.text=getString(R.string.book_now)
+                        binding.bookNow.text=getString(R.string.book_now)
                     }
                 }
 
@@ -57,6 +67,9 @@ class FragmentSearchCancelled: Fragment(R.layout.fragment_search_cancelled) {
 
 
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 }

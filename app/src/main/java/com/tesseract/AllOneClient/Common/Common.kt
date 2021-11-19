@@ -28,6 +28,7 @@ object Common {
 
     var favouritesPagingApi=1
 
+    var tourIndexMain=1
     var questionNumbers: ArrayList<ImageModel> = ArrayList<ImageModel>()
 
     fun View.hideKeyboard() {

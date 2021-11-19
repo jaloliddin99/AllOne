@@ -1,7 +1,6 @@
 package com.tesseract.AllOneClient.repository
 
 import com.tesseract.AllOneClient.API.APIInterface
-import com.tesseract.AllOneClient.model.dialogComplaint.MakeComplaintPostBody
 import com.tesseract.AllOneClient.model.dialogRating.DriverRatingPost
 import com.tesseract.AllOneClient.model.taxiCity.cancelOrderPost.CancelBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
@@ -394,5 +393,19 @@ constructor(private val apiInterface: APIInterface) {
 //        comment: String
 //    ) =
 //        apiInterface.medTourismDoctorRate(token, id, rating, comment)
+
+
+
+
+
+
+
+
+    ///=======================tourism
+
+    suspend fun tourismMainIndex(token: Map<String, String>)=apiInterface.getTourismIndex(token)
+
+    suspend fun getTourIndex(token: Map<String, String>, location: String, query:String, countryId:Int, currencyId:Int, sort:String, page: Int)=
+        apiInterface.getIndexUzb(token, location, query, countryId, currencyId, sort, page)
 
 }

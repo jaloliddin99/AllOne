@@ -20,7 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentLocation : Fragment(R.layout.fragment_location) {
-    private lateinit var binding: FragmentLocationBinding
+    private var _binding: FragmentLocationBinding? = null
+    private val binding get() = _binding!!
     private val args:FragmentLocationArgs by navArgs()
 
     private lateinit var viewModel: SearchTaxiViewModel
@@ -39,7 +40,7 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val locationFragmentBinging = FragmentLocationBinding.bind(view)
-        binding = locationFragmentBinging
+        _binding = locationFragmentBinging
         requireActivity().statusBarColor(
                     ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
         ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
@@ -88,6 +89,9 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
         )
 
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 }

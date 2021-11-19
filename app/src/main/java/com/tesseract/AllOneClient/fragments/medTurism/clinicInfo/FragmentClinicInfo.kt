@@ -24,7 +24,8 @@ import java.lang.Exception
 
 @AndroidEntryPoint
 class FragmentClinicInfo:Fragment() {
-    private lateinit var binding:FragmentClinicInfoBinding
+    private var _binding:FragmentClinicInfoBinding?=null
+    private val binding get() = _binding!!
     private val args:FragmentClinicInfoArgs by navArgs()
     private lateinit var viewModel: ClinicsViewModel
 
@@ -34,7 +35,7 @@ class FragmentClinicInfo:Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentClinicInfoBinding.inflate(inflater, container, false)
+        _binding= FragmentClinicInfoBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(ClinicsViewModel::class.java)
         return binding.root
     }
@@ -117,5 +118,10 @@ class FragmentClinicInfo:Fragment() {
             binding.loader.loader.visibility=View.GONE
             isFavourite=true
         })
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

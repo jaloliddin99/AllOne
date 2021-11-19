@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -36,7 +38,8 @@ class FragmentTaxiRegionsSelection
     TariffAdapter.DialogCloseListener {
 
     private var tariffText: String = ""
-    private var binding: FragmentTarifBinding? = null
+    private var _binding: FragmentTarifBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var tariffAdapter: TariffAdapter
     private lateinit var tariffModel: List<RouteTariffContentListModel>
@@ -47,13 +50,19 @@ class FragmentTaxiRegionsSelection
     private val shareViewModel: ShareViewModel by activityViewModels()
 
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentTarifBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tariffBinding = FragmentTarifBinding.bind(view)
-
-        binding = tariffBinding
 
         viewModel = ViewModelProvider(this).get(RouteTariffViewModel::class.java)
 
@@ -65,18 +74,18 @@ class FragmentTaxiRegionsSelection
 
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("addressName")?.observe(
             viewLifecycleOwner) {result ->
-            binding!!.startDestination.text=result
-            binding!!.startDestinationChange.text = getString(R.string.change)
+            binding.startDestination.text=result
+            binding.startDestinationChange.text = getString(R.string.change)
         }
         findNavController().currentBackStackEntry?.savedStateHandle?.getLiveData<String>("addressName1")?.observe(
             viewLifecycleOwner) {result ->
-            binding!!.endDestination.text=result
-            binding!!.endDestinationTextChange.text = getString(R.string.change)
+            binding.endDestination.text=result
+            binding.endDestinationTextChange.text = getString(R.string.change)
         }
 
 
 
-        binding?.apply {
+        binding.apply {
             viewModel.routeList.observe(requireActivity(), Observer {
                 tariffAdapter =
                     TariffAdapter(requireContext(), it, this@FragmentTaxiRegionsSelection)
@@ -175,13 +184,13 @@ class FragmentTaxiRegionsSelection
 
             if (it.direction == 0) {
                 Common.startDistrictId=0.toString()
-                binding!!.startDestination.text = "${it.locationName}"
-                binding!!.startDestinationChange.text = getString(R.string.change)
+                binding.startDestination.text = "${it.locationName}"
+                binding.startDestinationChange.text = getString(R.string.change)
             }
             if (it.direction  == 1) {
                 Common.endDistrictId=0.toString()
-                binding!!.endDestination.text = "${it.locationName}"
-                binding!!.endDestinationTextChange.text = getString(R.string.change)
+                binding.endDestination.text = "${it.locationName}"
+                binding.endDestinationTextChange.text = getString(R.string.change)
             }
         }
     }
@@ -244,6 +253,10 @@ class FragmentTaxiRegionsSelection
                     key
                 )
             }
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

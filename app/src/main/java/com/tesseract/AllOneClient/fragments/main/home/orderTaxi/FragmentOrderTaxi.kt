@@ -41,7 +41,8 @@ class FragmentOrderTaxi : Fragment(R.layout.fragment_order_taxi),
     DialogExtraLargeBaggage.SendDataListener {
 
 
-    private lateinit var binding: FragmentOrderTaxiBinding
+    private var _binding: FragmentOrderTaxiBinding?=null
+    private val binding get() = _binding!!
     private var selectedPlaces = ArrayList<Int>()
     private var selectedParcelPlaceBefore = ArrayList<Int>()
     private var viewModelSeatPrices = ArrayList<String>()
@@ -78,7 +79,7 @@ class FragmentOrderTaxi : Fragment(R.layout.fragment_order_taxi),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentOrderTaxiBinding.inflate(inflater, container, false)
+        _binding= FragmentOrderTaxiBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -752,6 +753,11 @@ class FragmentOrderTaxi : Fragment(R.layout.fragment_order_taxi),
                     key
                 )
             }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 

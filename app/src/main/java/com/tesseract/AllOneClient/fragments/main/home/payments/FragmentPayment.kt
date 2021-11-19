@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,19 +29,28 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.OnBonusSelected {
 
     private val args:FragmentPaymentArgs by navArgs()
-    private lateinit var binding: FragmentPaymentBinding
+    private var _binding: FragmentPaymentBinding?=null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel2: GetCardViewModel
     private lateinit var viewModel: PaymentsViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentPaymentBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel2 = ViewModelProvider(this).get(GetCardViewModel::class.java)
         viewModel2.getCardDataList(headerMapUniversal(requireContext()))
-        val paymentFragmentBinging = FragmentPaymentBinding.bind(view)
-        binding = paymentFragmentBinging
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
@@ -474,6 +485,11 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
                     R.string.emptySpace
                 ) + getString(R.string.summa1)
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

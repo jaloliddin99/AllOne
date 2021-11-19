@@ -620,6 +620,10 @@
     <string name="your_saved_item_is_empty">Ваше избранное пусто</string>
     <string name="med_tur_saved_desc">Вы можете добавить клиники или врачей в избранное, нажав на иконку избранное в правом верхнем углу на странице просмотра клиник или врачей</string>
     <string name="my_saveds">Мое избранное</string>
+    <string name="discover_the_world">Откройте для себя мир</string>
+    <string name="turPacket">Турпакеты</string>
+    <string name="aroundTheWOrld">По всему миру</string>
+    <string name="where_do_youWant">Куда хотите путешествовать?</string>
 
 
 </resources>

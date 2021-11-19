@@ -31,7 +31,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
 
-    var binding:FragmentRegionRegionBinding?=null
+    private var _binding:FragmentRegionRegionBinding?=null
+    private val binding get() = _binding!!
     private lateinit var regionAdapter: RegionRegionAdapter
     private lateinit var viewModel: RegionViewModel
 
@@ -40,7 +41,7 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View{
-        binding= FragmentRegionRegionBinding.inflate(inflater, container, false)
+        _binding= FragmentRegionRegionBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(RegionViewModel::class.java)
         return binding!!.root
     }
@@ -54,18 +55,18 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
             viewModel.getRegionList(headerMapUniversal(requireContext()))
         }
 
-        binding!!.searchItemRecycler.layoutManager=
+        binding.searchItemRecycler.layoutManager=
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         viewModel.regionDetails.observe(viewLifecycleOwner, {
             regionAdapter= RegionRegionAdapter(it, this)
-            binding!!.searchItemRecycler.adapter=regionAdapter
+            binding.searchItemRecycler.adapter=regionAdapter
             val resId: Int = R.anim.layout_animation
             val animation = AnimationUtils.loadLayoutAnimation(context, resId)
-            binding!!.searchItemRecycler.layoutAnimation = animation
-            binding!!.searchItemRecycler.setHasFixedSize(true)
+            binding.searchItemRecycler.layoutAnimation = animation
+            binding.searchItemRecycler.setHasFixedSize(true)
         })
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -140,6 +141,11 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
         if (doBack)
             findNavController().popBackStack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

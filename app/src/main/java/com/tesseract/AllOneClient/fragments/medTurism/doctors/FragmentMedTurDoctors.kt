@@ -23,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
-    private lateinit var binding: FragmentMedTurDoctorsBinding
+    private var _binding: FragmentMedTurDoctorsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel:DoctorsViewModel
 
     private lateinit var adapter: ClinicsAdapter
@@ -34,7 +35,7 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentMedTurDoctorsBinding.inflate(inflater, container, false)
+        _binding= FragmentMedTurDoctorsBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(DoctorsViewModel::class.java)
         return binding.root
     }
@@ -194,5 +195,11 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
                     key
                 )
             }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

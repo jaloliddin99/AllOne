@@ -526,27 +526,6 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="fragmentHiking">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-313" />
-                            <option name="y" value="632" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_fragmentHiking_to_fragmentActiveTour">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="fragmentLocation">
                     <value>
                       <LayoutPositions>
@@ -600,6 +579,11 @@
                               </value>
                             </entry>
                             <entry key="action_fragmentMainClinic_to_fragmentMedTurDoctors">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                            <entry key="action_fragmentMainClinic_to_fragmentMedTurFavourite">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -1143,61 +1127,35 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="fragmentTour">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-529" />
-                            <option name="y" value="1026" />
-                          </Point>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
-                  <entry key="fragmentTourPackets">
-                    <value>
-                      <LayoutPositions>
-                        <option name="myPosition">
-                          <Point>
-                            <option name="x" value="-522" />
-                            <option name="y" value="640" />
-                          </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_fragmentTourPackets_to_fragmentTour">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
-                        </option>
-                      </LayoutPositions>
-                    </value>
-                  </entry>
                   <entry key="fragmentTourismMain">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-403" />
-                            <option name="y" value="220" />
+                            <option name="x" value="-470" />
+                            <option name="y" value="334" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_fragmentTourismMain_to_fragmentHiking">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_fragmentTourismMain_to_fragmentTourPackets">
+                            <entry key="action_fragmentTourismMain_to_fragmentTourismPackages">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentTourismPackages">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-168" />
+                            <option name="y" value="327" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -23,8 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
-    private var binding: FragmentMedClinicsBinding? = null
-
+    private var _binding: FragmentMedClinicsBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: ClinicsViewModel
     private lateinit var adapter: ClinicsAdapter
     private var isCurrentFragment: Boolean = true
@@ -34,7 +34,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentMedClinicsBinding.inflate(inflater, container, false)
+        _binding = FragmentMedClinicsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ClinicsViewModel::class.java)
         return binding!!.root
     }
@@ -43,7 +43,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         Common.clinicsPaging = 1
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -53,7 +53,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
         viewModel.errorMCategory.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility=View.GONE
+            binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
@@ -61,7 +61,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         adapter = ClinicsAdapter(mutableSetOf(), this)
 
 
-        binding?.apply {
+        binding.apply {
             loader.loader.visibility = View.VISIBLE
             val layoutManager2 =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -110,13 +110,13 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
     private fun clinicsAdapterSetter() {
 
         viewModel.errorMessageClinic.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility=View.GONE
+            binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
         val arrayList:MutableSet<Data> =HashSet()
         viewModel.clinicLists.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility = View.GONE
+            binding.loader.loader.visibility = View.GONE
             for (i in it.indices) {
                 arrayList.add(it[i])
             }
@@ -127,10 +127,10 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
         })
 
         getBackStackData<Content>("categoryMed", true) {
-            binding?.byCategories?.text = it.name
+            binding.byCategories.text = it.name
             content = it
             if (district.id != 1) {
-                binding?.location?.text = district.name
+                binding.location.text = district.name
                 viewModel.startGetClinics(
                     headerMapUniversal(requireContext()),
                     "",
@@ -141,15 +141,15 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
                 viewModel.startGetClinics(headerMapUniversal(requireContext()), "", content.id, 1)
             }
             Common.clinicsPaging = 1
-            binding?.loader?.loader?.visibility = View.VISIBLE
+            binding.loader.loader.visibility = View.VISIBLE
         }
 
         getBackStackData<DistrictList>("districtSelected", true) {
-            binding?.location?.text = it.name
+            binding.location.text = it.name
             district = it
             Toast.makeText(context, content.name, Toast.LENGTH_SHORT).show()
             if (content.id != 1) {
-                binding?.byCategories?.text = content.name
+                binding.byCategories.text = content.name
                 viewModel.startGetClinics(
                     headerMapUniversal(requireContext()),
                     "",
@@ -160,12 +160,12 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
                 viewModel.startGetClinics(headerMapUniversal(requireContext()), "", 1, it.id!!)
             }
             Common.clinicsPaging = 1
-            binding?.loader?.loader?.visibility = View.VISIBLE
+            binding.loader.loader.visibility = View.VISIBLE
 
         }
 
         viewModel.categories.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility = View.GONE
+            binding.loader.loader.visibility = View.GONE
             isInitialized = true
             categoryList = it
         })
@@ -196,5 +196,11 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
                     key
                 )
             }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

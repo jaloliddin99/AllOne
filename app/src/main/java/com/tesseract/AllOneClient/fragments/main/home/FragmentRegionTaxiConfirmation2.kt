@@ -11,17 +11,14 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.databinding.FragmentRegionTaxiConfirmation2Binding
 
 class FragmentRegionTaxiConfirmation2: Fragment(R.layout.fragment_region_taxi_confirmation2) {
-    private var binding: FragmentRegionTaxiConfirmation2Binding? =null
-
+    private var _binding: FragmentRegionTaxiConfirmation2Binding? =null
+    private val binding get() = _binding!!
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val regionTaxiConfirmation2Binding=FragmentRegionTaxiConfirmation2Binding.bind(view)
-
-        binding=regionTaxiConfirmation2Binding
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -51,7 +48,10 @@ class FragmentRegionTaxiConfirmation2: Fragment(R.layout.fragment_region_taxi_co
             findNavController().navigate(action)
 
         }
+    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

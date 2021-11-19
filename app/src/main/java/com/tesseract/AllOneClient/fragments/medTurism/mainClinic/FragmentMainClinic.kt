@@ -25,8 +25,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance), ClinicMainAdapter.OnImageClickListener, ChipAdapter.OnChipClickListener,
     PopularAdapter.PopularClinics, PopularDoctorAdapter.OnDoctorClicked, NearClinicsAdapter.OnNearByKlicked {
-    private var binding: FragmentMedTurizmEntranceBinding?=null
-
+    private var _binding: FragmentMedTurizmEntranceBinding?=null
+    private val binding get() = _binding!!
     private lateinit var viewModel: MainClinicViewModel
 
     private lateinit var mainMedModel: List<MainMedModel>
@@ -37,15 +37,15 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance), Clin
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentMedTurizmEntranceBinding.inflate(inflater, container, false)
+        _binding= FragmentMedTurizmEntranceBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(MainClinicViewModel::class.java)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -53,23 +53,23 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance), Clin
 
         clinicMainAdapter=
             ClinicMainAdapter(mainMedModel, this)
-        binding?.recyclerView?.adapter=clinicMainAdapter
-        binding?.recyclerView?.layoutManager= GridLayoutManager(requireContext(), 2)
-        binding?.recyclerView?.setHasFixedSize(true)
+        binding.recyclerView.adapter=clinicMainAdapter
+        binding.recyclerView.layoutManager= GridLayoutManager(requireContext(), 2)
+        binding.recyclerView.setHasFixedSize(true)
 
         viewModel.mainIndex(headerMapUniversal(requireContext()))
 
         viewModel.errorM.observe(viewLifecycleOwner, {
-            binding?.loader?.loader?.visibility=View.GONE
+            binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        binding?.ambulance?.setOnClickListener {
+        binding.ambulance.setOnClickListener {
             val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentMedAmbulance()
             findNavController().navigate(action)
         }
 
-        binding?.apply {
+        binding.apply {
 
             viewModel.mainIndex.observe(viewLifecycleOwner, {
                 recyclerViewChip.apply {
@@ -155,6 +155,11 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance), Clin
 
     override fun onChipClicked(position: NearbyClinic) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 

@@ -617,57 +617,8 @@
             app:destination="@id/fragmentClinicInfo" />
     </fragment>
 
-    <fragment
-        android:id="@+id/fragmentTourismMain"
-        android:name="com.tesseract.AllOneClient.fragments.tourism.mainTourism.FragmentTourismMain"
-        android:label="fragment_tourism_main"
-        tools:layout="@layout/fragment_tourism_main">
-        <action
-            android:id="@+id/action_fragmentTourismMain_to_fragmentTourPackets"
-            app:destination="@id/fragmentTourPackets"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-        <action
-            android:id="@+id/action_fragmentTourismMain_to_fragmentHiking"
-            app:destination="@id/fragmentHiking"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentTourPackets"
-        android:name="com.tesseract.AllOneClient.fragments.tourism.tourPackets.FragmentTourPackets"
-        android:label="fragment_tourism_tour_packet"
-        tools:layout="@layout/fragment_tourism_tour_packet">
-        <action
-            android:id="@+id/action_fragmentTourPackets_to_fragmentTour"
-            app:destination="@id/fragmentTour"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentTour"
-        android:name="com.tesseract.AllOneClient.fragments.tourism.tour.FragmentTour"
-        android:label="fragment_tourism_tour"
-        tools:layout="@layout/fragment_tourism_tour" />
-    <fragment
-        android:id="@+id/fragmentHiking"
-        android:name="com.tesseract.AllOneClient.fragments.tourism.hiking.FragmentHiking"
-        android:label="fragment_tourism_hiking"
-        tools:layout="@layout/fragment_tourism_hiking">
-        <action
-            android:id="@+id/action_fragmentHiking_to_fragmentActiveTour"
-            app:destination="@id/fragmentActiveTour"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out" />
-    </fragment>
+
+
     <fragment
         android:id="@+id/fragmentActiveTour"
         android:name="com.tesseract.AllOneClient.fragments.tourism.activeTour.FragmentActiveTour"
@@ -1063,6 +1014,25 @@
         android:name="com.tesseract.AllOneClient.fragments.medTurism.saved.FragmentMedTurFavourite"
         android:label="fragment_med_tur_favourite"
         tools:layout="@layout/fragment_med_tur_favourite" />
+
+    <fragment
+        android:id="@+id/fragmentTourismMain"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.mainTourism.FragmentTourismMain"
+        android:label="fragment_tourism_main"
+        tools:layout="@layout/fragment_tourism_main">
+        <action
+            android:id="@+id/action_fragmentTourismMain_to_fragmentTourismPackages"
+            app:destination="@id/fragmentTourismPackages" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTourismPackages"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.tourPackages.FragmentTourismPackages"
+        android:label="fragment_tourism_packages"
+        tools:layout="@layout/fragment_tourism_packages" >
+        <argument
+            android:name="location"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>

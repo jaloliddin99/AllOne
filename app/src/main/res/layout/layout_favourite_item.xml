@@ -39,7 +39,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Shox International Hospital"
                 android:textSize="@dimen/text_size_15sp"
                 android:id="@+id/title"
                 android:fontFamily="@font/inter_semibold"
@@ -48,7 +47,6 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Многопрофильная клиника"
                 android:textSize="@dimen/text_size_13sp"
                 android:id="@+id/subtitle"
                 android:fontFamily="@font/inter_regular"

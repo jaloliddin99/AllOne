@@ -18,7 +18,8 @@ import com.tesseract.AllOneClient.utils.statusBarColor
 
 class FragmentNewsView:Fragment() {
 
-    var binding:FragmentNewsViewBinding?=null
+    private var _binding:FragmentNewsViewBinding?=null
+    private val binding get() = _binding!!
     val args:FragmentNewsViewArgs by navArgs()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,9 +50,9 @@ class FragmentNewsView:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val newsViewBinding=FragmentNewsViewBinding.bind(view)
-        binding=newsViewBinding
+        _binding=newsViewBinding
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-        binding?.apply {
+        binding.apply {
             mainView.transitionName="cardViewTransition${args.id}"
             Picasso.get().load(args.image).into(newsImageView)
             title.text=args.title
@@ -97,6 +98,11 @@ class FragmentNewsView:Fragment() {
             )
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 

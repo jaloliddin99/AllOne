@@ -25,7 +25,8 @@ import java.lang.Exception
 
 @AndroidEntryPoint
 class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPhoneAdapter.OnClickListener {
-    private lateinit var binding:FragmentMedTurDoctorViewBinding
+    private var _binding:FragmentMedTurDoctorViewBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: DoctorViewModel
     private lateinit var viewModel2:ClinicsViewModel
     private val args:FragmentDoctorViewArgs by navArgs()
@@ -35,7 +36,7 @@ class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPh
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentMedTurDoctorViewBinding.inflate(inflater, container, false)
+        _binding= FragmentMedTurDoctorViewBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(DoctorViewModel::class.java)
         viewModel2=ViewModelProvider(this).get(ClinicsViewModel::class.java)
 
@@ -123,6 +124,11 @@ class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPh
 
     override fun onChipClicked(position: String) {
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }

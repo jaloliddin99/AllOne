@@ -14,14 +14,15 @@ import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewMode
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Service
 
 class FragmentMedTurServices: Fragment(), ClinicsServicesAdapter.CategoriesClickListener {
-    private lateinit var binding:FragmentMedTurServocesBinding
+    private  var _binding:FragmentMedTurServocesBinding?=null
+    private val binding get() = _binding!!
     private val shareViewModel: ClinicsViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentMedTurServocesBinding.inflate(inflater, container, false)
+        _binding= FragmentMedTurServocesBinding.inflate(inflater, container, false)
 
         return  binding.root
     }
@@ -41,5 +42,10 @@ class FragmentMedTurServices: Fragment(), ClinicsServicesAdapter.CategoriesClick
 
     override fun onChipClicked(position: Service) {
         DialogServices(position).show(parentFragmentManager, tag)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

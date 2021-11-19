@@ -63,7 +63,8 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
 
     private lateinit var viewModel: UpdateNewOrderViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
-    private lateinit var binding: FragmentRegionDriwerInfoBinding
+    private  var _binding: FragmentRegionDriwerInfoBinding? = null
+    private val binding get() = _binding!!
     private lateinit var regionDriverInfoAdapter: RegionDriverInfoAdapter
 
     override fun onDetach() {
@@ -90,7 +91,7 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
         savedInstanceState: Bundle?
     ): View {
 
-        binding= FragmentRegionDriwerInfoBinding.inflate(inflater, container, false)
+        _binding= FragmentRegionDriwerInfoBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(UpdateNewOrderViewModel::class.java)
 
 
@@ -474,7 +475,11 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             }
 
         }
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }
