@@ -377,9 +377,10 @@ constructor(private val apiInterface: APIInterface) {
         token: Map<String, String>
     )=apiInterface.getMedTurIndex(token)
 
-    suspend fun getFavourites(token: Map<String, String>, page: Int)=apiInterface.getFavourites(token, page)
+    suspend fun getFavourites(token: Map<String, String>, medOrTour:String, page: Int)=apiInterface.getFavourites(token, medOrTour, page)
 
-    suspend fun deleteFromFavourites(token: Map<String, String>, pageId:Int, type: String)=apiInterface.deleteFromFavourites(token, pageId, type)
+    suspend fun deleteFromFavourites(token: Map<String, String>, medOrTour:String, pageId:Int, type: String)=
+        apiInterface.deleteFromFavourites(token, medOrTour, pageId, type)
 
 //    suspend fun doctorAddToFavourite(
 //        token: Map<String, String>,
@@ -407,5 +408,15 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun getTourIndex(token: Map<String, String>, location: String, query:String, countryId:Int, currencyId:Int, sort:String, page: Int)=
         apiInterface.getIndexUzb(token, location, query, countryId, currencyId, sort, page)
+
+    suspend fun packageView(token: Map<String, String>, packageId:Int)=apiInterface.tourPackageView(token, packageId)
+
+    suspend fun packageAddToFav(token: Map<String, String>, id: Int)=apiInterface.addToFavTour(token, id)
+
+    suspend fun getTourExplore(token: Map<String, String>)=apiInterface.getTourExplore(token)
+
+    suspend fun exploreCountryPackages(token: Map<String, String>, id: Int, page: Int)=apiInterface.exploreCountryPackages(token, id, page)
+
+    suspend fun exploreCountryView(token: Map<String, String>, id: Int)=apiInterface.exploreCountryView(token, id)
 
 }

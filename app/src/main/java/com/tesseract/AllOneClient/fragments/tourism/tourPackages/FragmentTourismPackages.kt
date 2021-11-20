@@ -19,6 +19,7 @@ import com.tesseract.AllOneClient.model.tourism.indexUzb.Data
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_get_bonus.*
 
 @AndroidEntryPoint
 class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListener {
@@ -45,11 +46,17 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         super.onViewCreated(view, savedInstanceState)
 
         Common.tourIndexMain = 1
+        if (args.location=="uzbekistan"){
+            viewModel.startMainIndex(headerMapUniversal(requireContext()), args.location, "", args.uzbId, 1, "by_popularity")
+        }
         viewModel.startMainIndex(headerMapUniversal(requireContext()), args.location, "", 1, 1, "by_popularity")
         adapter = TourPackagesAdapter(this, mutableSetOf())
 
 
         binding.apply {
+            backToHome.setOnClickListener {
+                findNavController().popBackStack()
+            }
             loader.loader.visibility = View.VISIBLE
             val layoutManager2 =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -92,6 +99,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
     }
 
     override fun onExploreListener(position: Data) {
-
+        val action=FragmentTourismPackagesDirections.actionFragmentTourismPackagesToFragmentPackagesView(position.id)
+        findNavController().navigate(action)
     }
 }

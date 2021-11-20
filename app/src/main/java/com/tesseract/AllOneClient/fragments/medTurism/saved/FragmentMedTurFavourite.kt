@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
@@ -25,6 +27,7 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
     private  var _binding:FragmentMedTurFavouriteBinding?=null
     private val binding get() = _binding!!
     private lateinit var adapter:FavouritesAdapter
+    private val args:FragmentMedTurFavouriteArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,13 +44,17 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
         super.onViewCreated(view, savedInstanceState)
 
         Common.favouritesPagingApi = 1
-        viewModel.starterFun(headerMapUniversal(requireContext()))
+        viewModel.starterFun(headerMapUniversal(requireContext()), args.medOrTour)
 
 
         adapter = FavouritesAdapter(mutableSetOf(), this, this)
 
 
         binding.apply {
+            backToHome.setOnClickListener {
+                findNavController().popBackStack()
+            }
+
             loader.loader.visibility = View.VISIBLE
             val layoutManager2 =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
@@ -56,7 +63,7 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
             recyclerView.addOnScrollListener(object :
                 EndlessRecyclerViewScrollListener(layoutManager2) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                    viewModel.favourites(headerMapUniversal(requireContext()))
+                    viewModel.favourites(headerMapUniversal(requireContext()), args.medOrTour)
                 }
             })
 
@@ -108,7 +115,7 @@ class FragmentMedTurFavourite:Fragment(),FavouritesAdapter.OnClickListener, Favo
 
         this.data=data
         this.position=position
-        viewModel.delete(headerMapUniversal(requireContext()), data.id, data.type)
+        viewModel.delete(headerMapUniversal(requireContext()),args.medOrTour, data.id, data.type)
 
     }
 

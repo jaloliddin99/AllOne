@@ -624,6 +624,24 @@
     <string name="turPacket">Турпакеты</string>
     <string name="aroundTheWOrld">По всему миру</string>
     <string name="where_do_youWant">Куда хотите путешествовать?</string>
+    <string name="favourites">Описание</string>
+    <string name="tourIncludes">В программу тура входит:</string>
+    <string name="contacts">Контакты</string>
+    <string name="other_tours">Другие туры от компании</string>
+    <string name="marshurt">Маршрут</string>
+    <string name="numberOfDays">Количество дней</string>
+    <string name="seaso">Сезон</string>
+    <string name="ageee">Возраст</string>
+    <string name="visa">ВИЗА</string>
+    <string name="forOnePerson">На одного человека</string>
+    <string name="tourFirma">Турфирма</string>
+    <string name="cloadadwd">Закрыто до завтра</string>
+    <string name="search_country">Поиск стран</string>
+    <string name="tour_uzb">Турпакеты по Узбекистану</string>
+    <string name="tour_world">Турпакеты по всему миру</string>
+    <string name="tour_firms">Туристические фирмы</string>
+    <string name="hotels">Отели</string>
+    <string name="carRent">Авто на прокат</string>
 
 
 </resources>

@@ -1,18 +1,19 @@
-package com.tesseract.AllOneClient.adapter.tourism
+package com.tesseract.AllOneClient.adapter.tourism.tourPackages
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
+import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.fragments.tourism.mainTourism.FragmentTourismMain
-import com.tesseract.AllOneClient.model.tourism.ImageModel
+import com.tesseract.AllOneClient.fragments.tourism.packagesView.FragmentPackagesView
+import com.tesseract.AllOneClient.model.tourism.main.index.Banner
 
-class HikingViewPagerAdapter(
-    private var context: Context,
-    var list: List<ImageModel>
+class GalleryAdapter(
+    private var homeFragment: FragmentPackagesView,
+    var list: List<String>
 ) : PagerAdapter() {
 
     override fun isViewFromObject(view: View, `object`: Any): Boolean {
@@ -29,11 +30,11 @@ class HikingViewPagerAdapter(
         val imageView: ImageView
 
         val v =
-            LayoutInflater.from(context)
+            LayoutInflater.from(homeFragment.context)
                 .inflate(R.layout.fragment_image_card, container, false)
 
         imageView = v.findViewById(R.id.image)
-        imageView.setImageResource(list[position].image)
+        Picasso.get().load(list[position]).into(imageView)
 
         container.addView(v)
         return v

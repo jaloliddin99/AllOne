@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.tourism.exploreCountry.FragmentExploreCountry"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:layout_height="?attr/actionBarSize">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/backToHome"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:tint="@color/white"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
+            android:layout_centerVertical="true"
+            android:focusable="true" />
+        
+    </RelativeLayout>
+    
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:scaleType="centerCrop"
+        android:id="@+id/poster"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_background_top_corner"
+        android:id="@+id/nestedScrollView"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        app:behavior_peekHeight="450dp"
+        android:scrollbars="none">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:id="@+id/country_name"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:textSize="28sp"
+                android:fontFamily="@font/inter_bold"
+                android:textColor="@color/black"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/dimens_6dp"
+                android:id="@+id/continent"
+                android:textSize="@dimen/text_size_15sp"
+                android:fontFamily="@font/inter_medium"
+                android:textColor="@color/dark_green"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:id="@+id/description"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:textSize="@dimen/text_size_15sp"
+                android:fontFamily="@font/inter_regular"
+                android:textColor="#E6272727"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:text="@string/fotoGallery"
+                android:textSize="@dimen/text_size_18sp"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerView"
+                android:paddingStart="@dimen/margin_padding_16"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                android:orientation="vertical"
+                android:clipToPadding="false"
+                android:layout_marginTop="@dimen/margin_padding_8dp"/>
+
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:text="@string/turPacket"
+                android:textSize="@dimen/text_size_18sp"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewTourPacket"
+                tools:listitem="@layout/layout_tourpacket_item"
+                android:clipToPadding="false"
+                android:layout_marginTop="@dimen/margin_padding_8dp"/>
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

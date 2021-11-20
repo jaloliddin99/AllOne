@@ -603,9 +603,6 @@
         <action
             android:id="@+id/action_fragmentMainClinic_to_fragmentMedTurDoctors"
             app:destination="@id/fragmentMedTurDoctors" />
-        <action
-            android:id="@+id/action_fragmentMainClinic_to_fragmentMedTurFavourite"
-            app:destination="@id/fragmentMedTurFavourite" />
     </fragment>
     <fragment
         android:id="@+id/fragmentClinics"
@@ -1013,7 +1010,14 @@
         android:id="@+id/fragmentMedTurFavourite"
         android:name="com.tesseract.AllOneClient.fragments.medTurism.saved.FragmentMedTurFavourite"
         android:label="fragment_med_tur_favourite"
-        tools:layout="@layout/fragment_med_tur_favourite" />
+        tools:layout="@layout/fragment_med_tur_favourite" >
+        <argument
+            android:name="medOrTour"
+            app:argType="string" />
+    </fragment>
+
+    <action app:destination="@+id/fragmentMedTurFavourite"
+        android:id="@+id/action_global_med_or_tour_favourites"/>
 
     <fragment
         android:id="@+id/fragmentTourismMain"
@@ -1023,6 +1027,9 @@
         <action
             android:id="@+id/action_fragmentTourismMain_to_fragmentTourismPackages"
             app:destination="@id/fragmentTourismPackages" />
+        <action
+            android:id="@+id/action_fragmentTourismMain_to_fragmentTourExplore"
+            app:destination="@id/fragmentTourExplore" />
     </fragment>
     <fragment
         android:id="@+id/fragmentTourismPackages"
@@ -1032,7 +1039,37 @@
         <argument
             android:name="location"
             app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentTourismPackages_to_fragmentPackagesView"
+            app:destination="@id/fragmentPackagesView" />
+        <argument
+            android:name="uzbId"
+            app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentPackagesView"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.packagesView.FragmentPackagesView"
+        android:label="fragment_tour_packages_view"
+        tools:layout="@layout/fragment_tour_packages_view" >
+        <argument
+            android:name="packageId"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTourExplore"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.explore.FragmentTourExplore"
+        android:label="fragment_tour_explore"
+        tools:layout="@layout/fragment_tour_explore" />
+    <fragment
+        android:id="@+id/fragmentExploreCountry"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.exploreCountry.FragmentExploreCountry"
+        android:label="fragment_explore_country_view"
+        tools:layout="@layout/fragment_explore_country_view">
+        <argument app:argType="integer"
+            android:name="exploreId"/>
+    </fragment>
+    <action android:id="@+id/action_global_tourism_explore"
+        app:destination="@id/fragmentExploreCountry"/>
 
 
 </navigation>

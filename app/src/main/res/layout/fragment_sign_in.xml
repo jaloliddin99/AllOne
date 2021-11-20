@@ -28,11 +28,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/inter_medium"
             android:text="@string/register"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20sp"
-            android:fontFamily="@font/inter_medium"
-            android:layout_centerInParent="true"/>
+            android:textSize="@dimen/text_size_20sp" />
 
     </RelativeLayout>
 

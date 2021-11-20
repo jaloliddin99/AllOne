@@ -58,19 +58,6 @@
                     app:queryBackground="@null"
                     app:queryHint="Поиск клиник и врачей" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerViewChip"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
-                    android:clipToPadding="false"
-                    android:orientation="horizontal"
-                    android:paddingStart="@dimen/margin_padding_16"
-                    android:paddingEnd="@dimen/margin_padding_8dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:itemCount="6"
-                    tools:listitem="@layout/layout_textview_chip" />
-
 
 
                 <androidx.viewpager.widget.ViewPager
@@ -107,6 +94,7 @@
                 <RelativeLayout
                     android:layout_marginTop="@dimen/margin_padding_24dp"
                     android:layout_width="wrap_content"
+                    android:id="@+id/explore"
                     android:layout_marginHorizontal="@dimen/margin_padding_16"
                     android:layout_height="wrap_content">
 

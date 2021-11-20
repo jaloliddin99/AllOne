@@ -136,7 +136,7 @@ class FragmentMainClinic : Fragment(R.layout.fragment_med_turizm_entrance), Clin
             findNavController().navigate(action)
         }
         if (position==3){
-            val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentMedTurFavourite()
+            val action=FragmentMainClinicDirections.actionGlobalMedOrTourFavourites("med_tourism")
             findNavController().navigate(action)
         }
     }

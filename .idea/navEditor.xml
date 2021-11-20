@@ -151,6 +151,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_med_or_tour_favourites">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_global_med_search">
                     <value>
                       <LayoutPositions />
@@ -167,6 +172,11 @@
                     </value>
                   </entry>
                   <entry key="action_global_show_from_map">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
+                  <entry key="action_global_tourism_explore">
                     <value>
                       <LayoutPositions />
                     </value>
@@ -287,8 +297,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-287" />
-                            <option name="y" value="1028" />
+                            <option name="x" value="-482" />
+                            <option name="y" value="1540" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -424,8 +434,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-878" />
-                            <option name="y" value="994" />
+                            <option name="x" value="-1306" />
+                            <option name="y" value="1096" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -436,8 +446,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1165" />
-                            <option name="y" value="694" />
+                            <option name="x" value="-1292" />
+                            <option name="y" value="618" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -469,8 +479,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1256" />
-                            <option name="y" value="1137" />
+                            <option name="x" value="-1744" />
+                            <option name="y" value="1096" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -483,6 +493,18 @@
                           <Point>
                             <option name="x" value="-2856" />
                             <option name="y" value="-4094" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentExploreCountry">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-244" />
+                            <option name="y" value="474" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -583,11 +605,6 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="action_fragmentMainClinic_to_fragmentMedTurFavourite">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
                           </map>
                         </option>
                       </LayoutPositions>
@@ -631,8 +648,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-872" />
-                            <option name="y" value="609" />
+                            <option name="x" value="-1846" />
+                            <option name="y" value="305" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -643,8 +660,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1691" />
-                            <option name="y" value="1118" />
+                            <option name="x" value="-1718" />
+                            <option name="y" value="693" />
                           </Point>
                         </option>
                         <option name="myPositions">
@@ -664,8 +681,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-1987" />
-                            <option name="y" value="562" />
+                            <option name="x" value="-887" />
+                            <option name="y" value="1024" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -748,6 +765,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentPackagesView">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-590" />
+                            <option name="y" value="819" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -1127,17 +1156,34 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentTourExplore">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-247" />
+                            <option name="y" value="64" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentTourismMain">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-470" />
-                            <option name="y" value="334" />
+                            <option name="x" value="-708" />
+                            <option name="y" value="84" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
+                            <entry key="action_fragmentTourismMain_to_fragmentTourExplore">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_fragmentTourismMain_to_fragmentTourismPackages">
                               <value>
                                 <LayoutPositions />
@@ -1153,9 +1199,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-168" />
-                            <option name="y" value="327" />
+                            <option name="x" value="-567" />
+                            <option name="y" value="407" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentTourismPackages_to_fragmentPackagesView">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

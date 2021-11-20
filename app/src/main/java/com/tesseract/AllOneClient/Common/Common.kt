@@ -9,6 +9,7 @@ import java.util.*
 
 object Common {
 
+    var countryPageee=1
     var donationCountPage = 1
     var donationProjects = 1
 

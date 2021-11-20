@@ -49,9 +49,7 @@
                     android:fontFamily="@font/inter_regular"
                     android:textColor="@color/black"
                     android:paddingEnd="@dimen/margin_padding_12dp"
-                    android:drawableEnd="@drawable/ic_arrow_right"
-                    android:text="Юнусобод 8 квартал, дом 39, Юнусабадский район, Ташкент"/>
-
+                    android:drawableEnd="@drawable/ic_arrow_right"/>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
@@ -173,8 +171,7 @@
                         android:textColor="@color/black"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:id="@+id/work_time"
-                        android:fontFamily="@font/inter_regular"
-                        android:text="Пн-Пт 8:30-13:00, 14:00-18:00 "/>
+                        android:fontFamily="@font/inter_regular"/>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -196,7 +193,6 @@
                 android:textSize="@dimen/text_size_15sp"
                 android:id="@+id/description"
                 android:fontFamily="@font/inter_regular"
-                android:text="@string/lorem_ipsum"
                 android:textColor="#E6110000"
                 android:lineSpacingExtra="@dimen/margin_padding_4dp"/>
 

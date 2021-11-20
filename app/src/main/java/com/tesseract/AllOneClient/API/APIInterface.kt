@@ -55,8 +55,12 @@ import com.tesseract.AllOneClient.model.taxiCity.newOrder.CityCreateNewOrder
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.CityTariffMainModel
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateSavedLocationModel
+import com.tesseract.AllOneClient.model.tourism.expCountryPackage.ExploreCountryPackage
+import com.tesseract.AllOneClient.model.tourism.expCountryView.ExploreCountryView
+import com.tesseract.AllOneClient.model.tourism.explore.TourExploreModel
 import com.tesseract.AllOneClient.model.tourism.indexUzb.IndexUzbModel
 import com.tesseract.AllOneClient.model.tourism.main.index.TourismMainIndex
+import com.tesseract.AllOneClient.model.tourism.packageView.PackageViewMainModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -575,16 +579,18 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>
     ):Response<MedTurMainModel>
 
-    @GET("med_tourism/favorites")
+    @GET("{med_tourism}/favorites")
     suspend fun getFavourites(
         @HeaderMap headers: Map<String, String>,
+        @Path("med_tourism") medOrTour:String,
         @Query("page") page:Int
     ):Response<FavouritesModel>
 
     @FormUrlEncoded
-    @POST("med_tourism/favorites/{id}/delete")
+    @POST("{med_tourism}/favorites/{id}/delete")
     suspend fun deleteFromFavourites(
         @HeaderMap headers: Map<String, String>,
+        @Path("med_tourism") medOrTour:String,
         @Path("id") itemId:Int,
         @Field("type") type: String
     ):Response<ClinicAddToFavouriteModel>
@@ -610,6 +616,35 @@ interface APIInterface {
         @Query("page") page:Int
     ):Response<IndexUzbModel>
 
+    @GET("tourism/tour_package/{packageId}")
+    suspend fun tourPackageView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("packageId") location: Int
+    ):Response<PackageViewMainModel>
+
+    @POST("tourism/tour_package/{id}/add_to_favorites")
+    suspend fun addToFavTour(
+        @HeaderMap headers: Map<String, String>,
+        @Path("packageId") location: Int
+    ):Response<ClinicAddToFavouriteModel>
+
+    @GET("tourism/explore")
+    suspend fun getTourExplore(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourExploreModel>
+
+    @GET("tourism/explore/{id}/packages")
+    suspend fun exploreCountryPackages(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") location: Int,
+        @Query("page") page:Int
+    ):Response<ExploreCountryPackage>
+
+    @GET("tourism/explore/{id}")
+    suspend fun exploreCountryView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") location: Int
+    ):Response<ExploreCountryView>
 
 
 

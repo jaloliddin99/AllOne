@@ -22,9 +22,9 @@ class MedTurFavouriteViewModel @Inject constructor(private val repository: Netwo
     val errorFAV= MutableLiveData<String>()
     val errorDelet= MutableLiveData<String>()
 
-    fun delete(token: Map<String, String>, pageId:Int, type: String)=viewModelScope.launch {
+    fun delete(token: Map<String, String>,medOrTour:String, pageId:Int, type: String)=viewModelScope.launch {
         try {
-            repository.deleteFromFavourites(token, pageId, type).let {
+            repository.deleteFromFavourites(token, medOrTour, pageId, type).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         deleteFromFavourites.postValue(it.body())
@@ -38,13 +38,13 @@ class MedTurFavouriteViewModel @Inject constructor(private val repository: Netwo
         }
     }
 
-    fun starterFun(token: Map<String, String>){
-        favourites(token)
+    fun starterFun(token: Map<String, String>, medOrTour:String){
+        favourites(token, medOrTour)
     }
 
-    fun favourites(token:Map<String, String>)=viewModelScope.launch {
+    fun favourites(token:Map<String, String>,  medOrTour:String)=viewModelScope.launch {
         try {
-            repository.getFavourites(token, Common.favouritesPagingApi).let{
+            repository.getFavourites(token, medOrTour,  Common.favouritesPagingApi).let{
                 Common.favouritesPagingApi++
                 if (it.isSuccessful){
                     if (it.body()?.success==true){

@@ -23,6 +23,7 @@ import com.tesseract.AllOneClient.model.tourism.main.index.ExploreCountry
 import com.tesseract.AllOneClient.model.tourism.main.index.PopularPlace
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
@@ -57,13 +58,9 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
         viewModel.tourismMainIndex.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
 
+            uzbId=it.content.uzb_country_id
             setCard(it.content.banners)
             binding.apply {
-                recyclerViewChip.apply {
-                    layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-                    adapter= PopularPlacesAdapter(this@FragmentTourismMain, it.content.popular_places)
-                }
-
                 recyclerViewDiscover.apply {
                     layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter=ExploreAdapter(this@FragmentTourismMain, it.content.explore_countries)
@@ -85,6 +82,11 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
         binding.recyclerView.adapter=clinicMainAdapter
         binding.recyclerView.layoutManager= GridLayoutManager(requireContext(), 2)
         binding.recyclerView.setHasFixedSize(true)
+
+        binding.explore.setOnClickListener {
+            val action=FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourExplore()
+            findNavController().navigate(action)
+        }
 
 
     }
@@ -122,20 +124,28 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
 
     private fun loadItems(){
         mainMedModel= listOf(
-            MainMedModel("Тур пакеты", R.drawable.ic_travel_fly),
-            MainMedModel("Гиды с авто", R.drawable.ic_travel_goude),
-            MainMedModel("Rent - Car", R.drawable.ic_travel_big_car),
-            MainMedModel("Походы", R.drawable.ic_children_bag)
+            MainMedModel(getString(R.string.tour_uzb), R.drawable.ic_tour_uzb),
+            MainMedModel(getString(R.string.tour_world), R.drawable.ic_travel_goude),
+            MainMedModel(getString(R.string.tour_firms), R.drawable.ic_travel_big_car),
+            MainMedModel(getString(R.string.hotels), R.drawable.ic_children_bag),
+            MainMedModel(getString(R.string.carRent), R.drawable.ic_tour_avto_procat),
+            MainMedModel(getString(R.string.mySaved), R.drawable.ic_saved)
         )
     }
 
+    private var uzbId by Delegates.notNull<Int>()
+
     override fun onItemClick(position: Int) {
         if (position==0){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan")
+            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan",uzbId )
             findNavController().navigate(action)
         }
         if (position==1){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world")
+            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId)
+            findNavController().navigate(action)
+        }
+        if (position==5){
+            val action=FragmentTourismMainDirections.actionGlobalMedOrTourFavourites("tourism")
             findNavController().navigate(action)
         }
 
@@ -153,5 +163,7 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
 
     override fun onExploreListener(position: ExploreCountry) {
 
+        val action=FragmentTourismMainDirections.actionGlobalTourismExplore(position.id)
+        findNavController().navigate(action)
     }
 }

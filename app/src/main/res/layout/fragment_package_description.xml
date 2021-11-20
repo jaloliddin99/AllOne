@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:scrollbars="none"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="@dimen/margin_padding_16">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/favourites"
+            android:layout_marginTop="@dimen/text_size_12sp"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lorem_ipsum"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:fontFamily="@font/inter_regular"
+            android:id="@+id/description"
+            android:textSize="@dimen/text_size_15sp"
+            android:textColor="@color/black"
+            android:lineSpacingExtra="@dimen/margin_padding_4dp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tourIncludes"
+
+            android:layout_marginTop="@dimen/icon_size_20dp"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:id="@+id/recyclerView"
+            android:overScrollMode="never"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tourIncludes"
+            android:layout_marginTop="@dimen/icon_size_20dp"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_8dp"
+            android:id="@+id/recyclerViewExtraPaid"
+            android:overScrollMode="never"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+
+
+
+</androidx.core.widget.NestedScrollView>
