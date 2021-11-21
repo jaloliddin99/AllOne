@@ -22,10 +22,10 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
+class FragmentMedTurDoctors : Fragment(), ClinicsAdapter.OnClickListener {
     private var _binding: FragmentMedTurDoctorsBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel:DoctorsViewModel
+    private lateinit var viewModel: DoctorsViewModel
 
     private lateinit var adapter: ClinicsAdapter
     private var isCurrentFragment: Boolean = true
@@ -35,8 +35,8 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding= FragmentMedTurDoctorsBinding.inflate(inflater, container, false)
-        viewModel=ViewModelProvider(this).get(DoctorsViewModel::class.java)
+        _binding = FragmentMedTurDoctorsBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(DoctorsViewModel::class.java)
         return binding.root
     }
 
@@ -48,13 +48,20 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
             findNavController().popBackStack()
         }
 
-        if (isCurrentFragment){
-            viewModel.startDoctors(headerMapUniversal(requireContext()), "", content.id, district.id!!)
+        viewModel.startDoctors(headerMapUniversal(requireContext()), "", content.id, district.id!!)
+
+        if (content.id!=-10){
+            binding.byCategories.text=content.name
         }
+
+        if (district.id!=-10){
+            binding.location.text=district.name
+        }
+
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
         viewModel.errorMessageDoctor.observe(viewLifecycleOwner, {
-            binding.loader.loader.visibility=View.GONE
+            binding.loader.loader.visibility = View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
@@ -108,27 +115,29 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
 
     private fun clinicsAdapterSetter() {
 
-        viewModel.errorClinicCategories.observe(viewLifecycleOwner,{
-            binding.loader.loader.visibility=View.GONE
+        viewModel.errorClinicCategories.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility = View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        val arrayList:MutableSet<Data> =HashSet()
+        val arrayList: MutableSet<Data> = HashSet()
+        val arrayList2: MutableSet<Data> = HashSet()
         viewModel.getDoctorsObserver.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility = View.GONE
-            for (i in it.indices) {
-                arrayList.addAll(it)
-            }
+            arrayList2.addAll(it)
+            arrayList.addAll(it)
+
             if (arrayList.size != 0) {
                 adapter.addList(arrayList)
             }
             arrayList.clear()
+            binding.counter.text = arrayList2.size.toString()
         })
 
         getBackStackData<Content>("categoryMed", true) {
             binding.byCategories.text = it.name
             content = it
-            if (district.id != 1) {
+            if (district.id != -10) {
                 binding.location.text = district.name
                 viewModel.startDoctors(
                     headerMapUniversal(requireContext()),
@@ -147,7 +156,7 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
             binding.location.text = it.name
             district = it
             Toast.makeText(context, content.name, Toast.LENGTH_SHORT).show()
-            if (content.id != 1) {
+            if (content.id != -10) {
                 binding.byCategories.text = content.name
                 viewModel.startDoctors(
                     headerMapUniversal(requireContext()),
@@ -171,15 +180,16 @@ class FragmentMedTurDoctors:Fragment(), ClinicsAdapter.OnClickListener {
 
     }
 
-    private var district = DistrictList(1, "")
+    private var district = DistrictList(-10, "")
 
-    private var content = Content(1, "")
+    private var content = Content(-10, "")
 
     lateinit var categoryList: ClinicsCategoriesModel
     private var isInitialized: Boolean = false
 
     override fun onChipClicked(position: Int) {
-        val action=FragmentMedTurDoctorsDirections.actionFragmentMedTurDoctorsToFragmentDoctorView(position)
+        val action =
+            FragmentMedTurDoctorsDirections.actionFragmentMedTurDoctorsToFragmentDoctorView(position)
         findNavController().navigate(action)
     }
 

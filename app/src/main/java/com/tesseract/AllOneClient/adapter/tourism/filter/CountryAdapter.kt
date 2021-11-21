@@ -1,4 +1,4 @@
-package com.tesseract.AllOneClient.adapter.medTourism.clinics
+package com.tesseract.AllOneClient.adapter.tourism.filter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,20 +6,21 @@ import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
+import com.tesseract.AllOneClient.adapter.medTourism.clinics.RegionAdapter
 import com.tesseract.AllOneClient.databinding.LayoutMedTourismRegionsItemBinding
-import com.tesseract.AllOneClient.model.home.getRegions.GetRegionDetails
+import com.tesseract.AllOneClient.model.tourism.countries.Content
 import java.util.*
 import kotlin.collections.ArrayList
 
-class RegionAdapter(
-    var searchItemList: List<GetRegionDetails>,
+class CountryAdapter(
+    var searchItemList: List<Content>,
     private val listener: OnItemClickListener
-) : RecyclerView.Adapter<RegionAdapter.RegionItemViewHolder>() , Filterable {
+) : RecyclerView.Adapter<CountryAdapter.RegionItemViewHolder>() , Filterable {
 
-    var locationFilter = ArrayList<GetRegionDetails>()
+    var locationFilter = ArrayList<Content>()
 
     init {
-        locationFilter = searchItemList as ArrayList<GetRegionDetails>
+        locationFilter = searchItemList as ArrayList<Content>
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RegionItemViewHolder {
@@ -30,7 +31,7 @@ class RegionAdapter(
     }
 
     override fun onBindViewHolder(holder: RegionItemViewHolder, position: Int) {
-        val searchItem : GetRegionDetails =locationFilter[position]
+        val searchItem : Content =locationFilter[position]
         holder.bind(searchItem)
     }
 
@@ -39,12 +40,12 @@ class RegionAdapter(
     inner class RegionItemViewHolder(private val itemBinding: LayoutMedTourismRegionsItemBinding)
         : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
-        fun bind(searchItemBinding: GetRegionDetails) {
+        fun bind(searchItemBinding: Content) {
             itemBinding.textView.text=searchItemBinding.name
         }
 
         init {
-            locationFilter = searchItemList as ArrayList<GetRegionDetails>
+            locationFilter = searchItemList as ArrayList<Content>
             itemView.setOnClickListener(this)
         }
         override fun onClick(v: View?) {
@@ -57,7 +58,7 @@ class RegionAdapter(
     }
 
     interface OnItemClickListener{
-        fun onItemClick(searchItemBinding: GetRegionDetails)
+        fun onItemClick(searchItemBinding: Content)
     }
 
     override fun getFilter(): Filter {
@@ -65,12 +66,12 @@ class RegionAdapter(
             override fun performFiltering(constraint: CharSequence?): FilterResults {
                 val charSearch = constraint.toString()
                 locationFilter = if (charSearch.isEmpty()) {
-                    searchItemList as ArrayList<GetRegionDetails>
+                    searchItemList as ArrayList<Content>
                 } else {
-                    val resultList = ArrayList<GetRegionDetails>()
+                    val resultList = ArrayList<Content>()
                     for (row in searchItemList) {
-                        if (row.name?.lowercase(Locale.ROOT)
-                                ?.contains(charSearch.lowercase(Locale.ROOT)) == true
+                        if (row.name.lowercase(Locale.ROOT)
+                            .contains(charSearch.lowercase(Locale.ROOT))
                         ) {
                             resultList.add(row)
                         }
@@ -84,7 +85,7 @@ class RegionAdapter(
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                locationFilter = results?.values as ArrayList<GetRegionDetails>
+                locationFilter = results?.values as ArrayList<Content>
                 notifyDataSetChanged()
             }
 

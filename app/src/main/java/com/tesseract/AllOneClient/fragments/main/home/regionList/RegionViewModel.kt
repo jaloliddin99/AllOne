@@ -1,5 +1,7 @@
 package com.tesseract.AllOneClient.fragments.main.home.regionList
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -20,11 +22,15 @@ class RegionViewModel @Inject constructor(private val repository: NetworkReposit
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         regionDetails.postValue(it.body()?.getRegionList)
+                    }else{
+                        Log.i(TAG, "getRegionList: aadwawd ${it.message()} ${it.code()}")
                     }
+                }else{
+                    Log.i(TAG, "getRegionList: adwwada ${it.message()} ${it.code()}")
                 }
             }
         }catch (e:Exception){
-
+            Log.i(TAG, "getRegionList: ${e.message}")
         }
     }
 

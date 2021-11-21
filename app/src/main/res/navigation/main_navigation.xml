@@ -1045,6 +1045,9 @@
         <argument
             android:name="uzbId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentTourismPackages_to_fragmentTourismFIlter"
+            app:destination="@id/fragmentTourismFIlter" />
     </fragment>
     <fragment
         android:id="@+id/fragmentPackagesView"
@@ -1070,6 +1073,21 @@
     </fragment>
     <action android:id="@+id/action_global_tourism_explore"
         app:destination="@id/fragmentExploreCountry"/>
-
+    <fragment
+        android:id="@+id/fragmentTourismFIlter"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.filter.FragmentTourismFIlter"
+        android:label="fragment_tourism_filter"
+        tools:layout="@layout/fragment_tourism_filter" >
+        <argument
+            android:name="purpose"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentTourCarRentMain"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.carRent.carRentMain.FragmentTourCarRentMain"
+        android:label="fragment_tour_car_rent_main"
+        tools:layout="@layout/fragment_tour_car_rent_main" />
+    <action android:id="@+id/action_global_car_rent_main"
+        app:destination="@id/fragmentTourCarRentMain"/>
 
 </navigation>

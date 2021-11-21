@@ -642,6 +642,8 @@
     <string name="tour_firms">Туристические фирмы</string>
     <string name="hotels">Отели</string>
     <string name="carRent">Авто на прокат</string>
+    <string name="country_selection">Выбор страны</string>
+    <string name="search_automobile">Поиск автомобилей</string>
 
 
 </resources>

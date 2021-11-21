@@ -245,6 +245,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tarif.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_technical_support.xml" value="0.18" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_agency.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_car_rent_main.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_explore.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_packages_view.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tourism_filter.xml" value="0.251953125" />
@@ -266,6 +267,9 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_baggages_order.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_cancel_call_chat_telegram_reusable.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_cancel_order.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_car_rent_car.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_car_rent_car_items.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_car_rent_popular_brend.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_card_car_photo.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_card_tour_images.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_cards_to_donate.xml" value="0.25" />

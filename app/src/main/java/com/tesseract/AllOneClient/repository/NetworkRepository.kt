@@ -419,4 +419,12 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun exploreCountryView(token: Map<String, String>, id: Int)=apiInterface.exploreCountryView(token, id)
 
+    suspend fun getAllCountries(token: Map<String, String>)=apiInterface.getAllCountries(token)
+
+    suspend fun getAllCurrencies(token: Map<String, String>)=apiInterface.getCurrencies(token)
+
+    //car rent
+
+    suspend fun getCarRentIndexMain(token: Map<String, String>)=apiInterface.getCarRentIndexMain(token)
+
 }

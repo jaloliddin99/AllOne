@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    tools:context=".fragments.tourism.mainTourism.FragmentTourismMain"
-    android:layout_height="match_parent">
+    tools:context=".fragments.tourism.carRent.carRentMain.FragmentTourCarRentMain"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:elevation="@dimen/margin_padding_4dp"
             android:layout_width="match_parent"
@@ -31,14 +32,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/tourism"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20sp"
+                android:layout_centerInParent="true"
                 android:fontFamily="@font/inter_medium"
-                android:layout_centerInParent="true"/>
+                android:text="@string/carRent"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
 
         </RelativeLayout>
-
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
@@ -48,52 +48,22 @@
             android:background="@drawable/bg_grey_rounded"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:queryHint="Поиск клиник и врачей" />
+            app:queryHint="@string/search_automobile" />
 
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
+            android:scrollbars="none"
+            android:id="@+id/nestedScrollView">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/icon_size_20dp"
                 android:orientation="vertical">
 
-
-                <androidx.viewpager.widget.ViewPager
-                    android:layout_width="match_parent"
-                    android:layout_height="250dp"
-                    android:paddingHorizontal="@dimen/margin_padding_16"
-                    android:clipToPadding="false"
-                    android:layout_marginTop="@dimen/margin_padding_16"
-                    android:id="@+id/viewPager"/>
-                <me.relex.circleindicator.CircleIndicator
-                    android:id="@+id/indicator"
-                    app:ci_drawable_unselected="@drawable/image_unselected"
-                    app:ci_drawable="@drawable/image_selected"
-                    android:layout_width="match_parent"
-                    android:layout_height="48dp"/>
-
-
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/choose_direction"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:layout_marginHorizontal="@dimen/margin_padding_16"
-                    android:textColor="@color/black"
-                    android:fontFamily="@font/inter_bold"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
-                    android:id="@+id/recyclerView"/>
-
                 <RelativeLayout
-                    android:layout_marginTop="@dimen/margin_padding_24dp"
                     android:layout_width="wrap_content"
                     android:id="@+id/explore"
                     android:layout_marginHorizontal="@dimen/margin_padding_16"
@@ -123,26 +93,32 @@
 
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:paddingBottom="@dimen/margin_padding_24dp"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
                     android:layout_width="match_parent"
                     android:paddingStart="@dimen/margin_padding_16"
-                    android:paddingEnd="7dp"
+                    android:paddingEnd="@dimen/margin_padding_8dp"
                     android:clipToPadding="false"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recyclerViewDiscover"/>
+                    android:id="@+id/recyclerView1"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/margin_padding_8dp"
+                    android:paddingBottom="@dimen/margin_padding_24dp"
+                    android:layout_width="match_parent"
+                    android:clipToPadding="false"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/recyclerView2"/>
 
 
             </androidx.appcompat.widget.LinearLayoutCompat>
+
         </androidx.core.widget.NestedScrollView>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
     <include layout="@layout/loader_lottie"
         android:id="@+id/loader"/>
-
-
-
-
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

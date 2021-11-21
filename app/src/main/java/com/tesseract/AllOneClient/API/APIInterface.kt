@@ -55,6 +55,8 @@ import com.tesseract.AllOneClient.model.taxiCity.newOrder.CityCreateNewOrder
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.CityTariffMainModel
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateSavedLocationModel
+import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.CarRentIndexMain
+import com.tesseract.AllOneClient.model.tourism.countries.TourismCountries
 import com.tesseract.AllOneClient.model.tourism.expCountryPackage.ExploreCountryPackage
 import com.tesseract.AllOneClient.model.tourism.expCountryView.ExploreCountryView
 import com.tesseract.AllOneClient.model.tourism.explore.TourExploreModel
@@ -646,6 +648,21 @@ interface APIInterface {
         @Path("id") location: Int
     ):Response<ExploreCountryView>
 
+    @GET("tourism/countries")
+    suspend fun getAllCountries(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismCountries>
+    @GET("tourism/currencies")
+    suspend fun getCurrencies(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismCountries>
+
+    /*==================CAR RENT=================*/
+
+    @GET("tourism/rent_car")
+    suspend fun getCarRentIndexMain(
+        @HeaderMap headers: Map<String, String>
+    ):Response<CarRentIndexMain>
 
 
 }

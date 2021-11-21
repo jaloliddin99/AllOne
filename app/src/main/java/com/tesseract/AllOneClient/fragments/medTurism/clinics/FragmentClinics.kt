@@ -47,9 +47,9 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
             findNavController().popBackStack()
         }
 
-        if (isCurrentFragment){
-            viewModel.startGetClinics(headerMapUniversal(requireContext()), "", content.id, district.id!!)
-        }
+        viewModel.startGetClinics(headerMapUniversal(requireContext()), "", content.id, district.id!!)
+
+
         viewModel.getClinicCategories(headerMapUniversal(requireContext()))
 
         viewModel.errorMCategory.observe(viewLifecycleOwner, {
@@ -87,7 +87,6 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
                             true
                         )
                     )
-                    isCurrentFragment = false
                 } else {
                     loader.loader.visibility = View.VISIBLE
                     viewModel.getClinicCategories(headerMapUniversal(requireContext()))
@@ -101,7 +100,6 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
                         false
                     )
                 )
-                isCurrentFragment = false
             }
         }
         clinicsAdapterSetter()
