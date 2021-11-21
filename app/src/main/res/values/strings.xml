@@ -647,6 +647,13 @@
     <string name="filter">Фильтр</string>
     <string name="showAll">Показать все</string>
     <string name="car_companies">Фирмы по прокату авто</string>
+    <string name="textObem">ОБЪЁМ ДВИГАТЕЛЯ</string>
+    <string name="tipTipliva">ТИП ТОПЛИВА</string>
+    <string name="svetaaw">РАЗЛИЧНЫЕ ЦВЕТА</string>
+    <string name="conditsionerr">КОНДИЦИОНЕР</string>
+    <string name="qsSQ">ТРАНСМИССИЯ</string>
+    <string name="dfesrrfsea">СТРАХОВАНИЕ</string>
+    <string name="summaSklad">Сумма заклада</string>
 
 
 </resources>

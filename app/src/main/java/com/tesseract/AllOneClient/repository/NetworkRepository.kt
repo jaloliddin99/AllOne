@@ -441,4 +441,6 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun getCarView(token: Map<String, String>, carId:Int)=apiInterface.getCarView(token, carId)
 
+    suspend fun carRentAddToFavourites(token: Map<String, String>, packageId:Int)=apiInterface.carRentAddToFavourites(token, packageId)
+
 }

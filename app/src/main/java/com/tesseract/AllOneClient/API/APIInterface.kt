@@ -699,5 +699,11 @@ interface APIInterface {
         @Query("id") carId:Int
     ):Response<CarViewModel>
 
+    @POST("tourism/rent_car/{id}/add_to_favorites")
+    suspend fun carRentAddToFavourites(
+        @HeaderMap headers: Map<String, String>,
+        @Path("packageId") location: Int
+    ):Response<ClinicAddToFavouriteModel>
+
 
 }

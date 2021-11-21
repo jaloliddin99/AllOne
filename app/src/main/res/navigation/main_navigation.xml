@@ -1107,6 +1107,18 @@
         <action
             android:id="@+id/action_fragmentCarRentCar_to_fragmentTourismFIlter"
             app:destination="@id/fragmentTourismFIlter" />
+        <action
+            android:id="@+id/action_fragmentCarRentCar_to_fragmentCarView"
+            app:destination="@id/fragmentCarView" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCarView"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.carRent.carView.FragmentCarView"
+        android:label="fragment_car_view"
+        tools:layout="@layout/fragment_car_view" >
+        <argument
+            android:name="carId"
+            app:argType="integer" />
     </fragment>
 
 

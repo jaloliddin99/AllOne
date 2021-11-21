@@ -229,7 +229,8 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
     }
 
     override fun carSelected(position: Data) {
-
+        val action=FragmentCarRentCarDirections.actionFragmentCarRentCarToFragmentCarView(position.id)
+        findNavController().navigate(action)
     }
 
     private fun <T> Fragment.getBackStackData(
