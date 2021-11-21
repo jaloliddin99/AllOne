@@ -644,6 +644,9 @@
     <string name="carRent">Авто на прокат</string>
     <string name="country_selection">Выбор страны</string>
     <string name="search_automobile">Поиск автомобилей</string>
+    <string name="filter">Фильтр</string>
+    <string name="showAll">Показать все</string>
+    <string name="car_companies">Фирмы по прокату авто</string>
 
 
 </resources>

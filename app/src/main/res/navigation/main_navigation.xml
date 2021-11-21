@@ -1086,8 +1086,28 @@
         android:id="@+id/fragmentTourCarRentMain"
         android:name="com.tesseract.AllOneClient.fragments.tourism.carRent.carRentMain.FragmentTourCarRentMain"
         android:label="fragment_tour_car_rent_main"
-        tools:layout="@layout/fragment_tour_car_rent_main" />
+        tools:layout="@layout/fragment_tour_car_rent_main" >
+        <action
+            android:id="@+id/action_fragmentTourCarRentMain_to_fragmentCarRentCar"
+            app:destination="@id/fragmentCarRentCar" />
+    </fragment>
     <action android:id="@+id/action_global_car_rent_main"
         app:destination="@id/fragmentTourCarRentMain"/>
+    <fragment
+        android:id="@+id/fragmentCarRentCar"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.carRent.car.FragmentCarRentCar"
+        android:label="fragment_car_rent_cars"
+        tools:layout="@layout/fragment_car_rent_cars" >
+        <argument
+            android:name="carId"
+            app:argType="integer" />
+        <argument
+            android:name="carType"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentCarRentCar_to_fragmentTourismFIlter"
+            app:destination="@id/fragmentTourismFIlter" />
+    </fragment>
+
 
 </navigation>

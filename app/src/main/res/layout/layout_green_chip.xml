@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingHorizontal="@dimen/margin_padding_12dp"
+    android:paddingVertical="@dimen/dimens_10dp"
+    android:background="@drawable/chip_drawable"
+    android:backgroundTint="@color/green"
+    android:layout_marginEnd="9dp"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="aawaw"
+            android:id="@+id/name"
+            android:textColor="@color/white"
+            android:textSize="@dimen/text_size_13sp"
+            android:fontFamily="@font/inter_medium"/>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/margin_padding_12dp"
+            android:layout_height="@dimen/margin_padding_12dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="7dp"
+            app:tint="@color/white"
+            android:src="@drawable/ic_ix_shape"
+            android:id="@+id/cancel"/>
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

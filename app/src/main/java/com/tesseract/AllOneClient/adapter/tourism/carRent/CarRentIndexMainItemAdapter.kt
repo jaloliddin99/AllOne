@@ -7,6 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutCarRentCarItemsBinding
 import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.Car
+import com.tesseract.AllOneClient.model.order.MessageEvent
+
+import org.greenrobot.eventbus.EventBus
+
+
+
 
 class CarRentIndexMainItemAdapter  (
     private val popularCategories:List<Car>
@@ -27,13 +33,20 @@ class CarRentIndexMainItemAdapter  (
     override fun getItemCount()=popularCategories.size
 
     inner class ClinicViewHolder(private val itemBinding: LayoutCarRentCarItemsBinding)
-        : RecyclerView.ViewHolder(itemBinding.root){
+        : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
 
         fun bind(newsItemBinding: Car) {
             itemBinding.name.text=newsItemBinding.name
             itemBinding.price.text=newsItemBinding.price
             Picasso.get().load(newsItemBinding.poster).into(itemBinding.poster)
+        }
+        init {
+            itemView.setOnClickListener(this)
+        }
+
+        override fun onClick(v: View?) {
+            EventBus.getDefault().post(popularCategories[adapterPosition])
         }
 
     }

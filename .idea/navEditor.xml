@@ -116,6 +116,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_car_rent_main">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_global_city_active_order">
                     <value>
                       <LayoutPositions />
@@ -297,8 +302,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-426" />
-                            <option name="y" value="1472" />
+                            <option name="x" value="170" />
+                            <option name="y" value="1448" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -344,6 +349,18 @@
                           <Point>
                             <option name="x" value="27" />
                             <option name="y" value="-1344" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentCarRentCar">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-330" />
+                            <option name="y" value="1580" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1161,9 +1178,18 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-100" />
-                            <option name="y" value="2150" />
+                            <option name="x" value="-696" />
+                            <option name="y" value="1588" />
                           </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentTourCarRentMain_to_fragmentCarRentCar">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

@@ -56,4 +56,68 @@ class TourismFilterViewModel @Inject constructor(private val repository: Network
         }
     }
 
+    val getCarCompanies=MutableLiveData<TourismCountries>()
+    val errorCarCompanies=MutableLiveData<String>()
+
+    fun getCarCompanies(token: Map<String, String>)=viewModelScope.launch {
+        try {
+            repository.getCarCompanies(token).let {
+                if (it.isSuccessful){
+                    if (it.body()?.success==true){
+                        getCarCompanies.postValue(it.body())
+                    }else{
+                        errorCarCompanies.postValue(it.message())
+                    }
+                }else{
+                    errorCarCompanies.postValue(it.message())
+                }
+            }
+        }catch (e:Exception){
+            errorCarCompanies.postValue(e.message)
+        }
+    }
+
+    val getCarModels=MutableLiveData<TourismCountries>()
+    val errorCarModels=MutableLiveData<String>()
+
+    fun getCarModels(token: Map<String, String>)=viewModelScope.launch {
+        try {
+            repository.getCarModels(token).let {
+                if (it.isSuccessful){
+                    if (it.body()?.success==true){
+                        getCarModels.postValue(it.body())
+                    }else{
+                        errorCarModels.postValue(it.message())
+                    }
+                }else{
+                    errorCarModels.postValue(it.message())
+                }
+            }
+        }catch (e:Exception){
+            errorCarModels.postValue(e.message)
+        }
+    }
+
+
+    val getCarMarkas=MutableLiveData<TourismCountries>()
+    val errorCarMarkas=MutableLiveData<String>()
+
+    fun getCarMarkas(token: Map<String, String>)=viewModelScope.launch {
+        try {
+            repository.getCarCompanies(token).let {
+                if (it.isSuccessful){
+                    if (it.body()?.success==true){
+                        getCarMarkas.postValue(it.body())
+                    }else{
+                        errorCarMarkas.postValue(it.message())
+                    }
+                }else{
+                    errorCarMarkas.postValue(it.message())
+                }
+            }
+        }catch (e:Exception){
+            errorCarMarkas.postValue(e.message)
+        }
+    }
+
 }

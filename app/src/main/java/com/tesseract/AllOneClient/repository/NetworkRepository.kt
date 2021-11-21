@@ -427,4 +427,18 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun getCarRentIndexMain(token: Map<String, String>)=apiInterface.getCarRentIndexMain(token)
 
+    suspend fun getCarRentCar(token:Map<String, String>,
+                              query:String, countryId:Int,
+                              currencyId:Int, sort:String,
+                              idMap:Map<String, String>?, carId:Int, page:Int)
+    =apiInterface.getCarRentCars(token, query, countryId, currencyId, sort, idMap, carId, page)
+
+    suspend fun getCarCompanies(token: Map<String, String>)=apiInterface.getCarCompanies(token)
+
+    suspend fun getCarModels(token: Map<String, String>)=apiInterface.getCarModels(token)
+
+    suspend fun getCarMarkas(token: Map<String, String>)=apiInterface.getCarMarkas(token)
+
+    suspend fun getCarView(token: Map<String, String>, carId:Int)=apiInterface.getCarView(token, carId)
+
 }

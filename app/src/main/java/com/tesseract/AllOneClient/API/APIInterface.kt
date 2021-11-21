@@ -1,5 +1,6 @@
 package com.tesseract.AllOneClient.API
 
+import com.tesseract.AllOneClient.model.tourism.carRent.carView.CarViewModel
 import com.tesseract.AllOneClient.model.charity.donate.CharityDonate
 import com.tesseract.AllOneClient.model.charity.history.CharityHistoryMain
 import com.tesseract.AllOneClient.model.charity.index.Index
@@ -55,6 +56,7 @@ import com.tesseract.AllOneClient.model.taxiCity.newOrder.CityCreateNewOrder
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.CityTariffMainModel
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateSavedLocationModel
+import com.tesseract.AllOneClient.model.tourism.carRent.cars.CarRentCarsModel
 import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.CarRentIndexMain
 import com.tesseract.AllOneClient.model.tourism.countries.TourismCountries
 import com.tesseract.AllOneClient.model.tourism.expCountryPackage.ExploreCountryPackage
@@ -663,6 +665,39 @@ interface APIInterface {
     suspend fun getCarRentIndexMain(
         @HeaderMap headers: Map<String, String>
     ):Response<CarRentIndexMain>
+
+    @GET("tourism/rent_car/cars")
+    suspend fun getCarRentCars(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") query:String,
+        @Query("country_id") country_id: Int,
+        @Query("currency_id") currency_id: Int,
+        @Query("sort") sort:String,
+        @QueryMap markId: Map<String, String>?,
+        @Query("car_id") car_id:Int,
+        @Query("page") page:Int
+    ):Response<CarRentCarsModel>
+
+    @GET("tourism/rent_car/companies")
+    suspend fun getCarCompanies(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismCountries>
+
+    @GET("tourism/rent_car/models")
+    suspend fun getCarModels(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismCountries>
+
+    @GET("tourism/rent_car/markas")
+    suspend fun getCarMarkas(
+        @HeaderMap headers: Map<String, String>
+    ):Response<TourismCountries>
+
+    @GET("tourism/rent_car/car/{id}")
+    suspend fun getCarView(
+        @HeaderMap headers: Map<String, String>,
+        @Query("id") carId:Int
+    ):Response<CarViewModel>
 
 
 }

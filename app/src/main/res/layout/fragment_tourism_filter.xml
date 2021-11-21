@@ -44,6 +44,7 @@
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
+            android:visibility="gone"
             android:layout_width="match_parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             android:layout_height="44dp"
@@ -53,6 +54,28 @@
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
             app:queryHint="@string/search" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:text="@string/showAll"
+            android:drawableEnd="@drawable/ic_check_box"
+            android:layout_marginVertical="@dimen/margin_padding_12dp"
+            android:textSize="@dimen/text_size_15sp"
+            android:drawablePadding="@dimen/margin_padding_12dp"
+            android:id="@+id/headerText"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"/>
+        <View
+            android:layout_width="match_parent"
+            android:id="@+id/line"
+            android:visibility="gone"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:layout_height="@dimen/dimen_1dp"
+            android:background="#1A272727"/>
+
 
 
 

@@ -7,14 +7,20 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.tourism.carRent.CarRentIndexMainAdapter
 import com.tesseract.AllOneClient.adapter.tourism.carRent.CarRentPopularAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTourCarRentMainBinding
+import com.tesseract.AllOneClient.fragments.tourism.carRent.car.FragmentCarRentCarDirections
+import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.Car
 import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.CarType
 import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.PopularBrand
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 @AndroidEntryPoint
 class FragmentTourCarRentMain:Fragment(), CarRentPopularAdapter.OnChipClickListener, CarRentIndexMainAdapter.OnChipClickListener {
@@ -69,6 +75,23 @@ class FragmentTourCarRentMain:Fragment(), CarRentPopularAdapter.OnChipClickListe
 
 
     override fun onItemClicked(position: CarType) {
+
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: Car?) {
+        val action= FragmentTourCarRentMainDirections.actionFragmentTourCarRentMainToFragmentCarRentCar(event?.id!!,event.name )
+        findNavController().navigate(action)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
     }
 
 }

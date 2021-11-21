@@ -165,6 +165,8 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_add_comment_to_driwer.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_all_news.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_bonus.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_car_rent_cars.xml" value="0.251953125" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_car_view.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_change_data.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_change_language.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_change_phone_number.xml" value="0.25390625" />
@@ -273,6 +275,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_card_car_photo.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_card_tour_images.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_cards_to_donate.xml" value="0.25" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_carr_item_list.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_city_address_history.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_city_car_lista.xml" value="0.33" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_city_card_item.xml" value="0.251953125" />
@@ -295,6 +298,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_get_region_search_item.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_good_donation.xml" value="0.25" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_good_donation_item.xml" value="0.25390625" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_green_chip.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_hiking_item.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_home_order_items.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/layout_line_reusable.xml" value="0.251953125" />
