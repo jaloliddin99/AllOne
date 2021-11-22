@@ -143,5 +143,9 @@ dependencies {
     implementation "ru.tinkoff.scrollingpagerindicator:scrollingpagerindicator:1.2.1"
 
 
+    //flowLayout
+    implementation 'com.nex3z:flow-layout:1.3.0'
+
+
 
 }

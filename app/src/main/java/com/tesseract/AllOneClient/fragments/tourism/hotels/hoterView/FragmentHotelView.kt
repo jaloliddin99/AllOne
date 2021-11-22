@@ -29,6 +29,7 @@ class FragmentHotelView :Fragment() {
     private val binding get() = _binding!!
     private val args: FragmentHotelViewArgs by navArgs()
 
+
     private lateinit var viewModel: HotelViewModel
     private val shareViewModel: HotelViewModel by activityViewModels()
     override fun onCreateView(
@@ -41,6 +42,10 @@ class FragmentHotelView :Fragment() {
         return binding.root
     }
 
+    companion object{
+        var hotelId:Int=-10
+    }
+
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -50,6 +55,8 @@ class FragmentHotelView :Fragment() {
         viewModel.errorM.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
         })
+
+        hotelId=args.hotelId
 
         viewModel.hotelModel.observe(viewLifecycleOwner, {
             binding.backToHome.setOnClickListener {
@@ -67,7 +74,7 @@ class FragmentHotelView :Fragment() {
             binding.name.text=it.content.name
             Picasso.get().load(it.content.poster).into(binding.poster)
             binding.rating.text=it.content.rating
-            binding.rateCount.text="(${it.content.rate_count.toString()})"
+            binding.rateCount.text="(${it.content.rate_count})"
 
             binding.apply {
                 tabLayout.addTab(tabLayout.newTab())

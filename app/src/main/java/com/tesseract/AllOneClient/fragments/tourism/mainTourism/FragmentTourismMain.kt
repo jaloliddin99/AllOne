@@ -144,6 +144,10 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
             val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId)
             findNavController().navigate(action)
         }
+        if (position==2){
+            val action=FragmentTourismMainDirections.actionGlobalTravelAgency()
+            findNavController().navigate(action)
+        }
         if (position==4){
             val action=FragmentTourismMainDirections.actionGlobalCarRentMain()
             findNavController().navigate(action)

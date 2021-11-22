@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/white_background_top_corner">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/line"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:src="@drawable/ic_line" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/icon_size_20dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_ix_shape"
+        app:tint="@color/black" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_24dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="@dimen/margin_padding_16"
+                android:fontFamily="@font/inter_semibold"
+                android:textColor="@color/black"
+                android:text="@string/lorem_ipsum"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_4dp"
+                android:background="@drawable/drawable_4dp_corner"
+                android:backgroundTint="@color/dark_green"
+                android:fontFamily="@font/inter_medium"
+                android:paddingHorizontal="@dimen/margin_padding_4dp"
+                android:paddingVertical="@dimen/dimen_2dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_size_13sp" />
+
+            <com.nex3z.flowlayout.FlowLayout
+                android:id="@+id/flowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_12dp" />
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="170dp"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:clipToPadding="false"
+                android:paddingHorizontal="@dimen/margin_padding_16" />
+
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_padding_24dp"
+                app:ci_drawable="@drawable/image_selected"
+                app:ci_drawable_unselected="@drawable/image_unselected" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:text="@string/lorem_ipsum"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_16"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/about_room"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/about_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                android:text="@string/lorem_ipsum"
+                android:textColor="@color/black"
+                android:layout_marginBottom="@dimen/margin_padding_24dp"
+                android:textSize="@dimen/text_size_15sp" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.core.widget.NestedScrollView>
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

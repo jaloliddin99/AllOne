@@ -57,6 +57,7 @@ import com.tesseract.AllOneClient.model.taxiCity.newOrder.CityCreateNewOrder
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.CityTariffMainModel
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateAddressBody
 import com.tesseract.AllOneClient.model.taxiCity.updateSaved.UpdateSavedLocationModel
+import com.tesseract.AllOneClient.model.tourism.agency.index.AgencyIndex
 import com.tesseract.AllOneClient.model.tourism.carRent.cars.CarRentCarsModel
 import com.tesseract.AllOneClient.model.tourism.carRent.indexMain.CarRentIndexMain
 import com.tesseract.AllOneClient.model.tourism.countries.TourismCountries
@@ -64,6 +65,7 @@ import com.tesseract.AllOneClient.model.tourism.expCountryPackage.ExploreCountry
 import com.tesseract.AllOneClient.model.tourism.expCountryView.ExploreCountryView
 import com.tesseract.AllOneClient.model.tourism.explore.TourExploreModel
 import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.TourHotelView
+import com.tesseract.AllOneClient.model.tourism.hotels.roomView.RoomView
 import com.tesseract.AllOneClient.model.tourism.indexUzb.IndexUzbModel
 import com.tesseract.AllOneClient.model.tourism.main.index.TourismMainIndex
 import com.tesseract.AllOneClient.model.tourism.packageView.PackageViewMainModel
@@ -726,11 +728,30 @@ interface APIInterface {
         @Path("id") hotelId:Int
     ):Response<TourHotelView>
 
-    @GET("tourism/hotel/{id}/add_to_favorites")
+    @POST("tourism/hotel/{id}/add_to_favorites")
     suspend fun hotelAddToFav(
         @HeaderMap headers: Map<String, String>,
         @Path("id") location: Int
     ):Response<ClinicAddToFavouriteModel>
+
+    @GET("tourism/hotel/{hotelId}/room/{roomId}")
+    suspend fun getRoomView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("hotelId") hotelId: Int,
+        @Path("roomId") roomId: Int
+    ):Response<RoomView>
+
+
+    /*=============AGENCY ===================*/
+
+    @GET("tourism/travel_agencies")
+    suspend fun getTravelAgencies(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") query:String,
+        @Query("country_id") country_id: Int,
+        @Query("sort") sort:String,
+        @Query("page") page:Int
+    ):Response<AgencyIndex>
 
 
 

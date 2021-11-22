@@ -1,18 +1,25 @@
 package com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.items
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.squareup.picasso.Picasso
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicImagesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelContactsItemBinding
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.HotelViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.HotelFacility
+import com.tesseract.AllOneClient.utils.dipToPixels
 
 
 class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
@@ -50,13 +57,52 @@ class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
                 website.text=it.content.website
                 description.text=it.content.description
 
-
+                implementFlowLayout(it.content.hotel_facilities)
 
             })
         }
 
 
 
+
+    }
+
+    private fun implementFlowLayout(hotelFacility: List<HotelFacility>){
+
+        val buttonLayoutParams: LinearLayout.LayoutParams =
+            LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+            )
+        buttonLayoutParams.setMargins(
+            0,
+            dipToPixels(requireContext(), 8f).toInt(),
+            dipToPixels(requireContext(), 8f).toInt(),
+            0)
+        binding.flowLayout.removeAllViews()
+
+        for (i in hotelFacility.indices) {
+            val button = TextView(requireActivity())
+            val button2= ImageView(requireContext())
+            Picasso.get().load(hotelFacility[i].icon).into(button2)
+
+            button.text=hotelFacility[i].name
+            button.textSize = 13f
+
+            button.setTextColor(requireContext().getColor(R.color.black))
+
+            button.setBackgroundResource(R.drawable.flow_layout_item_unselected)
+
+            button2.layoutParams=buttonLayoutParams
+            button.layoutParams = buttonLayoutParams
+            button.setPadding(dipToPixels(requireContext(), 8f).toInt(),
+                dipToPixels(requireContext(), 8f).toInt(),
+                dipToPixels(requireContext(), 8f).toInt(),
+                dipToPixels(requireContext(), 8f).toInt()
+            )
+
+            binding.flowLayout.addView(button)
+        }
 
     }
 

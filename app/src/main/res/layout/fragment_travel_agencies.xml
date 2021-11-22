@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.tourism.travelAgencies.index.FragmentTravelAgencies"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:elevation="@dimen/margin_padding_4dp"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+            android:layout_height="?attr/actionBarSize">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/backToHome"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_arrow_left"
+                android:layout_marginStart="@dimen/margin_padding_12dp"
+                android:layout_centerVertical="true"
+                android:focusable="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/turkish_firms"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+
+        </RelativeLayout>
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:background="@drawable/bg_grey_rounded"
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="@string/search_turkish" />
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                android:layout_marginVertical="@dimen/margin_padding_12dp">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/by_popularity"
+                    android:background="@drawable/chip_drawable"
+                    android:textSize="@dimen/text_size_13sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_medium"
+                    android:drawablePadding="@dimen/margin_padding_8dp"
+                    android:drawableEnd="@drawable/ic_arrow_down_small"
+                    android:paddingHorizontal="@dimen/margin_padding_12dp"
+                    android:paddingVertical="@dimen/dimens_10dp"
+                    android:id="@+id/first"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/uzbek"
+
+                    android:background="@drawable/chip_drawable"
+                    android:textSize="@dimen/text_size_13sp"
+                    android:textColor="@color/black"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
+                    android:fontFamily="@font/inter_medium"
+                    android:drawablePadding="@dimen/margin_padding_8dp"
+                    android:drawableEnd="@drawable/ic_arrow_down_small"
+                    android:paddingHorizontal="@dimen/margin_padding_12dp"
+                    android:paddingVertical="@dimen/dimens_10dp"
+                    android:id="@+id/country_name"/>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </HorizontalScrollView>
+
+
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:id="@+id/nestedScrollView">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/icon_size_20dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:id="@+id/explore"
+                    android:layout_marginHorizontal="@dimen/margin_padding_16"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/search_results"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text=" : "
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20sp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="0"
+                        android:id="@+id/counter"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_20sp" />
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="@dimen/dimens_0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:drawablePadding="@dimen/margin_padding_8dp"
+                        android:fontFamily="@font/inter_medium"
+                        android:text="@string/alll"
+                        android:drawableEnd="@drawable/ic_arrow_right"
+                        android:drawableTint="@color/green"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/text_size_13sp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:layout_width="match_parent"
+                    android:clipToPadding="false"
+                    android:layout_marginBottom="@dimen/margin_padding_8dp"
+                    android:layout_marginHorizontal="@dimen/margin_padding_16"
+                    android:layout_height="wrap_content"
+                    tools:listitem="@layout/layout_med_tur_clinic"
+                    android:id="@+id/recyclerView1"/>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

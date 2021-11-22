@@ -130,7 +130,17 @@
                 android:text="@string/on_role"
                 android:textSize="@dimen/text_size_18sp"
                 android:fontFamily="@font/inter_semibold"
+
                 android:textColor="@color/black"/>
+
+            <com.nex3z.flowlayout.FlowLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:id="@+id/flowLayout"/>
+
+
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

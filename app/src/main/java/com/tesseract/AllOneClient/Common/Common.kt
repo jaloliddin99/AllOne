@@ -9,6 +9,7 @@ import java.util.*
 
 object Common {
 
+    var travelPagerId=1
     var hotelIndexPager=1
     var carRentPageId=1
     var countryPageee=1

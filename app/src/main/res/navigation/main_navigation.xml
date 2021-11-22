@@ -1148,6 +1148,20 @@
         <argument android:name="hotelId"
             app:argType="integer"/>
     </fragment>
+    <fragment
+        android:id="@+id/fragmentTravelAgencies"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.travelAgencies.index.FragmentTravelAgencies"
+        android:label="fragment_travel_agencies"
+        tools:layout="@layout/fragment_travel_agencies"/>
+
+    <action android:id="@+id/action_global_travel_agency"
+        app:destination="@id/fragmentTravelAgencies"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"/>
+
+
 
 
 </navigation>

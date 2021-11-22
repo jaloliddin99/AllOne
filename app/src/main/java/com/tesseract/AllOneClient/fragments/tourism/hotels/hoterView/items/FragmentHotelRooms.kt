@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelRoomAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelRoomsBinding
+import com.tesseract.AllOneClient.dialogs.tourism.DialogHotelRoomView
+import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.FragmentHotelView
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.HotelViewModel
 import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.HotelRoom
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +50,7 @@ class FragmentHotelRooms : Fragment(), HotelRoomAdapter.OnChipClickListener {
     }
 
     override fun onItemClicked(position: HotelRoom) {
-        Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+        DialogHotelRoomView(FragmentHotelView.hotelId, position.id).show(parentFragmentManager, tag)
     }
 
 }

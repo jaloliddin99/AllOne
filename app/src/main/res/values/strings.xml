@@ -657,6 +657,9 @@
     <string name="search_hotels">Поиск отелей</string>
     <string name="nomera">Номера</string>
     <string name="on_role">В отеле:</string>
+    <string name="about_room">О номере</string>
+    <string name="search_turkish">Поиск туристических фирм</string>
+    <string name="turkish_firms">Туристические фирмы</string>
 
 
 </resources>
