@@ -1039,16 +1039,20 @@
         <argument
             android:name="location"
             app:argType="string" />
-        <action
-            android:id="@+id/action_fragmentTourismPackages_to_fragmentPackagesView"
-            app:destination="@id/fragmentPackagesView" />
+
         <argument
             android:name="uzbId"
             app:argType="integer" />
-        <action
-            android:id="@+id/action_fragmentTourismPackages_to_fragmentTourismFIlter"
-            app:destination="@id/fragmentTourismFIlter" />
     </fragment>
+
+    <action
+        android:id="@+id/action_global_tourism_filter"
+        app:destination="@id/fragmentTourismFIlter"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"/>
+
     <fragment
         android:id="@+id/fragmentPackagesView"
         android:name="com.tesseract.AllOneClient.fragments.tourism.packagesView.FragmentPackagesView"
@@ -1120,6 +1124,13 @@
             android:name="carId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentHotelIndex"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.hotels.index.FragmentHotelIndex"
+        android:label="fragment_hotel_index"
+        tools:layout="@layout/fragment_hotel_index" />
 
+    <action android:id="@+id/action_global_hotel_index"
+        app:destination="@+id/fragmentHotelIndex"/>
 
 </navigation>

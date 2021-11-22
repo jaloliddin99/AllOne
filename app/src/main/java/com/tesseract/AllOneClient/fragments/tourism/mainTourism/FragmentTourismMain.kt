@@ -152,6 +152,11 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
             val action=FragmentTourismMainDirections.actionGlobalMedOrTourFavourites("tourism")
             findNavController().navigate(action)
         }
+        if (position==3){
+            val action=FragmentTourismMainDirections.actionGlobalHotelIndex()
+            findNavController().navigate(action)
+        }
+
 
     }
 

@@ -1,5 +1,6 @@
 package com.tesseract.AllOneClient.API
 
+import com.tesseract.AllOneClient.model.tourism.hotels.index.HotelIndex
 import com.tesseract.AllOneClient.model.tourism.carRent.carView.CarViewModel
 import com.tesseract.AllOneClient.model.charity.donate.CharityDonate
 import com.tesseract.AllOneClient.model.charity.history.CharityHistoryMain
@@ -704,6 +705,21 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>,
         @Path("packageId") location: Int
     ):Response<ClinicAddToFavouriteModel>
+
+    /*===========HOTELS ===============*/
+
+
+    @GET("tourism/hotels")
+    suspend fun getHotelIndex(
+        @HeaderMap headers: Map<String, String>,
+        @Query("q") query:String,
+        @Query("country_id") country_id: Int,
+        @Query("currency_id") currency_id: Int,
+        @Query("sort") sort:String,
+        @Query("page") page:Int
+    ):Response<HotelIndex>
+
+
 
 
 }

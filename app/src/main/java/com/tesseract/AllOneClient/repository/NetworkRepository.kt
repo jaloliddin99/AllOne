@@ -443,4 +443,10 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun carRentAddToFavourites(token: Map<String, String>, packageId:Int)=apiInterface.carRentAddToFavourites(token, packageId)
 
+
+    //HOTELS
+
+    suspend fun getHotelIndex(token: Map<String, String>, query: String, countryId: Int, currencyId: Int, sort: String, page: Int)=
+        apiInterface.getHotelIndex(token, query, countryId, currencyId, sort, page)
+
 }

@@ -146,6 +146,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_hotel_index">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_global_interarea_active_order">
                     <value>
                       <LayoutPositions />
@@ -385,8 +390,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-262" />
-                            <option name="y" value="1284" />
+                            <option name="x" value="-150" />
+                            <option name="y" value="1268" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -587,6 +592,18 @@
                               </value>
                             </entry>
                           </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentHotelIndex">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-641" />
+                            <option name="y" value="1800" />
+                          </Point>
                         </option>
                       </LayoutPositions>
                     </value>
@@ -1275,8 +1292,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-715" />
-                            <option name="y" value="434" />
+                            <option name="x" value="-769" />
+                            <option name="y" value="446" />
                           </Point>
                         </option>
                         <option name="myPositions">
