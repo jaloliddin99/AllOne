@@ -71,6 +71,8 @@ class FragmentCarView : Fragment(), MedPhoneAdapter.OnClickListener {
                 companyWorkTime.text = it.content.company_work_time
                 Picasso.get().load(it.content.company_poster).into(companyPoster)
 
+                loader.loader.visibility=View.GONE
+
 
                 recyclerViewPhones.layoutManager =
                     LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
