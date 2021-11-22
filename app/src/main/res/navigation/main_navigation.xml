@@ -1128,9 +1128,26 @@
         android:id="@+id/fragmentHotelIndex"
         android:name="com.tesseract.AllOneClient.fragments.tourism.hotels.index.FragmentHotelIndex"
         android:label="fragment_hotel_index"
-        tools:layout="@layout/fragment_hotel_index" />
+        tools:layout="@layout/fragment_hotel_index" >
+        <action
+            android:id="@+id/action_fragmentHotelIndex_to_fragmentHotelView"
+            app:destination="@id/fragmentHotelView"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
 
     <action android:id="@+id/action_global_hotel_index"
         app:destination="@+id/fragmentHotelIndex"/>
+    <fragment
+        android:id="@+id/fragmentHotelView"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.FragmentHotelView"
+        android:label="fragment_hotel_view"
+        tools:layout="@layout/fragment_hotel_view">
+        <argument android:name="hotelId"
+            app:argType="integer"/>
+    </fragment>
+
 
 </navigation>

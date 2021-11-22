@@ -1,62 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:scrollbars="none"
-    android:id="@+id/nestedScrollView"
-    tools:context=".fragments.medTurism.clinicInfo.tabItems.FragmentAboutClinic"
+    tools:context=".fragments.tourism.hotels.hoterView.items.FragmentHotelContacts"
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/margin_padding_16"
             android:orientation="vertical">
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/aboutClinic"
-                android:layout_marginTop="@dimen/margin_padding_16"
-                android:textSize="@dimen/text_size_18sp"
-                app:fontFamily="@font/inter_semibold"
-                android:textColor="@color/black"/>
-
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_padding_16"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_16">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/icon_size_20dp"
                     android:layout_height="@dimen/icon_size_20dp"
-                    android:src="@drawable/ic_location"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"/>
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:src="@drawable/ic_location" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/addr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_padding_16"
                     android:layout_marginEnd="@dimen/margin_padding_8dp"
+                    android:drawableEnd="@drawable/ic_arrow_right"
                     android:drawableTint="@color/green"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:id="@+id/addr"
                     android:fontFamily="@font/inter_regular"
-                    android:textColor="@color/black"
                     android:paddingEnd="@dimen/margin_padding_12dp"
-                    android:drawableEnd="@drawable/ic_arrow_right"/>
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_1dp"
-                android:background="#1A272727"
-                android:layout_marginVertical="@dimen/margin_padding_12dp"/>
+                android:layout_marginVertical="@dimen/margin_padding_12dp"
+                android:background="#1A272727" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -66,22 +56,22 @@
                     android:layout_width="@dimen/icon_size_20dp"
                     android:layout_height="@dimen/icon_size_20dp"
                     android:layout_gravity="center_vertical"
-                    android:src="@drawable/ic_call"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"/>
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:src="@drawable/ic_call" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:id="@+id/recyclerViewPhones"
-                    android:overScrollMode="never"
-                    android:clipToPadding="false"/>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_1dp"
-                android:background="#1A272727"
-                android:layout_marginVertical="@dimen/margin_padding_12dp"/>
+                android:layout_marginVertical="@dimen/margin_padding_12dp"
+                android:background="#1A272727" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -90,54 +80,26 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/icon_size_20dp"
                     android:layout_height="@dimen/icon_size_20dp"
-                    android:src="@drawable/ic_telegram"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"/>
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:src="@drawable/ic_telegram" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/inter_medium"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:drawableTint="@color/green"
-                    android:textSize="@dimen/text_size_15sp"
                     android:id="@+id/telegram"
-                    android:text="test"
-                    android:textColor="@color/black"/>
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dimen_1dp"
-                android:background="#1A272727"
-                android:layout_marginVertical="@dimen/margin_padding_12dp"/>
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/icon_size_20dp"
-                    android:layout_height="@dimen/icon_size_20dp"
-                    android:src="@drawable/ic_earth"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_padding_16"
                     android:drawableTint="@color/green"
-                    android:textSize="@dimen/text_size_15sp"
-                    android:id="@+id/website"
-                    android:text="www.google.com"
                     android:fontFamily="@font/inter_medium"
-                    android:textColor="@color/black"/>
+                    android:text="test"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dimen_1dp"
-                android:background="#1A272727"
-                android:layout_marginVertical="@dimen/margin_padding_12dp"/>
+                android:layout_marginVertical="@dimen/margin_padding_12dp"
+                android:background="#1A272727" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -146,75 +108,70 @@
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="@dimen/icon_size_20dp"
                     android:layout_height="@dimen/icon_size_20dp"
-                    android:src="@drawable/ic_time"
-                    android:layout_marginStart="@dimen/margin_padding_4dp"/>
+                    android:layout_marginStart="@dimen/margin_padding_4dp"
+                    android:src="@drawable/ic_earth" />
 
-                <androidx.appcompat.widget.LinearLayoutCompat
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/website"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/margin_padding_16"
-                    android:orientation="vertical">
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableTint="@color/green"
-                        android:textSize="@dimen/text_size_15sp"
-                        android:textColor="@color/black"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/work_hours"/>
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:drawableTint="@color/green"
-                        android:textSize="@dimen/text_size_15sp"
-                        android:textColor="@color/black"
-                        android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:id="@+id/work_time"
-                        android:fontFamily="@font/inter_regular"/>
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-
+                    android:drawableTint="@color/green"
+                    android:fontFamily="@font/inter_medium"
+                    android:text="www.google.com"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_size_15sp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/desciption"
                 android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:text="@string/on_role"
                 android:textSize="@dimen/text_size_18sp"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/black"/>
             <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_padding_24dp"
+                android:fontFamily="@font/inter_semibold"
+                android:text="@string/desciption"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_8dp"
-                android:textSize="@dimen/text_size_15sp"
-                android:id="@+id/description"
                 android:fontFamily="@font/inter_regular"
+                android:lineSpacingExtra="@dimen/margin_padding_4dp"
                 android:textColor="#E6110000"
-                android:lineSpacingExtra="@dimen/margin_padding_4dp"/>
+                android:textSize="@dimen/text_size_15sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/fotoGallery"
                 android:layout_marginTop="@dimen/margin_padding_24dp"
-                android:textSize="@dimen/text_size_18sp"
                 android:fontFamily="@font/inter_semibold"
-                android:textColor="@color/black"/>
+                android:text="@string/fotoGallery"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_18sp" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
+
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_padding_8dp"
-            android:paddingStart="@dimen/margin_padding_16"
-            android:paddingBottom="@dimen/margin_padding_24dp"
-            android:id="@+id/recyclerView"
             android:clipToPadding="false"
-            android:paddingEnd="7dp"/>
+            android:paddingStart="@dimen/margin_padding_16"
+            android:paddingEnd="7dp"
+            android:paddingBottom="@dimen/margin_padding_24dp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 </androidx.core.widget.NestedScrollView>

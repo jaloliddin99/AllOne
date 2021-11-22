@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.tourism.hotels.hoterView.items.FragmentHotelRooms"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_marginHorizontal="@dimen/margin_padding_16"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_18sp"
+            android:fontFamily="@font/inter_semibold"
+            android:text="@string/nomera"
+            android:layout_marginTop="@dimen/margin_padding_16"
+            android:textColor="@color/black"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:paddingBottom="15dp"
+            tools:listitem="@layout/layout_hotel_room_item"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:id="@+id/recyclerView"/>
+
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+
+</androidx.core.widget.NestedScrollView>

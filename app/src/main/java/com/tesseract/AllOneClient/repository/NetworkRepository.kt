@@ -449,4 +449,10 @@ constructor(private val apiInterface: APIInterface) {
     suspend fun getHotelIndex(token: Map<String, String>, query: String, countryId: Int, currencyId: Int, sort: String, page: Int)=
         apiInterface.getHotelIndex(token, query, countryId, currencyId, sort, page)
 
+    suspend fun getHotelView(token: Map<String, String>, hotelId:Int)=
+        apiInterface.getHotelView(token, hotelId)
+
+    suspend fun hotelAddToFav(token: Map<String, String>, hotelId:Int)=
+        apiInterface.hotelAddToFav(token, hotelId)
+
 }

@@ -655,6 +655,8 @@
     <string name="dfesrrfsea">СТРАХОВАНИЕ</string>
     <string name="summaSklad">Сумма заклада</string>
     <string name="search_hotels">Поиск отелей</string>
+    <string name="nomera">Номера</string>
+    <string name="on_role">В отеле:</string>
 
 
 </resources>

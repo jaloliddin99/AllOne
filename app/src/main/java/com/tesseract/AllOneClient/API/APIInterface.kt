@@ -63,6 +63,7 @@ import com.tesseract.AllOneClient.model.tourism.countries.TourismCountries
 import com.tesseract.AllOneClient.model.tourism.expCountryPackage.ExploreCountryPackage
 import com.tesseract.AllOneClient.model.tourism.expCountryView.ExploreCountryView
 import com.tesseract.AllOneClient.model.tourism.explore.TourExploreModel
+import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.TourHotelView
 import com.tesseract.AllOneClient.model.tourism.indexUzb.IndexUzbModel
 import com.tesseract.AllOneClient.model.tourism.main.index.TourismMainIndex
 import com.tesseract.AllOneClient.model.tourism.packageView.PackageViewMainModel
@@ -718,6 +719,18 @@ interface APIInterface {
         @Query("sort") sort:String,
         @Query("page") page:Int
     ):Response<HotelIndex>
+
+    @GET("tourism/hotel/{id}")
+    suspend fun getHotelView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") hotelId:Int
+    ):Response<TourHotelView>
+
+    @GET("tourism/hotel/{id}/add_to_favorites")
+    suspend fun hotelAddToFav(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") location: Int
+    ):Response<ClinicAddToFavouriteModel>
 
 
 

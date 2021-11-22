@@ -191,6 +191,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_tourism_filter">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="addCardFragment2">
                     <value>
                       <LayoutPositions>
@@ -601,8 +606,29 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-641" />
-                            <option name="y" value="1800" />
+                            <option name="x" value="-673" />
+                            <option name="y" value="1722" />
+                          </Point>
+                        </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="action_fragmentHotelIndex_to_fragmentHotelView">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="fragmentHotelView">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-402" />
+                            <option name="y" value="1714" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -1295,20 +1321,6 @@
                             <option name="x" value="-769" />
                             <option name="y" value="446" />
                           </Point>
-                        </option>
-                        <option name="myPositions">
-                          <map>
-                            <entry key="action_fragmentTourismPackages_to_fragmentPackagesView">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                            <entry key="action_fragmentTourismPackages_to_fragmentTourismFIlter">
-                              <value>
-                                <LayoutPositions />
-                              </value>
-                            </entry>
-                          </map>
                         </option>
                       </LayoutPositions>
                     </value>

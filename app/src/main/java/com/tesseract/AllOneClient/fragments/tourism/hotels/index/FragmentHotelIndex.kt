@@ -170,6 +170,9 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
 
     override fun onChipClicked(position: Data) {
 
+        val action=FragmentHotelIndexDirections.actionFragmentHotelIndexToFragmentHotelView(position.id)
+        findNavController().navigate(action)
+
     }
     private fun <T> Fragment.getBackStackData(
         key: String,
