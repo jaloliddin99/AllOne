@@ -1152,7 +1152,15 @@
         android:id="@+id/fragmentTravelAgencies"
         android:name="com.tesseract.AllOneClient.fragments.tourism.travelAgencies.index.FragmentTravelAgencies"
         android:label="fragment_travel_agencies"
-        tools:layout="@layout/fragment_travel_agencies"/>
+        tools:layout="@layout/fragment_travel_agencies">
+        <action
+            android:id="@+id/action_fragmentTravelAgencies_to_fragmentAgencyView"
+            app:destination="@id/fragmentAgencyView"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"/>
+    </fragment>
 
     <action android:id="@+id/action_global_travel_agency"
         app:destination="@id/fragmentTravelAgencies"
@@ -1160,8 +1168,15 @@
         app:exitAnim="@anim/fade_out"
         app:popEnterAnim="@anim/fade_in"
         app:popExitAnim="@anim/fade_out"/>
-
-
+    <fragment
+        android:id="@+id/fragmentAgencyView"
+        android:name="com.tesseract.AllOneClient.fragments.tourism.travelAgencies.agencyView.FragmentAgencyView"
+        android:label="fragment_agency_view"
+        tools:layout="@layout/fragment_agency_view" >
+        <argument
+            android:name="agencyId"
+            app:argType="integer" />
+    </fragment>
 
 
 </navigation>

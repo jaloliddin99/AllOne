@@ -1,5 +1,7 @@
 package com.tesseract.AllOneClient.API
 
+import com.tesseract.AllOneClient.model.tourism.agency.agencyView.TravelAgencyView
+import com.tesseract.AllOneClient.model.tourism.agency.packageView.TravelPackageView
 import com.tesseract.AllOneClient.model.tourism.hotels.index.HotelIndex
 import com.tesseract.AllOneClient.model.tourism.carRent.carView.CarViewModel
 import com.tesseract.AllOneClient.model.charity.donate.CharityDonate
@@ -752,6 +754,25 @@ interface APIInterface {
         @Query("sort") sort:String,
         @Query("page") page:Int
     ):Response<AgencyIndex>
+
+    @GET("tourism/travel_agency/{id}")
+    suspend fun getAgencyView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") agencyId:Int
+    ):Response<TravelAgencyView>
+
+    @GET("tourism/travel_agency/{id}/packages")
+    suspend fun getAgencyPackageView(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") agencyId:Int,
+        @Query("page") page:Int,
+    ):Response<TravelPackageView>
+
+    @POST("tourism/travel_agency/{id}/add_to_favorites")
+    suspend fun agencyAddToFavourite(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") agencyId:Int
+    ):Response<ClinicAddToFavouriteModel>
 
 
 

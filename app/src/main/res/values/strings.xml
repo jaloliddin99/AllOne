@@ -660,6 +660,7 @@
     <string name="about_room">О номере</string>
     <string name="search_turkish">Поиск туристических фирм</string>
     <string name="turkish_firms">Туристические фирмы</string>
+    <string name="aboutFirm">О фирме</string>
 
 
 </resources>

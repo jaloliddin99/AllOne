@@ -142,7 +142,8 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
     }
 
     override fun onChipClicked(position: Data) {
-
+        val action=FragmentTravelAgenciesDirections.actionFragmentTravelAgenciesToFragmentAgencyView(position.id)
+        findNavController().navigate(action)
     }
 
 }

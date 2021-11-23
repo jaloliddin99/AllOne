@@ -336,6 +336,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="fragmentAgencyView">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-280" />
+                            <option name="y" value="2160" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="fragmentAllNews">
                     <value>
                       <LayoutPositions>
@@ -1335,8 +1347,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-652" />
-                            <option name="y" value="2190" />
+                            <option name="x" value="-702" />
+                            <option name="y" value="2170" />
                           </Point>
                         </option>
                       </LayoutPositions>

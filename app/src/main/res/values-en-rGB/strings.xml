@@ -336,6 +336,8 @@
     <string name="wrong_code">Wrong code</string>
     <string name="make_phone_call">Didn’t receive it?</string>
     <string name="card">Card</string>
+    <string name="turkish_firms">Tourist Firms</string>
+    <string name="google_maps_key" translatable="false">Firms\"</string>
 
 
 </resources>

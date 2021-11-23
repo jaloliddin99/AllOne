@@ -59,8 +59,6 @@ class PackageViewModel @Inject constructor(private val repository: NetworkReposi
     }
 
 
-
-
     private val sharePackage=MutableLiveData<PackageViewMainModel>()
     val mutableSearchItem: LiveData<PackageViewMainModel> get() = sharePackage
     fun clinicInfo(item: PackageViewMainModel){
