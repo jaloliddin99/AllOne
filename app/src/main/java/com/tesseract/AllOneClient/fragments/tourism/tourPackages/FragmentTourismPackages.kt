@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.tourPackages.TourPackagesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTourismPackagesBinding
 import com.tesseract.AllOneClient.model.tourism.countries.Content
@@ -41,9 +42,11 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         return binding.root
     }
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sorting=args.defaultSort
 
         if (currencyContent.id!=-10){
             binding.currency.text=currencyContent.name
@@ -52,18 +55,16 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             binding.countryName.text=countryContent.name
         }
 
-
-
-
         Common.tourIndexMain = 1
         if (args.location == "uzbekistan") {
+            binding.countryName.text=getString(R.string.uzbekistan)
             viewModel.startMainIndex(
                 headerMapUniversal(requireContext()),
                 args.location,
                 "",
                 args.uzbId,
                 currencyContent.id,
-                "by_popularity"
+                sorting
             )
         } else {
             viewModel.startMainIndex(
@@ -72,7 +73,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 "",
                 countryContent.id,
                 currencyContent.id,
-                "by_popularity"
+                sorting
             )
         }
         adapter = TourPackagesAdapter(this, mutableSetOf())
@@ -97,7 +98,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                             "",
                             args.uzbId,
                             currencyContent.id,
-                            "by_popularity"
+                            sorting
                         )
                     } else {
                         viewModel.mainIndex(
@@ -106,7 +107,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                             "",
                             countryContent.id,
                             currencyContent.id,
-                            "by_popularity"
+                            sorting
                         )
                     }
                 }
@@ -115,14 +116,14 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
             countryName.setOnClickListener {
                 val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter(
+                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
                         2
                     )
                 findNavController().navigate(action)
             }
             currency.setOnClickListener {
                 val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter(
+                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
                         3
                     )
                 findNavController().navigate(action)
@@ -140,9 +141,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             if (currencyContent.id != -10) {
                 binding.currency.text = currencyContent.name
             }
-
             load()
-
         }
 
         getBackStackData<Content>("onCurrencySelectedKey", true) {
@@ -151,9 +150,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             if (countryContent.id != -10) {
                 binding.countryName.text = countryContent.name
             }
-
             load()
-
         }
     }
 
@@ -166,7 +163,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 "",
                 args.uzbId,
                 currencyContent.id,
-                "by_popularity"
+                sorting
             )
         } else {
             viewModel.startMainIndex(
@@ -175,12 +172,13 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 "",
                 countryContent.id,
                 currencyContent.id,
-                "by_popularity"
+                sorting
             )
         }
     }
 
 
+    private var sorting:String=""
     private var countryContent = Content(-10, "")
     private var currencyContent = Content(-10, "")
 
@@ -200,14 +198,12 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
             for (i in it.indices) {
                 arrayList.add(it[i])
-
             }
             if (arrayList.size != 0) {
                 adapter.addList(arrayList)
             }
             arrayList.clear()
             binding.count.text = arrayList2.size.toString()
-
 
         })
     }

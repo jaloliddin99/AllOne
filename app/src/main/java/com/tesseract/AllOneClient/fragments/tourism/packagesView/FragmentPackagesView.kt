@@ -30,7 +30,7 @@ class FragmentPackagesView : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTourPackagesViewBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(PackageViewModel::class.java)
         return binding.root

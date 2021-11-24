@@ -14,6 +14,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.databinding.DialogClinicDoctorBinding
 import com.tesseract.AllOneClient.fragments.medTurism.doctorView.DoctorViewModel
+import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,7 +82,7 @@ class DialogDoctorView(private val doctorId: Int) : BottomSheetDialogFragment(),
     }
 
     override fun onChipClicked(position: String) {
-
+        gotoContact(position, requireContext())
     }
 
 }

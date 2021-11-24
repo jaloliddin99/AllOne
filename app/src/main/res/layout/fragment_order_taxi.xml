@@ -140,8 +140,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/inter_medium"
                             android:background="@drawable/background_grey"
+                            android:fontFamily="@font/inter_medium"
                             android:gravity="center"
                             android:padding="@dimen/margin_padding_16"
                             android:text="1"
@@ -163,8 +163,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/inter_medium"
                             android:background="@drawable/background_grey"
+                            android:fontFamily="@font/inter_medium"
                             android:gravity="center"
                             android:padding="@dimen/margin_padding_16"
                             android:text="2"
@@ -186,8 +186,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/inter_medium"
                             android:background="@drawable/background_grey"
+                            android:fontFamily="@font/inter_medium"
                             android:gravity="center"
                             android:padding="@dimen/margin_padding_16"
                             android:text="3"
@@ -207,8 +207,8 @@
                             android:layout_height="match_parent"
                             android:layout_centerInParent="true"
                             android:layout_gravity="center"
-                            android:fontFamily="@font/inter_medium"
                             android:background="@drawable/background_grey"
+                            android:fontFamily="@font/inter_medium"
                             android:gravity="center"
                             android:padding="@dimen/margin_padding_16"
                             android:text="4"
@@ -506,7 +506,7 @@
                             android:textSize="15sp" />
 
 
-                        <Space
+                        <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
@@ -549,7 +549,7 @@
                             android:textSize="15sp" />
 
 
-                        <Space
+                        <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />
@@ -592,7 +592,7 @@
                             android:textSize="15sp" />
 
 
-                        <Space
+                        <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_weight="1" />

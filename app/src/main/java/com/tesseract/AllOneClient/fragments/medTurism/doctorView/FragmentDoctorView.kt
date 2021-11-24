@@ -19,6 +19,7 @@ import com.tesseract.AllOneClient.databinding.FragmentMedTurDoctorViewBinding
 import com.tesseract.AllOneClient.dialogs.medTur.DialogRate
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.doctorView.Clinic
+import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -123,7 +124,7 @@ class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPh
     }
 
     override fun onChipClicked(position: String) {
-
+        gotoContact(position, requireContext())
     }
 
     override fun onDestroyView() {

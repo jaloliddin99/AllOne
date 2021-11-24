@@ -145,8 +145,7 @@
                     android:textColor="@color/black"
                     android:layout_marginTop="@dimen/margin_padding_4dp"
                     android:id="@+id/work_time"
-                    android:fontFamily="@font/inter_regular"
-                    android:text="Пн-Пт 8:30-13:00, 14:00-18:00 "/>
+                    android:fontFamily="@font/inter_regular"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

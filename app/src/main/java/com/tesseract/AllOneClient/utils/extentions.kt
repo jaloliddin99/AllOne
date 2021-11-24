@@ -3,10 +3,12 @@ package com.tesseract.AllOneClient.utils
 import android.app.Activity
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.util.DisplayMetrics
@@ -93,6 +95,29 @@ fun headerMapUniversal(context: Context): Map<String, String> {
 
 
 
+fun gotoTelegram(driverTelegram:String, context: Context) {
+    try {
+        val telegramIntent = Intent(Intent.ACTION_VIEW)
+        val telegram=if (driverTelegram.startsWith("@")){
+            driverTelegram.replace("@", "")
+        }else{
+            driverTelegram
+        }
+        telegramIntent.data = Uri.parse("https://telegram.me/$telegram")
+        context.startActivity(telegramIntent)
+    } catch (e: Exception) {
+        // show error message
+    }
+}
+
+fun gotoContact(driverPhoneNumber1:String, context: Context) {
+    try {
+        val phone = driverPhoneNumber1
+        val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
+        context.startActivity(intent)
+    } catch (e: Exception) {
+    }
+}
 
 fun headerMapUniversalForRoute(context: Context): Map<String, String> {
     var map = mutableMapOf<String, String>()

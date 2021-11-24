@@ -1,5 +1,7 @@
 package com.tesseract.AllOneClient.fragments.main.home.orderTaxi
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -30,11 +32,15 @@ class OrderTaxiViewModel @Inject constructor(private val repository: NetworkRepo
                     if (it.body()?.success == true) {
                         parcelList.postValue(it.body()?.content?.parcels)
                         placeList.postValue(it.body()?.content?.places)
+                    }else{
+                        Log.i(TAG, "getRouteTariffPrices: awdwdawd${it.message()}")
                     }
+                }else{
+                    Log.i(TAG, "getRouteTariffPres: awdwdawd${it.message()}")
                 }
             }
         }catch (e:Exception){
-
+            Log.i(TAG, "getRouteTariffPricesaaw:: ${e.message} ")
         }
     }
 

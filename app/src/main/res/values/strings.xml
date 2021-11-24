@@ -661,6 +661,16 @@
     <string name="search_turkish">Поиск туристических фирм</string>
     <string name="turkish_firms">Туристические фирмы</string>
     <string name="aboutFirm">О фирме</string>
+    <string name="search_doctors">Поиск клиник и врачей</string>
+    <string name="uzbekistan">Узбекистан</string>
+
+    <string-array name="sort_array">
+        <item>by_popularity</item>
+        <item>newest</item>
+        <item>alphabetically</item>
+        <item>ascending_price</item>
+        <item>descending_price</item>
+    </string-array>
 
 
 </resources>

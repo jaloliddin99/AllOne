@@ -2,11 +2,13 @@ package com.tesseract.AllOneClient.fragments.main.home.orderTaxi
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
@@ -94,7 +96,10 @@ class FragmentOrderTaxi : Fragment(R.layout.fragment_order_taxi),
         gotoPayments()
 
 
+
         shareModel.selectedItem.observe(viewLifecycleOwner, { item ->
+
+            Log.i(TAG, "onViewCreatedadwadaw: ${item.type}")
             viewModel.getRouteTariffPrices(
                 headerMapUniversal(requireContext()),
                 item.type!!,
@@ -422,8 +427,8 @@ class FragmentOrderTaxi : Fragment(R.layout.fragment_order_taxi),
                 ).show(it, tag)
             }
         }
-        binding.boxImagesLayout.att4.setOnClickListener {
 
+        binding.boxImagesLayout.att4.setOnClickListener {
             parentFragmentManager.let {
                 DialogThreeBaggage(
                     binding.boxImagesLayout.baggageType3.text.toString(),

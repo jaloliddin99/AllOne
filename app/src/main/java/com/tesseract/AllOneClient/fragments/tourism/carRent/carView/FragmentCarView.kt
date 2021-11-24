@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.databinding.FragmentCarViewBinding
+import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -125,7 +126,7 @@ class FragmentCarView : Fragment(), MedPhoneAdapter.OnClickListener {
     }
 
     override fun onChipClicked(position: String) {
-
+        gotoContact(position, requireContext())
     }
 
 

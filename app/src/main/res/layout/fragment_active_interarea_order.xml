@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -39,9 +39,10 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:overScrollMode="never"
         android:layout_above="@+id/bottomSheetDialog"
-        android:layout_below="@id/toolbar"
+        android:layout_marginTop="@dimen/item_height_56dp"
+
+        android:overScrollMode="never"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -96,7 +97,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:fontFamily="@font/inter_semibold"
-                                android:text="Стандарт: "
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_size_18sp" />
 
@@ -106,11 +106,10 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:fontFamily="@font/inter_semibold"
-                                android:text="@string/_120_000"
                                 android:textColor="@color/green"
                                 android:textSize="@dimen/text_size_18sp" />
 
-                            <Space
+                            <androidx.legacy.widget.Space
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1" />
@@ -158,7 +157,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_medium"
-                                    android:text="Статус: "
                                     android:textColor="@color/green"
                                     android:textSize="@dimen/text_size_15sp" />
 
@@ -227,7 +225,6 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="@dimen/margin_padding_4dp"
                                 android:fontFamily="@font/inter_bold"
-                                android:text="@string/name"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_size_15sp" />
 
@@ -239,7 +236,6 @@
                                 android:drawablePadding="@dimen/margin_padding_8dp"
                                 android:drawableTint="@color/yellow"
                                 android:fontFamily="@font/inter_medium"
-                                android:text="2.6"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_size_15sp" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -284,7 +280,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="+998 90 945-65-45"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -333,7 +328,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="От вас 24 км."
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
 
@@ -392,7 +386,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="Белый Lacetti,    30 A 487 BA"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -474,7 +467,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/_0011"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -522,7 +514,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/_11"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -580,7 +571,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="г. Самарканд, ул. Амир Темур, 25"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
 
@@ -634,7 +624,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="23.04.2020 19:30"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -682,7 +671,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/money"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -730,7 +718,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="Наличные"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -785,7 +772,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/summa"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -832,7 +818,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/send"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -850,7 +835,7 @@
         android:id="@+id/bottomSheetDialog"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
         android:background="@drawable/white_background_top_corner"
         android:elevation="@dimen/margin_padding_12dp">
 
@@ -893,4 +878,7 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

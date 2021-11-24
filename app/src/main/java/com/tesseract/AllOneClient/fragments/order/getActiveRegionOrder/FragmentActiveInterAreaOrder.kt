@@ -31,10 +31,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea_order) {
     private val args: FragmentActiveInterAreaOrderArgs by navArgs()
-    private lateinit var binding: FragmentActiveInterareaOrderBinding
+    private var _binding: FragmentActiveInterareaOrderBinding?=null
+    private val binding get() = _binding!!
     private lateinit var driverCarImagesAdapter: DriverCarImagesAdapter
     private lateinit var viewModel: GetActiveOrderViewModel
-    lateinit var dialog: Dialog
     private lateinit var fromLatLng: String
     private lateinit var toLatLng: String
 
@@ -45,7 +45,7 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentActiveInterareaOrderBinding.inflate(inflater, container, false)
+        _binding = FragmentActiveInterareaOrderBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -53,10 +53,7 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
         super.onViewCreated(view, savedInstanceState)
 
         viewModel = ViewModelProvider(this).get(GetActiveOrderViewModel::class.java)
-        loader()
-
         viewModel.taxiGetActiveOrderViewModel(headerMapUniversal(requireContext()), args.id)
-
         clickListenersAndViewModel()
 
         binding.apply {
@@ -95,15 +92,14 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
                 findNavController().navigate(action)
             }
             viewModel.message.observe(requireActivity(), Observer {
-                dialog.dismiss()
+                binding.loader.loader.visibility=View.GONE
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })
 
 
             viewModel.getActiveOrderModelData.observe(requireActivity(), {
-
+                binding.loader.loader.visibility=View.GONE
                 getActiveOrderModelData=it
-                dialog.dismiss()
                 orderId=it.id!!
                 amount.text =
                     SaveData.formatPhone(it.amount!!) + " " + requireContext().getString(R.string.summa1)
@@ -266,17 +262,8 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
                 goToContact()
             }
         }
-
     }
 
-    private fun loader() {
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-    }
     private var driverPhoneNumber1=""
     private var driverTelegram=""
 
@@ -301,7 +288,11 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
             val intent = Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone, null))
             startActivity(intent)
         } catch (e: Exception) {
-            // show error message
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

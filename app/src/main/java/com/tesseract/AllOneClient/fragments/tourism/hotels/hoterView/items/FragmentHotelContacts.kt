@@ -20,6 +20,7 @@ import com.tesseract.AllOneClient.databinding.FragmentHotelContactsItemBinding
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.HotelViewModel
 import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.HotelFacility
 import com.tesseract.AllOneClient.utils.dipToPixels
+import com.tesseract.AllOneClient.utils.gotoContact
 
 
 class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
@@ -113,7 +114,7 @@ class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
     }
 
     override fun onChipClicked(position: String) {
-
+        gotoContact(position, requireContext())
     }
 
 }

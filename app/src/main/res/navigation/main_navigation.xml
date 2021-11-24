@@ -1043,10 +1043,29 @@
         <argument
             android:name="uzbId"
             app:argType="integer" />
+        <argument
+            android:name="uzb_default_currency_id"
+            app:argType="integer" />
+        <argument
+            android:name="world_default_currency_id"
+            app:argType="integer" />
+        <argument
+            android:name="default_sort"
+            app:argType="string" />
+
+
     </fragment>
 
     <action
         android:id="@+id/action_global_tourism_filter"
+        app:destination="@id/fragmentPackagesView"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"/>
+
+    <action
+        android:id="@+id/action_global_tourism_filter2"
         app:destination="@id/fragmentTourismFIlter"
         app:enterAnim="@anim/fade_in"
         app:exitAnim="@anim/fade_out"

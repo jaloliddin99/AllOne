@@ -12,6 +12,7 @@ import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicImagesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTourAgencyBinding
 import com.tesseract.AllOneClient.fragments.tourism.packagesView.PackageViewModel
+import com.tesseract.AllOneClient.utils.gotoContact
 
 class FragmentPackageTourFirma: Fragment(), MedPhoneAdapter.OnClickListener {
     private var _binding:FragmentTourAgencyBinding?=null
@@ -65,6 +66,6 @@ class FragmentPackageTourFirma: Fragment(), MedPhoneAdapter.OnClickListener {
     }
 
     override fun onChipClicked(position: String) {
-
+        gotoContact(position, requireContext())
     }
 }

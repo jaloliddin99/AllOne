@@ -209,7 +209,7 @@ class FragmentTaxiRegionsSelection
             shareViewModel.selectItem(model)
         }
 
-        binding?.apply {
+        binding.apply {
             btnTariffOrder.backgroundTintList = context?.getColorStateList(R.color.green)
             btnTariffOrder.elevation = 0F
             if (Common.startRegionId.isNotEmpty() && Common.endRegionId.isNotEmpty()

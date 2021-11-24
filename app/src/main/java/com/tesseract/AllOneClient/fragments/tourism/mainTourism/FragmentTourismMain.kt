@@ -17,7 +17,10 @@ import com.tesseract.AllOneClient.adapter.tourism.index.ExploreAdapter
 import com.tesseract.AllOneClient.adapter.tourism.index.FragmentImageAdapter
 import com.tesseract.AllOneClient.adapter.tourism.index.PopularPlacesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTourismMainBinding
+import com.tesseract.AllOneClient.fragments.tourism.filter.TourismFilterViewModel
+import com.tesseract.AllOneClient.fragments.tourism.tourPackages.TourPackagesViewModel
 import com.tesseract.AllOneClient.model.medTourism.MainMedModel
+import com.tesseract.AllOneClient.model.tourism.countries.TourismCountries
 import com.tesseract.AllOneClient.model.tourism.main.index.Banner
 import com.tesseract.AllOneClient.model.tourism.main.index.ExploreCountry
 import com.tesseract.AllOneClient.model.tourism.main.index.PopularPlace
@@ -32,8 +35,8 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
     private val binding get() = _binding!!
     private lateinit var mainMedModel: List<MainMedModel>
     private lateinit var clinicMainAdapter: ClinicMainAdapter
-
     private lateinit var viewModel: TourismMainViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,16 +51,19 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel.tourismMainIndex(headerMapUniversal(requireContext()))
         viewModel.errorM.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
+
         viewModel.tourismMainIndex.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
 
+            uzb_default_currency_id=it.content.uzb_default_currency_id
+            world_default_currency_id=it.content.world_default_currency_id
+            default_sort=it.content.default_sort
             uzbId=it.content.uzb_country_id
             setCard(it.content.banners)
             binding.apply {
@@ -134,14 +140,17 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
     }
 
     private var uzbId by Delegates.notNull<Int>()
+    private var uzb_default_currency_id by Delegates.notNull<Int>()
+    private var world_default_currency_id by Delegates.notNull<Int>()
+    private lateinit var default_sort :String
 
     override fun onItemClick(position: Int) {
         if (position==0){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan",uzbId )
+            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan",uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
             findNavController().navigate(action)
         }
         if (position==1){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId)
+            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
             findNavController().navigate(action)
         }
         if (position==2){

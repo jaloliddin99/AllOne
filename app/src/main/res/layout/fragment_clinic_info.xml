@@ -71,7 +71,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Shox International Hospital "
                     android:id="@+id/name"
                     android:textSize="@dimen/text_size_20sp"
                     android:textColor="@color/black"
@@ -81,7 +80,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Многопрофильная клиника"
                     android:textColor="#119E46"
                     android:id="@+id/type"
                     android:textSize="@dimen/text_size_15sp"
@@ -92,7 +90,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Закрыто до завтра"
                     android:id="@+id/closed_title"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
                     android:drawableStart="@drawable/ic_time_left_gray"
@@ -138,7 +135,6 @@
                             android:drawablePadding="@dimen/margin_padding_8dp"
                             android:drawableTint="@color/yellow"
                             android:fontFamily="@font/inter_bold"
-                            android:text="4.5"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_20sp" />
 
@@ -149,7 +145,6 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/dimens_6dp"
                             android:fontFamily="@font/inter_regular"
-                            android:text="(443)"
                             android:textColor="#CC272727"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>

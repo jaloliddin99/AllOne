@@ -21,7 +21,7 @@ class FragmentAgencyGallery:Fragment(),GalleryAgencyAdapter.OnChipClickListener 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentAgencyGalleryBinding.inflate(inflater, container, false)
 
         return binding.root

@@ -29,14 +29,14 @@ class GetActiveOrderViewModel @Inject constructor(private val repository: Networ
                         }
 
                     }else{
-                        message.postValue(it.body()?.message)
+                        message.postValue(it.message())
                     }
                 }else{
-                    message.postValue("No Internet")
+                    message.postValue(it.message())
                 }
             }
         }catch (e: Exception){
-            message.postValue("No Internet")
+            message.postValue(e.message)
         }
     }
 

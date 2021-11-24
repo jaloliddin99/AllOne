@@ -322,27 +322,27 @@ interface APIInterface {
         @Query("page") page: Int
     ): Response<OrderHistoryModel>
 
-    @GET("orders/active/taxi/{id}")
+    @GET("orders/active/interarea/{id}")
     suspend fun taxiGetActiveOrder(
         @HeaderMap headers: Map<String, String>,
         @Path("id") id: Int
     ): Response<GetActiveOrderModel>
 
 
-    @GET("orders/active/parcel_delivery/{id}")
+    @GET("orders/active/interarea_parcel_delivery/{id}")
     suspend fun getParcelActiveOrders(
         @HeaderMap headers: Map<String, String>,
         @Path("id") id: Int
     ): Response<GetActiveParcelOrderModel>
 
 
-    @GET("orders/history/taxi/{id}")
+    @GET("orders/history/interarea/{id}")
     suspend fun getTaxiOrderHistory(
         @HeaderMap headers: Map<String, String>,
         @Path("id") id: Int
     ):Response<OrderRegionATModel>
 
-    @GET("orders/history/parcel_delivery/{id}")
+    @GET("orders/history/interarea_parcel_delivery/{id}")
     suspend fun getParcelDeliveryOrder(
         @HeaderMap headers: Map<String, String>,
         @Path("id") id: Int
