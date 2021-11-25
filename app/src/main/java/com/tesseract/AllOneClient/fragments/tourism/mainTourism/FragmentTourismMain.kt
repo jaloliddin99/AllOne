@@ -166,7 +166,7 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
             findNavController().navigate(action)
         }
         if (position==3){
-            val action=FragmentTourismMainDirections.actionGlobalHotelIndex()
+            val action=FragmentTourismMainDirections.actionGlobalHotelIndex(uzbId, uzb_default_currency_id, default_sort)
             findNavController().navigate(action)
         }
 

@@ -12,7 +12,6 @@
         android:textSize="@dimen/text_size_15sp"
         android:drawablePadding="@dimen/margin_padding_12dp"
         android:id="@+id/textView"
-        android:drawableEnd="@drawable/ic_hhhhhhhhhhhhhhh"
         android:fontFamily="@font/inter_regular"
         android:textColor="@color/black"/>
     <View

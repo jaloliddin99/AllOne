@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
@@ -25,8 +26,13 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
     private var _binding:FragmentHotelIndexBinding?=null
     private val binding get() = _binding!!
     private lateinit var adapter:HotelIndexAdapter
+    private val args: FragmentHotelIndexArgs by navArgs()
+
 
     private lateinit var viewModel: HotelINdexViewModel
+    private var sorting:String=""
+    private var isFirst:Boolean=true
+    private var isFirstView:Boolean=true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,17 +47,32 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Common.hotelIndexPager = 1
-        viewModel.hotelIndex(headerMapUniversal(requireContext()), "", -10, -10, "")
+
+        if (currencyContent.name.isNotEmpty()){
+            binding.currency.text=currencyContent.name
+        }
+        if (countryContent.name.isNotEmpty()){
+            binding.countryName.text=countryContent.name
+        }
+        if (sorting.isNotEmpty()){
+            binding.bySorting.text=sorting
+        }
+
+        if (isFirst){
+            Toast.makeText(context, "isFirst", Toast.LENGTH_SHORT).show()
+            sorting=args.defaultSort
+            countryContent.id=args.uzbId
+            currencyContent.id=args.uzbDefaultCurrencyId
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, sorting)
+        }
+        if (!isFirstView&&!isFirst){
+            Toast.makeText(context, "isSecond", Toast.LENGTH_SHORT).show()
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, sorting)
+        }
+
 
         adapter=HotelIndexAdapter(this, mutableSetOf())
 
-
-        if (currencyContent.id!=-10){
-            binding.currency.text=currencyContent.name
-        }
-        if (countryContent.id!=-10){
-            binding.countryName.text=countryContent.name
-        }
 
         binding.apply {
 
@@ -71,24 +92,25 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                         "",
                         countryContent.id,
                         currencyContent.id,
-                        "by_popularity"
+                        sorting
                     )
                 }
             })
 
+            bySorting.setOnClickListener {
+                val action= FragmentTourismPackagesDirections.actionGlobalTourismFilter2(1)
+                isFirst=false
+                findNavController().navigate(action)
+            }
 
             countryName.setOnClickListener {
-                val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter(
-                        2
-                    )
+                val action = FragmentTourismPackagesDirections.actionGlobalTourismFilter2(2)
+                isFirst=false
                 findNavController().navigate(action)
             }
             currency.setOnClickListener {
-                val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter(
-                        3
-                    )
+                val action = FragmentTourismPackagesDirections.actionGlobalTourismFilter2(3)
+                isFirst=false
                 findNavController().navigate(action)
             }
 
@@ -101,22 +123,42 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
             load()
         }
 
-        getBackStackData<Content>("onCountrySelectKey", true) {
-            binding.countryName.text = it.name
-            countryContent = it
-            if (currencyContent.id != -10) {
+        getBackStackData<String>("onSortClickKey", true) {
+            binding.bySorting.text=it
+            sorting=it
+            if (currencyContent.name.isNotEmpty()) {
                 binding.currency.text = currencyContent.name
             }
 
-            load()
+            if (countryContent.name.isNotEmpty()) {
+                binding.countryName.text = countryContent.name
+            }
 
+            load()
+        }
+
+        getBackStackData<Content>("onCountrySelectKey", true) {
+            binding.countryName.text = it.name
+            countryContent = it
+            if (sorting.isNotEmpty()){
+                binding.bySorting.text=sorting
+            }
+
+
+            if (currencyContent.name.isNotEmpty()) {
+                binding.currency.text = currencyContent.name
+            }
+            load()
         }
 
         getBackStackData<Content>("onCurrencySelectedKey", true) {
             binding.currency.text = it.name
             currencyContent = it
-            if (countryContent.id != -10) {
+            if (countryContent.name.isNotEmpty()) {
                 binding.countryName.text = countryContent.name
+            }
+            if (sorting.isNotEmpty()){
+                binding.bySorting.text=sorting
             }
 
             load()
@@ -130,7 +172,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
            "",
             countryContent.id,
             currencyContent.id,
-            "by_popularity"
+            sorting
         )
     }
 
@@ -171,6 +213,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
     override fun onChipClicked(position: Data) {
 
         val action=FragmentHotelIndexDirections.actionFragmentHotelIndexToFragmentHotelView(position.id)
+        isFirstView=false
         findNavController().navigate(action)
 
     }

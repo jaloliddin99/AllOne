@@ -63,7 +63,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="adwwdwa"
+                    android:text="@string/by_popularity"
                     android:background="@drawable/chip_drawable"
                     android:textSize="@dimen/text_size_13sp"
                     android:textColor="@color/black"
@@ -72,12 +72,12 @@
                     android:drawableEnd="@drawable/ic_arrow_down_small"
                     android:paddingHorizontal="@dimen/margin_padding_12dp"
                     android:paddingVertical="@dimen/dimens_10dp"
-                    android:id="@+id/first"/>
+                    android:id="@+id/bySorting"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/aroundTheWOrld"
+                    android:text="@string/uzbekistan"
 
                     android:background="@drawable/chip_drawable"
                     android:textSize="@dimen/text_size_13sp"
@@ -93,7 +93,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="USD"
+                    android:text="UZS"
                     android:background="@drawable/chip_drawable"
                     android:textSize="@dimen/text_size_13sp"
                     android:textColor="@color/black"

@@ -48,10 +48,10 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
         sorting=args.defaultSort
 
-        if (currencyContent.id!=-10){
+        if (currencyContent.name.isNotEmpty()){
             binding.currency.text=currencyContent.name
         }
-        if (countryContent.id!=-10){
+        if (countryContent.name.isNotEmpty()){
             binding.countryName.text=countryContent.name
         }
 
@@ -113,6 +113,14 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 }
             })
 
+            byPopularity.setOnClickListener {
+                val action =
+                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
+                        1
+                    )
+                findNavController().navigate(action)
+            }
+
 
             countryName.setOnClickListener {
                 val action =
@@ -132,6 +140,19 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         adapterSet()
 
         getBackStackData<Int>("cancelledInfo", true) {
+            load()
+        }
+
+        getBackStackData<String>("onSortClickKey", true) {
+            binding.byPopularity.text = it
+            sorting=it
+
+            if (currencyContent.id != -10) {
+                binding.currency.text = currencyContent.name
+            }
+            if (countryContent.id != -10) {
+                binding.countryName.text = countryContent.name
+            }
             load()
         }
 
