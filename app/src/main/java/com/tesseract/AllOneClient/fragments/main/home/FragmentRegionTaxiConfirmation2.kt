@@ -23,26 +23,7 @@ class FragmentRegionTaxiConfirmation2: Fragment(R.layout.fragment_region_taxi_co
         }
 
 
-//        if (args.fromWhichLayout==1){
-//            binding?.gonneableView?.visibility=View.VISIBLE
-//            binding?.gonneableView1?.visibility=View.VISIBLE
-//            binding?.post?.visibility=View.GONE
-//            binding?.rubbish?.setImageResource(R.drawable.ic_car_icon)
-//            binding?.region?.visibility=View.VISIBLE
-//            binding?.orderType?.setImageResource(R.drawable.ic_white_car)
-//            binding?.metka?.setImageResource(R.drawable.ic_metka)
-//        }else if (args.fromWhichLayout==0){
-//            binding?.gonneableView?.visibility=View.GONE
-//            binding?.gonneableView1?.visibility=View.GONE
-//            binding?.post?.visibility=View.VISIBLE
-//            binding?.region?.visibility=View.GONE
-//            binding?.rubbish?.setImageResource(R.drawable.ic_rubbush)
-//            binding?.metka?.setImageResource(R.drawable.ic_calendar)
-//            binding?.orderType?.setImageResource(R.drawable.ic_inter_nation_and_city)
-//        }
-
-
-        binding?.bookNow?.setOnClickListener {
+        binding.bookNow.setOnClickListener {
 
             val action =FragmentRegionTaxiConfirmation2Directions.actionGlobalInterareaActiveOrder(7, "standard")
             findNavController().navigate(action)

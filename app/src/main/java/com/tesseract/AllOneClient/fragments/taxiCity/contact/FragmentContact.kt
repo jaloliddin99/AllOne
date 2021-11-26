@@ -1,43 +1,42 @@
 package com.tesseract.AllOneClient.fragments.taxiCity.contact
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.database.Cursor
-import android.os.Build
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.taxiCity.ContactAdapter
 import com.tesseract.AllOneClient.databinding.FragmentClientContactListBinding
-import com.tesseract.AllOneClient.model.taxiCity.ContactModel
+import com.tesseract.AllOneClient.model.taxiCity.Contact
+import com.tesseract.AllOneClient.utils.hasPermission
+import com.tesseract.AllOneClient.utils.requestPermissionWithRationale
 import kotlinx.android.synthetic.main.fragment_client_contact_list.*
 
-class FragmentContact : Fragment(R.layout.fragment_client_contact_list), ContactAdapter.OnContactSelected {
+class FragmentContact : Fragment(),
+    ContactAdapter.OnContactSelected {
 
-    private lateinit var binding: FragmentClientContactListBinding
+    private var _binding: FragmentClientContactListBinding?=null
+    private val binding get() = _binding!!
     private lateinit var contactAdapter: ContactAdapter
-    private lateinit var contactSelected:ContactModel
+    private lateinit var contactSelected: Contact
 
-    private var hasPermission: Boolean=false
-
-    private var contactModel = ArrayList<ContactModel>()
+    private val contactsViewModel by viewModels<ContactViewModel>()
+    private val CONTACTS_READ_REQ_CODE = 100
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentClientContactListBinding.inflate(inflater, container, false)
-
+        _binding = FragmentClientContactListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -45,31 +44,27 @@ class FragmentContact : Fragment(R.layout.fragment_client_contact_list), Contact
         super.onViewCreated(view, savedInstanceState)
 
 
-        getContactList()
+        init()
 
         binding.apply {
-            recyclerView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            contactAdapter= ContactAdapter(contactModel, this@FragmentContact)
-            recyclerView.adapter=contactAdapter
-            recyclerView.setHasFixedSize(true)
 
-            .apply {
-                searchText.addTextChangedListener(textWatcher)
-            }
+
+            searchText.addTextChangedListener(textWatcher)
+
             backToHome.setOnClickListener {
                 findNavController().popBackStack()
             }
+
             select.setOnClickListener {
-                if (select.alpha.toInt()==1){
+                if (select.alpha.toInt() == 1) {
                     setBackStackData("selectedContact", contactSelected, true)
                 }
             }
         }
 
-
     }
 
-    private val textWatcher=object :TextWatcher{
+    private val textWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
         }
@@ -85,27 +80,30 @@ class FragmentContact : Fragment(R.layout.fragment_client_contact_list), Contact
     }
 
 
-    @SuppressLint("Recycle")
-    private fun getContactList() {
-        val cursor: Cursor? = requireContext().contentResolver.query(
-            ContactsContract.CommonDataKinds.Phone.CONTENT_URI,
-            null, null, null, null
-        )
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                val name =
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME))
-                var phone =
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
-                phone = phone.replace("-", "")
-                phone = phone.replace("(", "")
-                phone = phone.replace(")", "")
+    private fun init() {
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
-                val contact = ContactModel( name, phone)
-                contactModel.add(contact)
-            }
+        contactsViewModel.contactsLiveData.observe(viewLifecycleOwner,  {
+            binding.layout.loader.visibility=View.GONE
+            contactAdapter = ContactAdapter(it, this@FragmentContact)
+            recyclerView.adapter = contactAdapter
+        })
+        if (requireContext().hasPermission(Manifest.permission.READ_CONTACTS)) {
+            contactsViewModel.fetchContacts()
+        } else {
+            requireActivity().requestPermissionWithRationale(Manifest.permission.READ_CONTACTS, CONTACTS_READ_REQ_CODE, getString(
+                R.string.contact_permission_rationale))
         }
     }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == CONTACTS_READ_REQ_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            contactsViewModel.fetchContacts()
+        }
+    }
+
 
     fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
@@ -113,10 +111,15 @@ class FragmentContact : Fragment(R.layout.fragment_client_contact_list), Contact
             findNavController().popBackStack()
     }
 
-    override fun onSelect(contact: ContactModel) {
-        contactSelected=contact
-        binding.select.alpha=1f
+    override fun onSelect(contact: Contact) {
+        contactSelected = contact
+        binding.select.alpha = 1f
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

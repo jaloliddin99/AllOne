@@ -19,7 +19,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/poster"
-            android:src="@drawable/test_clinic"
             android:scaleType="centerCrop"/>
 
     </com.google.android.material.card.MaterialCardView>

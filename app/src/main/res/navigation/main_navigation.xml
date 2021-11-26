@@ -1190,6 +1190,14 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"/>
+
+        <argument
+            android:name="uzbId"
+            app:argType="integer" />
+        <argument
+            android:name="default_sort"
+            app:argType="string" />
+
     </fragment>
 
     <action android:id="@+id/action_global_travel_agency"

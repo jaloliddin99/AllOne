@@ -55,8 +55,7 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/image"
-                        android:src="@drawable/ajr_loyiasi"/>
+                        android:id="@+id/image"/>
 
                 </com.google.android.material.card.MaterialCardView>
 

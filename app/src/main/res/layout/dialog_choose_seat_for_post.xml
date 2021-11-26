@@ -16,11 +16,11 @@
         android:paddingEnd="@dimen/margin_padding_24dp">
 
         <ImageView
+            android:id="@+id/cancel_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:padding="@dimen/margin_padding_4dp"
-            android:id="@+id/cancel_image"
             android:src="@drawable/ic_ix_shape"
             app:tint="@color/black" />
 
@@ -32,7 +32,7 @@
             android:layout_marginTop="@dimen/margin_padding_4dp"
             android:layout_marginEnd="@dimen/margin_padding_36dp"
             android:fontFamily="@font/inter_medium"
-            android:text="Выберите место для посылки"
+            android:text="@string/choose_place_for_parcel"
             android:textAlignment="center"
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/text_size_20sp"
@@ -47,8 +47,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_padding_12dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_padding_12dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -58,18 +58,18 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Цена зависит от выбора места"
+                    android:text="@string/price_depend_on_location_choise"
                     android:textColor="?android:attr/textColorPrimary"
                     android:textSize="15sp" />
 
 
                 <TextView
+                    android:id="@+id/baggage_shape"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:fontFamily="@font/inter_regular"
                     android:text="60х60 \n50 кл."
-                    android:id="@+id/baggage_shape"
                     android:textColor="@color/green"
                     android:textSize="15sp" />
 
@@ -81,9 +81,9 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/firstSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/firstSeat"
                     android:src="@drawable/ic_large_rectangle_green" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -93,18 +93,18 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/firstItemRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/firstItemRadio"
                         android:src="@drawable/ic_radio_image_unchecked" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/firstText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_padding_4dp"
-                        android:id="@+id/firstText"
                         android:fontFamily="@font/inter_medium"
                         android:text="#1"
                         android:textColor="@color/black"
@@ -126,9 +126,9 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/secondSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/secondSeat"
                     android:src="@drawable/ic_small_rectangle_green" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -138,18 +138,18 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/secondItemRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/secondItemRadio"
                         android:src="@drawable/ic_radio_image_unchecked" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/secondText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="@dimen/margin_padding_4dp"
-                        android:id="@+id/secondText"
                         android:fontFamily="@font/inter_medium"
                         android:text="#2"
                         android:textColor="@color/black"
@@ -165,10 +165,10 @@
                 android:layout_weight="1">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/thirdSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:id="@+id/thirdSeat"
                     android:src="@drawable/ic_small_rectangle_grey" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
@@ -178,17 +178,17 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/thirdItemRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/thirdItemRadio"
                         android:src="@drawable/ic_radio_image_unchecked" />
 
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/thirdText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:id="@+id/thirdText"
                         android:layout_marginStart="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="#3"
@@ -203,11 +203,10 @@
                 android:layout_height="wrap_content">
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/fourthSeat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/fourthSeat"
-                    android:src="@drawable/ic_small_rectangle_grey"
-                    />
+                    android:src="@drawable/ic_small_rectangle_grey" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
@@ -216,16 +215,16 @@
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/fourthItemRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/fourthItemRadio"
                         android:src="@drawable/ic_radio_image_unchecked" />
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/fourthText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:id="@+id/fourthText"
                         android:layout_marginStart="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="#4"
@@ -246,73 +245,33 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/firstNumberColor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:id="@+id/firstNumberColor"
                 android:fontFamily="@font/inter_medium"
                 android:text="#1"
                 android:textColor="@color/dark_grey"
                 android:textSize="@dimen/text_size_20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/firstPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/margin_padding_16dp"
                 android:layout_weight="8"
-                android:id="@+id/firstPrice"
                 android:text="Цена: 120 000 сум"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
                 android:id="@+id/firstRadio"
-                app:tint="@color/dark_grey"
-                android:src="@drawable/ic_radio_image_unchecked" />
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-        <androidx.appcompat.widget.LinearLayoutCompat
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_padding_16dp"
-            android:orientation="horizontal">
-
-            <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:fontFamily="@font/inter_medium"
-                android:text="#2"
-                android:textColor="@color/dark_grey"
-                android:id="@+id/secondNumberColor"
-                android:textSize="@dimen/text_size_20sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginStart="@dimen/margin_padding_16dp"
-                android:layout_weight="8"
-                android:id="@+id/secondPrice"
-                android:text="Цена: 100 000 сум"
-                android:textColor="?android:attr/textColorPrimary"
-                android:textSize="15sp" />
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:id="@+id/secondRadio"
                 android:src="@drawable/ic_radio_image_unchecked"
                 app:tint="@color/dark_grey" />
 
@@ -326,6 +285,47 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondNumberColor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/inter_medium"
+                android:text="#2"
+                android:textColor="@color/dark_grey"
+                android:textSize="@dimen/text_size_20sp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/secondPrice"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:layout_weight="8"
+                android:text="Цена: 100 000 сум"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/secondRadio"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/ic_radio_image_unchecked"
+                app:tint="@color/dark_grey" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_16dp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thirdNumberColor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -333,26 +333,25 @@
                 android:fontFamily="@font/inter_medium"
                 android:text="#3"
                 android:textColor="@color/dark_grey"
-                android:id="@+id/thirdNumberColor"
                 android:textSize="@dimen/text_size_20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/thirdPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/margin_padding_16dp"
                 android:layout_weight="8"
-                android:id="@+id/thirdPrice"
                 android:text="Цена: 80 000 сум"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/thirdRadio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:id="@+id/thirdRadio"
                 android:src="@drawable/ic_radio_image_unchecked"
                 android:visibility="visible"
                 app:tint="@color/dark_grey" />
@@ -367,6 +366,7 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fourthNumberColor"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -374,26 +374,25 @@
                 android:fontFamily="@font/inter_medium"
                 android:text="#4"
                 android:textColor="@color/dark_grey"
-                android:id="@+id/fourthNumberColor"
                 android:textSize="@dimen/text_size_20sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/fourthPrice"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/margin_padding_16dp"
                 android:layout_weight="8"
                 android:text="Цена: 110 000 сум"
-                android:id="@+id/fourthPrice"
                 android:textColor="?android:attr/textColorPrimary"
                 android:textSize="15sp" />
 
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fourthRadio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:id="@+id/fourthRadio"
                 android:src="@drawable/ic_radio_image_unchecked"
                 android:visibility="visible"
                 app:tint="@color/dark_grey" />
@@ -408,7 +407,6 @@
             android:layout_gravity="bottom"
             android:layout_marginTop="@dimen/margin_padding_24dp"
             android:orientation="horizontal">
-
 
 
             <androidx.appcompat.widget.AppCompatButton

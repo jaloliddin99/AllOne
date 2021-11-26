@@ -30,7 +30,9 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
     private lateinit var viewModel: TourPackagesViewModel
     private lateinit var adapter: TourPackagesAdapter
-
+    private var sorting: String = ""
+    private var isFirst: Boolean = true
+    private var isFirstView: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,36 +48,73 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sorting=args.defaultSort
-
-        if (currencyContent.name.isNotEmpty()){
-            binding.currency.text=currencyContent.name
+        if (currencyContent.name.isNotEmpty()) {
+            binding.currency.text = currencyContent.name
         }
-        if (countryContent.name.isNotEmpty()){
-            binding.countryName.text=countryContent.name
+        if (countryContent.name.isNotEmpty()) {
+            binding.countryName.text = countryContent.name
+        }
+        if (sorting.isNotEmpty()) {
+            binding.byPopularity.text = sorting
         }
 
         Common.tourIndexMain = 1
-        if (args.location == "uzbekistan") {
-            binding.countryName.text=getString(R.string.uzbekistan)
-            viewModel.startMainIndex(
-                headerMapUniversal(requireContext()),
-                args.location,
-                "",
-                args.uzbId,
-                currencyContent.id,
-                sorting
-            )
-        } else {
-            viewModel.startMainIndex(
-                headerMapUniversal(requireContext()),
-                args.location,
-                "",
-                countryContent.id,
-                currencyContent.id,
-                sorting
-            )
+        if (isFirst) {
+            if (args.location == "uzbekistan") {
+                binding.countryName.text = getString(R.string.uzbekistan)
+
+                sorting=args.defaultSort
+                countryContent.id=args.uzbId
+                currencyContent.id=args.uzbDefaultCurrencyId
+
+                viewModel.startMainIndex(
+                    headerMapUniversal(requireContext()),
+                    args.location,
+                    "",
+                    args.uzbId,
+                    currencyContent.id,
+                    sorting
+                )
+            } else {
+
+                sorting=args.defaultSort
+                countryContent.id=args.uzbDefaultCurrencyId
+                currencyContent.id=args.worldDefaultCurrencyId
+
+                viewModel.startMainIndex(
+                    headerMapUniversal(requireContext()),
+                    args.location,
+                    "",
+                    countryContent.id,
+                    currencyContent.id,
+                    sorting
+                )
+            }
         }
+        if (!isFirst && !isFirstView) {
+            if (args.location == "uzbekistan") {
+                binding.countryName.text = getString(R.string.uzbekistan)
+                viewModel.startMainIndex(
+                    headerMapUniversal(requireContext()),
+                    args.location,
+                    "",
+                    args.uzbId,
+                    currencyContent.id,
+                    sorting
+                )
+            } else {
+                viewModel.startMainIndex(
+                    headerMapUniversal(requireContext()),
+                    args.location,
+                    "",
+                    countryContent.id,
+                    currencyContent.id,
+                    sorting
+                )
+            }
+
+        }
+
         adapter = TourPackagesAdapter(this, mutableSetOf())
 
 
@@ -114,26 +153,20 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             })
 
             byPopularity.setOnClickListener {
-                val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
-                        1
-                    )
+                val action = FragmentTourismPackagesDirections.actionGlobalTourismFilter2(1)
+                isFirst = false
                 findNavController().navigate(action)
             }
 
 
             countryName.setOnClickListener {
-                val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
-                        2
-                    )
+                val action = FragmentTourismPackagesDirections.actionGlobalTourismFilter2(2)
+                isFirst = false
                 findNavController().navigate(action)
             }
             currency.setOnClickListener {
-                val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(
-                        3
-                    )
+                val action = FragmentTourismPackagesDirections.actionGlobalTourismFilter2(3)
+                isFirst = false
                 findNavController().navigate(action)
             }
         }
@@ -145,12 +178,19 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
         getBackStackData<String>("onSortClickKey", true) {
             binding.byPopularity.text = it
-            sorting=it
+            sorting = it
 
-            if (currencyContent.id != -10) {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+
+            if (args.location == "uzbekistan") {
+                binding.countryName.text=getString(R.string.uzbekistan)
+            }
+
+            if (currencyContent.name.isNotEmpty()) {
                 binding.currency.text = currencyContent.name
             }
-            if (countryContent.id != -10) {
+
+            if (countryContent.name.isNotEmpty()) {
                 binding.countryName.text = countryContent.name
             }
             load()
@@ -159,17 +199,29 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         getBackStackData<Content>("onCountrySelectKey", true) {
             binding.countryName.text = it.name
             countryContent = it
-            if (currencyContent.id != -10) {
+            if (sorting.isNotEmpty()) {
+                binding.byPopularity.text = sorting
+            }
+            if (currencyContent.name.isNotEmpty()) {
                 binding.currency.text = currencyContent.name
             }
             load()
         }
 
+
         getBackStackData<Content>("onCurrencySelectedKey", true) {
             binding.currency.text = it.name
             currencyContent = it
-            if (countryContent.id != -10) {
+
+            if (args.location == "uzbekistan") {
+                binding.countryName.text=getString(R.string.uzbekistan)
+            }
+            if (countryContent.name.isNotEmpty()) {
                 binding.countryName.text = countryContent.name
+            }
+            Toast.makeText(context, "aww $sorting", Toast.LENGTH_SHORT).show()
+            if (sorting.isNotEmpty()) {
+                binding.byPopularity.text = sorting
             }
             load()
         }
@@ -182,7 +234,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 headerMapUniversal(requireContext()),
                 args.location,
                 "",
-                args.uzbId,
+                countryContent.id,
                 currencyContent.id,
                 sorting
             )
@@ -199,7 +251,6 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
     }
 
 
-    private var sorting:String=""
     private var countryContent = Content(-10, "")
     private var currencyContent = Content(-10, "")
 
@@ -236,9 +287,8 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
 
     override fun onExploreListener(position: Data) {
         val action =
-            FragmentTourismPackagesDirections.actionGlobalTourismFilter(
-                position.id
-            )
+            FragmentTourismPackagesDirections.actionGlobalTourismFilter(position.id)
+        isFirstView = false
         findNavController().navigate(action)
     }
 

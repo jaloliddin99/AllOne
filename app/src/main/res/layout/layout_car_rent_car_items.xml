@@ -24,8 +24,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/linearLayout"
             android:id="@+id/poster"
-            android:layout_height="@dimen/dimens_0dp"
-            android:src="@drawable/two_girls" />
+            android:layout_height="@dimen/dimens_0dp"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

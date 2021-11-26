@@ -1,5 +1,6 @@
 package com.tesseract.AllOneClient.dialogs.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,14 +14,15 @@ import com.tesseract.AllOneClient.databinding.DialogChooseSeatForPostBinding
 class DialogExtraLargeBaggage(
                               val size: String,
                               val mass:String,
-                              val price:String,
+                              val price:ArrayList<String>,
                               val arrayList: ArrayList<Int>,
                               val selectedParcelPlacesBefore: ArrayList<Int>,
                               val sendDataListener: SendDataListener
                               )
     : DialogFragment(R.layout.dialog_choose_seat_for_post) {
 
-    private var binding: DialogChooseSeatForPostBinding?=null
+    private var _binding: DialogChooseSeatForPostBinding?=null
+    private val binding get() = _binding!!
     private var firstSelected: Boolean=false
     private var secondSelected: Boolean=false
     private var thirdSelected: Boolean=false
@@ -28,24 +30,29 @@ class DialogExtraLargeBaggage(
     private var priceAmount: Float=0f
     val list = arrayListOf<Int>()
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+
+        _binding= DialogChooseSeatForPostBinding.inflate(inflater, container, false)
+        dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background);
+        isCancelable=false
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val baggageInfoBinding= DialogChooseSeatForPostBinding.bind(view)
-        binding=baggageInfoBinding
-        binding?.baggageShape?.text=size
-        binding?.cancelImage?.setOnClickListener {
+        binding.baggageShape.text=size
+        binding.cancelImage.setOnClickListener {
             dialog?.dismiss()
         }
 
 
-        binding?.choose?.setOnClickListener {
+        binding.choose.setOnClickListener {
             sendDataListener.sendData(priceAmount.toString(), list)
             dialog?.dismiss()
         }
 
-        val prices:String=getString(R.string.sena)+" "+SaveData.formatPhone(price)+" "+getString(R.string.summa1)
-        setTextPrices(prices)
+        setTextPrices(price)
 
 
         if (arrayList.size>0){
@@ -69,129 +76,129 @@ class DialogExtraLargeBaggage(
             enableFirst()
             firstSelected=true
             list.add(1)
-            priceAmount+=price.toFloat()
+            priceAmount+=price[0].toFloat()
         }
         if (selectedParcelPlacesBefore.contains(2)){
             enableSecond()
             secondSelected=true
             list.add(2)
-            priceAmount+=price.toFloat()
+            priceAmount+=price[1].toFloat()
         }
         if (selectedParcelPlacesBefore.contains(3)){
             enableThird()
             thirdSelected=true
             list.add(3)
-            priceAmount+=price.toFloat()
+            priceAmount+=price[2].toFloat()
         }
         if (selectedParcelPlacesBefore.contains(4)){
             enableFourth()
             fourthSelected=true
             list.add(4)
-            priceAmount+=price.toFloat()
+            priceAmount+=price[3].toFloat()
         }
         seatClickListeners(arrayList)
     }
 
-
-    private fun setTextPrices(price: String){
-        binding?.firstPrice?.text=price
-        binding?.secondPrice?.text=price
-        binding?.thirdPrice?.text=price
-        binding?.fourthPrice?.text=price
+    @SuppressLint("SetTextI18n")
+    private fun setTextPrices(price: ArrayList<String>){
+        binding.firstPrice.text=getString(R.string.sena)+" "+SaveData.formatPhone(price[0])+" "+getString(R.string.summa1)
+        binding.secondPrice.text=getString(R.string.sena)+" "+SaveData.formatPhone(price[1])+" "+getString(R.string.summa1)
+        binding.thirdPrice.text=getString(R.string.sena)+" "+SaveData.formatPhone(price[2])+" "+getString(R.string.summa1)
+        binding.fourthPrice.text=getString(R.string.sena)+" "+SaveData.formatPhone(price[3])+" "+getString(R.string.summa1)
     }
 
     private fun seatClickListeners(arrayList: ArrayList<Int>){
 
-        binding?.firstSeat?.setOnClickListener {
+        binding.firstSeat.setOnClickListener {
             if (!arrayList.contains(1)){
                 if (!firstSelected){
                     enableFirst()
                     list.add(1)
-                    priceAmount+=price.toFloat()
+                    priceAmount+=price[0].toFloat()
                     firstSelected=true
                 }else{
-                    binding?.firstSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.firstSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.firstRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.firstRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.firstItemRadio?.visibility=View.VISIBLE
-                    binding?.firstItemRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.firstRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.firstNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-                    binding?.firstText?.setTextColor(requireContext().getColor(R.color.black))
-                    priceAmount-=price.toFloat()
+                    binding.firstItemRadio.visibility=View.VISIBLE
+                    binding.firstItemRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.firstRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.firstNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+                    binding.firstText.setTextColor(requireContext().getColor(R.color.black))
+                    priceAmount-=price[0].toFloat()
                     list.remove(1)
                     firstSelected=false
                 }
             }
         }
 
-        binding?.secondSeat?.setOnClickListener {
+        binding.secondSeat.setOnClickListener {
             if (!arrayList.contains(2)){
                 if (!secondSelected){
                     enableSecond()
-                    priceAmount+=price.toFloat()
+                    priceAmount+=price[1].toFloat()
                     list.add(2)
                     secondSelected=true
                 }else{
-                    binding?.secondSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.secondSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.secondRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.secondRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.secondItemRadio?.visibility=View.VISIBLE
-                    binding?.secondItemRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.secondRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.secondNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-                    binding?.secondText?.setTextColor(requireContext().getColor(R.color.black))
-                    priceAmount-=price.toFloat()
+                    binding.secondItemRadio.visibility=View.VISIBLE
+                    binding.secondItemRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.secondRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.secondNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+                    binding.secondText.setTextColor(requireContext().getColor(R.color.black))
+                    priceAmount-=price[1].toFloat()
                     list.remove(2)
                     secondSelected=false
                 }
             }
         }
 
-        binding?.thirdSeat?.setOnClickListener {
+        binding.thirdSeat.setOnClickListener {
             if (!arrayList.contains(3)){
                 if (!thirdSelected){
                     enableThird()
-                    priceAmount+=price.toFloat()
+                    priceAmount+=price[2].toFloat()
                     list.add(3)
                     thirdSelected=true
                 }else{
-                    binding?.thirdSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.thirdSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.thirdItemRadio?.visibility=View.VISIBLE
-                    binding?.thirdItemRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.thirdRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.thirdItemRadio.visibility=View.VISIBLE
+                    binding.thirdItemRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.thirdRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.thirdRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.thirdNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-                    binding?.thirdText?.setTextColor(requireContext().getColor(R.color.black))
-                    priceAmount-=price.toFloat()
+                    binding.thirdRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.thirdNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+                    binding.thirdText.setTextColor(requireContext().getColor(R.color.black))
+                    priceAmount-=price[2].toFloat()
                     list.remove(3)
                     thirdSelected=false
                 }
             }
         }
 
-        binding?.fourthSeat?.setOnClickListener {
+        binding.fourthSeat.setOnClickListener {
             if (!arrayList.contains(4)){
                 if (!fourthSelected){
                     enableFourth()
-                    priceAmount+=price.toFloat()
+                    priceAmount+=price[3].toFloat()
                     list.add(4)
                     fourthSelected=true
                 }else{
-                    binding?.fourthSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.fourthSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.fourthItemRadio?.visibility=View.VISIBLE
-                    binding?.fourthItemRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.fourthRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+                    binding.fourthItemRadio.visibility=View.VISIBLE
+                    binding.fourthItemRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.fourthRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
                         ,android.graphics.PorterDuff.Mode.SRC_IN)
-                    binding?.fourthRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-                    binding?.fourthNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-                    binding?.fourthText?.setTextColor(requireContext().getColor(R.color.black))
-                    priceAmount-=price.toFloat()
+                    binding.fourthRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+                    binding.fourthNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+                    binding.fourthText.setTextColor(requireContext().getColor(R.color.black))
+                    priceAmount-=price[3].toFloat()
                     list.remove(4)
                     fourthSelected=false
                 }
@@ -201,99 +208,91 @@ class DialogExtraLargeBaggage(
     }
 
     private fun disableFirst(){
-        binding?.firstSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
+        binding.firstSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.firstRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+        binding.firstRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.firstItemRadio?.visibility=View.GONE
-        binding?.firstRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-        binding?.firstNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-        binding?.firstText?.setTextColor(requireContext().getColor(R.color.black))
+        binding.firstItemRadio.visibility=View.GONE
+        binding.firstRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+        binding.firstNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.firstText.setTextColor(requireContext().getColor(R.color.black))
     }
     private fun disableSecond(){
-        binding?.secondSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
+        binding.secondSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.secondRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+        binding.secondRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.secondItemRadio?.visibility=View.GONE
-        binding?.secondRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-        binding?.secondNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-        binding?.secondText?.setTextColor(requireContext().getColor(R.color.black))
+        binding.secondItemRadio.visibility=View.GONE
+        binding.secondRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+        binding.secondNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.secondText.setTextColor(requireContext().getColor(R.color.black))
     }
     private fun disableThird(){
-        binding?.thirdSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
+        binding.thirdSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.thirdRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+        binding.thirdRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.thirdItemRadio?.visibility=View.GONE
-        binding?.thirdRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-        binding?.thirdNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-        binding?.thirdText?.setTextColor(requireContext().getColor(R.color.black))
+        binding.thirdItemRadio.visibility=View.GONE
+        binding.thirdRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+        binding.thirdNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.thirdText.setTextColor(requireContext().getColor(R.color.black))
     }
     private fun disableFourth(){
-        binding?.fourthSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
+        binding.fourthSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red_seat_color)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.fourthRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
+        binding.fourthRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.dark_grey)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.fourthItemRadio?.visibility=View.GONE
-        binding?.fourthRadio?.setImageResource(R.drawable.ic_radio_image_unchecked)
-        binding?.fourthNumberColor?.setTextColor(requireContext().getColor(R.color.dark_grey))
-        binding?.fourthText?.setTextColor(requireContext().getColor(R.color.black))
+        binding.fourthItemRadio.visibility=View.GONE
+        binding.fourthRadio.setImageResource(R.drawable.ic_radio_image_unchecked)
+        binding.fourthNumberColor.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.fourthText.setTextColor(requireContext().getColor(R.color.black))
     }
 
     private fun enableFirst(){
-        binding?.firstSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.firstSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.firstItemRadio?.setImageResource(R.drawable.ic_radio_image)
-        binding?.firstItemRadio?.visibility=View.VISIBLE
-        binding?.firstRadio?.setImageResource(R.drawable.ic_check_box)
-        binding?.firstRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.firstItemRadio.setImageResource(R.drawable.ic_radio_image)
+        binding.firstItemRadio.visibility=View.VISIBLE
+        binding.firstRadio.setImageResource(R.drawable.ic_check_box)
+        binding.firstRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.firstNumberColor?.setTextColor(requireContext().getColor(R.color.green))
-        binding?.firstText?.setTextColor(requireContext().getColor(R.color.white))
+        binding.firstNumberColor.setTextColor(requireContext().getColor(R.color.green))
+        binding.firstText.setTextColor(requireContext().getColor(R.color.white))
     }
     private fun enableSecond(){
-        binding?.secondSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.secondSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.secondItemRadio?.setImageResource(R.drawable.ic_radio_image)
-        binding?.secondItemRadio?.visibility=View.VISIBLE
-        binding?.secondRadio?.setImageResource(R.drawable.ic_check_box)
-        binding?.secondRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.secondItemRadio.setImageResource(R.drawable.ic_radio_image)
+        binding.secondItemRadio.visibility=View.VISIBLE
+        binding.secondRadio.setImageResource(R.drawable.ic_check_box)
+        binding.secondRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.secondNumberColor?.setTextColor(requireContext().getColor(R.color.green))
-        binding?.secondText?.setTextColor(requireContext().getColor(R.color.white))
+        binding.secondNumberColor.setTextColor(requireContext().getColor(R.color.green))
+        binding.secondText.setTextColor(requireContext().getColor(R.color.white))
     }
     private fun enableThird(){
-        binding?.thirdSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.thirdSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.thirdItemRadio?.setImageResource(R.drawable.ic_radio_image)
-        binding?.thirdItemRadio?.visibility=View.VISIBLE
-        binding?.thirdRadio?.setImageResource(R.drawable.ic_check_box)
-        binding?.thirdRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.thirdItemRadio.setImageResource(R.drawable.ic_radio_image)
+        binding.thirdItemRadio.visibility=View.VISIBLE
+        binding.thirdRadio.setImageResource(R.drawable.ic_check_box)
+        binding.thirdRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.thirdNumberColor?.setTextColor(requireContext().getColor(R.color.green))
-        binding?.thirdText?.setTextColor(requireContext().getColor(R.color.white))
+        binding.thirdNumberColor.setTextColor(requireContext().getColor(R.color.green))
+        binding.thirdText.setTextColor(requireContext().getColor(R.color.white))
     }
     private fun enableFourth(){
-        binding?.fourthSeat?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.fourthSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.fourthItemRadio?.setImageResource(R.drawable.ic_radio_image)
-        binding?.fourthItemRadio?.visibility=View.VISIBLE
-        binding?.fourthRadio?.setImageResource(R.drawable.ic_check_box)
-        binding?.fourthRadio?.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
+        binding.fourthItemRadio.setImageResource(R.drawable.ic_radio_image)
+        binding.fourthItemRadio.visibility=View.VISIBLE
+        binding.fourthRadio.setImageResource(R.drawable.ic_check_box)
+        binding.fourthRadio.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green)
             ,android.graphics.PorterDuff.Mode.SRC_IN)
-        binding?.fourthNumberColor?.setTextColor(requireContext().getColor(R.color.green))
-        binding?.fourthText?.setTextColor(requireContext().getColor(R.color.white))
+        binding.fourthNumberColor.setTextColor(requireContext().getColor(R.color.green))
+        binding.fourthText.setTextColor(requireContext().getColor(R.color.white))
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view: View = inflater.inflate(R.layout.dialog_choose_seat_for_post, container, false)
-        dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background);
-
-        isCancelable=false
-
-        return view
-    }
 
     override fun onStart() {
         super.onStart()

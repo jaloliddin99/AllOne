@@ -1,9 +1,12 @@
 package com.tesseract.AllOneClient.utils
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -14,6 +17,7 @@ import android.os.Handler
 import android.util.DisplayMetrics
 import android.util.Log
 import android.util.TypedValue
+import android.view.MotionEvent
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -21,6 +25,8 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.annotation.ColorInt
 import androidx.annotation.RequiresApi
+import androidx.appcompat.widget.AppCompatEditText
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -205,6 +211,22 @@ fun dismissKeyboard(activity: Activity) {
     )
 }
 
+@SuppressLint("ClickableViewAccessibility")
+fun AppCompatEditText.onRightDrawableClicked(onClicked: (view: AppCompatEditText) -> Unit) {
+    this.setOnTouchListener { v, event ->
+        var hasConsumed = false
+        if (v is AppCompatEditText) {
+            if (event.x >= v.width - v.totalPaddingRight) {
+                if (event.action == MotionEvent.ACTION_UP) {
+                    onClicked(this)
+                }
+                hasConsumed = true
+            }
+        }
+        hasConsumed
+    }
+}
+
 public var xValue:Float=0F
 public var yValue:Float=0F
 
@@ -214,6 +236,34 @@ fun View.showKeyboard() {
     val inputMethodManager =
         context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     inputMethodManager.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
+}
+
+fun Context.hasPermission(permission: String): Boolean {
+
+    return ActivityCompat.checkSelfPermission(this, permission) ==
+            PackageManager.PERMISSION_GRANTED
+}
+
+fun Activity.requestPermissionWithRationale(
+    permission: String,
+    requestCode: Int,
+    rationaleStr: String
+) {
+    val provideRationale = ActivityCompat.shouldShowRequestPermissionRationale(this, permission)
+
+    if (provideRationale) {
+        AlertDialog.Builder(this).apply {
+            setTitle("Permission")
+            setMessage(rationaleStr)
+            setPositiveButton("Ok") { _, _ ->
+                ActivityCompat.requestPermissions(this@requestPermissionWithRationale, arrayOf(permission), requestCode)
+            }
+            create()
+            show()
+        }
+    } else {
+        ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
+    }
 }
 
 

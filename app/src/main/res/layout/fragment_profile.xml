@@ -77,8 +77,7 @@
                         android:id="@+id/imageProfile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/profile_owner" />
+                        android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
                 <ImageView
@@ -135,7 +134,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Space
+                        <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="4" />

@@ -8,11 +8,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.adapter.tourism.travelAgency.TravelAgencyIndexAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTravelAgenciesBinding
+import com.tesseract.AllOneClient.fragments.tourism.hotels.index.FragmentHotelIndexArgs
 import com.tesseract.AllOneClient.fragments.tourism.tourPackages.FragmentTourismPackagesDirections
 import com.tesseract.AllOneClient.model.tourism.countries.Content
 import com.tesseract.AllOneClient.model.tourism.agency.index.Data
@@ -26,6 +28,13 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
     private val binding get() =  _binding!!
     private lateinit var adapter: TravelAgencyIndexAdapter
     private lateinit var viewModel: TravelAgencyViewModel
+    private val args: FragmentTravelAgenciesArgs by navArgs()
+
+
+    private var sorting:String=""
+    private var isFirst:Boolean=true
+    private var isFirstView:Boolean=true
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +51,26 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
 
         Common.travelPagerId = 1
 
-        viewModel.startAgencyIndex(headerMapUniversal(requireContext()), "", countryContent.id, "by_popularity")
+        if (countryContent.name.isNotEmpty()){
+            binding.countryName.text=countryContent.name
+        }
+        if (sorting.isNotEmpty()){
+            binding.byPopularity.text=sorting
+        }
+
+
+
+        if (isFirst){
+            sorting=args.defaultSort
+            countryContent.id=args.uzbId
+            viewModel.startAgencyIndex(headerMapUniversal(requireContext()), "", countryContent.id, sorting)
+        }
+
+        if (!isFirstView&&!isFirst){
+            viewModel.startAgencyIndex(headerMapUniversal(requireContext()), "", countryContent.id, sorting)
+        }
+
+
 
         adapter=TravelAgencyIndexAdapter(this, mutableSetOf())
         binding.apply {
@@ -61,16 +89,22 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
                         headerMapUniversal(requireContext()),
                         "",
                         countryContent.id,
-                        "by_popularity"
+                        sorting
                     )
                 }
             })
 
+            byPopularity.setOnClickListener {
+                val action =
+                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(1)
+                isFirst=false
+                findNavController().navigate(action)
+            }
+
             countryName.setOnClickListener {
                 val action =
-                    FragmentTourismPackagesDirections.actionGlobalTourismFilter(
-                        2
-                    )
+                    FragmentTourismPackagesDirections.actionGlobalTourismFilter2(2)
+                isFirst=false
                 findNavController().navigate(action)
             }
         }
@@ -81,9 +115,25 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
             load()
         }
 
+        getBackStackData<String>("onSortClickKey", true) {
+            binding.byPopularity.text=it
+            sorting=it
+
+            if (countryContent.name.isNotEmpty()) {
+                binding.countryName.text = countryContent.name
+            }
+
+            load()
+        }
+
+
         getBackStackData<Content>("onCountrySelectKey", true) {
             binding.countryName.text = it.name
             countryContent = it
+            if (sorting.isNotEmpty()){
+                binding.byPopularity.text=sorting
+            }
+
             load()
         }
     }
@@ -94,7 +144,7 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
             headerMapUniversal(requireContext()),
             "",
             countryContent.id,
-            "by_popularity"
+            sorting
         )
     }
 
@@ -143,6 +193,7 @@ class FragmentTravelAgencies : Fragment() ,TravelAgencyIndexAdapter.OnChipClickL
 
     override fun onChipClicked(position: Data) {
         val action=FragmentTravelAgenciesDirections.actionFragmentTravelAgenciesToFragmentAgencyView(position.id)
+        isFirstView=false
         findNavController().navigate(action)
     }
 

@@ -7,14 +7,12 @@ import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.databinding.LayoutCityContactBinding
-import com.tesseract.AllOneClient.databinding.LayoutCityItemBinding
-import com.tesseract.AllOneClient.model.home.getDistricts.DistrictList
-import com.tesseract.AllOneClient.model.taxiCity.ContactModel
+import com.tesseract.AllOneClient.model.taxiCity.Contact
 import java.util.*
 import kotlin.collections.ArrayList
 
 class ContactAdapter(
-    private val mapModelList: ArrayList<ContactModel>,
+    private val mapModelList: ArrayList<Contact>,
     private val onSelectedContact: OnContactSelected
 ) : RecyclerView.Adapter<ContactAdapter.NewsItemViewHolder>(), Filterable {
 
@@ -24,14 +22,14 @@ class ContactAdapter(
 
         return NewsItemViewHolder(binding)
     }
-    var locationFilter = ArrayList<ContactModel>()
+    var locationFilter = ArrayList<Contact>()
     private var selectedPosition = -1
     init {
         locationFilter = mapModelList
     }
 
     override fun onBindViewHolder(holder: NewsItemViewHolder, position: Int) {
-        val newsItem: ContactModel = locationFilter[position]
+        val newsItem: Contact = locationFilter[position]
         holder.bind(newsItem)
         holder.itemView.setOnClickListener {
             if (selectedPosition >= 0) {
@@ -47,18 +45,20 @@ class ContactAdapter(
     inner class NewsItemViewHolder(private val itemBinding: LayoutCityContactBinding) :
         RecyclerView.ViewHolder(itemBinding.root) {
 
-        fun bind(model: ContactModel) {
+        fun bind(model: Contact) {
             itemBinding.name.text = model.name
-            itemBinding.phone.text=model.phone
+            if (model.numbers.size>0){
+                itemBinding.phone.text=model.numbers[0]
+            }
 
             if (selectedPosition == adapterPosition) {
                 itemView.isSelected = true
-                itemBinding.radio.isChecked=true
+                itemBinding.radio.setImageResource(R.drawable.ic_check_box)
                 onSelectedContact.onSelect(model)
 
             } else {
                 itemView.isSelected = false
-                itemBinding.radio.isChecked=false
+                itemBinding.radio.setImageResource(R.drawable.ic_unchecked_radio_button)
             }
 
         }
@@ -75,7 +75,7 @@ class ContactAdapter(
                 locationFilter = if (charSearch.isEmpty()) {
                     mapModelList
                 } else {
-                    val resultList = ArrayList<ContactModel>()
+                    val resultList = ArrayList<Contact>()
                     for (row in mapModelList) {
                         if (row.name.lowercase(Locale.ROOT)
                                 .contains(charSearch.lowercase(Locale.ROOT))
@@ -92,13 +92,14 @@ class ContactAdapter(
 
             @Suppress("UNCHECKED_CAST")
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                locationFilter = results?.values as ArrayList<ContactModel>
+                locationFilter = results?.values as ArrayList<Contact>
+                notifyDataSetChanged()
             }
 
         }
     }
 
     interface OnContactSelected {
-        fun onSelect(contact: ContactModel)
+        fun onSelect(contact: Contact)
     }
 }

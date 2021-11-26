@@ -24,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_size_15sp"
                 android:textColor="@color/black"
-                android:text="Akmal aka"
                 android:id="@+id/name"
                 android:fontFamily="@font/inter_regular"/>
 
@@ -34,17 +33,15 @@
                 android:layout_marginTop="@dimen/margin_padding_4dp"
                 android:textSize="@dimen/text_size_13sp"
                 android:id="@+id/phone"
-                android:text="Akmal aka"
                 android:fontFamily="@font/inter_medium"/>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <RadioButton
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/icon_size_20dp"
+            android:layout_height="@dimen/icon_size_20dp"
             android:id="@+id/radio"
-            android:layout_gravity="center_vertical"
-            android:buttonTint="@color/dark_grey"
-            android:layout_weight="1"/>
+            android:src="@drawable/ic_unchecked_radio_button"
+            android:layout_gravity="center_vertical"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
     <View
         android:layout_width="match_parent"

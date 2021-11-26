@@ -60,9 +60,7 @@ class FragmentActiveTour: Fragment() {
 
     fun getImage(): ArrayList<ImageModel> {
         return arrayListOf(
-            ImageModel(R.drawable.mountain_stones),
-            ImageModel(R.drawable.mountain_stones),
-            ImageModel(R.drawable.mountain_stones),
+
         )
     }
 
@@ -92,11 +90,5 @@ class FragmentActiveTour: Fragment() {
         })
     }
 
-    fun getImage2(): ArrayList<ImageModel> {
-        return arrayListOf(
-            ImageModel(R.drawable.mountain_stones),
-            ImageModel(R.drawable.mountain_stones),
-            ImageModel(R.drawable.mountain_stones),
-        )
-    }
+
 }

@@ -71,12 +71,12 @@
                     android:drawableEnd="@drawable/ic_arrow_down_small"
                     android:paddingHorizontal="@dimen/margin_padding_12dp"
                     android:paddingVertical="@dimen/dimens_10dp"
-                    android:id="@+id/first"/>
+                    android:id="@+id/byPopularity"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/uzbek"
+                    android:text="@string/uzbekistan"
 
                     android:background="@drawable/chip_drawable"
                     android:textSize="@dimen/text_size_13sp"

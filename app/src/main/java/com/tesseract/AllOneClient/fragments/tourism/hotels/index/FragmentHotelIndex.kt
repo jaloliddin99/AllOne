@@ -143,8 +143,6 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
             if (sorting.isNotEmpty()){
                 binding.bySorting.text=sorting
             }
-
-
             if (currencyContent.name.isNotEmpty()) {
                 binding.currency.text = currencyContent.name
             }

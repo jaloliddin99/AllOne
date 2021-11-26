@@ -104,7 +104,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:orientation="horizontal">
-                    <Space
+                    <androidx.legacy.widget.Space
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
@@ -237,7 +237,6 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="546879914"
                             android:fontFamily="@font/inter_semibold"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
@@ -415,7 +414,7 @@
                         android:layout_weight="1"
                         app:cardCornerRadius="@dimen/margin_padding_12dp"
                         app:cardElevation="0dp"
-                        app:strokeColor="@color/grey"
+                        app:strokeColor="@color/green"
                         app:strokeWidth="2dp">
 
                         <RelativeLayout
@@ -498,7 +497,6 @@
                                 android:buttonTint="@color/green"
                                 android:gravity="center" />
 
-
                         </RelativeLayout>
                     </com.google.android.material.card.MaterialCardView>
 
@@ -512,6 +510,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/linearLayout"
+                android:visibility="gone"
                 android:animateLayoutChanges="true"
                 android:layout_marginTop="@dimen/margin_padding_24dp"
                 android:orientation="vertical">
@@ -556,6 +555,7 @@
                     android:layout_height="120dp"
                     android:paddingStart="@dimen/margin_padding_16"
                     android:paddingEnd="@dimen/dimen_32dp"
+                    android:visibility="gone"
                     android:overScrollMode="never"
                     android:layout_marginBottom="@dimen/margin_padding_24dp"
                     app:layout_constraintLeft_toLeftOf="parent"

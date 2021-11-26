@@ -25,7 +25,7 @@ class AddCommentAdapter(
         holder.bind()
     }
 
-    override fun getItemCount()=20
+    override fun getItemCount()=0
 
     inner class NewsItemViewHolder(private val itemBinding: LayoutCommentaryItemBinding)
         : RecyclerView.ViewHolder(itemBinding.root){

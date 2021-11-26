@@ -12,7 +12,6 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="match_parent"
-        android:src="@drawable/baggage"
         android:scaleType="centerCrop"
         android:id="@+id/baggage_image"
         android:layout_height="match_parent"/>

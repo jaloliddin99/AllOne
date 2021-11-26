@@ -21,8 +21,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/car_image"
             android:layout_width="228dp"
-            android:layout_height="100dp"
-            android:src="@drawable/ac1" />
+            android:layout_height="100dp"/>
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/moreInfo"

@@ -26,10 +26,10 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.OnBonusSelected {
+class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
 
-    private val args:FragmentPaymentArgs by navArgs()
-    private var _binding: FragmentPaymentBinding?=null
+    private val args: FragmentPaymentArgs by navArgs()
+    private var _binding: FragmentPaymentBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var viewModel2: GetCardViewModel
@@ -41,7 +41,7 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding= FragmentPaymentBinding.inflate(inflater, container, false)
+        _binding = FragmentPaymentBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -62,52 +62,24 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
         }
 
 
-        if (args.fromWhichLayout==1){
-            interArea()
-        }else if (args.fromWhichLayout==0){
-            parcelDelivery()
+        interArea()
+        parcelDelivery()
+        binding.btNextPayment.setOnClickListener {
+
+            if (args.fromWhichLayout == 1) {
+                interArea2()
+            } else if (args.fromWhichLayout == 0) {
+                parcelDelivery2()
+            }
         }
+
         addCards()
 
         radioController()
         showDialog()
-
-//        binding.btNextPayment.setOnClickListener {
-//            val usedBonus: Boolean = binding.bonusAmount.isChecked
-//            val paymentType: String = if (binding.withCashRadio.isChecked) {
-//                "cash"
-//            } else {
-//                "card"
-//            }
-//            val shareModel = ShareRegionModel(
-//                startId,
-//                endId,
-//                tariff,
-//                userNumber,
-//                selectedPlace,
-//                depDate,
-//                seat,
-//                parcelPlaces,
-//                hasOverheadLuggage,
-//                hasAirConditioner,
-//                forAnother,
-//                phoneNumber,
-//                moneyTotalPrice,
-//                moneyChosenSeat,
-//                usedBonus,
-//                bonusAmount.toDouble(),
-//                paymentType,
-//                location
-//            )
-//            shareViewModel.selectItem(shareModel)
-//
-//            val action=FragmentPaymentDirections.actionFragmentPaymentToFragmentLocation()
-//            findNavController().navigate(action)
-//        }
-
     }
 
-    private fun addCards(){
+    private fun addCards() {
         binding.apply {
             PagerUzCard.visibility = View.GONE
             tvAddCard.setOnClickListener {
@@ -139,11 +111,13 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
                     tvAddCard.visibility = View.VISIBLE
                 }
                 binding.PagerUzCard.clipToPadding = false
-                binding.PagerUzCard.adapter =
-                    MyCardAdapter(this@FragmentPayment, it)
-                binding.PagerUzCard.setPadding(dipToPixels(requireContext(),16f).toInt(), 0, 150, 0)
-                binding.PagerUzCard.pageMargin= dipToPixels(requireContext(),8f).toInt()
-
+                binding.PagerUzCard.adapter = MyCardAdapter(this@FragmentPayment, it)
+                binding.PagerUzCard.setPadding(dipToPixels(requireContext(), 16f).toInt(),
+                    0,
+                    150,
+                    0
+                )
+                binding.PagerUzCard.pageMargin = dipToPixels(requireContext(), 8f).toInt()
             }
         })
     }
@@ -210,10 +184,10 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
             }
 
             withCardRadio.setOnCheckedChangeListener { buttonView, isChecked ->
-                if (isChecked) {
-                    linearLayout.visibility = View.VISIBLE
-                } else {
+                if (!isChecked) {
                     linearLayout.visibility = View.GONE
+                } else {
+                    linearLayout.visibility = View.VISIBLE
                 }
             }
         }
@@ -226,7 +200,7 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
             if (isChecked) {
                 if (SaveData.isCurrentFragment) {
                     parentFragmentManager.let {
-                        DialogBonusMoney(this, "34000.00").show(
+                        DialogBonusMoney(this, SaveData.getBalance(requireContext())!!).show(
                             it,
                             tag
                         )
@@ -252,7 +226,7 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
     private var phoneNumber: String = ""
     private var moneyTotalPrice: Double = 0.0
     private var moneyChosenSeat: Double = 0.0
-    private var comment=""
+    private var comment = ""
 
     @SuppressLint("SetTextI18n")
     private fun interArea() {
@@ -272,8 +246,8 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
             phoneNumber = it.phoneNumber
             moneyTotalPrice = it.money
             moneyChosenSeat = it.selectedSeatMoney
-            location=it.location
-            comment=it.comment
+            location = it.location
+            comment = it.comment
 
             binding.apply {
                 totalMoney.text =
@@ -293,54 +267,14 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
 
         })
 
-        binding.btNextPayment.setOnClickListener {
-
-            val usedBonus: Boolean = binding.bonusAmount.isChecked
-            val paymentType: String = if (binding.withCashRadio.isChecked) {
-                "cash"
-            } else {
-                "card"
-            }
-
-            Log.i("TAG", "gotoPayments: " +"startId $startId, \nendId $endId, \ntariff $tariff," +
-                    "\n end_point  $endId" +
-                    "\ntariff $tariff,\n userNumber $userNumber,\n " +
-                    "selectedPlace $selectedPlace,\n location $location, \norderAmount $moneyTotalPrice" +
-                    "\npassenger_count $userNumber,\n payment_type $paymentType,\n " +
-                    "phoneNumber $phoneNumber,\n places $selectedPlace,\n startId $startId,\n tariff $tariff" +
-
-                    " \n used_bonus $usedBonus,\n bonus_amount $bonusAmount")
-
-            viewModel.interAreaNewOrder(
-                headerMapUniversal(requireContext()),
-                startId,
-                endId,
-                tariff,
-                userNumber,
-                selectedPlace,
-                depDate,
-                location,
-                seat,
-                parcelPlaces,
-                hasOverheadLuggage,
-                hasAirConditioner,
-                forAnother,
-                phoneNumber,
-                paymentType,
-                usedBonus,
-                bonusAmount.toDouble(),
-                moneyTotalPrice,
-                comment,
-                1
-            )
-            SaveData.isCurrentFragment = true
-        }
-
         viewModel.newOrder.observe(requireActivity(), {
 
             if (SaveData.isCurrentFragment) {
                 Log.i("order id ", "" + it.content.order_id)
-                val action = FragmentPaymentDirections.actionFragmentPaymentToFragmentLocation(args.fromWhichLayout,it.content.order_id)
+                val action = FragmentPaymentDirections.actionFragmentPaymentToFragmentLocation(
+                    args.fromWhichLayout,
+                    it.content.order_id
+                )
                 SaveData.isCurrentFragment = false
                 findNavController().navigate(action)
             }
@@ -351,6 +285,51 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
         })
     }
 
+    private fun interArea2(){
+        val usedBonus: Boolean = binding.bonusAmount.isChecked
+        val paymentType: String = if (binding.withCashRadio.isChecked) {
+            "cash"
+        } else {
+            "card"
+        }
+
+        Log.i(
+            "TAG", "gotoPayments: " + "startId $startId, \nendId $endId, \ntariff $tariff," +
+                    "\n end_point  $endId" +
+                    "\ntariff $tariff,\n userNumber $userNumber,\n " +
+                    "selectedPlace $selectedPlace,\n location $location, \norderAmount $moneyTotalPrice" +
+                    "\npassenger_count $userNumber,\n payment_type $paymentType,\n " +
+                    "phoneNumber $phoneNumber,\n places $selectedPlace,\n startId $startId,\n tariff $tariff" +
+                    " \n used_bonus $usedBonus,\n bonus_amount $bonusAmount"
+        )
+
+        viewModel.interAreaNewOrder(
+            headerMapUniversal(requireContext()),
+            startId,
+            endId,
+            tariff,
+            userNumber,
+            selectedPlace,
+            depDate,
+            location,
+            seat,
+            parcelPlaces,
+            if (hasOverheadLuggage) 1 else 0,
+            if (hasAirConditioner) 1 else 0,
+            if (forAnother) 1 else 0,
+            phoneNumber,
+            paymentType,
+            if (usedBonus) 1 else 0,
+            if (bonusAmount.isEmpty()) 0.0 else bonusAmount.toDouble(),
+            moneyTotalPrice,
+            comment,
+            1
+        )
+        SaveData.isCurrentFragment = true
+    }
+
+
+
 
     private var parcelStartId = -1
     private var parcelEndId = -1
@@ -358,22 +337,21 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
     private var parcelLocation = ""
     private var parcelReceiverName = ""
     private var parcelReceiverPhoneNumber = ""
-    private var parcelBaggage=""
-    private var parcelBaggagePlaces=""
-    private var parcelPaymentType=""
-    private var parcelUsedBonus=false
-    private var parcelUsedBonusAmount=0.0
-    private var parcelOrderAmount=0.0
-    private lateinit var parcelBaggagePhotos:Map<String, String>
-    private var parcelHasOverheadLuggage=false
-    private var parcelForAnother=false
-    private var parcelPhoneNumber=""
-    private var parcelComment=""
-
+    private var parcelBaggage = ""
+    private var parcelBaggagePlaces = ""
+    private var parcelPaymentType = ""
+    private var parcelUsedBonus = false
+    private var parcelUsedBonusAmount = 0.0
+    private var parcelOrderAmount = 0.0
+    private lateinit var parcelBaggagePhotos: Map<String, String>
+    private var parcelHasOverheadLuggage = false
+    private var parcelForAnother = false
+    private var parcelPhoneNumber = ""
+    private var parcelComment = ""
 
 
     @SuppressLint("SetTextI18n")
-    private fun parcelDelivery(){
+    private fun parcelDelivery() {
 
         shareViewModel.selectedParcelItem.observe(viewLifecycleOwner, Observer {
             parcelStartId = it.startId
@@ -387,12 +365,12 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
             parcelHasOverheadLuggage = it.hasOverheadLuggage
             parcelPaymentType = it.paymentType
             parcelForAnother = it.forAnother
-            parcelUsedBonus=it.usedBonus
-            parcelUsedBonusAmount=it.usedBonusAmount
-            parcelOrderAmount=it.orderAmount
-            parcelBaggagePhotos=it.baggagePhoto
-            parcelPhoneNumber=it.phoneNumber
-            parcelComment=it.comment
+            parcelUsedBonus = it.usedBonus
+            parcelUsedBonusAmount = it.usedBonusAmount
+            parcelOrderAmount = it.orderAmount
+            parcelBaggagePhotos = it.baggagePhoto
+            parcelPhoneNumber = it.phoneNumber
+            parcelComment = it.comment
 
 
             binding.apply {
@@ -400,7 +378,7 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
                     SaveData.formatPhone(parcelOrderAmount.toString()) + getString(R.string.emptySpace) + getString(
                         R.string.summa1
                     )
-                baggage.visibility=View.GONE
+                baggage.visibility = View.GONE
 
                 bonus.text = "0 ${getString(R.string.summa1)}"
                 binding.totalSum.text =
@@ -410,49 +388,6 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
             }
 
         })
-
-        binding.btNextPayment.setOnClickListener {
-
-            val usedBonus: Boolean = binding.bonusAmount.isChecked
-            val paymentType: String = if (binding.withCashRadio.isChecked) {
-                "cash"
-            } else {
-                "card"
-            }
-
-            Log.i("TAG", "gotoPayments: " +"parcelStartId $parcelStartId, \nparcelEndId $parcelEndId, " +
-                    "\nparcelDepDate $parcelDepDate,\n parcelLocation  $parcelLocation" +
-                    "\nparcelReceiverName $parcelReceiverName,\n parcelReceiverPhoneNumber $parcelReceiverPhoneNumber," +
-                    "\n parcelBaggage $parcelBaggage,\n parcelBaggagePlaces $parcelBaggagePlaces, \npaymentType $paymentType" +
-                    "\nusedBonus $usedBonus,\n bonusAmount $bonusAmount,\n parcelOrderAmount $parcelOrderAmount," +
-                    "\n parcelHasOverheadLuggage $parcelHasOverheadLuggage,\n parcelForAnother $parcelForAnother,\n parcelPhoneNumber $parcelPhoneNumber" +
-
-                    " \n parcelComment $parcelComment")
-
-            viewModel.parcelNewOrder(
-                headerMapUniversal(requireContext()),
-                parcelStartId,
-                parcelEndId,
-                parcelDepDate,
-                "12:00",
-                parcelLocation,
-                parcelReceiverName,
-                parcelReceiverPhoneNumber,
-                parcelBaggage,
-                parcelBaggagePlaces,
-                paymentType,
-                usedBonus,
-                bonusAmount.toDouble(),
-                parcelOrderAmount,
-                parcelBaggagePhotos,
-                parcelHasOverheadLuggage,
-                parcelForAnother,
-                parcelPhoneNumber,
-                parcelComment,
-                1
-            )
-            SaveData.isCurrentFragment = true
-        }
 
         viewModel.parcelNewOrderObserver.observe(viewLifecycleOwner, {
             if (SaveData.isCurrentFragment) {
@@ -466,6 +401,51 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
                 findNavController().navigate(action)
             }
         })
+    }
+
+    private fun parcelDelivery2(){
+        val usedBonus: Boolean = binding.bonusAmount.isChecked
+        val paymentType: String = if (binding.withCashRadio.isChecked) {
+            "cash"
+        } else {
+            "card"
+        }
+
+        Log.i(
+            "TAG",
+            "gotoPayments: " + "parcelStartId $parcelStartId, \nparcelEndId $parcelEndId, " +
+                    "\nparcelDepDate $parcelDepDate,\n parcelLocation  $parcelLocation" +
+                    "\nparcelReceiverName $parcelReceiverName,\n parcelReceiverPhoneNumber $parcelReceiverPhoneNumber," +
+                    "\n parcelBaggage $parcelBaggage,\n parcelBaggagePlaces $parcelBaggagePlaces, \npaymentType $paymentType" +
+                    "\nusedBonus $usedBonus,\n bonusAmount $bonusAmount,\n parcelOrderAmount $parcelOrderAmount," +
+                    "\n parcelHasOverheadLuggage $parcelHasOverheadLuggage,\n parcelForAnother $parcelForAnother,\n parcelPhoneNumber $parcelPhoneNumber" +
+
+                    " \n parcelComment $parcelComment"
+        )
+
+        viewModel.parcelNewOrder(
+            headerMapUniversal(requireContext()),
+            parcelStartId,
+            parcelEndId,
+            parcelDepDate,
+            "12:00",
+            parcelLocation,
+            parcelReceiverName,
+            parcelReceiverPhoneNumber,
+            parcelBaggage,
+            parcelBaggagePlaces,
+            paymentType,
+            usedBonus,
+            if (bonusAmount.isEmpty()) 0.0 else bonusAmount.toDouble(),
+            parcelOrderAmount,
+            parcelBaggagePhotos,
+            parcelHasOverheadLuggage,
+            parcelForAnother,
+            parcelPhoneNumber,
+            parcelComment,
+            1
+        )
+        SaveData.isCurrentFragment = true
     }
 
     private var bonusAmount: String = ""
@@ -489,7 +469,7 @@ class FragmentPayment : Fragment(R.layout.fragment_payment), DialogBonusMoney.On
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
 }

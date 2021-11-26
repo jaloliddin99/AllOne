@@ -40,7 +40,7 @@ class FragmentAddCommentToDriver : Fragment(), AddCommentAdapter.CancelOrderList
         }
     }
 
-    fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
+    private fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
         if (doBack)
             findNavController().popBackStack()
