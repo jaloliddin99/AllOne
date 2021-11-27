@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
@@ -15,6 +17,7 @@ import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.*
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -46,11 +49,11 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
     DialogShowTime.OnDaySelectListener,
     ExtraLargeBaggage.SendDataListener,
     AddBaggageImagesAdapter.OnImageClickListener {
-    lateinit var dialog: Dialog
-    private lateinit var binding: FragmentPostServiceSelectionBinding
+
+    private var _binding: FragmentPostServiceSelectionBinding? = null
+    private val binding get() = _binding!!
 
     private lateinit var viewModel: PostServiceSelectionViewModel
-    //private val args: FragmentParcelMainArgs by navArgs()
 
     var viewModelSeatPrices = ArrayList<String>()
     var selectedParcelPlaceBegore = ArrayList<Int>()
@@ -61,9 +64,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
     private var isFourthBoxChecked: Boolean = false
     private var money: Float = 0f
 
-    private val startingDestination = 10
-    private val endingDestination = 11
-
 
     private lateinit var addBaggageImagesAdapter: AddBaggageImagesAdapter
     private var addBaggageImageModel = ArrayList<Any>()
@@ -71,7 +71,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
     private var firstSeat: String = ""
     private var secondSeat: String = ""
     private var thirdSeat: String = ""
-    private var fourthSeat: String = ""
     private var selectedSeat: String = ""
 
     private val shareViewModel: ShareDataViewModel by activityViewModels()
@@ -81,7 +80,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentPostServiceSelectionBinding.inflate(inflater, container, false)
+        _binding = FragmentPostServiceSelectionBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -90,58 +89,49 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this).get(PostServiceSelectionViewModel::class.java)
 
-
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
+        binding.loader.loader.visibility = View.GONE
         viewModel.parcelList.observe(requireActivity(), {
 
-            dialog.dismiss()
+            if (it.size < 3) {
+                binding.linearLayout.visibility = View.GONE
+                return@observe
+            }
 
+            firstSeat =
+                if (it[0].parcel == "small") it[0].price.toString() else if (it[1].parcel == "small") it[1].price.toString() else it[2].price.toString()
+            secondSeat =
+                if (it[0].parcel == "medium") it[0].price.toString() else if (it[1].parcel == "medium") it[1].price.toString() else it[2].price.toString()
+            thirdSeat =
+                if (it[0].parcel == "big") it[0].price.toString() else if (it[1].parcel == "big") it[1].price.toString() else it[2].price.toString()
             binding.apply {
-                boxImagesLayout.baggageType.text = it[0].parcel
-                boxImagesLayout.baggageType1.text = it[1].parcel
-                boxImagesLayout.baggageType2.text = it[2].parcel
-                boxImagesLayout.baggageType3.text = it[3].parcel
+                relativeView.visibility = View.GONE
+                loader.loader.visibility = View.GONE
+
+                boxImagesLayout.price.text =
+                    SaveData.formatPhone(firstSeat) + " ${getString(R.string.summa1)}"
+                boxImagesLayout.price1.text =
+                    SaveData.formatPhone(secondSeat) + " ${getString(R.string.summa1)}"
+                boxImagesLayout.price2.text =
+                    SaveData.formatPhone(thirdSeat) + " ${getString(R.string.summa1)}"
+
             }
 
 
-            firstSeat = it[0].price.toString()
-            secondSeat = it[1].price.toString()
-            thirdSeat = it[2].price.toString()
-            fourthSeat = it[3].price.toString()
-
-            binding.boxImagesLayout.price.text =
-                firstSeat.let { it1 -> SaveData.formatPhone(it1) + " ${getString(R.string.summa1)}" }
-            binding.boxImagesLayout.price1.text =
-                secondSeat.let { it1 -> SaveData.formatPhone(it1) + " ${getString(R.string.summa1)}" }
-            binding.boxImagesLayout.price2.text =
-                thirdSeat.let { it1 -> SaveData.formatPhone(it1) + " ${getString(R.string.summa1)}" }
-            binding.boxImagesLayout.price3.text =
-                fourthSeat.let { it1 -> SaveData.formatPhone(it1) + " ${getString(R.string.summa1)}" }
         })
 
         viewModel.placeList.observe(requireActivity(), {
             viewModelSeatPrices.clear()
-
             for (i in it.indices) {
                 viewModelSeatPrices.add(it[i].price!!)
             }
         })
 
         addBaggageImageModel.add(R.drawable.rectangle_baggage_image)
-
         addBaggageImagesAdapter = AddBaggageImagesAdapter(addBaggageImageModel, this)
         binding.baggageImageRecycler.adapter = addBaggageImagesAdapter
         binding.baggageImageRecycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.baggageImageRecycler.setHasFixedSize(false)
-
-
-
 
         binding.datePicker.setOnClickListener {
             DialogShowTime(getString(R.string.departure_date), this).show(
@@ -149,8 +139,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 tag
             )
         }
-
-
 
         binding.backToHome.setOnClickListener {
             val action =
@@ -180,7 +168,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         layoutDialogs()
 
         showHideEdittext()
-        restoreState()
         newParcelOrder()
         comments()
     }
@@ -193,8 +180,10 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         }
 
         getBackStackData<String>("locationName11", true) {
-            binding.selectedLocation.text = it.split("###")[0]
+            selectedLocationDisplay=it.split("###")[0]
+            binding.selectedLocation.text = selectedLocationDisplay
             selectedLocation = it.split("###")[1]
+            makeButtonGreen()
             restoreState()
         }
 
@@ -221,14 +210,13 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         if (Common.startRegionId.isNotEmpty() && Common.endRegionId.isNotEmpty()
             && Common.startDistrictId.isNotEmpty() && Common.endDistrictId.isNotEmpty()
         ) {
+            binding.loader.loader.visibility = View.VISIBLE
             viewModel.getRouteTariffPrices(
                 headerMapUniversal(requireContext()),
-                "standart",
+                "standard",
                 Common.startDistrictId,
                 Common.endDistrictId
             )
-
-            dialog.show()
 
             binding.apply {
                 startDestinationChange.text = getString(R.string.change)
@@ -242,19 +230,18 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
 
 
         binding.startDestinationChange.setOnClickListener {
-            Common.destination=10
+            Common.destination = 10
             val action =
                 FragmentParcelMainDirections.actionFragmentPostServiceSelectionToFragmentRegions()
             findNavController().navigate(action)
         }
 
         binding.endDestinationTextChange.setOnClickListener {
-            Common.destination=11
+            Common.destination = 11
             val action =
                 FragmentParcelMainDirections.actionFragmentPostServiceSelectionToFragmentRegions()
             findNavController().navigate(action)
         }
-
     }
 
     private fun showHideEdittext() {
@@ -270,19 +257,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     requireContext().hideKeyboard(requireView())
                 }
             }
-
-            KeyboardVisibilityEvent.setEventListener(
-                requireActivity(),
-                object : KeyboardVisibilityEventListener {
-                    override fun onVisibilityChanged(isOpen: Boolean) {
-                        if (isOpen) {
-                            binding.bottomSheet.visibility = View.GONE
-                        } else {
-                            binding.bottomSheet.visibility = View.VISIBLE
-                        }
-                    }
-                })
-
         }
     }
 
@@ -297,7 +271,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     "30x30 ",
                     "до 500 - Грамм",
                     binding.boxImagesLayout.price.text.toString(),
-                ).show(it, "MyCustomFragment")
+                ).show(it, tag)
             }
         }
         binding.boxImagesLayout.att2.setOnClickListener {
@@ -307,7 +281,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     "30x30 ",
                     "до 5 - kg",
                     binding.boxImagesLayout.price1.text.toString(),
-                ).show(it, "MyCustomFragment")
+                ).show(it, tag)
             }
         }
         binding.boxImagesLayout.att3.setOnClickListener {
@@ -317,7 +291,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     "30x30 ",
                     "до 10 - kg",
                     binding.boxImagesLayout.price2.text.toString(),
-                ).show(it, "MyCustomFragment")
+                ).show(it, tag)
             }
         }
         binding.boxImagesLayout.att4.setOnClickListener {
@@ -327,7 +301,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     "50x50 ",
                     "до 50 - kg",
                     binding.boxImagesLayout.price3.text.toString(),
-                ).show(it, "MyCustomFragment")
+                ).show(it, tag)
             }
         }
 
@@ -338,69 +312,58 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         binding.apply {
             boxImagesLayout.smallBox.setOnClickListener {
                 if (isFirstBoxChecked) {
-                    boxImagesLayout.firstRadio.isChecked = false
-                    boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
-                    boxImagesLayout.smallBox.invalidate()
-                    boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
-                    isFirstBoxChecked = false
-                    money -= firstSeat.toFloat()
+                    invalidateFirst()
                     updateTotalMoney()
-                    isFirstBoxChecked = false
 
                 } else {
                     boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.green)
                     boxImagesLayout.smallBox.invalidate()
                     boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.week_green))
-                    selectedSeat = boxImagesLayout.baggageType.text.toString()
+                    selectedSeat = "small"
                     boxImagesLayout.firstRadio.isChecked = true
                     money += firstSeat.toFloat()
-                    updateTotalMoney()
                     isFirstBoxChecked = true
+                    invalidateSecond()
+                    invalidateFourth()
+                    invalidateThird()
+                    updateTotalMoney()
                 }
 
             }
             binding.boxImagesLayout.middleBox.setOnClickListener {
                 if (isSecondBoxChecked) {
-                    boxImagesLayout.secondRadio.isChecked = false
-                    boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
-                    boxImagesLayout.middleBox.invalidate()
-                    boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
-                    money -= secondSeat.toFloat()
+                    invalidateSecond()
                     updateTotalMoney()
-                    isSecondBoxChecked = false
                 } else {
-                    selectedSeat = boxImagesLayout.baggageType1.text.toString()
+                    selectedSeat = "medium"
                     boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.green)
                     boxImagesLayout.middleBox.invalidate()
                     boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.week_green))
                     boxImagesLayout.secondRadio.isChecked = true
                     money += secondSeat.toFloat()
-                    updateTotalMoney()
                     isSecondBoxChecked = true
+                    invalidateThird()
+                    invalidateFourth()
+                    invalidateFirst()
+                    updateTotalMoney()
                 }
             }
             binding.boxImagesLayout.largeBox.setOnClickListener {
                 if (isThirdBoxChecked) {
-                    boxImagesLayout.thirdRadio.isChecked = false
-                    boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
-                    boxImagesLayout.largeBox.invalidate()
-                    boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
-                    money -= thirdSeat.toFloat()
+                    invalidateThird()
                     updateTotalMoney()
-
-                    isThirdBoxChecked = false
-
                 } else {
-                    selectedSeat = boxImagesLayout.baggageType2.text.toString()
+                    selectedSeat = "big"
                     boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.green)
                     boxImagesLayout.largeBox.invalidate()
                     boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.week_green))
                     boxImagesLayout.thirdRadio.isChecked = true
-
                     money += thirdSeat.toFloat()
-
-                    updateTotalMoney()
                     isThirdBoxChecked = true
+                    invalidateFirst()
+                    invalidateSecond()
+                    invalidateFourth()
+                    updateTotalMoney()
                 }
             }
             boxImagesLayout.extraLargeBox.setOnClickListener {
@@ -409,10 +372,10 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     ExtraLargeBaggage(
                         "50x50 ",
                         "до 50 - kg",
-                        fourthSeat,
+                        viewModelSeatPrices,
                         selectedParcelPlaceBegore,
                         this@FragmentParcelMain
-                    ).show(it, "MyCustomFragment")
+                    ).show(it, tag)
                 }
             }
         }
@@ -431,12 +394,16 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
 
     private var commentText = ""
     private var selectedLocation = ""
+    private var selectedLocationDisplay = ""
     private fun newParcelOrder() {
-
-
         binding.goToPayment.setOnClickListener {
-            val start = 1// args.startDistrictId.toInt()
-            val end = 2// args.endDistrictId.toInt()
+
+            if (selectedLocation.isEmpty()||selectedDate.isEmpty()||selectedSeat.isEmpty()){
+                return@setOnClickListener
+            }
+
+            val start = Common.startDistrictId
+            val end = Common.endDistrictId
             val depDate = selectedDate
             val receiverName = binding.receiverName.text.toString()
             val receiverPhone = binding.phoneNumber.text.toString()
@@ -447,24 +414,27 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             val baggagePlaces = printArray(selectedParcelPlaceBegore)
             val orderAmount = money.toString().replace(" ", "")
 
-            val details1 = mutableMapOf<String, String>()
+            val details1 = mutableMapOf<String, ArrayList<String>>()
 
-            for (i in 0 until imageBase64.size) {
-                details1["baggage_photo[]"] = imageBase64[i]
-            }
+            details1["baggage_photo[]"] = imageBase64
+
+            Toast.makeText(context, imageBase64.size.toString(), Toast.LENGTH_SHORT).show()
+
+            details1.forEach { (key, value) -> println("$key = $value") }
+
 
             val shareParcelModel = ShareParcelModel(
-                start,
-                end,
+                start.toInt(),
+                end.toInt(),
                 depDate,
                 selectedLocation,
                 receiverName,
                 receiverPhone,
                 baggage,
                 baggagePlaces,
-                "",
+                "cash",
                 false,
-                123.3,
+                0.0,
                 orderAmount.toDouble(),
                 details1,
                 hasOverheadLuggage,
@@ -497,7 +467,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                     binding.baggageImageRecycler.layoutManager =
                         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                     binding.baggageImageRecycler.setHasFixedSize(false)
-
                 }
 
                 if (selectedFile != null) {
@@ -525,6 +494,16 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
     override fun selectDayListener(time: String) {
         binding.date.text = time
         selectedDate = time
+        makeButtonGreen()
+    }
+
+    private fun makeButtonGreen(){
+        if (selectedLocation.isNotEmpty() || selectedDate.isNotEmpty() || selectedSeat.isNotEmpty()){
+            binding.goToPayment.background.setColorFilter(
+                requireContext().getColor(R.color.green),
+                PorterDuff.Mode.MULTIPLY
+            )
+        }
     }
 
 
@@ -532,6 +511,9 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         binding.apply {
             if (selectedDate.isNotEmpty()) {
                 date.text = selectedDate
+            }
+            if (this@FragmentParcelMain.selectedLocationDisplay.isNotEmpty()){
+                selectedLocation.text=selectedLocationDisplay
             }
             if (money > 0) {
                 updateTotalMoney()
@@ -564,7 +546,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             }
         }
 
-
     }
 
 
@@ -585,15 +566,16 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.green)
                 boxImagesLayout.extraLargeBox.invalidate()
                 boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.week_green))
-                updateTotalMoney()
                 isFourthBoxChecked = true
                 selectedSeat = "seat"
+                invalidateFirst()
+                invalidateSecond()
+                invalidateThird()
+                updateTotalMoney()
             } else {
-
                 boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.grey)
                 boxImagesLayout.extraLargeBox.invalidate()
                 boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.grey))
-
                 boxImagesLayout.fourthRadio.isChecked = false
                 updateTotalMoney()
                 isFourthBoxChecked = false
@@ -621,6 +603,58 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
 
     }
 
+    private fun invalidateFirst() {
+        binding.apply {
+            if (isFirstBoxChecked) {
+                isFirstBoxChecked = false
+                boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
+                boxImagesLayout.smallBox.invalidate()
+                boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
+                boxImagesLayout.firstRadio.isChecked = false
+                money -= firstSeat.toFloat()
+            }
+        }
+    }
+
+    private fun invalidateSecond() {
+        binding.apply {
+            if (isSecondBoxChecked) {
+                isSecondBoxChecked = false
+                boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
+                boxImagesLayout.middleBox.invalidate()
+                boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
+                boxImagesLayout.secondRadio.isChecked = false
+                money -= secondSeat.toFloat()
+            }
+        }
+    }
+
+    private fun invalidateThird() {
+        binding.apply {
+            if (isThirdBoxChecked) {
+                isThirdBoxChecked = false
+                boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
+                boxImagesLayout.largeBox.invalidate()
+                boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
+                boxImagesLayout.thirdRadio.isChecked = false
+                money -= thirdSeat.toFloat()
+            }
+        }
+    }
+
+    private fun invalidateFourth() {
+        binding.apply {
+            if (isFourthBoxChecked) {
+                isFourthBoxChecked = false
+                boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.grey)
+                boxImagesLayout.extraLargeBox.invalidate()
+                boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.grey))
+                boxImagesLayout.fourthRadio.isChecked = false
+                money -= seatTotalAmount
+            }
+        }
+    }
+
     override fun onAddClick(position: Int) {
         openGallery()
     }
@@ -643,4 +677,11 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 )
             }
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
+
 }

@@ -42,6 +42,7 @@
     <dimen name="dimens_0dp">0dp</dimen>
     <dimen name="dimen_14dp">14dp</dimen>
     <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="margin_padding_60dp">60dp</dimen>
 
     <item name="diment_05dp" type="dimen">1dp</item>
 </resources>

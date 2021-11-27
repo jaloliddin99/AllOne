@@ -13,7 +13,7 @@ data class ShareParcelModel(
     val usedBonus:Boolean,
     val usedBonusAmount:Double,
     val orderAmount:Double,
-    val baggagePhoto: Map<String, String>,
+    val baggagePhoto: Map<String, ArrayList<String>>,
     val hasOverheadLuggage: Boolean,
     val forAnother: Boolean,
     val phoneNumber: String,

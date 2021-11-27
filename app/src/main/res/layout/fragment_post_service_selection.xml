@@ -46,14 +46,13 @@
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
         android:layout_marginTop="?android:attr/actionBarSize"
         android:layout_marginBottom="0dp"
         android:scrollbars="none">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-
+            android:animateLayoutChanges="true"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_padding_16dp"
             android:layout_marginTop="@dimen/margin_padding_24dp"
@@ -287,6 +286,8 @@
                                 android:fontFamily="@font/inter_medium"
                                 android:text="@string/enter_your_address"
                                 android:textColor="@color/black"
+                                android:ellipsize="end"
+                                android:maxLines="1"
                                 android:textSize="@dimen/diment_text_size_15sp"
                                 android:textStyle="bold" />
 
@@ -316,19 +317,25 @@
                             app:tint="#A9B4B8" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_padding_24dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/size_of_baggage"
-                        android:textColor="?android:attr/textColorPrimary"
-                        android:textSize="@dimen/text_size_18sp"
-                        android:textStyle="bold" />
+                        android:id="@+id/linearLayout"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_padding_24dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/size_of_baggage"
+                            android:textColor="?android:attr/textColorPrimary"
+                            android:textSize="@dimen/text_size_18sp"
+                            android:textStyle="bold" />
+                        <include
+                            android:id="@+id/box_images_layout"
+                            layout="@layout/layout_order_baggage_post" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <include
-                        android:id="@+id/box_images_layout"
-                        layout="@layout/layout_order_baggage_post" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
@@ -551,13 +558,13 @@
                     android:background="#CCffffff"
                     android:elevation="50dp"
                     android:orientation="vertical"
-                    android:visibility="gone">
+                    android:visibility="visible">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="150dp"
                         android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="150dp"
 
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/choose_address"
@@ -568,10 +575,13 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:id="@+id/bottomSheet"
         android:background="@drawable/dark_green_top12"
@@ -624,4 +634,5 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </RelativeLayout>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

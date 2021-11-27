@@ -79,6 +79,12 @@ constructor(private val apiInterface: APIInterface) {
     ) =
         apiInterface.updateNewOrder(token, id, passengerCount, places)
 
+    suspend fun interAreaBooking(
+        token: Map<String, String>,
+        orderId:Int,
+        driverId: Int
+    )=apiInterface.interAreaBooking(token, orderId, driverId)
+
     suspend fun updateData(
         token: Map<String, String>,
         name: String,
@@ -114,12 +120,12 @@ constructor(private val apiInterface: APIInterface) {
         baggage: String,
         baggagePlaces: String,
         paymentType: String,
-        usedBonus: Boolean,
+        usedBonus: Int,
         usedBonusAmount: Double,
         orderAmount: Double,
-        details: Map<String, String>,
-        hasOverheadLuggage: Boolean,
-        forAnother: Boolean,
+        details: Map<String, ArrayList<String>>,
+        hasOverheadLuggage: Int,
+        forAnother: Int,
         phoneNumber: String,
         comment: String,
         cardId: Int
@@ -470,6 +476,12 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun postAddToFavourites(token: Map<String, String>, id: Int)=
         apiInterface.agencyAddToFavourite(token, id)
+
+    /*******************************CHAT API*******************************************/
+    /**Chat api*/
+    suspend fun chatModel(token: Map<String, String>, orderID: String)=apiInterface.getChatModel(token, orderID)
+
+
 
 
 }

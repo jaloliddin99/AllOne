@@ -196,6 +196,11 @@
                       <LayoutPositions />
                     </value>
                   </entry>
+                  <entry key="action_global_tourism_filter2">
+                    <value>
+                      <LayoutPositions />
+                    </value>
+                  </entry>
                   <entry key="action_global_travel_agency">
                     <value>
                       <LayoutPositions />
@@ -274,6 +279,18 @@
                           <Point>
                             <option name="x" value="-101" />
                             <option name="y" value="-4716" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="chatFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="-2980" />
+                            <option name="y" value="-1690" />
                           </Point>
                         </option>
                       </LayoutPositions>

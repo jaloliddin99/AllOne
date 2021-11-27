@@ -3,7 +3,7 @@ package com.tesseract.AllOneClient.model.home.RouteTariffPrices
 import com.google.gson.annotations.SerializedName
 
 data class RouteTariffPricesModel(
-    @field:SerializedName("success")
+        @field:SerializedName("success")
     var success: Boolean?=null,
 
     @field:SerializedName("content")

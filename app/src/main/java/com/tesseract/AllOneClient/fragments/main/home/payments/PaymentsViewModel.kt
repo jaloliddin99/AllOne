@@ -22,6 +22,7 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
 
 
     val parcelNewOrderObserver = MutableLiveData<NewOrderInterAreaModel>()
+    val parcelError=MutableLiveData<String>()
 
 
     fun parcelNewOrder(
@@ -36,12 +37,12 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
         baggage: String,
         baggagePlaces: String,
         paymentType: String,
-        usedBonus: Boolean,
+        usedBonus: Int,
         usedBonusAmount: Double,
         orderAmount: Double,
-        details: Map<String, String>,
-        hasOverheadLuggage:Boolean,
-        forAnother: Boolean,
+        details: Map<String, ArrayList<String>>,
+        hasOverheadLuggage:Int,
+        forAnother: Int,
         phoneNumber: String,
         comment: String,
         cardId: Int
@@ -54,12 +55,16 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
                 if (it.isSuccessful) {
                     if (it.body()?.success == true) {
                         parcelNewOrderObserver.postValue(it.body())
+                    }else{
+                        parcelError.postValue(it.body()?.message)
                     }
+                }else{
+                    parcelError.postValue(it.message())
                 }
                 Log.i(TAG, "parcelNewOrder: ${it.body()?.message} ${it.code()} ${it.message()}")
             }
         }catch (e:Exception){
-
+            parcelError.postValue(e.message)
         }
     }
 

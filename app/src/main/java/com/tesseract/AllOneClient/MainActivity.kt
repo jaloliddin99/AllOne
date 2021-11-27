@@ -259,6 +259,14 @@ class MainActivity : AppCompatActivity() {
                             true
                         )
                     }
+                    R.id.chatFragment->{
+                        hideBottomNav()
+                        statusBarColor(
+                            ResourcesCompat.getColor(resources, R.color.white, theme),
+                            ResourcesCompat.getColor(resources, R.color.white, theme),
+                            true
+                        )
+                    }
                 }
             }
         }
@@ -281,11 +289,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBottomNav() {
-        binding.bottomNav.visibility = View.VISIBLE
+        binding.bottomAppBar.performShow()
     }
 
     private fun hideBottomNav() {
-        binding.bottomNav.visibility = View.GONE
+        binding.bottomAppBar.performHide()
         menuItem?.isVisible = false
     }
 

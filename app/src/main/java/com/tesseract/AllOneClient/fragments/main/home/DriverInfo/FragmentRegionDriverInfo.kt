@@ -114,10 +114,22 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
         }
 
         viewModel.updateNewOrder.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
         viewModel.errorM.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel.interAreaError.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+        viewModel.interAreaBooking.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            val action=FragmentRegionDriverInfoDirections.actionFragmentRegionDriverInfoToFragmentRegionTaxiConfirmation(tariff, orderId, driverId)
+            findNavController().navigate(action)
         })
 
 
@@ -148,17 +160,25 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
                         taxiDriverLocationPresenter.translationZ=0f
                         selectPlaceText.setTextColor(context?.getColor(R.color.red)!!)
                     }else{
-                        val action=FragmentRegionDriverInfoDirections.actionFragmentRegionDriverInfoToFragmentRegionTaxiConfirmation()
-                        findNavController().navigate(action)
+                        if (driverId!=-11 && orderId!=-11){
+                            loader.loader.visibility=View.VISIBLE
+                            viewModel.interAreaBooking(headerMapUniversal(requireContext()), orderId, driverId)
+                        }
                     }
                 }else{
-                    val action=FragmentRegionDriverInfoDirections.actionFragmentRegionDriverInfoToFragmentRegionTaxiConfirmation()
-                    findNavController().navigate(action)
+                    if (driverId!=-11 && orderId!=-11){
+                        loader.loader.visibility=View.VISIBLE
+                        viewModel.interAreaBooking(headerMapUniversal(requireContext()), orderId, driverId)
+                    }
+
                 }
 
             }
         }
     }
+    private var tariff:String=""
+    private var orderId:Int=-11
+    private var driverId:Int=-11
     private lateinit var otherOption: OtherOption
     private var location=""
     private lateinit var content:Content
@@ -166,9 +186,15 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     private fun imageTextSetter(){
         shareViewModel.mutableSearchItem.observe(viewLifecycleOwner,  {
             content=it
+            orderId=it.order.id.toInt()
+            tariff=it.order.tariff
+
+
             binding.apply {
                 if (args.isYourRequest){
                     yourRequest(it)
+                    driverId=it.your_request[args.selectedPosition].id
+
                     placeNotAccording.visibility=View.GONE
                     selectPlaceCardView.visibility=View.GONE
                     materialCardView.visibility=View.VISIBLE
@@ -181,6 +207,7 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
                     location=it.your_request[args.selectedPosition].driver_last_location
                 }else{
                     otherOptions(it)
+                    driverId=it.your_request[args.selectedPosition].id
                     location=it.your_request[args.selectedPosition].driver_last_location
                     selectPlaceCardView.visibility=View.VISIBLE
                     placeNotAccording.visibility=View.VISIBLE
@@ -282,20 +309,6 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
         (mBottomSheetBehavior as BottomSheetBehavior<*>).addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                    }
-                    BottomSheetBehavior.STATE_DRAGGING -> {
-                    }
-                    BottomSheetBehavior.STATE_HALF_EXPANDED -> {
-                    }
-                    BottomSheetBehavior.STATE_HIDDEN -> {
-                    }
-                    BottomSheetBehavior.STATE_SETTLING -> {
-                    }
-                }
             }
 
             override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {
@@ -467,10 +480,10 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
                         "#${selectedPositions[i]}, "
                     }
                 }
-                places.text=seats
 
-                viewModel.update(headerMapUniversal(requireContext()), 7, selectedPositions.size, orderedSeats)
-                Toast.makeText(context, "start", Toast.LENGTH_SHORT).show()
+                places.text=seats
+                loader.loader.visibility=View.VISIBLE
+                viewModel.update(headerMapUniversal(requireContext()), orderId, selectedPositions.size, orderedSeats)
 
             }
 

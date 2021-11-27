@@ -672,6 +672,7 @@
     <string name="enterPhoneNumber">Введите Номер телефона</string>
     <string name="your_bonus_is_not_enough">" Суммы вашего бонуса недостаточно для выбора"</string>
     <string name="minimum_amount">500 сум</string>
+    <string name="bandPlace">Занять место</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

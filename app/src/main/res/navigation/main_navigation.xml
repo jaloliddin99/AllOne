@@ -15,47 +15,47 @@
         <action
             android:id="@+id/action_homeFragment_to_fragmentTaxiRegions"
             app:destination="@id/fragmentTaxiRegions"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
 
         <action
             android:id="@+id/action_homeFragment_to_fragmentCityMap"
             app:destination="@id/fragmentCityMap"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
         <action
             android:id="@+id/action_homeFragment_to_fragmentMainClinic"
             app:destination="@id/fragmentMainClinic"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
         <action
             android:id="@+id/action_homeFragment_to_fragmentTourismMain"
             app:destination="@id/fragmentTourismMain"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
 
         <action
             android:id="@+id/action_homeFragment_to_orderFragment"
             app:destination="@id/orderFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
         <action
             android:id="@+id/action_homeFragment_to_fragmentPostServiceSelection"
             app:destination="@id/fragmentPostServiceSelection"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
         <action
             android:id="@+id/action_homeFragment_to_fragmentNewsView2"
             app:destination="@id/fragmentNewsView" />
@@ -351,10 +351,10 @@
         <action
             android:id="@+id/action_fragmentRegionDriverInfo_to_fragmentRegionTaxiConfirmation"
             app:destination="@id/fragmentRegionTaxiConfirmation"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
         <argument
             android:name="selectedPosition"
             app:argType="integer" />
@@ -370,16 +370,34 @@
         <action
             android:id="@+id/action_fragmentRegionTaxiConfirmation_to_fragmentRegionTaxiConfirmation2"
             app:destination="@id/fragmentRegionTaxiConfirmation2"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_left"
-            app:popExitAnim="@anim/slide_out_right" />
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/fade_out"  />
+        <argument
+            android:name="tariff"
+            app:argType="string" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="driverId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegionTaxiConfirmation2"
         android:name="com.tesseract.AllOneClient.fragments.main.home.FragmentRegionTaxiConfirmation2"
         android:label="fragment_region_taxi_confirmation2"
         tools:layout="@layout/fragment_region_taxi_confirmation2">
+        <argument
+            android:name="tariff"
+            app:argType="string" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
+        <argument
+            android:name="driverId"
+            app:argType="integer" />
 
 
     </fragment>
@@ -1215,6 +1233,21 @@
             android:name="agencyId"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.tesseract.AllOneClient.fragments.chat.ChatFragment"
+        android:label="fragment_chat"
+        tools:layout="@layout/fragment_chat">
+        <argument android:name="orderId"
+            app:argType="integer"/>
+    </fragment>
+
+    <action android:id="@+id/action_global_chat"
+        app:destination="@+id/chatFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"/>
 
 
 </navigation>

@@ -38,6 +38,7 @@ import com.tesseract.AllOneClient.utils.bitmapDescriptorFromVector
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 import java.util.*
 
 
@@ -154,13 +155,17 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
 
         viewModel.data.observe(requireActivity(),  {
             dialog.dismiss()
-            if (!it.address.isNullOrEmpty()){
-                binding?.textSelect?.text=it.address
-                usedSelectedLocation= it.address!!
+            try {
+                if (!it.address.isNullOrEmpty()){
+                    binding?.textSelect?.text=it.address
+                    usedSelectedLocation= it.address!!
 
-                Log.i(TAG, "onMapReady: $usedSelectedLocation $latLngFinal")
-            }else{
-                binding?.textSelect?.text="Not found"
+                    Log.i(TAG, "onMapReady: $usedSelectedLocation $latLngFinal")
+                }else{
+                    binding?.textSelect?.text="Not found"
+                }
+            }catch (e:Exception){
+
             }
         })
 

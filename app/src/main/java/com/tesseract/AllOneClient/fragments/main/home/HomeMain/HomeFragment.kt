@@ -243,7 +243,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 )
             }
             2 -> {
-
+                val action=HomeFragmentDirections.actionGlobalChat(1)
+                findNavController().navigate(action)
             }
             3 -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentTourismMain()

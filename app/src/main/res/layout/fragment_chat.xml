@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.chat.ChatFragment">
+
+    <RelativeLayout
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:elevation="30dp"
+        tools:ignore="UnusedAttribute">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_arrow_left"
+            app:tint="@color/black" />
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_semibold"
+                android:text="Назаров Санжар"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/txt_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/inter_regular"
+                android:text="Chevrolet Gentra, 01 A 777 AA"
+                android:textColor="@color/hint_color"
+                android:textSize="@dimen/text_size_13sp"
+                tools:ignore="HardcodedText" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/margin_padding_36dp"
+            android:layout_height="@dimen/margin_padding_36dp"
+            app:cardCornerRadius="@dimen/dimens_18dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/margin_padding_8dp"
+            app:cardElevation="@dimen/dimens_0dp">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/image_avater"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                />
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/margin_padding_12dp"
+        android:clipToPadding="false"
+        android:scrollbarStyle="outsideOverlay"
+        android:layout_marginVertical="@dimen/item_height_56dp"
+        app:stackFromEnd="true"
+        app:reverseLayout="true"
+        tools:listitem="@layout/item_interior_chat_me"
+        android:visibility="visible" />
+
+
+<!--    <androidx.appcompat.widget.AppCompatImageView-->
+<!--        android:id="@+id/image"-->
+<!--        android:layout_width="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/toolbar"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintBottom_toTopOf="@id/layout"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_above="@id/layout"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginHorizontal="@dimen/margin_padding_60dp"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginTop="@dimen/margin_padding_60dp"-->
+<!--        android:src="@drawable/ic_chat_zero" />-->
+
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+        android:elevation="12dp"
+        android:id="@+id/layout"
+        android:translationZ="@dimen/margin_padding_12dp"
+        android:layout_height="wrap_content">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_height_56dp"
+            android:layout_gravity="bottom"
+            android:background="@color/white">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/text_size_20sp"
+                android:src="@drawable/ic_upload_image" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/chatEdittext"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/margin_padding_36dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="@dimen/dimens_10dp"
+                android:layout_marginEnd="@dimen/margin_padding_4dp"
+                android:layout_marginBottom="@dimen/dimens_10dp"
+                android:layout_weight="5"
+                android:background="@drawable/ic_item_contener_border"
+                android:fontFamily="@font/inter_regular"
+                android:inputType="textShortMessage"
+                android:paddingStart="@dimen/margin_padding_16dp"
+                android:paddingEnd="@dimen/margin_padding_12dp"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_15sp" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/margin_padding_8dp"
+                android:layout_marginEnd="@dimen/margin_padding_16dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:src="@drawable/ic_send_button_chat" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </RelativeLayout>
+
+
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

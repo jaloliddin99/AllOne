@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -343,7 +344,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
     private var parcelUsedBonus = false
     private var parcelUsedBonusAmount = 0.0
     private var parcelOrderAmount = 0.0
-    private lateinit var parcelBaggagePhotos: Map<String, String>
+    private lateinit var parcelBaggagePhotos: Map<String, ArrayList<String>>
     private var parcelHasOverheadLuggage = false
     private var parcelForAnother = false
     private var parcelPhoneNumber = ""
@@ -390,6 +391,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
         })
 
         viewModel.parcelNewOrderObserver.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             if (SaveData.isCurrentFragment) {
                 val action =
                     FragmentPaymentDirections.actionFragmentPaymentToFragmentLocation(
@@ -401,9 +403,17 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
                 findNavController().navigate(action)
             }
         })
+
+        viewModel.parcelError.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
+        })
     }
 
     private fun parcelDelivery2(){
+
+        binding.loader.loader.visibility=View.VISIBLE
+
         val usedBonus: Boolean = binding.bonusAmount.isChecked
         val paymentType: String = if (binding.withCashRadio.isChecked) {
             "cash"
@@ -435,12 +445,12 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             parcelBaggage,
             parcelBaggagePlaces,
             paymentType,
-            usedBonus,
+            if (usedBonus) 1 else 0,
             if (bonusAmount.isEmpty()) 0.0 else bonusAmount.toDouble(),
             parcelOrderAmount,
             parcelBaggagePhotos,
-            parcelHasOverheadLuggage,
-            parcelForAnother,
+            if (parcelHasOverheadLuggage) 1 else 0,
+            if (parcelForAnother) 1 else 0,
             parcelPhoneNumber,
             parcelComment,
             1

@@ -1,24 +1,23 @@
 package com.tesseract.AllOneClient.fragments.main.home
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.databinding.FragmentRegionTaxiConfirmationBinding
+import com.tesseract.AllOneClient.dialogs.sockets.DialogOrderCancelled
+import com.tesseract.AllOneClient.model.taxiCity.tariffs.ListenOrderAccept
+import com.tesseract.AllOneClient.services.SocketHandler
 
-class FragmentRegionTaxiConfirmation: Fragment(R.layout.fragment_region_taxi_confirmation) {
+class FragmentRegionTaxiConfirmation: Fragment(), DialogOrderCancelled.OnLickListener {
     private var _binding: FragmentRegionTaxiConfirmationBinding? = null
     private val binding get() = _binding!!
     private val time= 20_000L
+    private val args:FragmentRegionTaxiConfirmationArgs by navArgs()
 
 
     override fun onCreateView(
@@ -38,12 +37,10 @@ class FragmentRegionTaxiConfirmation: Fragment(R.layout.fragment_region_taxi_con
         }
 
         binding.apply {
-            val timer = object: CountDownTimer(time, 1000) {
+            val timer = object: CountDownTimer(time, 10*60*1000L) {
                 override fun onTick(millisUntilFinished: Long) {
-                    Log.i("context ", ""+millisUntilFinished)
                     val progress=(1-millisUntilFinished.toFloat()/time.toFloat())*100
-                    Log.i("contextdwdd ", ""+progress)
-                    wrongProgress.progress= progress.toFloat()
+                    wrongProgress.progress= progress
 
                 }
 
@@ -54,8 +51,25 @@ class FragmentRegionTaxiConfirmation: Fragment(R.layout.fragment_region_taxi_con
             timer.start()
         }
 
+        SocketHandler.setSocket()
+        SocketHandler.establishConnection()
+
+        val mSocket = SocketHandler.getSocket()
+
+        mSocket.on("chat_client_2") { args ->
+            if (args[0] != null) {
+                val response = args[0] as ListenOrderAccept
+                activity?.runOnUiThread {
+                    if (response.status=="cancelled"){
+                        DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                    }
+                }
+            }
+        }
+
+
         binding.bookNow.setOnClickListener {
-            val action= FragmentRegionTaxiConfirmationDirections.actionFragmentRegionTaxiConfirmationToFragmentRegionTaxiConfirmation2()
+            val action= FragmentRegionTaxiConfirmationDirections.actionFragmentRegionTaxiConfirmationToFragmentRegionTaxiConfirmation2(args.tariff, args.orderId, args.driverId)
             findNavController().navigate(action)
         }
 
@@ -65,5 +79,9 @@ class FragmentRegionTaxiConfirmation: Fragment(R.layout.fragment_region_taxi_con
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    override fun orderAgain() {
+
     }
 }

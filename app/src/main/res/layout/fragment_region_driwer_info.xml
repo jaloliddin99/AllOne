@@ -586,7 +586,6 @@
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" #1, #2"
                                 android:id="@+id/places"
                                 android:textSize="@dimen/text_size_15sp"
                                 android:fontFamily="@font/inter_regular"
@@ -599,7 +598,7 @@
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
-                <Space
+                <androidx.legacy.widget.Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"/>
@@ -634,4 +633,9 @@
             android:textSize="@dimen/text_size_18sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -9,6 +9,7 @@ import com.tesseract.AllOneClient.model.charity.history.CharityHistoryMain
 import com.tesseract.AllOneClient.model.charity.index.Index
 import com.tesseract.AllOneClient.model.charity.projectCards.ProjectCreditCardModel
 import com.tesseract.AllOneClient.model.charity.projects.CharityProjectMainModel
+import com.tesseract.AllOneClient.model.chat.ChatSocketModel
 import com.tesseract.AllOneClient.model.dialogComplaint.DialogComplaintModel
 import com.tesseract.AllOneClient.model.dialogComplaint.MakeComplaintDriverResponseModel
 import com.tesseract.AllOneClient.model.dialogRating.DriverRatingOptions
@@ -166,6 +167,13 @@ interface APIInterface {
         @Field("places") places: String
     ):Response<NewOrderUpdateModel>
 
+    @POST("interarea/book/{order_id}")
+    suspend fun interAreaBooking(
+        @HeaderMap headers: Map<String, String>,
+        @Path("order_id") id: Int,
+        @Field("driver_id") driverId:Int
+    ):Response<ClinicAddToFavouriteModel>
+
 
 
     //parcel delivery related APIS
@@ -184,12 +192,12 @@ interface APIInterface {
         @Field("baggage") baggage: String,
         @Field("baggage_places") baggage_places: String,
         @Field("payment_type") payment_type: String,
-        @Field("used_bonus") used_bonus: Boolean,
+        @Field("used_bonus") used_bonus: Int,
         @Field("used_bonus_amount") used_bonus_amount: Double,
         @Field("order_amount") order_amount: Double,
-        @FieldMap details: Map<String, String>,
-        @Field("has_overhead_luggage") has_overhead_luggage: Boolean,
-        @Field("for_another") for_another: Boolean,
+        @FieldMap details: Map<String, ArrayList<String>>,
+        @Field("has_overhead_luggage") has_overhead_luggage: Int,
+        @Field("for_another") for_another: Int,
         @Field("phone_number") phone_number: String,
         @Field("comment") comment: String,
         @Field("card_id") cardId:Int
@@ -774,6 +782,15 @@ interface APIInterface {
         @Path("id") agencyId:Int
     ):Response<ClinicAddToFavouriteModel>
 
+
+
+    /*******************************CHAT API*******************************************/
+    /**Chat api*/
+    @GET("orders/{id}/chat")
+    suspend fun getChatModel(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") orderId: String,
+    ):Response<ChatSocketModel>
 
 
 
