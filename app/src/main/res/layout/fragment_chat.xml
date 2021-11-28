@@ -124,6 +124,10 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/upload_Image"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="@dimen/text_size_20sp"
                 android:src="@drawable/ic_upload_image" />

@@ -100,7 +100,13 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
 
         }
 
+        viewModel2.errorM.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         viewModel2.cardDataList.observe(requireActivity(), {
+            binding.loader.loader.visibility=View.GONE
             binding.apply {
                 if (it.isNotEmpty()) {
                     PagerUzCard.visibility = View.VISIBLE

@@ -789,7 +789,7 @@ interface APIInterface {
     @GET("orders/{id}/chat")
     suspend fun getChatModel(
         @HeaderMap headers: Map<String, String>,
-        @Path("id") orderId: String,
+        @Path("id") orderId: Int,
     ):Response<ChatSocketModel>
 
 

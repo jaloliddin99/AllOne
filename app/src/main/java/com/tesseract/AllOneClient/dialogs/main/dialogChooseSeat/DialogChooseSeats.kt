@@ -26,7 +26,8 @@ class DialogChooseSeats(
     private val selectedParcelPlacesBefore: ArrayList<Int>,
     private val arrayList: ArrayList<Int>,
     private val viewModelSeatPrices: ArrayList<String>,
-    private val listener: SelectedInfoListener
+    private val listener: SelectedInfoListener,
+    private val tariff: Int
 ) :
     DialogFragment(R.layout.dialog_choose_seats) {
     private var firstSeatSelected: Boolean = true
@@ -302,28 +303,30 @@ class DialogChooseSeats(
     @SuppressLint("ResourceAsColor", "UseCompatLoadingForDrawables")
     private fun clickListeners() {
         binding?.firstSeat?.setOnClickListener {
-            if (!selectedParcelPlacesBefore.contains(1)) {
-                if (firstSeatSelected) {
-                    firstSeatEnabled()
-                } else {
-                    context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
-                        ?.let { it2 ->
-                            binding?.firstSeat?.setColorFilter(
-                                it2, android.graphics.PorterDuff.Mode.SRC_IN
-                            )
-                        }
-                    binding?.firstSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
-                    binding?.firstSeatText?.setTextColor(Color.BLACK)
-                    firstSeatSelected = true
-                    binding?.numOne?.setTextColor(requireContext().getColor(R.color.dark_grey))
-                    context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
-                        ?.let { it2 ->
-                            binding?.checkOne?.setColorFilter(
-                                it2, android.graphics.PorterDuff.Mode.SRC_IN
-                            )
-                        }
-                    chosenSeats.remove(1)
-                    totalSum -= viewModelSeatPrices[0].toFloat()
+            if (tariff == 1) {
+                if (!selectedParcelPlacesBefore.contains(1)) {
+                    if (firstSeatSelected) {
+                        firstSeatEnabled()
+                    } else {
+                        context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
+                            ?.let { it2 ->
+                                binding?.firstSeat?.setColorFilter(
+                                    it2, android.graphics.PorterDuff.Mode.SRC_IN
+                                )
+                            }
+                        binding?.firstSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
+                        binding?.firstSeatText?.setTextColor(Color.BLACK)
+                        firstSeatSelected = true
+                        binding?.numOne?.setTextColor(requireContext().getColor(R.color.dark_grey))
+                        context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
+                            ?.let { it2 ->
+                                binding?.checkOne?.setColorFilter(
+                                    it2, android.graphics.PorterDuff.Mode.SRC_IN
+                                )
+                            }
+                        chosenSeats.remove(1)
+                        totalSum -= viewModelSeatPrices[0].toFloat()
+                    }
                 }
             }
         }
@@ -382,6 +385,7 @@ class DialogChooseSeats(
             }
         }
         binding?.fourthSeat?.setOnClickListener {
+
             if (!selectedParcelPlacesBefore.contains(4)) {
                 if (fourthSeatSelected) {
 
@@ -408,8 +412,11 @@ class DialogChooseSeats(
 
                 }
             }
+
+
         }
     }
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation;

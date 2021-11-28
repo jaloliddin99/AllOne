@@ -1,6 +1,12 @@
 package com.tesseract.AllOneClient.fragments.chat
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,6 +28,7 @@ import com.tesseract.AllOneClient.services.SocketHandler
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 import org.json.JSONObject
+import java.io.ByteArrayOutputStream
 
 
 @AndroidEntryPoint
@@ -53,24 +60,38 @@ class ChatFragment : Fragment() {
 
         SocketHandler.setSocket()
         SocketHandler.establishConnection()
-
         val mSocket = SocketHandler.getSocket()
+
+        SendMessageSocket.setSendSocket()
+        SendMessageSocket.establishConnection()
 
         mSocket.on("chat_client_1") { args ->
             if (args[0] != null) {
-                val counter = args[0] as ChatWriteModel
+                val counter = args[0] as JSONObject
                 activity?.runOnUiThread {
-                    Log.d("@@@", "xxxxxx: $counter")
 
-                    val message=Message(1,counter.content, "1111111112222212", "dc", 1, "text")
-                    adapter.addMessage(message)
-                    //binding.image.visibility=View.GONE
+                    val chatId=counter.getString("client_id").toInt()
+                    val content=counter.getString("content")
+                    val direction=counter.getString("direction")
+                    val driver_id=counter.getString("driver_id").toInt()
+                    val order_id=counter.getString("order_id")
+                    val type=counter.getString("type")
+                    if(type=="text"){
+
+                        val message=Message(chatId,content,"1111111112222212",direction,driver_id,type)
+                        adapter.addMessage(message)
+                    }
+                    else {
+                        val message=Message(chatId,content,"1111111112222212",direction,driver_id,type)
+                        adapter.addMessage(message)
+                    }
+
+
 
                 }
             }
         }
 
-        //uiOnItemClickListener...
         uiOnItemClickListener()
 
     }
@@ -82,7 +103,10 @@ class ChatFragment : Fragment() {
             Picasso.get().load(it.content.driver_avatar).into(binding.imageAvater)
             binding.txtName.text = it.content.driver_name
 
+
+            println(it)
             adapter=ChatAdapter(it.content.messages as ArrayList<Message>)
+            Toast.makeText(context, "${it.content.messages.size}", Toast.LENGTH_SHORT).show()
             binding.recyclerview.adapter = adapter
 
         })
@@ -96,7 +120,7 @@ class ChatFragment : Fragment() {
     private fun init() {
         chatWriteModel = ViewModelProvider(this).get(ChatViewModel::class.java)
 
-        chatWriteModel.getChatModel(headerMapUniversal(requireContext()), args.orderId.toString())
+        chatWriteModel.getChatModel(headerMapUniversal(requireContext()), 1)
     }
 
     private fun uiOnItemClickListener() {
@@ -104,8 +128,11 @@ class ChatFragment : Fragment() {
             findNavController().popBackStack()
         }
 
-        SendMessageSocket.setSendSocket()
-        SendMessageSocket.establishConnection()
+        binding.uploadImage.setOnClickListener {
+            openGallery()
+        }
+
+
         val sendMessageSocket = SendMessageSocket.getSocket()
 
 
@@ -117,19 +144,68 @@ class ChatFragment : Fragment() {
             sendMessageSocket.emit("chat_send", JSONObject(Gson().toJson(model)))
             binding.chatEdittext.setText("")
             adapter.addMessage(message)
+
             binding.recyclerview.smoothScrollToPosition(binding.recyclerview.adapter?.itemCount!!)
-            //binding.image.visibility=View.GONE
         }
+
+        binding.imageAvater
         onBackPassed()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == PICK_IMAGE_INTENT) {
+
+                val selectedFile: Uri? = data!!.data
+
+                if (data.clipData==null){
+                    data.data.toString()
+                    val message=Message(1,data.data.toString(), "1111111112222212", "cd", 1, "file")
+                    adapter.addMessage(message)
+                    binding.recyclerview.smoothScrollToPosition(binding.recyclerview.adapter?.itemCount!!)
+                }
+
+
+                if (selectedFile != null) {
+                    val bitmap =
+                        MediaStore.Images.Media.getBitmap(
+                            requireContext().contentResolver,
+                            selectedFile
+                        )
+                    val outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                    val byteArray: ByteArray = outputStream.toByteArray()
+                    val encodedString: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+                    val sendMessageSocket = SendMessageSocket.getSocket()
+
+                    Log.d("@@@", "uiOnItemClickListener: ${sendMessageSocket.connected()}")
+                    val model = ChatWriteModel(1, encodedString, "cd", 1, 1, "file")
+
+                    println(JSONObject(Gson().toJson(model)))
+                    sendMessageSocket.emit("chat_send", JSONObject(Gson().toJson(model)))
+                    binding.chatEdittext.setText("")
+
+
+                }
+
+            }
+        }
+    }
+
+    private var PICK_IMAGE_INTENT = 1
+
+    private fun openGallery() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, false)
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(Intent.createChooser(intent, "Select Image"), PICK_IMAGE_INTENT)
+
+    }
     private fun onBackPassed() {
-//        val callback = object : OnBackPressedCallback(true) {
-//            override fun handleOnBackPressed() {
-//                 findNavController().popBackStack()
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(callback)
+
     }
 
 

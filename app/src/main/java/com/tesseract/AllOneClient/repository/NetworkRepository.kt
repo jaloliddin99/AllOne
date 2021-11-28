@@ -479,7 +479,7 @@ constructor(private val apiInterface: APIInterface) {
 
     /*******************************CHAT API*******************************************/
     /**Chat api*/
-    suspend fun chatModel(token: Map<String, String>, orderID: String)=apiInterface.getChatModel(token, orderID)
+    suspend fun chatModel(token: Map<String, String>, orderID: Int)=apiInterface.getChatModel(token, orderID)
 
 
 

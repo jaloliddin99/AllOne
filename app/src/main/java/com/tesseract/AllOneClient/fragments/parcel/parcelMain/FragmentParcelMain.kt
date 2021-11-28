@@ -462,7 +462,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 val selectedFile: Uri? = data!!.data
                 if (data.clipData == null) {
                     addBaggageImageModel.add(data.data.toString())
-
                     binding.baggageImageRecycler.adapter = addBaggageImagesAdapter
                     binding.baggageImageRecycler.layoutManager =
                         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

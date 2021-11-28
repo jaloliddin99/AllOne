@@ -16,7 +16,7 @@ class ChatViewModel  @Inject constructor(private val networkRepository: NetworkR
 
     val error = MutableLiveData<String>()
 
-    fun getChatModel(token:Map<String, String>, orderId:String) = viewModelScope.launch {
+    fun getChatModel(token:Map<String, String>, orderId:Int) = viewModelScope.launch {
         try {
             networkRepository.chatModel(token, orderId).let {
                 if (it.isSuccessful) {

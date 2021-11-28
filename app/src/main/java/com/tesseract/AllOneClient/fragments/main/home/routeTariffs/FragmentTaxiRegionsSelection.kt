@@ -1,6 +1,7 @@
 package com.tesseract.AllOneClient.fragments.main.home.routeTariffs
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -33,8 +34,7 @@ import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentTaxiRegionsSelection
-    : Fragment(R.layout.fragment_tarif),
+class FragmentTaxiRegionsSelection : Fragment(),
     TariffAdapter.DialogCloseListener {
 
     private var tariffText: String = ""
@@ -100,7 +100,7 @@ class FragmentTaxiRegionsSelection
         }
 
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             val action = FragmentTaxiRegionsSelectionDirections.actionGlobalComposeFragment()
             findNavController().navigate(action)
         }
@@ -115,34 +115,16 @@ class FragmentTaxiRegionsSelection
                 }
             })
 
-//        startRegion = args.startRegionName
-//        startDistrict = args.startDistrictName
-//        endRegion = args.endRegionName
-//        endDistrict = args.endDistrictName
-//
-//        startRegionId = args.startRegionId
-//        startDistrictId = args.startDistrictId
-//        endRegionId = args.endRegionId
-//        endDistrictId = args.endDistrictId
-//
-//        if (startRegion.contains("myLocationStartKey")){
-//            binding?.startDestination?.text=startRegion.removePrefix("myLocationStartKey")
-//        }else if(startRegion.contains("myLocationEndKey")){
-//            binding?.endDestination?.text=startRegion.removePrefix("myLocationEndKey")
-//
-//        }
-
-
         if (Common.destination == 0) {
             if (Common.startRegionId.isNotEmpty() && Common.startDistrictId.isNotEmpty()) {
-                binding!!.startDestination.text = "${Common.startRegion} ${Common.startDistrict}"
-                binding!!.startDestinationChange.text = getString(R.string.change)
+                binding.startDestination.text = "${Common.startRegion} ${Common.startDistrict}"
+                binding.startDestinationChange.text = getString(R.string.change)
             }
         }
         if (Common.destination == 1) {
             if (Common.endRegionId.isNotEmpty() && Common.endDistrictId.isNotEmpty()) {
-                binding!!.endDestination.text = "${Common.endRegion} ${Common.endDistrict}"
-                binding!!.endDestinationTextChange.text = getString(R.string.change)
+                binding.endDestination.text = "${Common.endRegion} ${Common.endDistrict}"
+                binding.endDestinationTextChange.text = getString(R.string.change)
             }
         }
 
@@ -151,7 +133,7 @@ class FragmentTaxiRegionsSelection
         if (Common.startRegionId.isNotEmpty() && Common.endRegionId.isNotEmpty()
             && Common.startDistrictId.isNotEmpty() && Common.endDistrictId.isNotEmpty()
         ) {
-            binding?.apply {
+            binding.apply {
                 startDestinationChange.text = getString(R.string.change)
                 endDestinationTextChange.text = getString(R.string.change)
                 relativeView.visibility=View.GONE
@@ -164,14 +146,14 @@ class FragmentTaxiRegionsSelection
         }
         Common.isCurrentRegionFragment = true
 
-        binding!!.startDestinationChange.setOnClickListener {
+        binding.startDestinationChange.setOnClickListener {
             Common.destination=0
             val action =
                 FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
             findNavController().navigate(action)
         }
 
-        binding!!.endDestinationTextChange.setOnClickListener {
+        binding.endDestinationTextChange.setOnClickListener {
             Common.destination=1
             val action =
                 FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
@@ -198,6 +180,7 @@ class FragmentTaxiRegionsSelection
     override fun onDialogClose(tariff: String?, name: String?, url: String?, price: String?) {
         if (tariff != null) {
             tariffText = tariff
+            Log.i(TAG, "onDialogClose: $tariff")
             val model=ShareModel(
                 tariffText,
                 name,
@@ -223,13 +206,13 @@ class FragmentTaxiRegionsSelection
 
 
     private fun tariffOrder() {
-        binding?.btnTariffOrder?.setOnClickListener {
+        binding.btnTariffOrder.setOnClickListener {
             if (isClickEventEnabled) {
                 if (!isEnabled) {
 
                 } else {
                     val action =
-                        FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentOrderTaxi2()
+                        FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentOrderTaxi2(if (tariffText=="standard") 1 else if (tariffText=="women") 2 else 3)
                     findNavController().navigate(action)
                 }
             } else {

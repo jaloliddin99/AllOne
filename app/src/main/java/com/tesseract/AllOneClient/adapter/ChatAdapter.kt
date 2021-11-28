@@ -2,11 +2,19 @@ package com.tesseract.AllOneClient.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.databinding.ItemInteriorChatMeBinding
 import com.tesseract.AllOneClient.databinding.ItemInteriorChatYouBinding
 import com.tesseract.AllOneClient.model.chat.Message
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.graphics.Bitmap
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.layout_baggage_images.view.*
+
 
 class ChatAdapter(var list: ArrayList<Message>) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -64,18 +72,33 @@ class ChatAdapter(var list: ArrayList<Message>) :
         : RecyclerView.ViewHolder(binding.root) {
 
             fun holderMe(order:Message){
-                binding.txtTextMe.text=order.content
-                binding.txtTimeMe.text=order.created_at
+                if (order.type=="file"){
+                    binding.txtTextMe.visibility= View.GONE
+                    binding.card.visibility=View.VISIBLE
+                    Picasso.get().load(order.content).into(binding.imageSend)
+                }else{
+                    binding.card.visibility=View.GONE
+                    binding.txtTextMe.visibility=View.VISIBLE
+                    binding.txtTextMe.text=order.content
+                    binding.txtTimeMe.text=order.created_at
+                }
+
             }
     }
 
     class MyViewHolderYou(var binding: ItemInteriorChatYouBinding)
         : RecyclerView.ViewHolder(binding.root) {
         fun holderYou(order:Message){
-            binding.txtTextYou.text=order.content
-            binding.txtTimeYou.text=order.created_at
+            if (order.type=="file"){
+                binding.txtTextYou.visibility= View.GONE
+                binding.card.visibility=View.VISIBLE
+                Picasso.get().load(order.content).into(binding.imageSend)
+            }else{
+                binding.card.visibility=View.GONE
+                binding.txtTextYou.visibility=View.VISIBLE
+                binding.txtTextYou.text=order.content
+                binding.txtTimeYou.text=order.created_at
+            }
         }
-
-
     }
 }

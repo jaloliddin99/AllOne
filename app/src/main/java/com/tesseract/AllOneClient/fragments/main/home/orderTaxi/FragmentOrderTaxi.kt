@@ -1,22 +1,17 @@
 package com.tesseract.AllOneClient.fragments.main.home.orderTaxi
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.content.ContentValues.TAG
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.appcompat.widget.AppCompatEditText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
@@ -34,10 +29,6 @@ import com.tesseract.AllOneClient.utils.hideKeyboard
 import com.tesseract.AllOneClient.utils.onRightDrawableClicked
 import dagger.hilt.android.AndroidEntryPoint
 
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
-
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
-
 
 @AndroidEntryPoint
 class FragmentOrderTaxi : Fragment(),
@@ -48,6 +39,7 @@ class FragmentOrderTaxi : Fragment(),
 
     private var _binding: FragmentOrderTaxiBinding?=null
     private val binding get() = _binding!!
+    private val args:FragmentOrderTaxiArgs by navArgs()
     private var selectedPlaces = ArrayList<Int>()
     private var selectedParcelPlaceBefore = ArrayList<Int>()
     private var viewModelSeatPrices = ArrayList<String>()
@@ -98,8 +90,6 @@ class FragmentOrderTaxi : Fragment(),
         viewModel = ViewModelProvider(this).get(OrderTaxiViewModel::class.java)
         gotoPayments()
 
-
-
         shareModel.selectedItem.observe(viewLifecycleOwner, { item ->
             viewModel.getRouteTariffPrices(
                 headerMapUniversal(requireContext()),
@@ -126,6 +116,7 @@ class FragmentOrderTaxi : Fragment(),
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
+
         chooseDialogs()
         showHideBaggage()
         hideBottom()
@@ -133,20 +124,33 @@ class FragmentOrderTaxi : Fragment(),
 
         restoreStateOf()
         clickListeners()
-
         baggageBoxes()
-        selectSeat()
+
         viewModelListener()
 
+        if (args.tariff!=3){
+            selectSeat()
+        }else{
+            fourthSeatSelected()
+            selectedPlaces.clear()
+            selectedPlaces.add(1)
+            selectedPlaces.add(2)
+            selectedPlaces.add(3)
+            selectedPlaces.add(4)
+            binding.selectedSeatNumbers.text = printArray(selectedPlaces)
+
+        }
+
+
         binding.openComment.setOnClickListener {
-            val action =
-                FragmentOrderTaxiDirections.actionGlobalAddComment()
+            val action = FragmentOrderTaxiDirections.actionGlobalAddComment()
             findNavController().navigate(action)
         }
 
         getBackStackData<String>("commentKey", true) {
             commentText = it
             restoreStateOf()
+            isReady()
         }
 
         getBackStackData<Contact>("selectedContact", true) {
@@ -157,6 +161,7 @@ class FragmentOrderTaxi : Fragment(),
                 .replace(")", "")
             phoneNumberOther=phoneNum
             restoreStateOf()
+            isReady()
         }
 
 
@@ -164,7 +169,6 @@ class FragmentOrderTaxi : Fragment(),
             selectedLocationDisplay = it.split("###")[0]
             selectedLocation = it.split("###")[1]
             isReady()
-
             restoreStateOf()
         }
 
@@ -216,18 +220,6 @@ class FragmentOrderTaxi : Fragment(),
                 tag
             )
         }
-
-//        setEventListener(requireActivity(), object : KeyboardVisibilityEventListener {
-//            override fun onVisibilityChanged(isOpen: Boolean) {
-//                if (isOpen){
-//                    binding.bottomSheet.visibility = View.GONE
-//                }else{
-//                    binding.bottomSheet.visibility = View.VISIBLE
-//                }
-//            }
-//        })
-
-
     }
 
 
@@ -308,12 +300,23 @@ class FragmentOrderTaxi : Fragment(),
 
         viewModel.placeList.observe(requireActivity(), {
             viewModelSeatPrices.clear()
+            totalMoneyPremium=0.0
             for (i in it.indices) {
+                totalMoneyPremium += it[i].price!!.toDouble()
                 viewModelSeatPrices.add(it[i].price!!)
                 fourthSeat.add(it[i].price!!)
             }
+            if (isFirstTotal){
+                money=totalMoneyPremium.toFloat()
+                updateTotalMoney()
+                bottomSheetPeekHeightController()
+            }
+            isFirstTotal=false
         })
     }
+
+    private var isFirstTotal=true
+    private var totalMoneyPremium=0.0
 
     private fun baggageBoxes() {
 
@@ -359,7 +362,7 @@ class FragmentOrderTaxi : Fragment(),
             } else {
                 selectedSeat = binding.boxImagesLayout.baggageType1.text.toString()
                 money += secondSeat.toFloat()
-                binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
+                binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.week_green))
                 binding.boxImagesLayout.middleBox.strokeColor =
                     requireContext().getColor(R.color.green)
                 isSecondBoxChecked = true
@@ -479,9 +482,12 @@ class FragmentOrderTaxi : Fragment(),
 
     private fun chooseSeat() {
         binding.chooseSeat.setOnClickListener {
-            if (userNumberSelected) {
-                openSelectSeatDialog()
+            if (args.tariff!=3){
+                if (userNumberSelected) {
+                    openSelectSeatDialog()
+                }
             }
+
         }
     }
 
@@ -492,7 +498,8 @@ class FragmentOrderTaxi : Fragment(),
                 selectedParcelPlaceBefore,
                 selectedPlaces,
                 viewModelSeatPrices,
-                this
+                this,
+                args.tariff
             ).show(
                 it,
                 tag
@@ -668,6 +675,51 @@ class FragmentOrderTaxi : Fragment(),
         bottomSheetPeekHeightController()
     }
 
+    private fun invalidateFirst(){
+        binding.apply {
+            if (isFirstBoxChecked){
+                binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
+                binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.smallBox.invalidate()
+                money -= secondSeat.toFloat()
+                isFirstBoxChecked = false
+            }
+        }
+    }
+    private fun invalidateSecond(){
+        binding.apply {
+            if (isSecondBoxChecked){
+                binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
+                binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.middleBox.invalidate()
+                money -= secondSeat.toFloat()
+                isSecondBoxChecked = false
+            }
+        }
+    }
+    private fun invalidateThird(){
+        binding.apply {
+            if (isThirdBoxChecked){
+                binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
+                binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.largeBox.invalidate()
+                money -= thirdSeat.toFloat()
+                isFourthBoxChecked = false
+            }
+        }
+    }
+    private fun invalidateFourth(){
+        binding.apply {
+            if (isFourthBoxChecked){
+                binding.boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.grey))
+                binding.boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.extraLargeBox.invalidate()
+                money -= seatTotalAmount
+                isFourthBoxChecked = false
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun updateTotalMoney() {
 
@@ -770,9 +822,11 @@ class FragmentOrderTaxi : Fragment(),
             isReady()
         }
         binding.fourPerson.setOnClickListener {
-            fourthSeatSelected()
-            openSelectSeatDialog()
-            isReady()
+            if (args.tariff==1){
+                fourthSeatSelected()
+                openSelectSeatDialog()
+                isReady()
+            }
         }
     }
 

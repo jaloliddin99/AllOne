@@ -27,6 +27,7 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"  />
+
         <action
             android:id="@+id/action_homeFragment_to_fragmentMainClinic"
             app:destination="@id/fragmentMainClinic"
@@ -286,6 +287,9 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <argument
+            android:name="tariff"
+            app:argType="integer" />
 
     </fragment>
     <fragment
