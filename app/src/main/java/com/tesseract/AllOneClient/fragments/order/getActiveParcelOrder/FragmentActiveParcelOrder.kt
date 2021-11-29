@@ -1,14 +1,10 @@
 package com.tesseract.AllOneClient.fragments.order.getActiveParcelOrder
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -66,7 +62,12 @@ class FragmentActiveParcelOrder : Fragment() {
 
 
         viewModel.getParcelActiveOrders(headerMapUniversal(requireContext()), args.parcelId)
+
+
         viewModel.getActiveParcelData.observe(requireActivity(), {
+            binding.loader.loader.visibility=View.GONE
+
+
             binding.amount.text= SaveData.formatPhone(it.amount!!) +" "+ requireContext().getString(R.string.summa1)
             binding.amount2.text= SaveData.formatPhone(it.amount!!)+" "+ requireContext().getString(R.string.summa1)
             binding.bonusAmount.text=it.bonusAmount
@@ -127,12 +128,9 @@ class FragmentActiveParcelOrder : Fragment() {
             binding.driverName.text=it.driverName
             binding.driverPhoneNumber.text=it.driverPhoneNumber
             binding.receiverName.text=it.receiver
-
-
             yourTaxiAdapter = DriverCarImagesAdapter(it.parcelPhotos!!)
             binding.postAdvertisementImages.adapter = yourTaxiAdapter
             binding.postAdvertisementImages.setHasFixedSize(true)
-
 
             yourTaxiAdapter2 = DriverCarImagesAdapter(it.driverCarPhotos!!)
             binding.postCarPhotos.adapter = yourTaxiAdapter2
@@ -142,7 +140,8 @@ class FragmentActiveParcelOrder : Fragment() {
         })
 
         viewModel.errorM.observe(requireActivity(), Observer {
-
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
         })
 
         binding.backToHome.setOnClickListener {

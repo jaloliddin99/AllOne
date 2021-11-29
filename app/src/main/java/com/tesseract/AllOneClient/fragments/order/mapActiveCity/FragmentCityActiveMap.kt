@@ -27,8 +27,7 @@ class FragmentCityActiveMap : Fragment(), CityOrderFinished.OnLickListener, Dial
     private var binding: FragmentCityActiveMapBinding? = null
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
     private val callback = OnMapReadyCallback { googleMap ->
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        val sydney = LatLng(41.0, 69.0)
         googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 
@@ -38,7 +37,6 @@ class FragmentCityActiveMap : Fragment(), CityOrderFinished.OnLickListener, Dial
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentCityActiveMapBinding.inflate(inflater, container, false)
-
         activity?.statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
             ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
@@ -53,13 +51,6 @@ class FragmentCityActiveMap : Fragment(), CityOrderFinished.OnLickListener, Dial
         mapFragment?.getMapAsync(callback)
 
         val bottomSheet: View = view.findViewById(R.id.bottomSheetNestedScrollView)
-
-
-//        binding?.call?.setOnClickListener {
-//            val menuFragment = CityOrderFinished(this)
-//            menuFragment.isCancelable = false
-//            menuFragment.show(parentFragmentManager, menuFragment.tag)
-//        }
 
         binding?.driver?.setOnClickListener {
             val action = FragmentCityActiveMapDirections.actionGlobalCancelOrder(2, "city")

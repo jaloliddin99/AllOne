@@ -42,7 +42,6 @@ class ChatFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         _binding = FragmentChatBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -138,7 +137,7 @@ class ChatFragment : Fragment() {
 
         binding.btnMessage.setOnClickListener {
             Log.d("@@@", "uiOnItemClickListener: ${sendMessageSocket.connected()}")
-            val model = ChatWriteModel(1, binding.chatEdittext.text.toString(), "cd", 1, 1, "text")
+            val model = ChatWriteModel(1, binding.chatEdittext.text.toString(), "cd", 19, 1, "text")
             val message=Message(1,binding.chatEdittext.text.toString(), "1111111112222212", "cd", 1, "text")
             println(JSONObject(Gson().toJson(model)))
             sendMessageSocket.emit("chat_send", JSONObject(Gson().toJson(model)))
@@ -147,8 +146,6 @@ class ChatFragment : Fragment() {
 
             binding.recyclerview.smoothScrollToPosition(binding.recyclerview.adapter?.itemCount!!)
         }
-
-        binding.imageAvater
         onBackPassed()
     }
 
@@ -181,7 +178,7 @@ class ChatFragment : Fragment() {
                     val sendMessageSocket = SendMessageSocket.getSocket()
 
                     Log.d("@@@", "uiOnItemClickListener: ${sendMessageSocket.connected()}")
-                    val model = ChatWriteModel(1, encodedString, "cd", 1, 1, "file")
+                    val model = ChatWriteModel(1, encodedString, "cd", 19, 1, "file")
 
                     println(JSONObject(Gson().toJson(model)))
                     sendMessageSocket.emit("chat_send", JSONObject(Gson().toJson(model)))

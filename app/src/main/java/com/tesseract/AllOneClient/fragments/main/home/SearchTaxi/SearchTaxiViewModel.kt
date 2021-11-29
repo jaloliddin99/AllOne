@@ -15,21 +15,27 @@ import javax.inject.Inject
 class SearchTaxiViewModel @Inject constructor(private val repository: NetworkRepository):ViewModel() {
 
     val searchTaxiResponse=MutableLiveData<Content>()
+    val interAreaError=MutableLiveData<String>()
     fun searchRegionTaxiOrder(token: Map<String, String>, id:Int)=viewModelScope.launch {
         try {
             repository.searchOrderRegion(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         searchTaxiResponse.postValue(it.body()?.content)
+                    }else{
+                        interAreaError.postValue(it.body()?.message.toString())
                     }
+                }else{
+                    interAreaError.postValue(it.message())
                 }
-                Log.i("success message", ""+it.code()+it.message())
+
             }
         }catch (e:Exception){
-
+            interAreaError.postValue(e.message)
         }
     }
     val parcelSearchModel=MutableLiveData<com.tesseract.AllOneClient.model.parcel.parcelSearch.Content>()
+    val parcelError=MutableLiveData<String>()
 
     fun parcelSearchRequest(token: Map<String, String>, id:Int)=viewModelScope.launch {
         try {
@@ -37,11 +43,15 @@ class SearchTaxiViewModel @Inject constructor(private val repository: NetworkRep
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         parcelSearchModel.postValue(it.body()?.content)
+                    }else{
+                        parcelError.postValue(it.body()?.message.toString())
                     }
+                }else{
+                    parcelError.postValue(it.message())
                 }
             }
         }catch (e:Exception){
-
+            parcelError.postValue(e.message)
         }
     }
 

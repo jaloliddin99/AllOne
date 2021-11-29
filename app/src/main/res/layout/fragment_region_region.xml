@@ -30,6 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:id="@+id/toolbarTitle"
             android:fontFamily="@font/inter_medium"
             android:text="@string/where_are_you_going"
             android:textColor="@color/black"
@@ -72,6 +73,8 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/search_item_recycler"
             android:layout_width="match_parent"
+            android:clipToPadding="false"
+            android:paddingBottom="@dimen/margin_padding_24dp"
             android:layoutAnimation="@anim/layout_animation"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_padding_8dp" />

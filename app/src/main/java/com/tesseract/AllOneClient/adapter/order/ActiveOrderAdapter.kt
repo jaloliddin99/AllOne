@@ -1,6 +1,8 @@
 package com.tesseract.AllOneClient.adapter.order
 
+import android.content.ContentValues.TAG
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +13,12 @@ import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderHis
 
 class ActiveOrderAdapter(
     private val activeList: ArrayList<OrderHistoryDataListModel>,
-    private val context: Context
+    private val context: Context,
+    private val isMain:Boolean
 )
     : RecyclerView.Adapter<ActiveOrderAdapter.ViewModel>(){
+
+
 
     private lateinit var homeAdapter: HomeAdapter
 
@@ -27,14 +32,23 @@ class ActiveOrderAdapter(
     fun addList(list: List<OrderHistoryDataListModel>) {
         var counter=0
         counter+=itemCount
-        activeList.addAll(list)
-        notifyItemRangeInserted(counter, activeList.size)
+        if (isMain){
+            if (activeList.size<2){
+                activeList.addAll(list)
+                while (activeList.size>=2){
+                    activeList.removeLast()
+                }
+
+                notifyItemRangeInserted(counter, activeList.size)
+            }
+        }else{
+            activeList.addAll(list)
+            notifyItemRangeInserted(counter, activeList.size)
+        }
+
     }
 
-    fun clearList(){
-        notifyItemRangeRemoved(0, activeList.size)
-        activeList.clear()
-    }
+
 
     override fun onBindViewHolder(holder: ViewModel, position: Int) {
 

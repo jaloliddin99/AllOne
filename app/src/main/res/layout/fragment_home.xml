@@ -79,7 +79,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <Space
+                        <androidx.legacy.widget.Space
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:layout_weight="4" />
@@ -310,7 +310,6 @@
                                 android:layout_marginTop="@dimen/margin_padding_12dp"
                                 android:layout_marginEnd="@dimen/margin_padding_12dp"
                                 android:fontFamily="@font/inter_regular"
-                                android:text="hello this is "
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/text_size_13sp" />
 

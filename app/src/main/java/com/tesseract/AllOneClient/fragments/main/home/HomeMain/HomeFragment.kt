@@ -5,8 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -32,6 +31,7 @@ import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderHis
 import com.tesseract.AllOneClient.model.home.news.NewsItemModel
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
 import com.tesseract.AllOneClient.utils.headerMapUniversal
+import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_city_situation.*
 
@@ -53,7 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         _fragmentHomeBinding = null
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,6 +61,11 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         _fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        requireActivity().statusBarColor(
+            ResourcesCompat.getColor(resources, R.color.green, requireActivity().theme),
+            ResourcesCompat.getColor(resources, R.color.green, requireActivity().theme),
+            false
+        )
         return fragmentHomeBinding.root
     }
 
@@ -70,21 +74,19 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         super.onViewCreated(view, savedInstanceState)
         postponeEnterTransition()
         view.doOnPreDraw { startPostponedEnterTransition() }
+        exitTransition=null
+        reenterTransition=null
 
         Common.countPageMain = 1
         viewModel.startMain(headerMapUniversal(requireContext()))
 
         loadItems()
         fragmentHomeBinding.apply {
-            activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext())
-            val layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext(), true)
             recyclerView.layoutManager = layoutManager
             recyclerView.adapter = activeOrderAdapter
-            val resId: Int = R.anim.layout_animation
-            val animation = AnimationUtils.loadLayoutAnimation(context, resId)
-            recyclerView.layoutAnimation = animation
-            recyclerView.setHasFixedSize(true)
+
             recyclerView.addOnScrollListener(object :
                 EndlessRecyclerViewScrollListener(layoutManager) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
@@ -103,7 +105,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }
 
 
-
         setNews()
         fragmentHomeBinding.recyclerView.layoutManager =
             LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -115,10 +116,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         fragmentHomeBinding.apply {
 
             allNews.setOnClickListener {
-                enterTransition=null
-                reenterTransition=null
-                exitTransition=null
-                Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show()
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentAllNews()
                 findNavController().navigate(action)
             }
@@ -133,12 +130,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private fun loadItems(){
         homeOrderModel= listOf(
-            HomeOrderModel(getString(R.string.taxi_region), R.drawable.ic_new_order_history_item),
-            HomeOrderModel(getString(R.string.send_post), R.drawable.ic_box),
-            HomeOrderModel(getString(R.string.taxi_internationall), R.drawable.ic_international_image),
-            HomeOrderModel(getString(R.string.tourism), R.drawable.ic_treasure_map_1),
-            HomeOrderModel(getString(R.string.inside_of_city), R.drawable.ic_new_sity),
-            HomeOrderModel(getString(R.string.med_turizm), R.drawable.ic_taxi_turizm),
+            HomeOrderModel(getString(R.string.inside_of_city), R.drawable.ic_tour_avto_procat),
+            HomeOrderModel(getString(R.string.send_post), R.drawable.ic_box_3),
+            HomeOrderModel(getString(R.string.taxi_region), R.drawable.ic_tour_uzb),
+            HomeOrderModel(getString(R.string.med_turizm), R.drawable.med_turism),
+            HomeOrderModel(getString(R.string.inside_of_city), R.drawable.taxi_international),
+            HomeOrderModel(getString(R.string.tourism), R.drawable.turism_),
         )
     }
 
@@ -169,7 +166,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                         newsItemModel.title!!,
                         newsItemModel.description!!,
                         newsItemModel.id!!,
-                        true
+                        true,
+                        newsItemModel.date!!
                     )
                 val extras = FragmentNavigatorExtras(
                     newsCardView to "cardViewTransition${newsItemModel.id}"
@@ -185,6 +183,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     private fun activeOrders() {
         val arrayList = ArrayList<OrderHistoryDataListModel>()
         viewModel.activeOrdersMain.observe(requireActivity(), {
+
             for (i in it.content?.orderHistoryDataData?.indices!!) {
                 val orderHistoryList = OrderHistoryDataListModel(
                     it.content?.orderHistoryDataData!![i].id,

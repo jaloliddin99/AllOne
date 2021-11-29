@@ -55,7 +55,7 @@ class FragmentRegionActiveMap : Fragment(), OnMapReadyCallback, DialogDriverRati
     private var MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private lateinit var viewModel: GetActiveOrderViewModel
     private var isGPS = false
-    private val value: Float = 10F
+    private val value: Float = 16f
     private var driverPhoneNumber=""
     private var driverTelegram=""
 
@@ -123,8 +123,8 @@ class FragmentRegionActiveMap : Fragment(), OnMapReadyCallback, DialogDriverRati
             binding?.view1?.amount?.text=SaveData.formatPhone(it.amount!!)+" "+getString(R.string.summa1)
             binding?.orderStatus?.text=it.orderStatus
             binding?.pickup?.text=it.pickup
-            binding?.seekbarReusable?.time?.text=it.time
-            binding?.seekbarReusable?.distance?.text=it.distance
+//            binding?.seekbarReusable?.time?.text=it.time
+//            binding?.seekbarReusable?.distance?.text=it.distance
             driverLastLocation=it.driver_last_location!!
             pickupLatLng=it.pickUpLtLng!!
             driverPhoneNumber=it.driverPhoneNumber!!
@@ -246,17 +246,17 @@ class FragmentRegionActiveMap : Fragment(), OnMapReadyCallback, DialogDriverRati
         BottomSheetBehavior.from(bottomSheet2).state = BottomSheetBehavior.STATE_EXPANDED
 
         var isVisible = false
-        binding?.seekbarReusable?.cardView?.setOnClickListener {
-            if (!isVisible) {
-                bottomSheet2.visibility = View.VISIBLE
-                bottomSheet.visibility = View.GONE
-                isVisible = true
-            } else {
-                bottomSheet2.visibility = View.GONE
-                bottomSheet.visibility = View.VISIBLE
-                isVisible = false
-            }
-        }
+//        binding?.seekbarReusable?.cardView?.setOnClickListener {
+//            if (!isVisible) {
+//                bottomSheet2.visibility = View.VISIBLE
+//                bottomSheet.visibility = View.GONE
+//                isVisible = true
+//            } else {
+//                bottomSheet2.visibility = View.GONE
+//                bottomSheet.visibility = View.VISIBLE
+//                isVisible = false
+//            }
+//        }
 
         binding?.bookNow?.setOnClickListener {
             if (isVisible) {

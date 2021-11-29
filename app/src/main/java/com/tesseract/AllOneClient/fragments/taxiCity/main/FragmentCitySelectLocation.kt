@@ -197,6 +197,8 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        val sydney = LatLng(41.0, 69.0)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
         mMap.uiSettings.isCompassEnabled=false
 
         if (ActivityCompat.checkSelfPermission( requireContext(),

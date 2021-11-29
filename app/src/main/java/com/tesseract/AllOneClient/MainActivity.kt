@@ -1,26 +1,38 @@
 package com.tesseract.AllOneClient
 
-import android.annotation.SuppressLint
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.app.Activity
 import android.content.res.Configuration
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment.newInstance
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.ActivityMainBinding
+import com.tesseract.AllOneClient.fragments.charity.Main.FragmentCharityMain
+import com.tesseract.AllOneClient.fragments.login.registration.RegisterViewModel_Factory.newInstance
+import com.tesseract.AllOneClient.fragments.main.home.HomeMain.HomeFragment
+import com.tesseract.AllOneClient.fragments.order.orderHome.OrderFragment
+import com.tesseract.AllOneClient.fragments.profile.ProfileFragment
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
-import android.app.Activity
-import android.content.res.Resources
 
 
 @AndroidEntryPoint
@@ -28,9 +40,23 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
+    private var savedStateSparseArray = SparseArray<Fragment.SavedState>()
+    private var currentSelectItemId = R.id.bottom_nav
+    companion object {
+        const val SAVED_STATE_CONTAINER_KEY = "ContainerKey"
+        const val SAVED_STATE_CURRENT_TAB_KEY = "CurrentTabKey"
+    }
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        if (savedInstanceState != null) {
+            savedStateSparseArray = savedInstanceState.getSparseParcelableArray(SAVED_STATE_CONTAINER_KEY)
+                ?: savedStateSparseArray
+            currentSelectItemId = savedInstanceState.getInt(SAVED_STATE_CURRENT_TAB_KEY)
+        }
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,16 +79,13 @@ class MainActivity : AppCompatActivity() {
             .build()
         languageConfig()
 
+
+
         binding.apply {
             navController.addOnDestinationChangedListener { _, destination, _ ->
                 when (destination.id) {
                     R.id.homeFragment -> {
                         menuItem?.setIcon(R.drawable.ic_bell_white)
-                        statusBarColor(
-                            ResourcesCompat.getColor(resources, R.color.green, theme),
-                            ResourcesCompat.getColor(resources, R.color.green, theme),
-                            false
-                        )
                         showBottomNav()
                         menuItem?.isVisible = true
                     }
@@ -289,11 +312,30 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showBottomNav() {
-        binding.bottomAppBar.performShow()
+        binding.run {
+            bottomAppBar.performShow()
+            bottomAppBar.visibility=View.VISIBLE
+
+        }
     }
 
     private fun hideBottomNav() {
-        binding.bottomAppBar.performHide()
+        binding.run {
+            bottomAppBar.performHide()
+            bottomAppBar.animate().setListener(object : AnimatorListenerAdapter(){
+                var isCanceled = false
+                override fun onAnimationEnd(animation: Animator?) {
+                    if (isCanceled) return
+
+                    // Hide the BottomAppBar to avoid it showing above the keyboard
+                    // when composing a new email.
+                    bottomAppBar.visibility = View.GONE
+                }
+                override fun onAnimationCancel(animation: Animator?) {
+                    isCanceled = true
+                }
+            })
+        }
         menuItem?.isVisible = false
     }
 

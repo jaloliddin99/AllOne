@@ -77,8 +77,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
-                            android:layout_weight="1"
-                            android:src="@drawable/driver_photo" />
+                            android:layout_weight="1" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
@@ -95,7 +94,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="@string/name"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp"
                             />
@@ -108,7 +106,6 @@
                             android:drawablePadding="@dimen/margin_padding_8dp"
                             android:drawableTint="@color/yellow"
                             android:fontFamily="@font/inter_regular"
-                            android:text="2.6"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -156,7 +153,6 @@
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:textColor="@color/black"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/driver_number"
                         android:textSize="@dimen/text_size_15sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -206,7 +202,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/telegram"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -259,7 +254,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/white_cobalt"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -281,7 +275,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/margin_padding_16"
-                android:layout_marginStart="@dimen/margin_padding_16dp"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:paddingStart="@dimen/margin_padding_16dp"
                 android:layout_marginTop="@dimen/margin_padding_4dp"
                 android:id="@+id/post_car_photos"/>
 
@@ -314,5 +310,17 @@
             android:textSize="@dimen/text_size_15sp"
             android:fontFamily="@font/inter_bold"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:elevation="@dimen/margin_padding_4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

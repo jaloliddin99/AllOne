@@ -872,6 +872,9 @@
         <argument
             android:name="isFromHome"
             app:argType="boolean" />
+        <argument
+            android:name="data"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAllNews"

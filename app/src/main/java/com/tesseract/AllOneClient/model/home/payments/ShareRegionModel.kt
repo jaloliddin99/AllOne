@@ -19,5 +19,8 @@ data class ShareRegionModel(
     val used_bonus:Boolean,
     val used_bonus_amount: Double,
     val paymentType: String,
-    val comment:String
+    val comment:String,
+    val baggageTotalAmount:String,
+    val locationName:String
+
 )

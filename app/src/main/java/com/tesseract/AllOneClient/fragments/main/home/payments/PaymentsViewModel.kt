@@ -79,6 +79,7 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
         places: String,
         depDate: String,
         location: String,
+        locationName:String,
         baggage: String,
         baggagePlaces: String,
         hasLuggage: Int,
@@ -89,25 +90,26 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
         usedBosus: Int,
         usedAmount: Double,
         orderAmount: Double,
+        baggageAmount:Double,
         comment: String,
-        cardId:Int
+        cardId: Int
     )
             =viewModelScope.launch {
         repository.newOrderInter(
-            token, startPoint, endPoint, tariff, passangerCount, places, depDate,location, baggage, baggagePlaces, hasLuggage, hasConditioner,
-            forAnother, phoneNumber, paymentType, usedBosus, usedAmount, orderAmount,comment, cardId
+            token, startPoint, endPoint, tariff, passangerCount, places, depDate,location,locationName, baggage, baggagePlaces, hasLuggage, hasConditioner,
+            forAnother, phoneNumber, paymentType, usedBosus, usedAmount, orderAmount,baggageAmount, comment, cardId
         ).let {
             try {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         newOrder.postValue(it.body())
-                        Log.i(TAG, "newOrder:awdqqqq ${it.message()}  ${it.code()}")
+                    }else{
+                        newOrderError.postValue(it.body()?.message)
                     }
+                }else{
+                    newOrderError.postValue(it.message())
                 }
-
-                Log.i(TAG, "newOrder:wdawd ${it.message()}  ${it.code()}")
             }catch (e:Exception){
-                Log.i(TAG, "newOrder:errer ${e.message}")
                 newOrderError.postValue(e.message)
             }
 

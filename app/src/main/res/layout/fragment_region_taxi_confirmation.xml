@@ -18,17 +18,6 @@
             android:id="@+id/toolbar"
             android:layout_height="?attr/actionBarSize">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/backToHome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="@dimen/margin_padding_12dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true"
-                android:padding="@dimen/margin_padding_12dp"
-                android:src="@drawable/ic_arrow_left" />
 
             <TextView
                 android:layout_width="wrap_content"

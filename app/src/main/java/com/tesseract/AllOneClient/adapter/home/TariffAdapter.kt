@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
+import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.CardTariffLayoutBinding
 import com.tesseract.AllOneClient.model.home.routeRariffs.RouteTariffContentListModel
 import kotlinx.android.synthetic.main.dialog_main_standart_share.*
@@ -53,13 +54,11 @@ class TariffAdapter(
         fun bind(newsItemBinding: RouteTariffContentListModel){
 
             Picasso.get().load(newsItemBinding.icon).into(itemBinding.tariffCarImage)
-            println("hello")
-            println(newsItemBinding.icon)
             itemBinding.tariffType.text=newsItemBinding.name
-            itemBinding.tariffPrice.text=newsItemBinding.price
+            itemBinding.tariffPrice.text=SaveData.formatPhone(newsItemBinding.price!!)+" "+context.getString(R.string.summa1)
 
             if (newsItemBinding.discount?.toInt()!! >0){
-                itemBinding.tariffSkidka.text="Skidka "+newsItemBinding.discount+"%"
+                itemBinding.tariffSkidka.text=context.getString(R.string.discount)+" "+newsItemBinding.discount+"%"
                 itemBinding.tariffSkidka.visibility=View.VISIBLE
             }else{
                 itemBinding.tariffSkidka.visibility=View.GONE

@@ -2,20 +2,14 @@ package com.tesseract.AllOneClient.fragments.parcel.parcelMain
 
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.app.Dialog
-import android.content.ContentValues
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -24,7 +18,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.R
@@ -39,8 +32,6 @@ import com.tesseract.AllOneClient.model.home.payments.ShareParcelModel
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
-import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 import java.io.ByteArrayOutputStream
 
 
@@ -119,6 +110,10 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
 
         })
 
+        viewModel.parcelError.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
         viewModel.placeList.observe(requireActivity(), {
             viewModelSeatPrices.clear()
             for (i in it.indices) {
@@ -504,8 +499,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             )
         }
     }
-
-
     private fun restoreState() {
         binding.apply {
             if (selectedDate.isNotEmpty()) {
@@ -593,6 +586,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
     }
 
     private var PICK_IMAGE_INTENT = 1
+
     private fun openGallery() {
         val intent = Intent()
         intent.type = "image/*"

@@ -37,9 +37,9 @@ class FragmentOrderTaxi : Fragment(),
     DialogExtraLargeBaggage.SendDataListener {
 
 
-    private var _binding: FragmentOrderTaxiBinding?=null
+    private var _binding: FragmentOrderTaxiBinding? = null
     private val binding get() = _binding!!
-    private val args:FragmentOrderTaxiArgs by navArgs()
+    private val args: FragmentOrderTaxiArgs by navArgs()
     private var selectedPlaces = ArrayList<Int>()
     private var selectedParcelPlaceBefore = ArrayList<Int>()
     private var viewModelSeatPrices = ArrayList<String>()
@@ -54,16 +54,19 @@ class FragmentOrderTaxi : Fragment(),
     private var firstSeat: String = ""
     private var secondSeat: String = ""
     private var thirdSeat: String = ""
-    private var fourthSeat=ArrayList<String>()
-    private var selectedSeat: String = ""
+    private var fourthSeat = ArrayList<String>()
+    private var selectedSeat: String = "no"
     private var depDate: String = ""
     private var tariff: String = ""
 
     private var startId: Int = 0
     private var endId: Int = 0
     private var arraySize: Int = 0
+
     private var userNumber: Int = 0
+
     private var amount: Float = 0f
+
     private var money: Float = 0F
     private var seatTotalAmount: Float = 0f
 
@@ -76,8 +79,7 @@ class FragmentOrderTaxi : Fragment(),
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding= FragmentOrderTaxiBinding.inflate(inflater, container, false)
-
+        _binding = FragmentOrderTaxiBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -97,8 +99,8 @@ class FragmentOrderTaxi : Fragment(),
                 item.start,
                 item.end
             )
-            println(item.type+"   "+ item.start+"jaloldo  "+item.end)
-            binding.loader.loader.visibility=View.VISIBLE
+            println(item.type + "   " + item.start + "jaloldo  " + item.end)
+            binding.loader.loader.visibility = View.VISIBLE
 
             startId = item.start.toInt()
             endId = item.end.toInt()
@@ -128,9 +130,9 @@ class FragmentOrderTaxi : Fragment(),
 
         viewModelListener()
 
-        if (args.tariff!=3){
+        if (args.tariff != 3) {
             selectSeat()
-        }else{
+        } else {
             fourthSeatSelected()
             selectedPlaces.clear()
             selectedPlaces.add(1)
@@ -154,12 +156,12 @@ class FragmentOrderTaxi : Fragment(),
         }
 
         getBackStackData<Contact>("selectedContact", true) {
-            val phoneNum=it.numbers[0]
+            val phoneNum = it.numbers[0]
                 .replace(" ", "")
                 .replace("-", "")
                 .replace("(", "")
                 .replace(")", "")
-            phoneNumberOther=phoneNum
+            phoneNumberOther = phoneNum
             restoreStateOf()
             isReady()
         }
@@ -180,30 +182,30 @@ class FragmentOrderTaxi : Fragment(),
             yesText.setTextColor(requireContext().getColor(R.color.black))
             hasBaggage.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    parcelSeat.visibility=View.VISIBLE
+                    parcelSeat.visibility = View.VISIBLE
                     noText.setTextColor(requireContext().getColor(R.color.black))
                     yesText.setTextColor(requireContext().getColor(R.color.green))
 
                 } else {
-                    parcelSeat.visibility=View.GONE
+                    parcelSeat.visibility = View.GONE
                     noText.setTextColor(requireContext().getColor(R.color.green))
                     yesText.setTextColor(requireContext().getColor(R.color.black))
                 }
             }
 
             findYourLocation.setOnClickListener {
-                val action=FragmentOrderTaxiDirections.actionGlobalLocationReverse(false, "")
+                val action = FragmentOrderTaxiDirections.actionGlobalLocationReverse(false, "")
                 findNavController().navigate(action)
             }
             phoneNumberForOther.onRightDrawableClicked {
-                val action=FragmentOrderTaxiDirections.actionGlobalContact()
+                val action = FragmentOrderTaxiDirections.actionGlobalContact()
                 findNavController().navigate(action)
             }
         }
 
     }
 
-    private fun isReady(){
+    private fun isReady() {
         if (userNumberSelected && dateSelected && selectedLocation.isNotEmpty()) {
             binding.goToPayment.background.setColorFilter(
                 requireContext().getColor(R.color.green),
@@ -237,55 +239,62 @@ class FragmentOrderTaxi : Fragment(),
         }
         if (binding.forYourFriend.isChecked) {
             binding.phoneNumberForOther.visibility = View.VISIBLE
-            if (phoneNumberOther.isNotEmpty()){
+            if (phoneNumberOther.isNotEmpty()) {
                 binding.phoneNumberForOther.setText(phoneNumberOther)
             }
         }
-        if (selectedLocationDisplay.isNotEmpty()){
-            binding.selectedLocation.text=selectedLocationDisplay
+        if (selectedLocationDisplay.isNotEmpty()) {
+            binding.selectedLocation.text = selectedLocationDisplay
         }
-        if (commentText.isNotEmpty()){
-            binding.commentText.text=commentText
+        if (commentText.isNotEmpty()) {
+            binding.commentText.text = commentText
         }
         colorSeats()
 
-        if (isFirstBoxChecked){
+        if (isFirstBoxChecked) {
             binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.week_green))
             binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.green)
         }
-        if (isSecondBoxChecked){
+        if (isSecondBoxChecked) {
             binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.week_green))
             binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.green)
         }
-        if (isThirdBoxChecked){
+        if (isThirdBoxChecked) {
             binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.week_green))
             binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.green)
         }
 
-        if (isFourthBoxChecked){
+        if (isFourthBoxChecked) {
             binding.boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.week_green))
-            binding.boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.green)
+            binding.boxImagesLayout.extraLargeBox.strokeColor =
+                requireContext().getColor(R.color.green)
         }
     }
 
     private fun viewModelListener() {
         viewModel.parcelList.observe(viewLifecycleOwner, {
-            binding.loader.loader.visibility=View.GONE
+            binding.loader.loader.visibility = View.GONE
 
-            if (it.size<3){
-                binding.haveLuggage.visibility=View.GONE
-                binding.parcelSeat.visibility=View.GONE
+            if (it.size < 3) {
+                binding.haveLuggage.visibility = View.GONE
+                binding.parcelSeat.visibility = View.GONE
                 return@observe
             }
 
-            binding.boxImagesLayout.baggageType.text = if (it[0].parcel=="small") it[0].parcel else if (it[1].parcel=="small") it[1].parcel else it[2].parcel
-            binding.boxImagesLayout.baggageType1.text = if (it[0].parcel=="medium") it[0].parcel else if (it[1].parcel=="medium") it[1].parcel else it[2].parcel
-            binding.boxImagesLayout.baggageType2.text =  if (it[0].parcel=="big") it[0].parcel else if (it[1].parcel=="big") it[1].parcel else it[2].parcel
+            binding.boxImagesLayout.baggageType.text =
+                if (it[0].parcel == "small") it[0].parcel else if (it[1].parcel == "small") it[1].parcel else it[2].parcel
+            binding.boxImagesLayout.baggageType1.text =
+                if (it[0].parcel == "medium") it[0].parcel else if (it[1].parcel == "medium") it[1].parcel else it[2].parcel
+            binding.boxImagesLayout.baggageType2.text =
+                if (it[0].parcel == "big") it[0].parcel else if (it[1].parcel == "big") it[1].parcel else it[2].parcel
 
 
-            firstSeat =if (it[0].parcel=="small") it[0].price.toString() else if (it[1].parcel=="small") it[1].price.toString() else it[2].price.toString()
-            secondSeat = if (it[0].parcel=="medium") it[0].price.toString() else if (it[1].parcel=="medium") it[1].price.toString() else it[2].price.toString()
-            thirdSeat = if (it[0].parcel=="big") it[0].price.toString() else if (it[1].parcel=="big") it[1].price.toString() else it[2].price.toString()
+            firstSeat =
+                if (it[0].parcel == "small") it[0].price.toString() else if (it[1].parcel == "small") it[1].price.toString() else it[2].price.toString()
+            secondSeat =
+                if (it[0].parcel == "medium") it[0].price.toString() else if (it[1].parcel == "medium") it[1].price.toString() else it[2].price.toString()
+            thirdSeat =
+                if (it[0].parcel == "big") it[0].price.toString() else if (it[1].parcel == "big") it[1].price.toString() else it[2].price.toString()
 
 
 
@@ -300,129 +309,98 @@ class FragmentOrderTaxi : Fragment(),
 
         viewModel.placeList.observe(requireActivity(), {
             viewModelSeatPrices.clear()
-            totalMoneyPremium=0.0
+            totalMoneyPremium = 0.0
             for (i in it.indices) {
                 totalMoneyPremium += it[i].price!!.toDouble()
                 viewModelSeatPrices.add(it[i].price!!)
                 fourthSeat.add(it[i].price!!)
             }
-            if (isFirstTotal){
-                money=totalMoneyPremium.toFloat()
-                updateTotalMoney()
-                bottomSheetPeekHeightController()
+            if (args.tariff==3){
+                if (isFirstTotal) {
+                    money = totalMoneyPremium.toFloat()
+                    updateTotalMoney()
+                    bottomSheetPeekHeightController()
+                }
+                isFirstTotal = false
             }
-            isFirstTotal=false
         })
     }
 
-    private var isFirstTotal=true
-    private var totalMoneyPremium=0.0
+    private var isFirstTotal = true
+    private var totalMoneyPremium = 0.0
 
     private fun baggageBoxes() {
 
 
         binding.boxImagesLayout.smallBox.setOnClickListener {
             if (isFirstBoxChecked) {
-                money -= firstSeat.toFloat()
-                binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
-                binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
-                isFirstBoxChecked = false
+                invalidateFirst()
+                baggageTotalAmount=""
             } else {
                 selectedSeat = binding.boxImagesLayout.baggageType.text.toString()
                 money += firstSeat.toFloat()
+                baggageTotalAmount=firstSeat
                 binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.week_green))
-                binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.green)
+                binding.boxImagesLayout.smallBox.strokeColor =
+                    requireContext().getColor(R.color.green)
                 isFirstBoxChecked = true
-            }
-            binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.middleBox.invalidate()
-            binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.largeBox.invalidate()
-            if (isThirdBoxChecked) {
-                money -= thirdSeat.toFloat()
+
+                invalidateFourth()
+                invalidateSecond()
+                invalidateThird()
             }
 
-            if (isSecondBoxChecked) {
-                money -= secondSeat.toFloat()
-            }
             updateTotalMoney()
             bottomSheetPeekHeightController()
-            isThirdBoxChecked = false
-            isSecondBoxChecked = false
+
         }
 
         binding.boxImagesLayout.middleBox.setOnClickListener {
             if (isSecondBoxChecked) {
-                money -= secondSeat.toFloat()
-                binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
-                isSecondBoxChecked = false
+                invalidateSecond()
+                baggageTotalAmount=""
             } else {
                 selectedSeat = binding.boxImagesLayout.baggageType1.text.toString()
                 money += secondSeat.toFloat()
+                baggageTotalAmount=secondSeat
                 binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.week_green))
                 binding.boxImagesLayout.middleBox.strokeColor =
                     requireContext().getColor(R.color.green)
                 isSecondBoxChecked = true
             }
-            binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.smallBox.invalidate()
-            binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.largeBox.invalidate()
-            if (isThirdBoxChecked) {
-                money -= thirdSeat.toFloat()
-            }
-            if (isFirstBoxChecked) {
-                money -= firstSeat.toFloat()
-            }
+            invalidateFirst()
+            invalidateThird()
+            invalidateFourth()
             updateTotalMoney()
             bottomSheetPeekHeightController()
-            isThirdBoxChecked = false
-            isFirstBoxChecked = false
         }
         binding.boxImagesLayout.largeBox.setOnClickListener {
             if (isThirdBoxChecked) {
-
-                money -= thirdSeat.toFloat()
-                binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
-                isThirdBoxChecked = false
+                invalidateThird()
+                baggageTotalAmount=""
             } else {
                 money += thirdSeat.toFloat()
+                baggageTotalAmount=thirdSeat
                 binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.week_green))
                 selectedSeat = binding.boxImagesLayout.baggageType2.text.toString()
-                binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.green)
+                binding.boxImagesLayout.largeBox.strokeColor =
+                    requireContext().getColor(R.color.green)
                 isThirdBoxChecked = true
             }
-            binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.middleBox.invalidate()
-            binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.smallBox.invalidate()
-            if (isFirstBoxChecked) {
-                money -= firstSeat.toFloat()
-            }
-            if (isSecondBoxChecked) {
-                money -= secondSeat.toFloat()
-            }
+            invalidateFourth()
+            invalidateSecond()
+            invalidateFirst()
+
             updateTotalMoney()
             bottomSheetPeekHeightController()
-
-            isFirstBoxChecked = false
-            isSecondBoxChecked = false
         }
 
         binding.boxImagesLayout.extraLargeBox.setOnClickListener {
 
             parentFragmentManager.let {
                 DialogExtraLargeBaggage(
-                    "50x50 ",
-                    "до 50 - kg",
+                    getString(R.string.razmer50to50),
+                    getString(R.string.massa50kg),
                     fourthSeat,
                     selectedPlaces,
                     selectedParcelPlaceBefore,
@@ -434,61 +412,62 @@ class FragmentOrderTaxi : Fragment(),
 
     @SuppressLint("SetTextI18n")
     private fun chooseDialogs() {
-        chooseSeat()
 
-        binding.boxImagesLayout.att1.setOnClickListener {
-            parentFragmentManager.let {
-                DialogThreeBaggage(
-                    binding.boxImagesLayout.baggageType.text.toString(),
-                    "30x30 ",
-                    "до 500 - Грамм",
-                    binding.boxImagesLayout.price.text.toString(),
-                ).show(it, tag)
-            }
-        }
-
-        binding.boxImagesLayout.att2.setOnClickListener {
-            parentFragmentManager.let {
-                DialogThreeBaggage(
-                    binding.boxImagesLayout.baggageShape1.text.toString(),
-                    "30x30 ",
-                    "до 5 - kg",
-                    binding.boxImagesLayout.price1.text.toString(),
-                ).show(it, tag)
-            }
-        }
-        binding.boxImagesLayout.att3.setOnClickListener {
-            parentFragmentManager.let {
-                DialogThreeBaggage(
-                    binding.boxImagesLayout.baggageType2.text.toString(),
-                    "30x30 ",
-                    "до 10 - kg",
-                    binding.boxImagesLayout.price2.text.toString(),
-                ).show(it, tag)
-            }
-        }
-
-        binding.boxImagesLayout.att4.setOnClickListener {
-            parentFragmentManager.let {
-                DialogThreeBaggage(
-                    binding.boxImagesLayout.baggageType88.text.toString(),
-                    "50x50  ",
-                    "до 50 - kg",
-                    "",
-                ).show(it, tag)
-            }
-        }
-    }
-
-    private fun chooseSeat() {
-        binding.chooseSeat.setOnClickListener {
-            if (args.tariff!=3){
-                if (userNumberSelected) {
-                    openSelectSeatDialog()
+        binding.apply {
+            chooseSeat.setOnClickListener {
+                if (args.tariff != 3) {
+                    if (userNumberSelected) {
+                        openSelectSeatDialog()
+                    }
                 }
             }
 
+            boxImagesLayout.att1.setOnClickListener {
+                parentFragmentManager.let {
+                    DialogThreeBaggage(
+                        binding.boxImagesLayout.baggageType.text.toString(),
+                        getString(R.string.razmer30to30),
+                        getString(R.string.massa500),
+                        binding.boxImagesLayout.price.text.toString(),
+                    ).show(it, tag)
+                }
+            }
+
+            boxImagesLayout.att2.setOnClickListener {
+                parentFragmentManager.let {
+                    DialogThreeBaggage(
+                        binding.boxImagesLayout.baggageShape1.text.toString(),
+                        getString(R.string.razmer40to40),
+                        getString(R.string.massa5kg),
+                        binding.boxImagesLayout.price1.text.toString(),
+                    ).show(it, tag)
+                }
+            }
+
+            boxImagesLayout.att3.setOnClickListener {
+                parentFragmentManager.let {
+                    DialogThreeBaggage(
+                        binding.boxImagesLayout.baggageType2.text.toString(),
+                        getString(R.string.razmer50to50),
+                        getString(R.string.massa10Kg),
+                        binding.boxImagesLayout.price2.text.toString(),
+                    ).show(it, tag)
+                }
+            }
+
+            boxImagesLayout.att4.setOnClickListener {
+                parentFragmentManager.let {
+                    DialogThreeBaggage(
+                        binding.boxImagesLayout.baggageType88.text.toString(),
+                        getString(R.string.razmer50to50),
+                        getString(R.string.massa50kg),
+                        "",
+                    ).show(it, tag)
+                }
+            }
         }
+
+
     }
 
     private fun openSelectSeatDialog() {
@@ -512,6 +491,7 @@ class FragmentOrderTaxi : Fragment(),
     private var selectedLocation = ""
     private var selectedLocationDisplay = ""
     private var phoneNumberOther = ""
+    private var baggageTotalAmount=""
 
     private fun gotoPayments() {
 
@@ -547,23 +527,22 @@ class FragmentOrderTaxi : Fragment(),
                 false,
                 0.0,
                 "cash",
-                commentText
+                commentText,
+                baggageTotalAmount,
+                selectedLocationDisplay
             )
             shareViewModel.selectItem(shareModel)
             val action =
                 FragmentOrderTaxiDirections.actionFragmentOrderTaxi2ToFragmentPayment(1)
             findNavController().navigate(action)
-
         }
     }
 
 
     override fun selectedInfo(selectedPositions: ArrayList<Int>, totalSum: Float) {
-
         if (amount.toInt() > 0) {
             money -= amount
         }
-
         amount = totalSum
         money += amount
         selectedPositions.sort()
@@ -610,7 +589,6 @@ class FragmentOrderTaxi : Fragment(),
     }
 
 
-
     @RequiresApi(Build.VERSION_CODES.N)
     override fun selectDayListener(time: String) {
         binding.date.text = time
@@ -655,64 +633,71 @@ class FragmentOrderTaxi : Fragment(),
         }
         seatTotalAmount = priceAmount.toFloat()
         money += seatTotalAmount
-        updateTotalMoney()
+        baggageTotalAmount= seatTotalAmount.toString()
         selectedPlacesList.sort()
         selectedParcelPlaceBefore = selectedPlacesList
         if (selectedPlacesList.size > 0) {
-
-            binding.boxImagesLayout.extraLargeBox.strokeColor =
-                requireContext().getColor(R.color.green)
+            binding.boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.green)
             binding.boxImagesLayout.extraLargeBox.invalidate()
             binding.boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.week_green))
             isFourthBoxChecked = true
+
+            invalidateFirst()
+            invalidateSecond()
+            invalidateThird()
         } else {
-            binding.boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.grey))
-            binding.boxImagesLayout.extraLargeBox.strokeColor =
-                requireContext().getColor(R.color.grey)
-            binding.boxImagesLayout.extraLargeBox.invalidate()
-            isFourthBoxChecked = false
+            invalidateFourth()
+            baggageTotalAmount=""
         }
+        updateTotalMoney()
         bottomSheetPeekHeightController()
     }
 
-    private fun invalidateFirst(){
+    private fun invalidateFirst() {
         binding.apply {
-            if (isFirstBoxChecked){
+            if (isFirstBoxChecked) {
                 binding.boxImagesLayout.constraint1.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.smallBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.smallBox.strokeColor =
+                    requireContext().getColor(R.color.grey)
                 binding.boxImagesLayout.smallBox.invalidate()
                 money -= secondSeat.toFloat()
                 isFirstBoxChecked = false
             }
         }
     }
-    private fun invalidateSecond(){
+
+    private fun invalidateSecond() {
         binding.apply {
-            if (isSecondBoxChecked){
+            if (isSecondBoxChecked) {
                 binding.boxImagesLayout.constraint2.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.middleBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.middleBox.strokeColor =
+                    requireContext().getColor(R.color.grey)
                 binding.boxImagesLayout.middleBox.invalidate()
                 money -= secondSeat.toFloat()
                 isSecondBoxChecked = false
             }
         }
     }
-    private fun invalidateThird(){
+
+    private fun invalidateThird() {
         binding.apply {
-            if (isThirdBoxChecked){
+            if (isThirdBoxChecked) {
                 binding.boxImagesLayout.constraint3.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.largeBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.largeBox.strokeColor =
+                    requireContext().getColor(R.color.grey)
                 binding.boxImagesLayout.largeBox.invalidate()
                 money -= thirdSeat.toFloat()
-                isFourthBoxChecked = false
+                isThirdBoxChecked = false
             }
         }
     }
-    private fun invalidateFourth(){
+
+    private fun invalidateFourth() {
         binding.apply {
-            if (isFourthBoxChecked){
+            if (isFourthBoxChecked) {
                 binding.boxImagesLayout.constraint4.setBackgroundColor(requireContext().getColor(R.color.grey))
-                binding.boxImagesLayout.extraLargeBox.strokeColor = requireContext().getColor(R.color.grey)
+                binding.boxImagesLayout.extraLargeBox.strokeColor =
+                    requireContext().getColor(R.color.grey)
                 binding.boxImagesLayout.extraLargeBox.invalidate()
                 money -= seatTotalAmount
                 isFourthBoxChecked = false
@@ -822,7 +807,7 @@ class FragmentOrderTaxi : Fragment(),
             isReady()
         }
         binding.fourPerson.setOnClickListener {
-            if (args.tariff==1){
+            if (args.tariff == 1) {
                 fourthSeatSelected()
                 openSelectSeatDialog()
                 isReady()
@@ -846,7 +831,7 @@ class FragmentOrderTaxi : Fragment(),
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
 

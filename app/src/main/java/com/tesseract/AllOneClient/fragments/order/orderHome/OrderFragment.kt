@@ -51,7 +51,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     ): View {
         _fragmentOrderBinding = FragmentOrderBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
-        return fragmentOrderBinding!!.root
+        return fragmentOrderBinding.root
     }
 
     @SuppressLint("SetTextI18n")
@@ -63,17 +63,15 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         viewModel.start(headerMapUniversal(requireContext()))
         viewModel.startOrderHistory(headerMapUniversal(requireContext()), "", "")
 
+
         val layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext())
+        activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext(), false)
         fragmentOrderBinding.orderTaxiList.layoutManager = layoutManager
         fragmentOrderBinding.orderTaxiList.adapter = activeOrderAdapter
         fragmentOrderBinding.orderTaxiList.setHasFixedSize(true)
 
-        val resId: Int = R.anim.layout_animation
-        val animation = AnimationUtils.loadLayoutAnimation(context, resId)
-        fragmentOrderBinding!!.orderTaxiList.layoutAnimation = animation
 
         fragmentOrderBinding.orderTaxiList.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager) {
@@ -88,7 +86,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         orderHistoryAdapter = OrderHistoryAdapter(ArrayList(), requireContext())
         fragmentOrderBinding.orderPackageList.layoutManager = layoutManager2
         fragmentOrderBinding.orderPackageList.adapter = orderHistoryAdapter
-        fragmentOrderBinding!!.orderPackageList.layoutAnimation = animation
+
         fragmentOrderBinding.orderPackageList.setHasFixedSize(true)
         fragmentOrderBinding.orderPackageList.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager2) {
@@ -97,7 +95,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
             }
         })
 
-        fragmentOrderBinding!!.backToHome.setOnClickListener {
+        fragmentOrderBinding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -105,19 +103,19 @@ class OrderFragment : Fragment(R.layout.fragment_order),
             activeOrders()
             orderHistory()
         }
-        fragmentOrderBinding!!.datePicker1.setOnClickListener {
+        fragmentOrderBinding.datePicker1.setOnClickListener {
             DialogShowTime(getString(R.string.daparture_date), this).show(
                 parentFragmentManager,
                 tag
             )
         }
-        fragmentOrderBinding!!.datePicker2.setOnClickListener {
+        fragmentOrderBinding.datePicker2.setOnClickListener {
             DialogShowTime2(getString(R.string.daparture_date), this).show(
                 parentFragmentManager,
                 tag
             )
         }
-        fragmentOrderBinding!!.datePickersLayouts.visibility = View.GONE
+        fragmentOrderBinding.datePickersLayouts.visibility = View.GONE
 
         fragmentOrderBinding.apply {
             tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.active)))
@@ -125,7 +123,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
 
             if (tabPosition==1){
                 tabLayout.getTabAt(1)?.select()
-                fragmentOrderBinding!!.datePickersLayouts.visibility = View.VISIBLE
+                fragmentOrderBinding.datePickersLayouts.visibility = View.VISIBLE
                 orderPackageList.visibility = View.VISIBLE
                 orderTaxiList.visibility = View.GONE
             }
@@ -139,11 +137,11 @@ class OrderFragment : Fragment(R.layout.fragment_order),
                     if (tab.position == 0) {
                         orderPackageList.visibility = View.GONE
                         orderTaxiList.visibility = View.VISIBLE
-                        fragmentOrderBinding!!.datePickersLayouts.visibility = View.GONE
+                        fragmentOrderBinding.datePickersLayouts.visibility = View.GONE
                     } else {
                         orderPackageList.visibility = View.VISIBLE
                         orderTaxiList.visibility = View.GONE
-                        fragmentOrderBinding!!.datePickersLayouts.visibility = View.VISIBLE
+                        fragmentOrderBinding.datePickersLayouts.visibility = View.VISIBLE
                     }
                 }
 

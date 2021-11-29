@@ -48,9 +48,6 @@
         android:layout_height="match_parent" />
 
 
-    <include layout="@layout/layout_seekbar_reusable"
-        android:id="@+id/seekbarReusable"/>
-
 
 
 
@@ -628,7 +625,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
-                            android:text="Jalol"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>

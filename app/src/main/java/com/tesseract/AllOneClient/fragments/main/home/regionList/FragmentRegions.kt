@@ -43,7 +43,7 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
     ): View{
         _binding= FragmentRegionRegionBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(RegionViewModel::class.java)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -53,6 +53,11 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
 
         if (Common.isCurrentRegionFragment){
             viewModel.getRegionList(headerMapUniversal(requireContext()))
+        }
+        if (Common.destination == 0||Common.destination== 10) {
+            binding.toolbarTitle.text=getString(R.string.wheRee)
+        }else{
+            binding.toolbarTitle.text=getString(R.string.to_where)
         }
 
         binding.searchItemRecycler.layoutManager=

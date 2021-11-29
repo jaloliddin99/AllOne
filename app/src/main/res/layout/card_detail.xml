@@ -108,13 +108,6 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="@dimen/margin_padding_16"
-                android:src="@drawable/ic_box"/>
-
-
         </LinearLayout>
 
 

@@ -51,7 +51,7 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private var isGPS = false
-    private val value: Float = 10F
+    private val value: Float = 18f
     var locationName:String=""
     lateinit var dialog: Dialog
 
@@ -142,6 +142,9 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
+        val sydney = LatLng(41.0, 69.0)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -185,8 +188,7 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
                 MarkerOptions()
                     .position(LatLng(it.latitude, it.longitude))
                     .draggable(true).visible(true).title(locationName)
-                    .icon(context?.bitmapDescriptorFromVector(R.drawable.ic_dest))
-            )
+                    .icon(context?.bitmapDescriptorFromVector(R.drawable.ic_dest)))
             val yourLocation = LatLng(it.latitude, it.longitude)
             val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(yourLocation, value)
             mMap.animateCamera(update)

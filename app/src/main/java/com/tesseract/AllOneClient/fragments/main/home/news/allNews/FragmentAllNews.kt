@@ -102,7 +102,8 @@ class FragmentAllNews:Fragment(), AllNewsAdapter.OnItemClickListener {
             duration = 250.toLong()
         }
         val direction: NavDirections =
-            FragmentAllNewsDirections.actionFragmentAllNewsToFragmentNewsView(position.image, position.title, position.description, position.id, false)
+            FragmentAllNewsDirections.actionFragmentAllNewsToFragmentNewsView(position.image, position.title,
+                position.description, position.id, false, position.date)
         val extras = FragmentNavigatorExtras(
             view to "cardViewTransition${position.id}"
         )

@@ -28,28 +28,15 @@
             android:src="@drawable/ic_arrow_left" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:id="@+id/toolbarTitle"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_toStartOf="@id/notification"
-            android:layout_toEndOf="@id/backToHome"
             android:fontFamily="@font/inter_medium"
             android:text="@string/taxi_region"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_20sp" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="@dimen/margin_padding_12dp"
-            android:padding="@dimen/margin_padding_12dp"
-            android:src="@drawable/ic_bell" />
-
     </RelativeLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat

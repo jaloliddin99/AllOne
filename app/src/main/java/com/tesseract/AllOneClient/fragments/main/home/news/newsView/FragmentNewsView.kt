@@ -57,6 +57,7 @@ class FragmentNewsView:Fragment() {
             Picasso.get().load(args.image).into(newsImageView)
             title.text=args.title
             description.text=args.description
+            date.text=args.data
 
         }
 

@@ -58,7 +58,7 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
     private lateinit var mMap: GoogleMap
     private var isGPS = false
-    private val value: Float = 14F
+    private val value: Float = 16f
     private var userSeatIsSelected:Boolean=false
 
     private lateinit var viewModel: UpdateNewOrderViewModel
@@ -90,11 +90,8 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding= FragmentRegionDriwerInfoBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(UpdateNewOrderViewModel::class.java)
-
-
 
         activity?.statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
@@ -121,6 +118,9 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             binding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
+
+        binding.loader.loader.visibility=View.GONE
+
 
         viewModel.interAreaError.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
@@ -235,6 +235,11 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+
+        val sydney = LatLng(41.0, 69.0)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+
+
         mMap.isMyLocationEnabled=false
         mMap.uiSettings.isCompassEnabled = false
         if (ActivityCompat.checkSelfPermission(
@@ -254,7 +259,6 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             mMap.addMarker(MarkerOptions().position(yourLocation).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_my_location_on_map)))
             val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(yourLocation, value)
             mMap.animateCamera(update)
-
         }
 
 

@@ -49,6 +49,7 @@ constructor(private val apiInterface: APIInterface) {
         places: String,
         depDate: String,
         location: String,
+        locationName:String,
         baggage: String,
         baggagePlaces: String,
         hasLuggage: Int,
@@ -59,15 +60,16 @@ constructor(private val apiInterface: APIInterface) {
         usedBosus: Int,
         usedAmount: Double,
         orderAmount: Double,
+        baggageAmount:Double,
         comment: String,
         cardId: Int
 
     ) =
         apiInterface.newOrderInterArea(
             token, startPoint, endPoint, tariff, passangerCount,
-            places, depDate, location, baggage, baggagePlaces, hasLuggage,
+            places, depDate, location, locationName, baggage, baggagePlaces, hasLuggage,
             hasConditioner, forAnother, phoneNumber, paymentType, usedBosus, usedAmount,
-            orderAmount, comment, cardId
+            orderAmount, baggageAmount, comment, cardId
         )
 
 

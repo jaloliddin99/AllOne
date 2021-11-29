@@ -3,6 +3,7 @@ package com.tesseract.AllOneClient.fragments.main.home.SearchTaxi
 import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -23,6 +24,8 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
     private var _binding: FragmentLocationBinding? = null
     private val binding get() = _binding!!
     private val args:FragmentLocationArgs by navArgs()
+    private var isCurrentFragment=true
+    private var isCurrentFragment2=true
 
     private lateinit var viewModel: SearchTaxiViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
@@ -49,19 +52,39 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
         requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         if (args.fromWhichLayout==0){
-            viewModel.parcelSearchRequest(headerMapUniversal(requireContext()), args.orderId)
-            viewModel.parcelSearchModel.observe(viewLifecycleOwner, {
-                shareViewModel.parcelSearchItem(it)
-                val action= FragmentLocationDirections.actionFragmentLocationToFragmentParcelSearch(args.orderId)
-                findNavController().navigate(action)
-            })
+            if (isCurrentFragment){
+                viewModel.parcelSearchRequest(headerMapUniversal(requireContext()), args.orderId)
+                viewModel.parcelSearchModel.observe(viewLifecycleOwner, {
+                    shareViewModel.parcelSearchItem(it)
+                    val action= FragmentLocationDirections.actionFragmentLocationToFragmentParcelSearch(args.orderId)
+                    isCurrentFragment=false
+                    findNavController().navigate(action)
+                })
+
+                viewModel.parcelError.observe(viewLifecycleOwner, {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                })
+            }
+
         }else if (args.fromWhichLayout==1){
-            viewModel.searchRegionTaxiOrder(headerMapUniversal(requireContext()),args.orderId)
-            viewModel.searchTaxiResponse.observe(viewLifecycleOwner, {
-                shareViewModel.searchOrder(it)
-                val action= FragmentLocationDirections.actionFragmentLocationToFragmentSearchTaxi2()
-                findNavController().navigate(action)
-            })
+            if (isCurrentFragment2){
+                viewModel.searchRegionTaxiOrder(headerMapUniversal(requireContext()),args.orderId)
+                viewModel.searchTaxiResponse.observe(viewLifecycleOwner, {
+                    shareViewModel.searchOrder(it)
+                    val action= FragmentLocationDirections.actionFragmentLocationToFragmentSearchTaxi2()
+                    isCurrentFragment2=false
+                    findNavController().navigate(action)
+                })
+                viewModel.interAreaError.observe(viewLifecycleOwner, {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                    findNavController().popBackStack()
+                })
+            }
+        }
+
+        binding.btBack.setOnClickListener{
+            findNavController().popBackStack()
         }
 
 

@@ -35,6 +35,14 @@
 
     </RelativeLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="@dimen/margin_padding_4dp"
+        android:layout_centerInParent="true">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -243,7 +251,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="@string/name"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_15sp"
                             />
@@ -302,7 +309,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="+998 90 945-65-45"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -350,7 +356,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="От вас 24 км."
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -408,7 +413,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="Белый Lacetti,    30 A 487 BA"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -498,7 +502,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/_0011"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -545,7 +548,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/type_description"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -591,7 +593,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/tashkent_namangan"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -644,7 +645,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/namangan"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -697,7 +697,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/start_end_time"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -744,7 +743,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/_40_000"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -790,7 +788,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/cash_method"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />
@@ -884,7 +881,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/_998_90_900_5995"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_15sp"
                         />

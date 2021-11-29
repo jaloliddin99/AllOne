@@ -15,12 +15,14 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.viewpager.widget.ViewPager
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.home.MyCardAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentPaymentBinding
 import com.tesseract.AllOneClient.dialogs.main.DialogBonusMoney
 import com.tesseract.AllOneClient.fragments.profile.addcard.getCards.GetCardViewModel
+import com.tesseract.AllOneClient.model.profile.getCards.GetCardData
 import com.tesseract.AllOneClient.utils.dipToPixels
 import com.tesseract.AllOneClient.utils.getNavOptions
 import com.tesseract.AllOneClient.utils.headerMapUniversal
@@ -36,6 +38,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
     private lateinit var viewModel2: GetCardViewModel
     private lateinit var viewModel: PaymentsViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
+    private lateinit var getCardData:List<GetCardData>
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -117,14 +120,15 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
                     PagerUzCard.visibility = View.GONE
                     tvAddCard.visibility = View.VISIBLE
                 }
-                binding.PagerUzCard.clipToPadding = false
-                binding.PagerUzCard.adapter = MyCardAdapter(this@FragmentPayment, it)
-                binding.PagerUzCard.setPadding(dipToPixels(requireContext(), 16f).toInt(),
+                PagerUzCard.clipToPadding = false
+                PagerUzCard.adapter = MyCardAdapter(this@FragmentPayment, it)
+                getCardData=it
+                PagerUzCard.setPadding(dipToPixels(requireContext(), 16f).toInt(),
                     0,
                     150,
                     0
                 )
-                binding.PagerUzCard.pageMargin = dipToPixels(requireContext(), 8f).toInt()
+                PagerUzCard.pageMargin = dipToPixels(requireContext(), 8f).toInt()
             }
         })
     }
@@ -234,6 +238,8 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
     private var moneyTotalPrice: Double = 0.0
     private var moneyChosenSeat: Double = 0.0
     private var comment = ""
+    private var baggageTotalAmount=""
+    private var locationName=""
 
     @SuppressLint("SetTextI18n")
     private fun interArea() {
@@ -255,6 +261,8 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             moneyChosenSeat = it.selectedSeatMoney
             location = it.location
             comment = it.comment
+            baggageTotalAmount=it.baggageTotalAmount
+            locationName=it.locationName
 
             binding.apply {
                 totalMoney.text =
@@ -282,12 +290,14 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
                     args.fromWhichLayout,
                     it.content.order_id
                 )
+                binding.loader.loader.visibility=View.GONE
                 SaveData.isCurrentFragment = false
                 findNavController().navigate(action)
             }
         })
         viewModel.newOrderError.observe(viewLifecycleOwner, {
-
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
 
         })
     }
@@ -300,16 +310,26 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             "card"
         }
 
-        Log.i(
-            "TAG", "gotoPayments: " + "startId $startId, \nendId $endId, \ntariff $tariff," +
-                    "\n end_point  $endId" +
-                    "\ntariff $tariff,\n userNumber $userNumber,\n " +
-                    "selectedPlace $selectedPlace,\n location $location, \norderAmount $moneyTotalPrice" +
-                    "\npassenger_count $userNumber,\n payment_type $paymentType,\n " +
-                    "phoneNumber $phoneNumber,\n places $selectedPlace,\n startId $startId,\n tariff $tariff" +
-                    " \n used_bonus $usedBonus,\n bonus_amount $bonusAmount"
-        )
+        if (paymentType=="card"){
+            if (getCardData.isEmpty()){
+                Toast.makeText(context, getString(R.string.please_endter_card), Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
 
+        Log.i(
+            "TAG", " startId $startId, \nendId $endId, \ntariff $tariff," +
+                    "\n userNumber $userNumber,\n " +
+                    "selectedPlace $selectedPlace,\ndepDate $depDate \n location $location, \nlocationName $locationName \n" +
+                    "seat $seat \nparcelPlaces $parcelPlaces \n hasOverheadLuggage $hasOverheadLuggage \n " +
+                    "hasAirConditioner$hasAirConditioner \nforAnother $forAnother \nphoneNumber $phoneNumber,\n" +
+                    "payment_type $paymentType, \n" +
+                    " used_bonus $usedBonus,\n" +
+                    " bonus_amount $bonusAmount\norderAmount $moneyTotalPrice" +
+                    "\n baggageAmount $baggageTotalAmount \n" +
+                    "comment $comment\n  cardData ${getCardData[binding.PagerUzCard.currentItem].id!!}"
+        )
+        binding.loader.loader.visibility=View.VISIBLE
         viewModel.interAreaNewOrder(
             headerMapUniversal(requireContext()),
             startId,
@@ -319,6 +339,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             selectedPlace,
             depDate,
             location,
+            locationName,
             seat,
             parcelPlaces,
             if (hasOverheadLuggage) 1 else 0,
@@ -329,8 +350,9 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             if (usedBonus) 1 else 0,
             if (bonusAmount.isEmpty()) 0.0 else bonusAmount.toDouble(),
             moneyTotalPrice,
+            if (baggageTotalAmount.isEmpty()) 0.0 else baggageTotalAmount.toDouble(),
             comment,
-            1
+            getCardData[binding.PagerUzCard.currentItem].id!!
         )
         SaveData.isCurrentFragment = true
     }

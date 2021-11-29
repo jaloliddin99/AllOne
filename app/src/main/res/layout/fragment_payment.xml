@@ -217,6 +217,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
+                        android:id="@+id/schot"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
@@ -589,13 +590,15 @@
 
         </androidx.core.widget.NestedScrollView>
 
+
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btNextPayment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_padding_16dp"
             android:layout_marginEnd="@dimen/margin_padding_16"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="@dimen/margin_padding_24dp"
             android:background="@drawable/background_white_corner_12"
             android:backgroundTint="@color/green"
             android:padding="@dimen/margin_padding_16dp"

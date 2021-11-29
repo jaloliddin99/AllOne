@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,10 +21,8 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
+class FragmentSearchDistrict : Fragment(),
     SearchDistrictAdapter.OnItemClick {
-
-
     private var _binding: FragmentDestrictSearchBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel: DistrictViewModel
@@ -47,7 +44,7 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentDestrictSearchBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -58,7 +55,7 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
 
         viewModel = ViewModelProvider(this).get(DistrictViewModel::class.java)
 
-        binding?.apply {
+        binding.apply {
             if (Common.destination == 0 || Common.destination == 10) {
                 toolbarTitle.text = Common.startRegion
                 toolbarTitle.transitionName =
@@ -89,22 +86,22 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
             })
 
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             Common.isCurrentRegionFragment = false
             findNavController().popBackStack()
         }
 
-        binding!!.searchItemRecycler.layoutManager =
+        binding.searchItemRecycler.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        viewModel.districtList.observe(requireActivity(), Observer {
+        viewModel.districtList.observe(requireActivity(), {
 
             searchDistrictAdapter = SearchDistrictAdapter(it, this)
-            binding!!.searchItemRecycler.adapter = searchDistrictAdapter
+            binding.searchItemRecycler.adapter = searchDistrictAdapter
             val resId: Int = R.anim.layout_animation
             val animation = AnimationUtils.loadLayoutAnimation(context, resId)
-            binding!!.searchItemRecycler.layoutAnimation = animation
-            binding!!.searchItemRecycler.setHasFixedSize(true)
+            binding.searchItemRecycler.layoutAnimation = animation
+            binding.searchItemRecycler.setHasFixedSize(true)
 
         })
 
@@ -116,7 +113,7 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
 
     private fun performSearch() {
 
-        binding?.searchView?.addTextChangedListener(textWatcher)
+        binding.searchView.addTextChangedListener(textWatcher)
 
     }
 
@@ -140,10 +137,11 @@ class FragmentSearchDistrict : Fragment(R.layout.fragment_destrict_search),
     override fun onItemClick(position: String, districtName: String?) {
         isLocationSelected=true
         ready(districtName, position)
-        binding?.ready?.backgroundTintList = context?.getColorStateList(R.color.green)
+        binding.ready.backgroundTintList = context?.getColorStateList(R.color.green)
     }
+
     private fun ready(districtName: String?, position: String){
-        binding?.apply {
+        binding.apply {
             ready.setOnClickListener {
                 if (isLocationSelected){
                     if (Common.destination == 0 || Common.destination == 10) {

@@ -137,6 +137,7 @@ interface APIInterface {
         @Field("places") places: String,
         @Field("departure_date") departure_date: String,
         @Field("location") location: String,
+        @Field("location_name") location_name:String,
         @Field("baggage") baggage: String,
         @Field("baggage_places") baggage_places: String,
         @Field("has_overhead_luggage") has_overhead_luggage: Int,
@@ -147,6 +148,7 @@ interface APIInterface {
         @Field("used_bonus") used_bonus: Int,
         @Field("used_bonus_amount") used_bonus_amount: Double,
         @Field("order_amount") order_amount: Double,
+        @Field("baggage_amount") baggage_amount:Double,
         @Field("comment") comment: String,
         @Field("card_id") cardId:Int
     ) : Response<NewOrderInterAreaModel>
@@ -155,7 +157,7 @@ interface APIInterface {
     @POST("interarea/search/{id}")
     suspend fun searchRegionOrder(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id: Int
+        @Path("id") id: Int
     ) : Response<SearchRegionOrderModel>
 
     @FormUrlEncoded
@@ -167,6 +169,7 @@ interface APIInterface {
         @Field("places") places: String
     ):Response<NewOrderUpdateModel>
 
+    @FormUrlEncoded
     @POST("interarea/book/{order_id}")
     suspend fun interAreaBooking(
         @HeaderMap headers: Map<String, String>,

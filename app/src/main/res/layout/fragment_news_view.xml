@@ -37,8 +37,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_13sp"
                     android:fontFamily="@font/inter_regular"
-                    android:id="@+id/date"
-                    android:text="01.09.21 10:51"/>
+                    android:id="@+id/date"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -46,9 +45,8 @@
                     android:fontFamily="@font/inter_bold"
                     android:id="@+id/title"
                     android:textColor="@color/black"
-                    android:lineSpacingExtra="@dimen/dimen_48dp"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
-                    android:text="01.09.21 10:51"/>
+                    android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"/>
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -56,9 +54,8 @@
                     android:fontFamily="@font/inter_regular"
                     android:id="@+id/description"
                     android:textColor="@color/black"
-                    android:lineSpacingExtra="@dimen/dimen_48dp"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
-                    android:text="01.09.21 10:51"/>
+                    android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                    android:layout_marginTop="@dimen/margin_padding_12dp"/>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
