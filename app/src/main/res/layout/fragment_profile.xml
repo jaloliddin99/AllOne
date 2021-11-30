@@ -73,14 +73,15 @@
                     app:cardCornerRadius="45dp"
                     app:cardElevation="0dp">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageProfile"
+                        android:src="@drawable/ic_profile_user"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
                 </androidx.cardview.widget.CardView>
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:layout_alignParentEnd="true"
@@ -124,7 +125,9 @@
                     android:id="@+id/bonus_card"
                     android:layout_width="match_parent"
                     android:layout_height="95dp"
+                    app:rippleColor="@android:color/transparent"
                     android:layout_marginTop="30dp"
+
                     android:backgroundTint="@color/green"
                     app:cardCornerRadius="@dimen/margin_padding_12dp"
                     app:cardElevation="0dp">
@@ -177,7 +180,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="2"
                                 android:fontFamily="@font/inter_bold"
-                                android:text="Бонусные баллы:"
+                                android:text="@string/bonus_ball"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/text_size_18sp" />
 

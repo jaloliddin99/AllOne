@@ -89,7 +89,7 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
                     )
                 findNavController().navigate(action)
             }
-            viewModel.message.observe(requireActivity(), Observer {
+            viewModel.message.observe(requireActivity(), {
                 binding.loader.loader.visibility=View.GONE
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             })

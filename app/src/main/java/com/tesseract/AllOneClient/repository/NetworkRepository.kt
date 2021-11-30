@@ -175,11 +175,17 @@ constructor(private val apiInterface: APIInterface) {
     suspend fun getParcelActiveOrders(token: Map<String, String>, id: Int) =
         apiInterface.getParcelActiveOrders(token, id)
 
+    suspend fun getCityActiveOrders(token: Map<String, String>, orderId: Int)=
+        apiInterface.getCityActiveOrders(token, orderId)
+
     suspend fun getTaxiOrderHistory(token: Map<String, String>, id: Int) =
         apiInterface.getTaxiOrderHistory(token, id)
 
     suspend fun getParcelDeliveryOrder(token: Map<String, String>, id: Int) =
         apiInterface.getParcelDeliveryOrder(token, id)
+
+    suspend fun getOrderCityHistory(token: Map<String, String>, id: Int)=
+        apiInterface.getOrderCityHistory(token, id)
 
     suspend fun getAboutDriver(token: Map<String, String>, id: Int) =
         apiInterface.getAboutDriver(token, id)

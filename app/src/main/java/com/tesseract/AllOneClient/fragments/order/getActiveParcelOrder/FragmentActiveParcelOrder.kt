@@ -19,6 +19,8 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.order.DriverCarImagesAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentActiveParcelOrderBinding
+import com.tesseract.AllOneClient.utils.gotoContact
+import com.tesseract.AllOneClient.utils.gotoTelegram
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,6 +34,8 @@ class FragmentActiveParcelOrder : Fragment() {
     private lateinit var yourTaxiAdapter: DriverCarImagesAdapter
     private lateinit var yourTaxiAdapter2: DriverCarImagesAdapter
     private lateinit var viewModel: ActiveParcelOrderViewModel
+    private var phoneNumber:String=""
+    private var telegram:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -63,10 +67,41 @@ class FragmentActiveParcelOrder : Fragment() {
 
         viewModel.getParcelActiveOrders(headerMapUniversal(requireContext()), args.parcelId)
 
+        binding.CRUD.cancel.setOnClickListener {
+            val action=FragmentActiveParcelOrderDirections.actionGlobalCancelOrder(args.parcelId, "interarea_parcel_delivery")
+            findNavController().navigate(action)
+        }
+
+        binding.CRUD.call.setOnClickListener {
+            gotoContact(phoneNumber, requireContext())
+        }
+
+        binding.CRUD.telegram.setOnClickListener {
+            gotoTelegram(telegram, requireContext())
+        }
+
+        binding.CRUD.chat.setOnClickListener {
+            val action=FragmentActiveParcelOrderDirections.actionGlobalChat(args.parcelId)
+            findNavController().navigate(action)
+        }
+
+        binding.showFromMap.setOnClickListener {
+//                val action =
+//                    FragmentActiveInterAreaOrderDirections.actionFragmentOrderYourTaxiToFragmentRegionMapFirst(
+//                        fromLatLng,
+//                        toLatLng,
+//                        args.tariff,
+//                        args.id
+//                    )
+//                findNavController().navigate(action)
+            }
+
 
         viewModel.getActiveParcelData.observe(requireActivity(), {
             binding.loader.loader.visibility=View.GONE
 
+            phoneNumber=it.driverPhoneNumber!!
+            telegram=it.driverTelegram!!
 
             binding.amount.text= SaveData.formatPhone(it.amount!!) +" "+ requireContext().getString(R.string.summa1)
             binding.amount2.text= SaveData.formatPhone(it.amount!!)+" "+ requireContext().getString(R.string.summa1)
@@ -77,6 +112,10 @@ class FragmentActiveParcelOrder : Fragment() {
                     it1
                 )
             }
+
+            binding.id.text=it.id?.toString()
+            binding.parcelType.text=it.parcelType
+
             if (it.hasOverHeadLuggage == true){
                 binding.hasOverheadLuggage.visibility=View.VISIBLE
                 binding.userSeats.visibility=View.VISIBLE
@@ -136,10 +175,9 @@ class FragmentActiveParcelOrder : Fragment() {
             binding.postCarPhotos.adapter = yourTaxiAdapter2
             binding.postCarPhotos.setHasFixedSize(true)
 
-
         })
 
-        viewModel.errorM.observe(requireActivity(), Observer {
+        viewModel.errorM.observe(requireActivity(), {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             binding.loader.loader.visibility=View.GONE
         })

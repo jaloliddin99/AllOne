@@ -17,6 +17,18 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_login.view.*
 import java.util.*
+import com.tesseract.AllOneClient.model.order.MessageEvent
+
+import org.greenrobot.eventbus.ThreadMode
+
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.EventBus
+
+
+
+
+
+
 
 @AndroidEntryPoint
 class LoginActivity : AppCompatActivity(){
@@ -66,18 +78,35 @@ class LoginActivity : AppCompatActivity(){
         return  navController.navigateUp() || super.onSupportNavigateUp()
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onMessageEvent(event: String?) {
+
+        when (event) {
+            "Uzbek" -> {
+                setLocate("uz")
+            }
+            "English" -> {
+                setLocate("en")
+            }
+            else -> {
+                setLocate("ru")
+            }
+        }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
 //    override fun languageSetter(lan: String) {
-//        when (lan) {
-//            "Uzbek" -> {
-//                setLocate("uz")
-//            }
-//            "English" -> {
-//                setLocate("en")
-//            }
-//            else -> {
-//                setLocate("ru")
-//            }
-//        }
+
 //    }
 
     private fun setLocate(Lang: String) {

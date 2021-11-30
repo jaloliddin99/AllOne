@@ -75,9 +75,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/order_num"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -85,11 +85,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="№46"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/id"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -122,9 +122,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/taxi_city"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -132,11 +132,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Стандарт"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/tariff"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -172,9 +172,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/driver"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -182,11 +182,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="г.Ташкент"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/driver_name"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -225,9 +225,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/wheRee"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -235,11 +235,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Ташкент, Улица Абдулла"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:id="@+id/startPoint"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -278,9 +278,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/to_where"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -288,11 +288,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Ташкент, ул. Амир Темур, 25"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/endPoint"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -332,9 +332,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/diatance"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -342,11 +342,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="16 км"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/distance"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -380,9 +380,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/time"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -390,11 +390,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="5 мин 53 сек."
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/time"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
 
@@ -429,9 +429,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/payment_method"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -439,11 +439,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="Наличныет"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/payment_type"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -475,9 +475,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/sena"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -485,11 +485,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="18 800 сум"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/amount"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -521,9 +521,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:fontFamily="@font/inter_medium"
+                        android:fontFamily="@font/inter_regular"
                         android:text="@string/bonus_money"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -531,11 +531,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="18 800 сум"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:fontFamily="@font/inter_semibold"
+                        android:id="@+id/bonus_amount"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
-                        android:textStyle="bold" />
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -556,6 +556,12 @@
         android:text="@string/back"
         android:textAppearance="@style/boldStyleLight"
         android:textSize="@dimen/text_size_18sp" />
-
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
 
 </RelativeLayout>

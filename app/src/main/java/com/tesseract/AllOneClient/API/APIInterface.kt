@@ -40,6 +40,8 @@ import com.tesseract.AllOneClient.model.medTourism.doctorView.DoctorViewMainMode
 import com.tesseract.AllOneClient.model.medTourism.favourites.FavouritesModel
 import com.tesseract.AllOneClient.model.medTourism.medMain.MedTurMainModel
 import com.tesseract.AllOneClient.model.order.aboutDriverModel.AboutDriverModel
+import com.tesseract.AllOneClient.model.order.activeOrderCity.CityActiveOrderModel
+import com.tesseract.AllOneClient.model.order.cityOrderHistory.CityOrderHistoryModel
 import com.tesseract.AllOneClient.model.order.getActiveOrderModel.GetActiveOrderModel
 import com.tesseract.AllOneClient.model.order.getActiveParcelOrdersModel.GetActiveParcelOrderModel
 import com.tesseract.AllOneClient.model.order.getOrderParcelModel.OrderParcelATModel
@@ -355,6 +357,12 @@ interface APIInterface {
         @Path("id") id: Int
     ): Response<GetActiveParcelOrderModel>
 
+    @GET("orders/active/city/{orderId}")
+    suspend fun getCityActiveOrders(
+        @HeaderMap headers: Map<String, String>,
+        @Path("orderId") id: Int
+    ):Response<CityActiveOrderModel>
+
 
     @GET("orders/history/interarea/{id}")
     suspend fun getTaxiOrderHistory(
@@ -367,6 +375,12 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>,
         @Path("id") id: Int
     ):Response<OrderParcelATModel>
+
+    @GET("orders/history/city/{id}")
+    suspend fun getOrderCityHistory(
+        @HeaderMap headers: Map<String, String>,
+        @Path("id") id: Int
+    ):Response<CityOrderHistoryModel>
 
     @GET("driver_info/{id}")
     suspend fun getAboutDriver(

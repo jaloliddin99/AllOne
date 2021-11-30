@@ -90,43 +90,43 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 Toast.makeText(context, "bomadi", Toast.LENGTH_LONG).show()
             }
         })
-        binding?.txtSignIn?.addTextChangedListener(textWatcher)
-        binding?.txtSignIn?.setOnKeyListener(object : View.OnKeyListener {
-            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-                if (keyCode == KeyEvent.KEYCODE_DEL) {
-                    if (binding?.txtSignIn?.text.toString().endsWith(" ")){
-                        binding?.txtSignIn?.setText(binding?.txtSignIn?.text?.trim())
-                        binding?.txtSignIn?.text?.length?.let { binding?.txtSignIn?.setSelection(it) }
-                    }
-                }
-                return false
-            }
-        })
+//        binding?.txtSignIn?.addTextChangedListener(textWatcher)
+//        binding?.txtSignIn?.setOnKeyListener(object : View.OnKeyListener {
+//            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
+//                if (keyCode == KeyEvent.KEYCODE_DEL) {
+//                    if (binding?.txtSignIn?.text.toString().endsWith(" ")){
+//                        binding?.txtSignIn?.setText(binding?.txtSignIn?.text?.trim())
+//                        binding?.txtSignIn?.text?.length?.let { binding?.txtSignIn?.setSelection(it) }
+//                    }
+//                }
+//                return false
+//            }
+//        })
     }
 
 
 
-    private val textWatcher = object : TextWatcher {
-        override fun afterTextChanged(s: Editable?) {
-
-        }
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-        }
-        @SuppressLint("SetTextI18n")
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-            if (start == 3 ||start == 6 || start == 10|| start == 13) {
-                binding?.txtSignIn?.setText(binding!!.txtSignIn.text.toString() + " ")
-                binding?.txtSignIn?.setSelection(binding?.txtSignIn?.text.toString().length)
-            }
-        }
-    }
-
-    fun showKeyboard() {
-        val inputMethodManager: InputMethodManager =
-            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-    }
+//    private val textWatcher = object : TextWatcher {
+//        override fun afterTextChanged(s: Editable?) {
+//
+//        }
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//        }
+//        @SuppressLint("SetTextI18n")
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            if (start == 3 ||start == 6 || start == 10|| start == 13) {
+//                binding?.txtSignIn?.setText(binding!!.txtSignIn.text.toString() + " ")
+//                binding?.txtSignIn?.setSelection(binding?.txtSignIn?.text.toString().length)
+//            }
+//        }
+//    }
+//
+//    fun showKeyboard() {
+//        val inputMethodManager: InputMethodManager =
+//            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+//        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//    }
 
 
 }

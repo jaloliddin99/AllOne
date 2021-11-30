@@ -222,6 +222,18 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     override fun onItemClick(position: Int) {
         when (position) {
             0 -> {
+                val action = HomeFragmentDirections.actionHomeFragmentToFragmentCityMap()
+                findNavController().navigate(action)
+            }
+            1 -> {
+                val addPhotoBottomDialogFragment = ModalDialogParcelSelection(this@HomeFragment)
+                addPhotoBottomDialogFragment.show(
+                    parentFragmentManager,
+                    tag
+                )
+            }
+            2 -> {
+
                 val directions = HomeFragmentDirections.actionHomeFragmentToFragmentTaxiRegions()
                 Common.startRegion=""
                 Common.startDistrict=""
@@ -233,28 +245,21 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 Common.endRegionId=""
                 Common.endDistrictId=""
                 findNavController().navigate(directions)
-            }
-            1 -> {
-                val addPhotoBottomDialogFragment = ModalDialogParcelSelection(this@HomeFragment)
-                addPhotoBottomDialogFragment.show(
-                    parentFragmentManager,
-                    tag
-                )
-            }
-            2 -> {
-                val action=HomeFragmentDirections.actionGlobalChat(1)
-                findNavController().navigate(action)
+
             }
             3 -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToFragmentTourismMain()
+
+                val action = HomeFragmentDirections.actionHomeFragmentToFragmentMainClinic()
                 findNavController().navigate(action)
+
             }
             4 -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToFragmentCityMap()
+                val action=HomeFragmentDirections.actionGlobalChat(1)
                 findNavController().navigate(action)
+
             }
             5 -> {
-                val action = HomeFragmentDirections.actionHomeFragmentToFragmentMainClinic()
+                val action = HomeFragmentDirections.actionHomeFragmentToFragmentTourismMain()
                 findNavController().navigate(action)
             }
         }

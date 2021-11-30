@@ -317,7 +317,7 @@ class FragmentRegionActiveMap : Fragment(), OnMapReadyCallback, DialogDriverRati
         mMap.addPolyline(
             PolylineOptions().addAll(
                 latLngList
-            ).width(12F).color(Color.BLUE).geodesic(true).jointType(JointType.ROUND)
+            ).width(12F).color(Color.parseColor("#02C65C")).geodesic(true).jointType(JointType.ROUND)
         )
     }
 

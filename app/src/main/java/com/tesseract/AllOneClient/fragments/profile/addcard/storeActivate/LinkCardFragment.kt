@@ -27,7 +27,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
 
     var fragmentLinkCardBinding: FragmentLinkCardBinding? = null
-    lateinit var dialog: Dialog
+
     private var isSaveButtonEnabled:Boolean=false
     var cardId: Int = -1
 
@@ -52,7 +52,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         fragmentLinkCardBinding?.apply {
             getCode.setOnClickListener {
                 if (expirityDate.text.toString().length==5 && cardNumber.text.toString().length==19){
-                    loader()
+                    fragmentLinkCardBinding?.loader?.loader?.visibility=View.VISIBLE
                     viewModel.storeCard(
                         headerMapUniversal(requireContext()),
                         cardName.text.toString(),
@@ -73,7 +73,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
                 }else{
                     Log.i("size ", ""+code+" "+code.length)
                     if (code.length==6){
-                        dialog.show()
+                        fragmentLinkCardBinding?.loader?.loader?.visibility=View.VISIBLE
                         viewModel.activateCard(
                             headerMapUniversal(requireContext()),
                             cardId,
@@ -86,12 +86,12 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
 
 
         viewModel.activateCardMsg.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
             newCardAdded=true
             findNavController().popBackStack()
         })
         viewModel.errorMessageActiveCards.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
             fragmentLinkCardBinding?.incorrectCode?.visibility=View.VISIBLE
             context?.getColor(R.color.red)?.let { it1 ->
                 fragmentLinkCardBinding?.codeField?.setTextColor(
@@ -102,7 +102,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         })
 
         viewModel.postStoreCardDataResponse.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
             cardId= it.id!!
             fragmentLinkCardBinding?.apply {
                 getCode.visibility=View.GONE
@@ -115,7 +115,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
@@ -197,14 +197,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
-    private fun loader(){
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-    }
+
 
 
 }

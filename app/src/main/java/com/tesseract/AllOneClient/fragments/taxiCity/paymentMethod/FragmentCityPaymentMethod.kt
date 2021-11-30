@@ -30,8 +30,6 @@ class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, 
     private lateinit var getCardData: List<GetCardData>
     private  var paymentType="cash"
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

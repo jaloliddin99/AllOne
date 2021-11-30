@@ -257,6 +257,9 @@ class MainActivity : AppCompatActivity() {
                     R.id.fragmentOrderParcelAboutTrip->{
                         hideBottomNav()
                     }
+                    R.id.mapsFragment->{
+                        hideBottomNav()
+                    }
                     R.id.fragmentGoodMain->{
                         showBottomNav()
                         statusBarColor(
@@ -272,6 +275,9 @@ class MainActivity : AppCompatActivity() {
                         hideBottomNav()
                     }
                     R.id.fragmentNewsView->{
+                        hideBottomNav()
+                    }
+                    R.id.fragmentOrderAboutDriver->{
                         hideBottomNav()
                     }
                     R.id.fragmentAllNews->{

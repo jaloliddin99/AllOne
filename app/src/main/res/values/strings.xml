@@ -683,6 +683,7 @@
     <string name="discount">скидка</string>
     <string name="please_endter_card">Пожалуйста, выберите карту для оплаты картой</string>
     <string name="tell_reason">Укажите причины</string>
+    <string name="bonus_ball">Бонусные баллы:</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

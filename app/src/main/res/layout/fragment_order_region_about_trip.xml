@@ -587,4 +587,12 @@
         android:textAppearance="@style/boldStyleLight"
         android:textSize="@dimen/text_size_18sp" />
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
+
 </RelativeLayout>

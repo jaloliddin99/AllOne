@@ -25,12 +25,11 @@ import dagger.hilt.android.AndroidEntryPoint
 class RenameCardsFragment : Fragment(R.layout.fragment_rename_cards), DialogDeleteCard.DeleteListener {
 
     val args: RenameCardsFragmentArgs by navArgs()
-    lateinit var dialog: Dialog
     var fragmentRenameCardsBinding:FragmentRenameCardsBinding?=null
     private lateinit var viewModel: UpdateCardViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var bindding=FragmentRenameCardsBinding.bind(view)
+        val bindding=FragmentRenameCardsBinding.bind(view)
         viewModel=ViewModelProvider(this).get(UpdateCardViewModel::class.java)
         fragmentRenameCardsBinding=bindding
 
@@ -40,7 +39,7 @@ class RenameCardsFragment : Fragment(R.layout.fragment_rename_cards), DialogDele
                 if (notes.text.toString().isEmpty()){
                     return@setOnClickListener
                 }else{
-                    loader()
+                    bindding.loader.loader.visibility=View.VISIBLE
                     viewModel.updateCard(headerMapUniversal(requireContext()), args.cardId, notes.text.toString())
                 }
             }
@@ -72,23 +71,16 @@ class RenameCardsFragment : Fragment(R.layout.fragment_rename_cards), DialogDele
         }
 
         viewModel.successM.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            bindding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.errorM.observe(requireActivity(), Observer {
-            dialog.dismiss()
+            bindding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
 
-    private fun loader(){
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-    }
+
 
     override fun deleted() {
         findNavController().popBackStack()

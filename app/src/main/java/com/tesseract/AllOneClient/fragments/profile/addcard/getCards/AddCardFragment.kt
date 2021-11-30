@@ -31,7 +31,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card), AddCardAdapter.OnI
     private var fragmentAddCardBinding: FragmentAddCardBinding? = null
     private lateinit var addCardAdapter: AddCardAdapter
     private lateinit var viewModel: GetCardViewModel
-    lateinit var dialog: Dialog
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,9 +52,8 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card), AddCardAdapter.OnI
         binding.rvAddCard.setHasFixedSize(true)
         if (newCardAdded||firstCardFragmentEntrance){
             viewModel.getCardDataList(headerMapUniversal(requireContext()))
-            loader()
             viewModel.cardDataList.observe(requireActivity(), Observer {
-                dialog.dismiss()
+                binding.loader.loader.visibility=View.GONE
                 for (i in it.indices){
                     Log.i("card type ", ""+it[i].type)
                 }
@@ -104,13 +103,5 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card), AddCardAdapter.OnI
         findNavController().navigate(action)
     }
 
-    private fun loader(){
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-    }
 
 }

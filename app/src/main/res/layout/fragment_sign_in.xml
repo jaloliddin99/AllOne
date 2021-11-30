@@ -72,38 +72,23 @@
             android:textAppearance="@style/boldStyle"
             android:textSize="@dimen/text_size_14sp" />
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <com.santalu.maskara.widget.MaskEditText
+            android:id="@+id/txtSignIn"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_height="@dimen/item_height_56dp"
             android:layout_marginTop="@dimen/margin_padding_8dp"
-            android:layout_marginEnd="@dimen/margin_padding_16"
+            android:animateLayoutChanges="true"
             android:background="@drawable/bg_grey_rounded"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/txtSignIn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_24dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="@dimen/margin_padding_24dp"
-                android:layout_marginBottom="20dp"
-                android:background="@null"
-                android:digits="0123456789+"
-                android:drawableEnd="@drawable/ic_phone"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:fontFamily="@font/inter_regular"
-                android:hint="@string/enterSomething"
-                android:imeOptions="actionDone"
-                android:inputType="phone"
-                android:maxLength="17"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_14sp" />
-
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+            android:drawableEnd="@drawable/ic_phone"
+            android:fontFamily="@font/inter_regular"
+            android:hint="@string/enterSomething"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            android:paddingHorizontal="@dimen/margin_padding_24dp"
+            android:textSize="@dimen/text_size_14sp"
+            app:mask="+___ __ ___ __ __" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

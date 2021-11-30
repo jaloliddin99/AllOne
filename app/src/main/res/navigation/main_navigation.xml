@@ -543,6 +543,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out" />
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
 
 
     </fragment>
@@ -701,6 +704,9 @@
         android:label="fragment_order_city_about_trip"
         tools:layout="@layout/fragment_order_city_about_trip">
 
+        <argument
+            android:name="orderId"
+            app:argType="integer" />
     </fragment>
 
     <action

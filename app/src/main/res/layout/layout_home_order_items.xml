@@ -15,6 +15,7 @@
             android:id="@+id/regionName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:elevation="@dimen/margin_padding_4dp"
             android:layout_marginStart="@dimen/margin_padding_12dp"
             android:layout_marginTop="@dimen/margin_padding_8dp"
             android:fontFamily="@font/inter_semibold"

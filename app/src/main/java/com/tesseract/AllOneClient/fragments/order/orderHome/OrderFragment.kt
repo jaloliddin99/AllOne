@@ -247,6 +247,13 @@ class OrderFragment : Fragment(R.layout.fragment_order),
                 findNavController().navigate(action)
                 isCurrentFragment = false
             }
+
+            event.tariff.toString()=="city"->{
+                val action=
+                    OrderFragmentDirections.actionGlobalCityActiveOrder(event.id!!)
+                findNavController().navigate(action)
+                isCurrentFragment = false
+            }
         }
     }
 
@@ -269,7 +276,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
             }
             else -> {
                 val action =
-                    OrderFragmentDirections.actionOrderFragmentToFragmentOrderCityAboutTrip()
+                    OrderFragmentDirections.actionOrderFragmentToFragmentOrderCityAboutTrip(event.id)
                 findNavController().navigate(action)
                 Log.i("city is called", "")
                 isCurrentFragment = false

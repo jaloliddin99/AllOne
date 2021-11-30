@@ -9,33 +9,15 @@
     android:orientation="vertical"
     tools:context=".fragments.login.SplashFragment">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        android:layout_height="@dimen/item_height_56dp"
         android:layout_gravity="center"
-        android:id="@+id/linear"
-        android:layout_marginBottom="@dimen/margin_padding_36dp"
-        android:orientation="vertical">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/app_icon" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/margin_padding_16dp"
-            android:text="@string/allOne"
-            android:textAppearance="@style/boldStyleLight"
-            android:textSize="@dimen/text_size_18sp" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+        android:src="@drawable/ic_main_logo" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -43,7 +25,6 @@
         android:layout_gravity="bottom"
         android:id="@+id/linearLayout"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/linear"
         android:orientation="vertical"
         android:paddingBottom="@dimen/margin_padding_24dp">
 
@@ -62,41 +43,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/rusLang"
-                android:layout_weight="5"
-                android:layout_width="0dp"
-                android:gravity="start"
-                android:drawablePadding="@dimen/margin_padding_12dp"
-                android:layout_height="wrap_content"
-                android:background="@drawable/background_white_corner_12"
-                android:drawableStart="@drawable/ic_russian_flag"
-                android:padding="@dimen/margin_padding_16"
-                android:text="@string/russian"
-                android:textAppearance="@style/mediumStyle"
-                android:textSize="@dimen/text_size_18sp" />
-
-            <Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:orientation="horizontal">
-
-            <Space
+            <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
@@ -105,17 +52,51 @@
                 android:id="@+id/uzbLan"
                 android:layout_weight="5"
                 android:layout_width="0dp"
-                android:gravity="start"
-                android:drawablePadding="@dimen/margin_padding_12dp"
+                android:textAlignment="center"
+                android:elevation="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_corner_12"
                 android:drawableStart="@drawable/ic_uzb_flag"
                 android:padding="@dimen/margin_padding_16"
+                android:text="O'zbekcha"
+                android:textAppearance="@style/mediumStyle"
+                android:textSize="@dimen/text_size_18sp" />
+
+            <androidx.legacy.widget.Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <androidx.legacy.widget.Space
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/rusLan"
+                android:layout_weight="5"
+                android:layout_width="0dp"
+                android:elevation="@dimen/dimens_0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_white_corner_12"
+                android:drawableStart="@drawable/ic_russian_flag"
+                android:padding="@dimen/margin_padding_16"
+                android:textAlignment="center"
                 android:text="@string/russian"
                 android:textAppearance="@style/mediumStyle"
                 android:textSize="@dimen/text_size_18sp" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -129,7 +110,7 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1" />
@@ -138,17 +119,17 @@
                 android:id="@+id/enLan"
                 android:layout_weight="5"
                 android:layout_width="0dp"
-                android:gravity="start"
-                android:drawablePadding="@dimen/margin_padding_12dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_corner_12"
-                android:drawableStart="@drawable/ic_russian_flag"
+                android:drawableStart="@drawable/ic_english_flag"
                 android:padding="@dimen/margin_padding_16"
+                android:textAlignment="center"
                 android:text="@string/english"
+                android:elevation="@dimen/dimens_0dp"
                 android:textAppearance="@style/mediumStyle"
                 android:textSize="@dimen/text_size_18sp" />
 
-            <Space
+            <androidx.legacy.widget.Space
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />

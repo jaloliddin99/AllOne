@@ -525,7 +525,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
         binding.btnGotoSearch.setOnClickListener {
             val action =
-                FragmentCityTariffsDirections.actionGlobalCityActiveOrder()
+                FragmentCityTariffsDirections.actionGlobalCityActiveOrder(2)
             findNavController().navigate(action)
         }
 

@@ -56,10 +56,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
-        android:elevation="@dimen/margin_padding_24dp"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        android:elevation="@dimen/margin_padding_24dp"
         app:behavior_hideable="false"
-        app:behavior_peekHeight="300dp">
+        app:behavior_peekHeight="400dp">
 
 
         <androidx.appcompat.widget.LinearLayoutCompat
@@ -77,6 +77,8 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
                     android:orientation="vertical"
+                    android:id="@+id/chatAndTelegram"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.68"
                     app:layout_constraintStart_toStartOf="parent"
@@ -109,6 +111,7 @@
                                 <androidx.appcompat.widget.AppCompatImageView
                                     android:layout_width="30dp"
                                     android:layout_height="30dp"
+                                    android:id="@+id/chat"
                                     android:layout_gravity="center_horizontal"
                                     android:src="@drawable/ic_chat" />
 
@@ -132,6 +135,7 @@
                                     android:layout_width="20dp"
                                     android:layout_height="20dp"
                                     android:layout_gravity="center"
+                                    android:id="@+id/telegram"
                                     android:layout_marginTop="5dp"
                                     android:layout_marginBottom="5dp"
                                     android:src="@drawable/ic_telegram_blue" />
@@ -220,7 +224,7 @@
                                 android:orientation="horizontal">
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/type"
+                                    android:id="@+id/tariff"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_semibold"
@@ -229,7 +233,7 @@
                                     android:textSize="@dimen/text_size_18sp" />
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/deal_money"
+                                    android:id="@+id/amount"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_semibold"
@@ -246,7 +250,7 @@
                                 android:orientation="horizontal">
 
                                 <androidx.appcompat.widget.AppCompatTextView
-                                    android:id="@+id/banned_seats"
+                                    android:id="@+id/order_status"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:drawableStart="@drawable/ic_transport"
@@ -257,11 +261,15 @@
                                     android:textColor="@color/black"
                                     android:textSize="15sp" />
 
+                                <androidx.legacy.widget.Space
+                                    android:layout_width="@dimen/margin_padding_4dp"
+                                    android:layout_height="wrap_content" />
+
                                 <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/eta"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_regular"
-                                    android:text="  5мин"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/text_size_15sp" />
 
@@ -281,6 +289,7 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/driver_car"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/linear"
@@ -337,6 +346,7 @@
                                 android:layout_marginTop="@dimen/margin_padding_4dp"
                                 android:drawableEnd="@drawable/ic_star_green"
                                 android:drawablePadding="@dimen/margin_padding_12dp"
+                                android:id="@+id/driver_name"
                                 android:drawableTint="@color/yellow"
                                 android:fontFamily="@font/inter_bold"
                                 android:text="Акмал Шербоев"
@@ -344,7 +354,7 @@
                                 android:textSize="15sp" />
 
                             <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/rating"
+                                android:id="@+id/driver_rating"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
@@ -411,7 +421,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -467,7 +477,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -522,7 +532,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -570,6 +580,7 @@
                             android:layout_marginTop="@dimen/margin_padding_4dp"
                             android:fontFamily="@font/inter_bold"
                             android:text="@string/via_chash"
+                            android:id="@+id/payment_type"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -578,7 +589,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -586,10 +597,11 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
+                    android:id="@+id/for_another_phone_number3"
                     android:background="#C8C8C8" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/orderForOtherLinear"
+                    android:id="@+id/for_another_phone_number2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
@@ -624,6 +636,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
+                            android:id="@+id/for_another_phone_number"
                             android:fontFamily="@font/inter_bold"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -633,17 +646,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
+                    android:id="@+id/has_conditioner"
                     android:background="#C8C8C8" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
-                    android:id="@+id/withAirConditioner"
+                    android:id="@+id/has_conditioner2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
@@ -656,7 +671,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginStart="@dimen/margin_padding_8dp"
                         android:layout_marginEnd="@dimen/margin_padding_16"
-                        android:src="@drawable/ic_people"
+                        android:src="@drawable/ic_snow"
                         app:tint="@color/green" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -673,7 +688,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right_green" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -681,13 +696,13 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
-                    android:id="@+id/lineConditioner"
+                    android:id="@+id/commentLine"
                     android:background="#C8C8C8" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/linearComment"
+                    android:id="@+id/commentLinear"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
                     android:layout_marginBottom="@dimen/margin_padding_12dp"
                     android:orientation="horizontal">
@@ -716,7 +731,7 @@
                             android:textSize="@dimen/text_size_15sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/comment"
+                            android:id="@+id/comments"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_4dp"
@@ -783,6 +798,9 @@
             android:textSize="@dimen/text_size_18sp" />
     </FrameLayout>
 
+
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
