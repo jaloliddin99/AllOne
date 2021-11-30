@@ -82,7 +82,7 @@ class FragmentWaitingSuccess: Fragment() {
     private var parcelUsedBonus = false
     private var parcelUsedBonusAmount = 0.0
     private var parcelOrderAmount = 0.0
-    private lateinit var parcelBaggagePhotos: Map<String, ArrayList<String>>
+    private var parcelBaggagePhotos=ArrayList<String>()
     private var parcelHasOverheadLuggage = false
     private var parcelForAnother = false
     private var parcelPhoneNumber = ""
@@ -109,7 +109,6 @@ class FragmentWaitingSuccess: Fragment() {
             parcelBaggagePhotos = it.baggagePhoto
             parcelPhoneNumber = it.phoneNumber
             parcelComment = it.comment
-
 
             binding.apply {
                 bottomSHeet.dealMoney.text =

@@ -117,6 +117,7 @@ constructor(private val apiInterface: APIInterface) {
         depDate: String,
         depTime: String,
         location: String,
+        location_name: String,
         receiverName: String,
         receiverPhone: String,
         baggage: String,
@@ -125,7 +126,7 @@ constructor(private val apiInterface: APIInterface) {
         usedBonus: Int,
         usedBonusAmount: Double,
         orderAmount: Double,
-        details: Map<String, ArrayList<String>>,
+        baggagePhotos:ArrayList<String>,
         hasOverheadLuggage: Int,
         forAnother: Int,
         phoneNumber: String,
@@ -139,6 +140,7 @@ constructor(private val apiInterface: APIInterface) {
             depDate,
             depTime,
             location,
+            location_name,
             receiverName,
             receiverPhone,
             baggage,
@@ -147,7 +149,7 @@ constructor(private val apiInterface: APIInterface) {
             usedBonus,
             usedBonusAmount,
             orderAmount,
-            details,
+            baggagePhotos,
             hasOverheadLuggage,
             forAnother,
             phoneNumber,
@@ -161,6 +163,9 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun parcelUpdate(token: Map<String, String>, id: Int, baggage_places: String) =
         apiInterface.parcelUpdatePlaces(token, id, baggage_places)
+
+    suspend fun parcelBooking(token: Map<String, String>, orderId: Int, driverId: Int)=
+        apiInterface.parcelBooking(token, orderId,driverId)
 
 
     suspend fun taxiGetActiveOrderRepo(token: Map<String, String>, id: Int) =

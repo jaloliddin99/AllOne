@@ -113,9 +113,26 @@ class FragmentParcelSelectedItem: Fragment()
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
-
+        binding.loader.loader.visibility=View.GONE
         viewModel.parcelUpdateObserver.observe(viewLifecycleOwner, {
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
+        })
+
+        viewModel.updatePlaceError.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
+        })
+
+        viewModel.parcelBookingError.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
+        })
+
+        viewModel.parcelBooking.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            val action= FragmentParcelSelectedItemDirections.actionFragmentParcelSelectedItemToFragmentWaitingOrderAccept(args.orderId, driverIdCar)
+            findNavController().navigate(action)
         })
 
 
@@ -147,12 +164,13 @@ class FragmentParcelSelectedItem: Fragment()
                         taxiDriverLocationPresenter.translationZ=0f
                         selectPlaceText.setTextColor(context?.getColor(R.color.red)!!)
                     }else{
-                        val action= FragmentParcelSelectedItemDirections.actionFragmentParcelSelectedItemToFragmentWaitingOrderAccept(args.orderId)
-                        findNavController().navigate(action)
+
+                        binding.loader.loader.visibility=View.VISIBLE
+                        viewModel.parcelBooking(headerMapUniversal(requireContext()), args.orderId, driverIdCar)
                     }
                 }else{
-                    val action= FragmentParcelSelectedItemDirections.actionFragmentParcelSelectedItemToFragmentWaitingOrderAccept(args.orderId)
-                    findNavController().navigate(action)
+                    binding.loader.loader.visibility=View.VISIBLE
+                    viewModel.parcelBooking(headerMapUniversal(requireContext()), args.orderId, driverIdCar)
                 }
 
             }
@@ -168,11 +186,13 @@ class FragmentParcelSelectedItem: Fragment()
             binding.apply {
                 if (args.isYourRequest){
                     yourRequest(it)
+
                     placeNotAccording.visibility= View.GONE
                     selectPlaceCardView.visibility= View.GONE
                     materialCardView.visibility= View.VISIBLE
                     tariff.text=it.order.tariff
 
+                    driverIdCar=it.your_request[args.selectedPosition].id
                     price.text= SaveData.formatPhone(it.order.price)+context?.getString(R.string.summa1)
                     driverLocation.text=it.your_request[args.selectedPosition].driver_location
                     baggage.text=it.your_request[args.selectedPosition].baggage
@@ -180,6 +200,7 @@ class FragmentParcelSelectedItem: Fragment()
                     location=it.your_request[args.selectedPosition].driver_last_location
                 }else{
                     otherOptions(it)
+                    driverIdCar=it.other_options[args.selectedPosition].id
                     location=it.other_options[args.selectedPosition].driver_last_location
                     selectPlaceCardView.visibility= View.VISIBLE
                     placeNotAccording.visibility= View.VISIBLE
@@ -203,6 +224,8 @@ class FragmentParcelSelectedItem: Fragment()
             }
         })
     }
+
+    private var driverIdCar=-11
 
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -475,6 +498,7 @@ class FragmentParcelSelectedItem: Fragment()
 
                 Log.i(TAG, "selectedSeatsInformation: ${args.orderId}")
                 viewModel.parcelUpdate(headerMapUniversal(requireContext()), args.orderId, orderedSeats)
+                binding.loader.loader.visibility=View.VISIBLE
                 Toast.makeText(context, "start", Toast.LENGTH_SHORT).show()
 
             }

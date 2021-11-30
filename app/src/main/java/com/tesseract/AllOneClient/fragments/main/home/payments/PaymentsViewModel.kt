@@ -32,6 +32,7 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
         depDate: String,
         depTime:String,
         location: String,
+        location_name: String,
         receiverName: String,
         receiverPhone:String,
         baggage: String,
@@ -40,7 +41,7 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
         usedBonus: Int,
         usedBonusAmount: Double,
         orderAmount: Double,
-        details: Map<String, ArrayList<String>>,
+        baggagePhotos:ArrayList<String>,
         hasOverheadLuggage:Int,
         forAnother: Int,
         phoneNumber: String,
@@ -49,8 +50,8 @@ class PaymentsViewModel @Inject constructor(private val repository: NetworkRepos
     ) = viewModelScope.launch {
         try {
             repository.parcelNewOrder(
-                token, startPoint, endPoint, depDate,depTime, location, receiverName,
-                receiverPhone, baggage, baggagePlaces, paymentType, usedBonus, usedBonusAmount, orderAmount, details
+                token, startPoint, endPoint, depDate,depTime, location,location_name, receiverName,
+                receiverPhone, baggage, baggagePlaces, paymentType, usedBonus, usedBonusAmount, orderAmount, baggagePhotos
             , hasOverheadLuggage, forAnother, phoneNumber, comment, cardId).let {
                 if (it.isSuccessful) {
                     if (it.body()?.success == true) {

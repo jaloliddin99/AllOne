@@ -2,10 +2,13 @@ package com.tesseract.AllOneClient.fragments.parcel.waiting
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -16,34 +19,100 @@ import androidx.navigation.fragment.navArgs
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentParcelWaitingOrderAcceptBinding
+import com.tesseract.AllOneClient.dialogs.sockets.DialogOrderCancelled
+import com.tesseract.AllOneClient.fragments.main.home.FragmentRegionTaxiConfirmationDirections
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.fragments.parcel.selectLocation.SelectLocationViewModel
+import com.tesseract.AllOneClient.services.SocketHandler
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
+import org.json.JSONObject
 
 @AndroidEntryPoint
-class FragmentWaitingOrderAccept : Fragment() {
+class FragmentWaitingOrderAccept : Fragment(), DialogOrderCancelled.OnLickListener {
 
 
     private lateinit var viewModel:SelectLocationViewModel
     val args: FragmentWaitingOrderAcceptArgs by navArgs()
-    private lateinit var binding: FragmentParcelWaitingOrderAcceptBinding
+    private var _binding: FragmentParcelWaitingOrderAcceptBinding?=null
+    private val binding get() = _binding!!
     private val shareViewModel: ShareDataViewModel by activityViewModels()
+    private val time= 10*60*1000L
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentParcelWaitingOrderAcceptBinding.inflate(inflater, container, false)
+        _binding = FragmentParcelWaitingOrderAcceptBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(SelectLocationViewModel::class.java)
+        activity?.statusBarColor(
+            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
+            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
+            true
+        )
         return binding.root
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            val timer = object: CountDownTimer(time, 100) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val progress=(1.0-millisUntilFinished.toDouble()/time.toDouble())*100
+
+                    Log.i("TAG", "onTick: $progress")
+
+                    wrongProgress.progress= progress.toFloat()
+                }
+
+                override fun onFinish() {
+                    wrongProgress.progress=100f
+                }
+            }
+            timer.start()
+        }
+
+        SocketHandler.setSocket()
+        SocketHandler.establishConnection()
+
+        val mSocket = SocketHandler.getSocket()
+
+        mSocket.on("client_order_${args.parcelOrderId}") { args ->
+            if (args[0] != null) {
+                val response = args[0] as JSONObject
+                activity?.runOnUiThread {
+                    val direction=response.getString("status")
+                    if (direction=="cancelled"){
+                        DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                    }
+                    if (direction=="accepted"){
+
+                    }
+                }
+            }
+        }
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+
+                }
+            }
+            )
+
+
+
+        binding.cancel.setOnClickListener {
+            val action=
+                FragmentRegionTaxiConfirmationDirections.actionGlobalCancelOrder(args.parcelOrderId, "interarea_parcel_delivery")
+            findNavController().navigate(action)
+        }
+
 
         binding.run {
             bottomSHeet.orderId.text = args.parcelOrderId.toString()
@@ -68,6 +137,7 @@ class FragmentWaitingOrderAccept : Fragment() {
     private var parcelEndId = -1
     private var parcelDepDate = ""
     private var parcelLocation = ""
+    private var parcelLocationDisplay = ""
     private var parcelReceiverName = ""
     private var parcelReceiverPhoneNumber = ""
     private var parcelBaggage = ""
@@ -76,7 +146,7 @@ class FragmentWaitingOrderAccept : Fragment() {
     private var parcelUsedBonus = false
     private var parcelUsedBonusAmount = 0.0
     private var parcelOrderAmount = 0.0
-    private lateinit var parcelBaggagePhotos: Map<String, ArrayList<String>>
+    private var parcelBaggagePhotos=ArrayList<String>()
     private var parcelHasOverheadLuggage = false
     private var parcelForAnother = false
     private var parcelPhoneNumber = ""
@@ -85,11 +155,13 @@ class FragmentWaitingOrderAccept : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun shareModel() {
-        shareViewModel.selectedParcelItem.observe(viewLifecycleOwner, Observer {
+        shareViewModel.selectedParcelItem.observe(viewLifecycleOwner, {
+
             parcelStartId = it.startId
             parcelEndId = it.endId
             parcelDepDate = it.depDate
             parcelLocation = it.location
+            parcelLocationDisplay = it.locationName
             parcelReceiverName = it.receiverName
             parcelReceiverPhoneNumber = it.receiverPhoneNumber
             parcelBaggage = it.baggage
@@ -139,6 +211,14 @@ class FragmentWaitingOrderAccept : Fragment() {
             ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
             true
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+
+    override fun orderAgain() {
 
     }
 

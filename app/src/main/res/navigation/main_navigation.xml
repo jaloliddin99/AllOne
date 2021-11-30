@@ -926,6 +926,9 @@
         <action
             android:id="@+id/action_fragmentWaitingOrderAccept_to_fragmentWaitingSuccess"
             app:destination="@id/fragmentWaitingSuccess" />
+        <argument
+            android:name="driverId"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/fragmentWaitingSuccess"

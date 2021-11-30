@@ -13,23 +13,50 @@ import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
-class UpdateParcelViewModel @Inject constructor(private val repository: NetworkRepository):ViewModel(){
+class UpdateParcelViewModel @Inject constructor(private val repository: NetworkRepository) :
+    ViewModel() {
 
-    val parcelUpdateObserver=MutableLiveData<ParcelUpdateModel>()
+    val parcelUpdateObserver = MutableLiveData<ParcelUpdateModel>()
+    val updatePlaceError = MutableLiveData<String>()
 
 
-    fun parcelUpdate(token: Map<String, String>, id: Int, baggagePlaces:String)=viewModelScope.launch {
-        try {
-            repository.parcelUpdate(token, id,baggagePlaces).let {
-                if (it.isSuccessful){
-                    if (it.body()?.success==true){
-                        parcelUpdateObserver.postValue(it.body())
+    fun parcelUpdate(token: Map<String, String>, id: Int, baggagePlaces: String) =
+        viewModelScope.launch {
+            try {
+                repository.parcelUpdate(token, id, baggagePlaces).let {
+                    if (it.isSuccessful) {
+                        if (it.body()?.success == true) {
+                            parcelUpdateObserver.postValue(it.body())
+                        } else {
+                            updatePlaceError.postValue(it.body()?.message)
+                        }
+                    } else {
+                        updatePlaceError.postValue(it.message())
                     }
                 }
-                Log.i(TAG, "parcelUpdate: ${it.message()} ${it.code()}")
+            } catch (e: Exception) {
+                updatePlaceError.postValue(e.message)
             }
-        }catch (e:Exception){
-            Log.i("vroifeofie", ""+e.message)
+        }
+
+    val parcelBooking = MutableLiveData<ParcelUpdateModel>()
+    val parcelBookingError = MutableLiveData<String>()
+
+    fun parcelBooking(token: Map<String, String>, orderId: Int, driverId:Int) = viewModelScope.launch {
+        try {
+            repository.parcelBooking(token, orderId, driverId).let {
+                if (it.isSuccessful) {
+                    if (it.body()?.success == true) {
+                        parcelBooking.postValue(it.body())
+                    } else {
+                        parcelBookingError.postValue(it.body()?.message)
+                    }
+                } else {
+                    parcelBookingError.postValue(it.message())
+                }
+            }
+        } catch (e: Exception) {
+            parcelBookingError.postValue(e.message)
         }
     }
 }

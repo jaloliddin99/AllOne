@@ -62,8 +62,6 @@ class FragmentActiveInterAreaOrder : Fragment(R.layout.fragment_active_interarea
                 findNavController().navigate(action)
             }
         }
-
-
     }
 
     private var orderId:Int=-1

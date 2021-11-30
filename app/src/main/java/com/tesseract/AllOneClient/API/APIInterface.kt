@@ -190,6 +190,7 @@ interface APIInterface {
         @Field("departure_date") departure_date: String,
         @Field("departure_time") departure_time: String,
         @Field("location") location: String,
+        @Field("location_name") location_name: String,
         @Field("receiver_name") receiverName: String,
         @Field("receiver_phone_number") receiverPhone: String,
         @Field("baggage") baggage: String,
@@ -198,7 +199,7 @@ interface APIInterface {
         @Field("used_bonus") used_bonus: Int,
         @Field("used_bonus_amount") used_bonus_amount: Double,
         @Field("order_amount") order_amount: Double,
-        @FieldMap details: Map<String, ArrayList<String>>,
+        @Field("baggage_photo") baggagePhotos:ArrayList<String>,
         @Field("has_overhead_luggage") has_overhead_luggage: Int,
         @Field("for_another") for_another: Int,
         @Field("phone_number") phone_number: String,
@@ -209,15 +210,23 @@ interface APIInterface {
     @POST("interarea_parcel_delivery/search/{id}")
     suspend fun parcelSearch(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id: Int
+        @Path("id") id: Int
     ) : Response<ParcelSearchFoundModel>
 
     @FormUrlEncoded
     @POST("interarea_parcel_delivery/update_place/{id}")
     suspend fun parcelUpdatePlaces(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id: Int,
+        @Path("id") id: Int,
         @Field("baggagePlaces") baggagePlaces:String
+    ):Response<ParcelUpdateModel>
+
+    @FormUrlEncoded
+    @POST("interarea_parcel_delivery/book/{orderId}")
+    suspend fun parcelBooking(
+        @HeaderMap headers: Map<String, String>,
+        @Path("orderId") id: Int,
+        @Field("driver_id") driver_id:Int
     ):Response<ParcelUpdateModel>
 
 

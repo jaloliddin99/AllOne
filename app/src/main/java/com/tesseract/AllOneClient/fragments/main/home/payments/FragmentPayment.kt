@@ -364,6 +364,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
     private var parcelEndId = -1
     private var parcelDepDate = ""
     private var parcelLocation = ""
+    private var parcelLocationName = ""
     private var parcelReceiverName = ""
     private var parcelReceiverPhoneNumber = ""
     private var parcelBaggage = ""
@@ -372,7 +373,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
     private var parcelUsedBonus = false
     private var parcelUsedBonusAmount = 0.0
     private var parcelOrderAmount = 0.0
-    private lateinit var parcelBaggagePhotos: Map<String, ArrayList<String>>
+    private var parcelBaggagePhotos = ArrayList<String>()
     private var parcelHasOverheadLuggage = false
     private var parcelForAnother = false
     private var parcelPhoneNumber = ""
@@ -387,6 +388,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             parcelEndId = it.endId
             parcelDepDate = it.depDate
             parcelLocation = it.location
+            parcelLocationName=it.locationName
             parcelReceiverName = it.receiverName
             parcelReceiverPhoneNumber = it.receiverPhoneNumber
             parcelBaggage = it.baggage
@@ -452,13 +454,16 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
         Log.i(
             "TAG",
             "gotoPayments: " + "parcelStartId $parcelStartId, \nparcelEndId $parcelEndId, " +
-                    "\nparcelDepDate $parcelDepDate,\n parcelLocation  $parcelLocation" +
+                    "\nparcelDepDate $parcelDepDate,\n parcelLocation  $parcelLocation \n parcelLocationName $parcelLocationName" +
                     "\nparcelReceiverName $parcelReceiverName,\n parcelReceiverPhoneNumber $parcelReceiverPhoneNumber," +
                     "\n parcelBaggage $parcelBaggage,\n parcelBaggagePlaces $parcelBaggagePlaces, \npaymentType $paymentType" +
-                    "\nusedBonus $usedBonus,\n bonusAmount $bonusAmount,\n parcelOrderAmount $parcelOrderAmount," +
-                    "\n parcelHasOverheadLuggage $parcelHasOverheadLuggage,\n parcelForAnother $parcelForAnother,\n parcelPhoneNumber $parcelPhoneNumber" +
-
-                    " \n parcelComment $parcelComment"
+                    "\nusedBonus $usedBonus,\n bonusAmount $bonusAmount,\n " +
+                    "parcelOrderAmount $parcelOrderAmount," +
+                    "\n parcelHasOverheadLuggage $parcelHasOverheadLuggage,\n " +
+                    "parcelForAnother $parcelForAnother,\n " +
+                    "parcelPhoneNumber $parcelPhoneNumber" +
+                    " \n parcelComment $parcelComment" +
+                    "\nparcelBaggagePhotos $parcelBaggagePhotos"
         )
 
         viewModel.parcelNewOrder(
@@ -468,6 +473,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             parcelDepDate,
             "12:00",
             parcelLocation,
+            parcelLocationName,
             parcelReceiverName,
             parcelReceiverPhoneNumber,
             parcelBaggage,

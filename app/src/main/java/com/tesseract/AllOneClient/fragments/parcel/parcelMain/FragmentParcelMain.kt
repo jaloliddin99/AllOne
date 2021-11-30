@@ -397,6 +397,10 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 return@setOnClickListener
             }
 
+            if (selectedLocationDisplay.isEmpty()){
+                return@setOnClickListener
+            }
+
             val start = Common.startDistrictId
             val end = Common.endDistrictId
             val depDate = selectedDate
@@ -413,9 +417,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
 
             details1["baggage_photo[]"] = imageBase64
 
-            Toast.makeText(context, imageBase64.size.toString(), Toast.LENGTH_SHORT).show()
 
-            details1.forEach { (key, value) -> println("$key = $value") }
 
 
             val shareParcelModel = ShareParcelModel(
@@ -423,6 +425,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 end.toInt(),
                 depDate,
                 selectedLocation,
+                selectedLocationDisplay,
                 receiverName,
                 receiverPhone,
                 baggage,
@@ -431,7 +434,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 false,
                 0.0,
                 orderAmount.toDouble(),
-                details1,
+                imageBase64,
                 hasOverheadLuggage,
                 fourYourFriend,
                 phoneNumber,
@@ -439,10 +442,8 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             )
 
             shareViewModel.selectedParcelItem(shareParcelModel)
-            val action =
-                FragmentParcelMainDirections.actionFragmentPostServiceSelectionToFragmentPayment(
-                    0
-                )
+            val action = FragmentParcelMainDirections.actionFragmentPostServiceSelectionToFragmentPayment(0)
+
             findNavController().navigate(action)
         }
     }
