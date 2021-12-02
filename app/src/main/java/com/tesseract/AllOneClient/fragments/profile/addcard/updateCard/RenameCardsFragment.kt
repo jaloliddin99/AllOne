@@ -1,14 +1,10 @@
 package com.tesseract.AllOneClient.fragments.profile.addcard.updateCard
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
-import android.view.Window
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class RenameCardsFragment : Fragment(R.layout.fragment_rename_cards), DialogDeleteCard.DeleteListener {
+class RenameCardsFragment : Fragment(), DialogDeleteCard.DeleteListener {
 
     val args: RenameCardsFragmentArgs by navArgs()
     var fragmentRenameCardsBinding:FragmentRenameCardsBinding?=null

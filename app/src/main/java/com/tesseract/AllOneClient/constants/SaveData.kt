@@ -2,6 +2,7 @@ package com.tesseract.AllOneClient.constants
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import com.tesseract.AllOneClient.R
 
 object SaveData {
@@ -269,5 +270,19 @@ object SaveData {
     fun getCreatedTime(context: Context): String? {
         val sharedrefrence = context.getSharedPreferences("createdTime", Context.MODE_PRIVATE)
         return sharedrefrence.getString(context.getString(R.string.createdTime), "")
+    }
+
+
+    fun saveProfileImage(context: Context, balance: String?) {
+
+        val sharedrefrence = context.getSharedPreferences("saveProfileImage", Context.MODE_PRIVATE)
+        val editor: SharedPreferences.Editor = sharedrefrence.edit()
+        editor.putString(context.getString(R.string.saveProfileImage), balance).apply()
+
+    }
+
+    fun getProfileImage(context: Context): String? {
+        val sharedrefrence = context.getSharedPreferences("saveProfileImage", Context.MODE_PRIVATE)
+        return sharedrefrence.getString(context.getString(R.string.saveProfileImage), "")
     }
 }

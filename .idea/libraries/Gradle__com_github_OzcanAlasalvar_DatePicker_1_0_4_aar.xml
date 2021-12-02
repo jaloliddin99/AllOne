@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.github.OzcanAlasalvar:DatePicker:1.0.4@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d88bc2c4646bb2882488d6deaa3d570b/jetified-DatePicker-1.0.4/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d88bc2c4646bb2882488d6deaa3d570b/jetified-DatePicker-1.0.4/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d88bc2c4646bb2882488d6deaa3d570b/jetified-DatePicker-1.0.4/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fcf36f730af91da1520f9f4461787084/jetified-DatePicker-1.0.4/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fcf36f730af91da1520f9f4461787084/jetified-DatePicker-1.0.4/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/fcf36f730af91da1520f9f4461787084/jetified-DatePicker-1.0.4/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

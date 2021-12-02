@@ -10,9 +10,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.KeyEvent
-import android.view.View
-import android.view.Window
+import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -32,60 +30,40 @@ import com.tesseract.AllOneClient.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
+class ChangePhoneFragment : Fragment() {
 
-    private var binding: FragmentChangePhoneNumberBinding? = null
+    private var _binding: FragmentChangePhoneNumberBinding? = null
+    private val binding get() = _binding!!
     private lateinit var viewModel: ChangePhoneViewModel
     var phoneNumber: String = ""
     var isSent: Boolean = false
-    lateinit var dialog: Dialog
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentChangePhoneNumberBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
     @SuppressLint("ClickableViewAccessibility", "SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val fragmentChangePhoneNumberBinding = FragmentChangePhoneNumberBinding.bind(view)
         viewModel = ViewModelProvider(this).get(ChangePhoneViewModel::class.java)
 
 
-        binding = fragmentChangePhoneNumberBinding
 
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        binding.loader.loader.visibility=View.GONE
 
-
-        binding?.apply {
+        binding.apply {
             backToHome.setOnClickListener {
                 findNavController().popBackStack()
             }
             codeField.addTextChangedListener(codeFieldWatcher)
-            phoneNumberField.setOnTouchListener(View.OnTouchListener { _, _ ->
-                if (phoneNumberField.text?.isEmpty() == true) {
-                    phoneNumberField.setText("+998 ")
-                    phoneNumberField.text?.length?.let {
-                        phoneNumberField.setSelection(
-                            it
-                        )
-                    }
-                }
-                false
-            })
+            phoneNumberField.setText("+998")
+
             phoneNumberField.addTextChangedListener(textWatcher)
-            phoneNumberField.setOnKeyListener { v, keyCode, event ->
-                if (keyCode == KeyEvent.KEYCODE_DEL) {
-                    if (phoneNumberField.text.toString().endsWith(" ")) {
-                        phoneNumberField.setText(phoneNumberField?.text?.trim())
-                        phoneNumberField.text?.length?.let {
-                            phoneNumberField.setSelection(
-                                it
-                            )
-                        }
-                    }
-                }
-                false
-            }
 
             sendNumber.setOnClickListener {
                 phoneNumber = phoneNumberField.text.toString()
@@ -96,7 +74,7 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
                         phoneNumberField.error = getString(R.string.enter_your_phone)
                         return@setOnClickListener
                     }
-                    dialog.show()
+                    binding.loader.loader.visibility=View.VISIBLE
                     viewModel.sendCode(headerMapUniversal(requireContext()), phoneNumber.replace(" ", ""))
                 }
             }
@@ -104,7 +82,7 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
             send.setOnClickListener {
                 if (isSent) {
                     if (isFilled) {
-                        dialog.show()
+                        binding.loader.loader.visibility=View.VISIBLE
                         viewModel.updatePhone(
                             headerMapUniversal(requireContext()),
                             phoneNumber.replace(" ", ""),
@@ -114,8 +92,8 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
                 }
             }
 
-            viewModel.text.observe(requireActivity(), Observer {
-                dialog.dismiss()
+            viewModel.text.observe(requireActivity(),  {
+                binding.loader.loader.visibility=View.GONE
                 Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 if (it.equals("Ok")) {
                     desctiption.text =
@@ -130,12 +108,14 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
 
         }
 
-        viewModel.userDetails.observe(requireActivity(), Observer {
-            it.id?.let { it1 ->
-                SaveData.saveUserId(
-                    requireContext(),
-                    it1
-                )
+        viewModel.userDetails.observe(requireActivity(),  {
+            it.id.let { it1 ->
+                if (it1 != null) {
+                    SaveData.saveUserId(
+                        requireContext(),
+                        it1
+                    )
+                }
             }
             SaveData.savePhone1(requireContext(), phoneNumber)
             SaveData.savePhone(requireContext(), it.phone)
@@ -145,7 +125,7 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
             SaveData.saveBalance(requireContext(), it.balance)
             SaveData.createdTime(requireContext(), it.created_at)
 
-            dialog.dismiss()
+            binding.loader.loader.visibility=View.GONE
             findNavController().popBackStack()
         })
 
@@ -165,9 +145,7 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
         @SuppressLint("SetTextI18n")
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (start == 3 || start == 6 || start == 10 || start == 13) {
-                binding?.phoneNumberField?.setText(binding!!.phoneNumberField.text.toString() + " ")
-                binding?.phoneNumberField?.setSelection(binding?.phoneNumberField?.text.toString().length)
-                if (binding?.phoneNumberField?.text?.toString()?.replace(" ", "")?.length == 13) {
+                if (binding.phoneNumberField.text.toString().replace(" ", "").length == 13) {
                     view?.hideKeyboard()
                 }
 
@@ -183,8 +161,8 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-            if (binding?.codeField?.text?.toString()?.length == 6) {
-                binding?.send?.backgroundTintList = context?.getColorStateList(R.color.green)
+            if (binding.codeField.text.toString().length == 6) {
+                binding.send.backgroundTintList = requireContext().getColorStateList(R.color.green)
                 view?.hideKeyboard()
                 isFilled = true
             }
@@ -201,5 +179,9 @@ class ChangePhoneFragment : Fragment(R.layout.fragment_change_phone_number) {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 }

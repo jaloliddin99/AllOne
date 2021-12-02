@@ -2,22 +2,32 @@ package com.tesseract.AllOneClient.fragments.profile
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.tesseract.AllOneClient.MainActivity
-import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentChangeLanguageBinding
 
-class ChangeLanguageFragment: Fragment(R.layout.fragment_change_language) {
-    private var fragmentChangeLanguageFragment: FragmentChangeLanguageBinding?=null
+class ChangeLanguageFragment: Fragment() {
+    private var _binding: FragmentChangeLanguageBinding?=null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding= FragmentChangeLanguageBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding=FragmentChangeLanguageBinding.bind(view)
-        fragmentChangeLanguageFragment=binding
 
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
@@ -61,5 +71,10 @@ class ChangeLanguageFragment: Fragment(R.layout.fragment_change_language) {
         val intent = Intent(requireContext(), MainActivity::class.java)
         startActivity(intent)
         activity?.finish()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

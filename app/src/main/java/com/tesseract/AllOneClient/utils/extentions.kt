@@ -3,19 +3,15 @@ package com.tesseract.AllOneClient.utils
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
-import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Handler
 import android.util.DisplayMetrics
-import android.util.Log
 import android.util.TypedValue
 import android.view.MotionEvent
 import android.view.View
@@ -28,16 +24,23 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavArgument
 import androidx.navigation.NavOptions
 import androidx.navigation.NavType
-import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.BitmapDescriptor
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
+import android.util.SparseArray
+import androidx.core.util.forEach
+import androidx.core.util.set
+import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -98,7 +101,6 @@ fun headerMapUniversal(context: Context): Map<String, String> {
     map["Lang"] = SaveData.getLanguage(context).toString()
     return map
 }
-
 
 
 fun gotoTelegram(driverTelegram:String, context: Context) {
@@ -265,9 +267,6 @@ fun Activity.requestPermissionWithRationale(
         ActivityCompat.requestPermissions(this, arrayOf(permission), requestCode)
     }
 }
-
-
-
 
 
 

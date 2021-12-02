@@ -63,7 +63,6 @@ class FragmentTaxiRegionsSelection : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         viewModel = ViewModelProvider(this).get(RouteTariffViewModel::class.java)
 
         requireActivity().statusBarColor(
@@ -96,6 +95,7 @@ class FragmentTaxiRegionsSelection : Fragment(),
             recyclerTariff.setHasFixedSize(true)
             isEnabled = false
             btnTariffOrder.backgroundTintList = context?.getColorStateList(R.color.green)
+
 
         }
 
@@ -148,15 +148,13 @@ class FragmentTaxiRegionsSelection : Fragment(),
 
         binding.startDestinationChange.setOnClickListener {
             Common.destination=0
-            val action =
-                FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
+            val action = FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
             findNavController().navigate(action)
         }
 
         binding.endDestinationTextChange.setOnClickListener {
             Common.destination=1
-            val action =
-                FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
+            val action = FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
             findNavController().navigate(action)
 
         }

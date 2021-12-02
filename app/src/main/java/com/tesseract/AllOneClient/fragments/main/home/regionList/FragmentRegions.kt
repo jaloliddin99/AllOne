@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.LinearLayoutCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
@@ -48,8 +49,6 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
 
         if (Common.isCurrentRegionFragment){
             viewModel.getRegionList(headerMapUniversal(requireContext()))
@@ -60,9 +59,15 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
             binding.toolbarTitle.text=getString(R.string.to_where)
         }
 
+        viewModel.errorM.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
         binding.searchItemRecycler.layoutManager=
             LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         viewModel.regionDetails.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             regionAdapter= RegionRegionAdapter(it, this)
             binding.searchItemRecycler.adapter=regionAdapter
             val resId: Int = R.anim.layout_animation
@@ -86,12 +91,6 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
         regionName: String?,
         searchItemBinding: GetRegionDetails
     ) {
-        exitTransition = MaterialElevationScale(false).apply {
-            duration = 250.toLong()
-        }
-        reenterTransition = MaterialElevationScale(true).apply {
-            duration = 250.toLong()
-        }
         if (Common.destination == 0||Common.destination== 10) {
             Common.startRegion = regionName!!
             Common.startRegionId = position
@@ -128,7 +127,7 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
     }
 
     private fun performSearch() {
-        binding?.searchView?.addTextChangedListener(textWatcher)
+        binding.searchView.addTextChangedListener(textWatcher)
 
     }
     private val textWatcher=object :TextWatcher{

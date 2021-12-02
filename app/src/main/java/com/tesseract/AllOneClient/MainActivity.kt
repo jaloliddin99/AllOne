@@ -6,30 +6,22 @@ import android.app.Activity
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.SparseArray
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
-import androidx.annotation.IdRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.gms.maps.SupportStreetViewPanoramaFragment.newInstance
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.chuckerteam.chucker.api.Chucker
 import com.google.android.material.shape.CornerFamily
 import com.google.android.material.shape.MaterialShapeDrawable
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.ActivityMainBinding
-import com.tesseract.AllOneClient.fragments.charity.Main.FragmentCharityMain
-import com.tesseract.AllOneClient.fragments.login.registration.RegisterViewModel_Factory.newInstance
-import com.tesseract.AllOneClient.fragments.main.home.HomeMain.HomeFragment
-import com.tesseract.AllOneClient.fragments.order.orderHome.OrderFragment
-import com.tesseract.AllOneClient.fragments.profile.ProfileFragment
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -40,35 +32,34 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
-    private var savedStateSparseArray = SparseArray<Fragment.SavedState>()
-    private var currentSelectItemId = R.id.bottom_nav
-    companion object {
-        const val SAVED_STATE_CONTAINER_KEY = "ContainerKey"
-        const val SAVED_STATE_CURRENT_TAB_KEY = "CurrentTabKey"
+    private fun loadFragment(fragment: Fragment) {
+        val transaction: FragmentTransaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.nav_host_fragment, fragment)
+        transaction.addToBackStack(null)
+        transaction.commit()
     }
-
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (savedInstanceState != null) {
-            savedStateSparseArray = savedInstanceState.getSparseParcelableArray(SAVED_STATE_CONTAINER_KEY)
-                ?: savedStateSparseArray
-            currentSelectItemId = savedInstanceState.getInt(SAVED_STATE_CURRENT_TAB_KEY)
-        }
+
+        val intent = Chucker.getLaunchIntent(this)
+        startActivity(intent)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
-
         binding.bottomNav.setupWithNavController(navController)
 
+
+
+
         binding.bottomNav.getOrCreateBadge(R.id.orderFragment).number = 3
-
-
         val radius = resources.getDimension(R.dimen.margin_padding_12dp)
 
         val bottomBarBackground = binding.bottomNav.background as MaterialShapeDrawable
@@ -77,12 +68,12 @@ class MainActivity : AppCompatActivity() {
             .setTopRightCorner(CornerFamily.ROUNDED, radius)
             .setTopLeftCorner(CornerFamily.ROUNDED, radius)
             .build()
+
         languageConfig()
-
-
 
         binding.apply {
             navController.addOnDestinationChangedListener { _, destination, _ ->
+
                 when (destination.id) {
                     R.id.homeFragment -> {
                         menuItem?.setIcon(R.drawable.ic_bell_white)
@@ -305,6 +296,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
     }
 
     private var menuItem: MenuItem? = null
@@ -370,5 +362,4 @@ class MainActivity : AppCompatActivity() {
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
     }
-
 }

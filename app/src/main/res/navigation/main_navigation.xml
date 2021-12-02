@@ -672,10 +672,10 @@
         android:label="fragment_select_location"
         tools:layout="@layout/fragment_select_location">
         <argument
-            android:name="fromCity"
+            android:name="fromCity1"
             app:argType="boolean" />
         <argument
-            android:name="type"
+            android:name="type1"
             app:argType="string" />
     </fragment>
     <fragment

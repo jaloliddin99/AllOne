@@ -106,7 +106,7 @@ class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickLi
                         FragmentSaveLocationDirections.actionGlobalCrudLocation(savedLocationDataHome, type="", latLng="", address="")
                     findNavController().navigate(action)
                 }else{
-                    val action=FragmentSaveLocationDirections.actionGlobalLocationReverse(fromCity = true, type = "home")
+                    val action=FragmentSaveLocationDirections.actionGlobalLocationReverse(fromCity1 = true, type1 = "home")
                     findNavController().navigate(action)
                 }
             }
@@ -117,7 +117,7 @@ class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickLi
                         FragmentSaveLocationDirections.actionGlobalCrudLocation(savedLocationDataWork, type="", latLng="", address="")
                     findNavController().navigate(action)
                 }else{
-                    val action=FragmentSaveLocationDirections.actionGlobalLocationReverse(fromCity = true, type = "work")
+                    val action=FragmentSaveLocationDirections.actionGlobalLocationReverse(fromCity1 = true, type1 = "work")
                     findNavController().navigate(action)
                 }
             }

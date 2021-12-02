@@ -104,9 +104,9 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
         }
 
         binding?.select?.setOnClickListener {
-            if (args.fromCity){
+            if (args.fromCity1){
                 val action=FragmentSelectLocationDirections.actionGlobalCrudLocation(null,
-                args.type,  latLngFinal,usedSelectedLocation)
+                args.type1,  latLngFinal,usedSelectedLocation)
                 Toast.makeText(context, latLngFinal, Toast.LENGTH_SHORT).show()
                 findNavController().navigate(action)
             }else{

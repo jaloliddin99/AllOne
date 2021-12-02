@@ -9,26 +9,33 @@ import androidx.navigation.fragment.findNavController
 import com.tesseract.AllOneClient.databinding.FragmentGetBonusBinding
 
 class FragmentGetBonusText : Fragment() {
-    var binding: FragmentGetBonusBinding?=null
+    var _binding: FragmentGetBonusBinding?=null
+    private val binding get() = _binding!!
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentGetBonusBinding.inflate(inflater, container, false)
+        _binding= FragmentGetBonusBinding.inflate(inflater, container, false)
 
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding?.back?.setOnClickListener {
+        binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }
