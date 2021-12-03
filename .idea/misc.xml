@@ -83,6 +83,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MyTaxiUz/app/src/main/res/layout/layout_search_item.xml" value="0.15135135135135136" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyTaxiUz/app/src/main/res/menu/drawer_bottom_nav_menu.xml" value="0.12916666666666668" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable-v24/ic_blackout.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable-v24/shape_payment.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/background_green_corner_12.xml" value="0.269140625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/background_white_corner_12.xml" value="0.269140625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/bg_grey_rounded.xml" value="0.2671875" />
@@ -98,6 +99,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/dark_green_top12.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/district_search_item_selected.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/drawable_4dp_corner.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/drawable_navigation.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/flow_layout_item_unselected.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/gray_radius.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/green_radius.xml" value="0.2671875" />
@@ -129,6 +131,8 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/tab_indicator.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/text_border.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/white_background_top_corner.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout-v26/nav_header_main.xml" value="0.3359375" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/activity_login.xml" value="0.3359375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/activity_main.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/activity_maps.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/card_active_order_reusable.xml" value="0.251953125" />
@@ -162,7 +166,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_model_post_type_selection.xml" value="0.133984375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_order_female.xml" value="0.133984375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_rate_clinic_driver.xml" value="0.251953125" />
-        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_show_day.xml" value="0.133984375" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_show_day.xml" value="0.25" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_show_time.xml" value="0.133984375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_user_birth_day.xml" value="0.133984375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/dialog_user_gender.xml" value="0.133984375" />
@@ -206,7 +210,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_donation_history.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_explore_country_view.xml" value="0.21364690294799601" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_get_bonus.xml" value="0.251953125" />
-        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_good.xml" value="0.25390625" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_good.xml" value="0.18" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_good_choose_your_card.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_home.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_hotel_contacts_item.xml" value="0.251953125" />
@@ -265,7 +269,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_situation.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_splash.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tarif.xml" value="0.251953125" />
-        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_technical_support.xml" value="0.18" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_technical_support.xml" value="0.33" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_agency.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_car_rent_main.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_tour_explore.xml" value="0.251953125" />
@@ -373,6 +377,8 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/reuse_search_for_order_bottom.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/tab_indicator.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/www_test.xml" value="0.22" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/menu/activity_main_drawer.xml" value="0.3359375" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/menu/drawer_bottom_nav_menu.xml" value="0.3359375" />
       </map>
     </option>
   </component>

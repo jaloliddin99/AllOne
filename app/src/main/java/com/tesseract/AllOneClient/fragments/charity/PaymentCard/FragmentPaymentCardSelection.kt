@@ -6,6 +6,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,14 +28,15 @@ class FragmentPaymentCardSelection:Fragment() {
     private lateinit var titleCard:String
     private lateinit var imageCard:String
     private var projectId by Delegates.notNull<Int>()
-    private lateinit var binding:FragmentMakePaymentCardSelectionBinding
+    private var _binding:FragmentMakePaymentCardSelectionBinding?=null
+    private val binding get() = _binding!!
     private var upDownCounter=0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentMakePaymentCardSelectionBinding.inflate(inflater, container, false)
+        _binding=FragmentMakePaymentCardSelectionBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(SelectCardViewModel::class.java)
         return binding.root
     }
@@ -44,8 +46,14 @@ class FragmentPaymentCardSelection:Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.gerCreditCards(headerMapUniversal(requireContext()), args.id)
+        binding.loader.loader.visibility=View.VISIBLE
+        viewModel.errorM.observe(viewLifecycleOwner,{
+            binding.loader.loader.visibility=View.GONE
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
 
         viewModel.creditCard.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             titleCard=it.title
             imageCard=it.image
             projectId=it.id
@@ -109,5 +117,9 @@ class FragmentPaymentCardSelection:Fragment() {
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 }

@@ -673,9 +673,9 @@
     <string name="your_bonus_is_not_enough">" Суммы вашего бонуса недостаточно для выбора"</string>
     <string name="minimum_amount">500 сум</string>
     <string name="bandPlace">Занять место</string>
-    <string name="razmer30to30">30x30</string>
-    <string name="razmer40to40">40x40</string>
-    <string name="razmer50to50">50x50</string>
+    <string name="razmer30to30" translatable="false">30x30</string>
+    <string name="razmer40to40" translatable="false">40x40</string>
+    <string name="razmer50to50" translatable="false">50x50</string>
     <string name="massa500">до 500 - Грамм</string>
     <string name="massa5kg">до 5 - kg</string>
     <string name="massa10Kg">до 10 - kg</string>
@@ -685,7 +685,13 @@
     <string name="tell_reason">Укажите причины</string>
     <string name="bonus_ball">Бонусные баллы:</string>
     <string name="fio">Ф.И.О</string>
-    <string name="saveProfileImage">saveProfileImage</string>
+    <string name="saveProfileImage" translatable="false">saveProfileImage</string>
+    <string name="service">Сервисы</string>
+    <string name="order_history">История заказов</string>
+    <string name="payment_methodd">Способ оплаты</string>
+    <string name="charity">Благотворителность</string>
+    <string name="adwawdwa">Язык приложения</string>
+    <string name="historyy">История</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

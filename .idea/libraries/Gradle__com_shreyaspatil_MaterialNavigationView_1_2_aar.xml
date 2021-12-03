@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.shreyaspatil:MaterialNavigationView:1.2@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7a5604f3c29a495be0392cc54b23ff3/jetified-MaterialNavigationView-1.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7a5604f3c29a495be0392cc54b23ff3/jetified-MaterialNavigationView-1.2/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/b7a5604f3c29a495be0392cc54b23ff3/jetified-MaterialNavigationView-1.2/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.shreyaspatil/MaterialNavigationView/1.2/9a67440eda539d8500c9fe9b3f91c7231294a115/MaterialNavigationView-1.2-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.shreyaspatil/MaterialNavigationView/1.2/e2a62cdaaf22f813601aed8be86d179827fab6b6/MaterialNavigationView-1.2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

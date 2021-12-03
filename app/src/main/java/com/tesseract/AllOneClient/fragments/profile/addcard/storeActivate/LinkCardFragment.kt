@@ -9,7 +9,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -26,22 +28,33 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
 
-    var fragmentLinkCardBinding: FragmentLinkCardBinding? = null
+    var _fragmentLinkCardBinding: FragmentLinkCardBinding? = null
+    val fragmentLinkCardBinding get() = _fragmentLinkCardBinding!!
 
     private var isSaveButtonEnabled:Boolean=false
     var cardId: Int = -1
 
     private lateinit var viewModel: StoreActivateViewModel
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _fragmentLinkCardBinding= FragmentLinkCardBinding.inflate(inflater, container, false)
+
+        return fragmentLinkCardBinding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var binding = FragmentLinkCardBinding.bind(view)
         viewModel=ViewModelProvider(this).get(StoreActivateViewModel::class.java)
-        fragmentLinkCardBinding = binding
 
-        fragmentLinkCardBinding?.cardNumber?.addTextChangedListener(textWatcher)
-        fragmentLinkCardBinding?.expirityDate?.addTextChangedListener(expirityWatcher)
-        fragmentLinkCardBinding?.backToHome?.setOnClickListener {
+        fragmentLinkCardBinding.save.visibility=View.GONE
+        fragmentLinkCardBinding.loader.loader.visibility=View.GONE
+        fragmentLinkCardBinding.cardNumber.addTextChangedListener(textWatcher)
+        fragmentLinkCardBinding.expirityDate.addTextChangedListener(expirityWatcher)
+        fragmentLinkCardBinding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
 
@@ -49,10 +62,10 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
     }
 
     private fun getCode(){
-        fragmentLinkCardBinding?.apply {
+        fragmentLinkCardBinding.apply {
             getCode.setOnClickListener {
                 if (expirityDate.text.toString().length==5 && cardNumber.text.toString().length==19){
-                    fragmentLinkCardBinding?.loader?.loader?.visibility=View.VISIBLE
+                    fragmentLinkCardBinding.loader.loader.visibility=View.VISIBLE
                     viewModel.storeCard(
                         headerMapUniversal(requireContext()),
                         cardName.text.toString(),
@@ -73,7 +86,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
                 }else{
                     Log.i("size ", ""+code+" "+code.length)
                     if (code.length==6){
-                        fragmentLinkCardBinding?.loader?.loader?.visibility=View.VISIBLE
+                        fragmentLinkCardBinding.loader.loader.visibility=View.VISIBLE
                         viewModel.activateCard(
                             headerMapUniversal(requireContext()),
                             cardId,
@@ -86,15 +99,16 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
 
 
         viewModel.activateCardMsg.observe(requireActivity(), Observer {
-            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
+
+            fragmentLinkCardBinding.loader.loader.visibility=View.GONE
             newCardAdded=true
             findNavController().popBackStack()
         })
         viewModel.errorMessageActiveCards.observe(requireActivity(), Observer {
-            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
-            fragmentLinkCardBinding?.incorrectCode?.visibility=View.VISIBLE
-            context?.getColor(R.color.red)?.let { it1 ->
-                fragmentLinkCardBinding?.codeField?.setTextColor(
+            fragmentLinkCardBinding.loader.loader.visibility=View.GONE
+            fragmentLinkCardBinding.incorrectCode.visibility=View.VISIBLE
+            requireContext().getColor(R.color.red).let { it1 ->
+                fragmentLinkCardBinding.codeField.setTextColor(
                     it1
                 )
             }
@@ -102,9 +116,10 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         })
 
         viewModel.postStoreCardDataResponse.observe(requireActivity(), Observer {
-            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
+            fragmentLinkCardBinding.save.visibility=View.VISIBLE
+            fragmentLinkCardBinding.loader.loader.visibility=View.GONE
             cardId= it.id!!
-            fragmentLinkCardBinding?.apply {
+            fragmentLinkCardBinding.apply {
                 getCode.visibility=View.GONE
                 linearLayout.visibility=View.VISIBLE
                 save.alpha=1f
@@ -115,7 +130,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         })
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
-            fragmentLinkCardBinding?.loader?.loader?.visibility=View.GONE
+            fragmentLinkCardBinding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
@@ -130,15 +145,15 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         @SuppressLint("SetTextI18n")
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (start == 1) {
-                fragmentLinkCardBinding?.expirityDate?.setText(fragmentLinkCardBinding?.expirityDate?.text.toString() + "/")
-                fragmentLinkCardBinding?.expirityDate?.setSelection(fragmentLinkCardBinding?.expirityDate?.text.toString().length)
+                fragmentLinkCardBinding.expirityDate.setText(fragmentLinkCardBinding.expirityDate.text.toString() + "/")
+                fragmentLinkCardBinding.expirityDate.setSelection(fragmentLinkCardBinding.expirityDate.text.toString().length)
             }
             if (count == 2 && start == 0 && before == 1) {
-                fragmentLinkCardBinding?.expirityDate?.setText(fragmentLinkCardBinding?.expirityDate?.text.toString().split("/").toTypedArray().get(0))
+                fragmentLinkCardBinding.expirityDate.setText(fragmentLinkCardBinding.expirityDate.text.toString().split("/").toTypedArray().get(0))
 
             }
             Log.i("counter ", ""+count)
-            if (fragmentLinkCardBinding?.expirityDate?.text?.toString()?.length==5){
+            if (fragmentLinkCardBinding.expirityDate.text.toString().length==5){
                 view?.hideKeyboard()
             }
 
@@ -164,11 +179,11 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         @SuppressLint("SetTextI18n")
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             if (start == 3 || start == 8 || start == 13) {
-                fragmentLinkCardBinding?.cardNumber?.setText(fragmentLinkCardBinding?.cardNumber?.text.toString() + " ")
-                fragmentLinkCardBinding?.cardNumber?.setSelection(fragmentLinkCardBinding?.cardNumber?.text.toString().length)
+                fragmentLinkCardBinding.cardNumber.setText(fragmentLinkCardBinding.cardNumber.text.toString() + " ")
+                fragmentLinkCardBinding.cardNumber.setSelection(fragmentLinkCardBinding.cardNumber.text.toString().length)
             }
             if (count == 14 && start == 0 && before == 13 || count == 9 && start == 0 && before == 8 || count == 4 && start == 0 && before == 3) {
-                fragmentLinkCardBinding?.cardNumber?.setText(fragmentLinkCardBinding?.cardNumber?.text.toString().trim { it <= ' ' })
+                fragmentLinkCardBinding.cardNumber.setText(fragmentLinkCardBinding.cardNumber.text.toString().trim { it <= ' ' })
             }
 
         }
@@ -181,7 +196,7 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
 
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-            if (fragmentLinkCardBinding?.codeField?.text?.toString()?.length == 6) {
+            if (fragmentLinkCardBinding.codeField.text.toString().length == 6) {
                 view?.hideKeyboard()
             }
         }
@@ -197,6 +212,11 @@ class LinkCardFragment : Fragment(R.layout.fragment_link_card) {
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentLinkCardBinding=null
+    }
 
 
 

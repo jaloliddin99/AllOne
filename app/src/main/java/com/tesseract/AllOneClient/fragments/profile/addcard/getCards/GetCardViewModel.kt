@@ -21,7 +21,7 @@ class GetCardViewModel @Inject constructor(private val repository: NetworkReposi
             repository.getCardData(token).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        cardDataList.postValue(it.body()?.content)
+                        cardDataList.postValue(it.body()?.content!!)
                     }else{
                         errorM.postValue("something went wrong")
                     }

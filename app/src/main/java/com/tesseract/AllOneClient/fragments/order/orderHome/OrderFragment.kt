@@ -3,10 +3,14 @@ package com.tesseract.AllOneClient.fragments.order.orderHome
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -18,6 +22,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.order.ActiveOrderAdapter
 import com.tesseract.AllOneClient.adapter.order.OrderHistoryAdapter
 import com.tesseract.AllOneClient.databinding.FragmentOrderBinding
+import com.tesseract.AllOneClient.dialogs.login.DialogDateOfBirth
 import com.tesseract.AllOneClient.dialogs.main.DialogShowTime
 import com.tesseract.AllOneClient.dialogs.main.DialogShowTime2
 import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderHistoryDataListModel
@@ -32,8 +37,7 @@ import org.greenrobot.eventbus.ThreadMode
 
 @AndroidEntryPoint
 class OrderFragment : Fragment(R.layout.fragment_order),
-    DialogShowTime.OnDaySelectListener,
-    DialogShowTime2.OnDaySelectListener {
+    DialogDateOfBirth.OnDaySelectListener {
     private var _fragmentOrderBinding: FragmentOrderBinding? = null
     private val fragmentOrderBinding get() = _fragmentOrderBinding!!
     private lateinit var orderHistoryAdapter: OrderHistoryAdapter
@@ -42,6 +46,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     private var endTime: String = ""
     private var isCurrentFragment: Boolean = true
     private var tabPosition: Int = 0
+    private var isFromActive:Boolean=false
 
     private lateinit var viewModel: OrderViewModel
     override fun onCreateView(
@@ -54,14 +59,25 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         return fragmentOrderBinding.root
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
+        val drawerLayout: DrawerLayout =requireActivity().findViewById(R.id.drawerLayout)
+
+        fragmentOrderBinding.drawerIcon.setOnClickListener {
+            if(!drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.openDrawer(Gravity.START)
+            else drawerLayout.closeDrawer(Gravity.END)
+            drawerLayout.openDrawer(Gravity.START)
+        }
+
+
         Common.countPage = 1
         Common.orderHistoryCountPage = 1
 
         viewModel.start(headerMapUniversal(requireContext()))
-        viewModel.startOrderHistory(headerMapUniversal(requireContext()), "", "")
+        viewModel.startOrderHistory(headerMapUniversal(requireContext()), startTime, endTime)
 
 
         val layoutManager =
@@ -91,35 +107,27 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         fragmentOrderBinding.orderPackageList.addOnScrollListener(object :
             EndlessRecyclerViewScrollListener(layoutManager2) {
             override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                viewModel.historyList(headerMapUniversal(requireContext()), "", "")
+                viewModel.historyList(headerMapUniversal(requireContext()), startTime, endTime)
             }
         })
-
-        fragmentOrderBinding.backToHome.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         if (isCurrentFragment) {
             activeOrders()
             orderHistory()
         }
         fragmentOrderBinding.datePicker1.setOnClickListener {
-            DialogShowTime(getString(R.string.daparture_date), this).show(
-                parentFragmentManager,
-                tag
-            )
+            isFromActive=true
+            DialogDateOfBirth(getString(R.string.daparture_date), this).show(parentFragmentManager, tag)
         }
         fragmentOrderBinding.datePicker2.setOnClickListener {
-            DialogShowTime2(getString(R.string.daparture_date), this).show(
-                parentFragmentManager,
-                tag
-            )
+            isFromActive=false
+            DialogDateOfBirth(getString(R.string.daparture_date), this).show(parentFragmentManager, tag)
         }
         fragmentOrderBinding.datePickersLayouts.visibility = View.GONE
 
         fragmentOrderBinding.apply {
             tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.active)))
-            tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.history)))
+            tabLayout.addTab(tabLayout.newTab().setText(getString(R.string.historyy)))
 
             if (tabPosition==1){
                 tabLayout.getTabAt(1)?.select()
@@ -163,6 +171,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
 
         val arrayList = ArrayList<OrderHistoryDataListModel>()
         viewModel.orderHistory.observe(requireActivity(),  {
+            fragmentOrderBinding.loader.loader.visibility=View.GONE
             for (i in it.content?.orderHistoryDataData?.indices!!) {
                 val orderHistoryList = OrderHistoryDataListModel(
                     it.content?.orderHistoryDataData!![i].id,
@@ -182,6 +191,7 @@ class OrderFragment : Fragment(R.layout.fragment_order),
         val arrayList = ArrayList<OrderHistoryDataListModel>()
         viewModel.activeOrders.observe(requireActivity(), {
             for (i in it.content?.orderHistoryDataData?.indices!!) {
+                fragmentOrderBinding.loader.loader.visibility=View.GONE
                 val orderHistoryList = OrderHistoryDataListModel(
                     it.content?.orderHistoryDataData!![i].id,
                     it.content?.orderHistoryDataData!![i].date,
@@ -197,22 +207,20 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     }
 
     override fun selectDayListener(time: String) {
-        fragmentOrderBinding.date1.text = time
-        startTime = time
+        if (isFromActive){
+            fragmentOrderBinding.date1.text = time
+            startTime = time
+        }else{
+            fragmentOrderBinding.date2.text = time
+            endTime = time
+        }
         if (startTime.isNotEmpty() && endTime.isNotEmpty()) {
+            fragmentOrderBinding.loader.loader.visibility=View.VISIBLE
             viewModel.historyList(headerMapUniversal(requireContext()), startTime, endTime)
             orderHistory()
         }
     }
 
-    override fun selectDayListener2(time: String) {
-        fragmentOrderBinding.date2.text = time
-        endTime = time
-        if (startTime.isNotEmpty() && endTime.isNotEmpty()) {
-            viewModel.historyList(headerMapUniversal(requireContext()), startTime, endTime)
-            orderHistory()
-        }
-    }
 
     override fun onStart() {
         super.onStart()

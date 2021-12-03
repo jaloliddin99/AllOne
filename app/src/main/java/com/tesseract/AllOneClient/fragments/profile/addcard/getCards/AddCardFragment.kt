@@ -1,12 +1,8 @@
 package com.tesseract.AllOneClient.fragments.profile.addcard.getCards
 
-import android.app.Dialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.Window
 import android.view.animation.AnimationUtils
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -35,7 +31,7 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card), AddCardAdapter.OnI
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var binding = FragmentAddCardBinding.bind(view)
+        val binding = FragmentAddCardBinding.bind(view)
         fragmentAddCardBinding = binding
         viewModel=ViewModelProvider(this).get(GetCardViewModel::class.java)
 
@@ -52,18 +48,14 @@ class AddCardFragment : Fragment(R.layout.fragment_add_card), AddCardAdapter.OnI
         binding.rvAddCard.setHasFixedSize(true)
         if (newCardAdded||firstCardFragmentEntrance){
             viewModel.getCardDataList(headerMapUniversal(requireContext()))
-            viewModel.cardDataList.observe(requireActivity(), Observer {
+            viewModel.cardDataList.observe(requireActivity(), {
                 binding.loader.loader.visibility=View.GONE
-                for (i in it.indices){
-                    Log.i("card type ", ""+it[i].type)
-                }
 
                 addCardAdapter=AddCardAdapter(it as ArrayList<GetCardData>, this, requireContext())
                 binding.rvAddCard.adapter=addCardAdapter
 
             })
-//            newCardAdded=false
-//            firstCardFragmentEntrance=false
+
         }
 
         requireActivity()

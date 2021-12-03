@@ -2,7 +2,9 @@ package com.tesseract.AllOneClient.fragments.profile.addcard.updateCard
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -21,21 +23,35 @@ import dagger.hilt.android.AndroidEntryPoint
 class RenameCardsFragment : Fragment(), DialogDeleteCard.DeleteListener {
 
     val args: RenameCardsFragmentArgs by navArgs()
-    var fragmentRenameCardsBinding:FragmentRenameCardsBinding?=null
+    var _fragmentRenameCardsBinding:FragmentRenameCardsBinding?=null
+
+    val fragmentRenameCardsBinding get() = _fragmentRenameCardsBinding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _fragmentRenameCardsBinding= FragmentRenameCardsBinding.inflate(inflater, container, false)
+
+        return fragmentRenameCardsBinding.root
+    }
+
     private lateinit var viewModel: UpdateCardViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bindding=FragmentRenameCardsBinding.bind(view)
         viewModel=ViewModelProvider(this).get(UpdateCardViewModel::class.java)
-        fragmentRenameCardsBinding=bindding
 
 
-        fragmentRenameCardsBinding?.apply {
+        fragmentRenameCardsBinding.apply {
+
+            loader.loader.visibility=View.GONE
+
             save.setOnClickListener {
                 if (notes.text.toString().isEmpty()){
                     return@setOnClickListener
                 }else{
-                    bindding.loader.loader.visibility=View.VISIBLE
+                    fragmentRenameCardsBinding.loader.loader.visibility=View.VISIBLE
                     viewModel.updateCard(headerMapUniversal(requireContext()), args.cardId, notes.text.toString())
                 }
             }
@@ -67,11 +83,11 @@ class RenameCardsFragment : Fragment(), DialogDeleteCard.DeleteListener {
         }
 
         viewModel.successM.observe(requireActivity(), Observer {
-            bindding.loader.loader.visibility=View.GONE
+            fragmentRenameCardsBinding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
         viewModel.errorM.observe(requireActivity(), Observer {
-            bindding.loader.loader.visibility=View.GONE
+            fragmentRenameCardsBinding.loader.loader.visibility=View.GONE
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
     }
@@ -80,6 +96,11 @@ class RenameCardsFragment : Fragment(), DialogDeleteCard.DeleteListener {
 
     override fun deleted() {
         findNavController().popBackStack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _fragmentRenameCardsBinding=null
     }
 
 }

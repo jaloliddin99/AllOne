@@ -41,6 +41,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.MaterialShapeDrawable
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -62,6 +65,16 @@ fun FragmentActivity.statusBarColor(
     } else {
         dec.systemUiVisibility = 0
     }
+}
+
+fun NavigationView.changeCornerRadius() {
+    val navViewBackground : MaterialShapeDrawable = background as MaterialShapeDrawable
+    val radius = resources.getDimension(R.dimen.margin_padding_16)
+    navViewBackground.shapeAppearanceModel = navViewBackground.shapeAppearanceModel
+        .toBuilder()
+        .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+        .setBottomLeftCorner(CornerFamily.ROUNDED, radius)
+        .build()
 }
 
 

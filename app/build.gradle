@@ -152,6 +152,8 @@ dependencies {
     /////REMOVE BEFORE RELEASE
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
+    implementation 'com.shreyaspatil:MaterialNavigationView:1.2'
+
 
 
 }

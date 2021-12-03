@@ -49,6 +49,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_12dp"
+                android:id="@+id/call"
                 android:layout_marginBottom="@dimen/margin_padding_12dp"
                 android:orientation="horizontal">
 
@@ -80,6 +81,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
+                        android:id="@+id/phoneNumber"
                         android:fontFamily="@font/inter_bold"
                         android:text="+998 33 007 0079"
                         android:textColor="@color/black"
@@ -104,6 +106,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:id="@+id/telegram1"
                 android:layout_marginTop="@dimen/margin_padding_12dp"
                 android:layout_marginBottom="@dimen/margin_padding_12dp"
                 android:orientation="horizontal">
@@ -231,6 +234,7 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/telegram"
             android:src="@drawable/ic_telegramlogo"
             android:layout_marginEnd="@dimen/margin_padding_12dp"
             android:layout_centerHorizontal="true"/>
@@ -238,11 +242,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_facebooklogo"
+            android:id="@+id/faceBook"
             android:layout_marginHorizontal="@dimen/margin_padding_12dp"
             android:layout_centerHorizontal="true"/>
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/instagram"
             android:src="@drawable/ic_instagramlogo"
             android:layout_marginStart="@dimen/margin_padding_12dp"
             android:layout_centerHorizontal="true"/>

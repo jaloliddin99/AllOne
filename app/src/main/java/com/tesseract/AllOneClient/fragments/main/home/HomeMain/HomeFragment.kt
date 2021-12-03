@@ -2,11 +2,14 @@ package com.tesseract.AllOneClient.fragments.main.home.HomeMain
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.GravityCompat
 import androidx.core.view.doOnPreDraw
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -70,13 +73,21 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         return fragmentHomeBinding.root
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
-        view.doOnPreDraw { startPostponedEnterTransition() }
+//        postponeEnterTransition()
+//        view.doOnPreDraw { startPostponedEnterTransition() }
         exitTransition=null
         reenterTransition=null
+
+        val drawerLayout:DrawerLayout=requireActivity().findViewById(R.id.drawerLayout)
+
+        fragmentHomeBinding.drawerIcon.setOnClickListener {
+            if(!drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.openDrawer(Gravity.START)
+            else drawerLayout.closeDrawer(Gravity.END);
+            drawerLayout.openDrawer(Gravity.START)
+        }
 
         Common.countPageMain = 1
         viewModel.startMain(headerMapUniversal(requireContext()))
@@ -102,7 +113,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
 
             recyclerViewOrders.layoutManager=GridLayoutManager(context,2)
-            recyclerViewOrders.adapter=HomeOrdersAdapter(homeOrderModel, this@HomeFragment)
+            recyclerViewOrders.adapter=HomeOrdersAdapter(homeOrderModel, this@HomeFragment, requireContext())
         }
         setNews()
         fragmentHomeBinding.recyclerView.layoutManager =
@@ -122,7 +133,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 val action = HomeFragmentDirections.actionHomeFragmentToOrderFragment()
                 findNavController().navigate(action)
             }
-
         }
 
     }
@@ -132,9 +142,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             HomeOrderModel(getString(R.string.inside_of_city), R.drawable.ic_tour_avto_procat),
             HomeOrderModel(getString(R.string.send_post), R.drawable.ic_box_3),
             HomeOrderModel(getString(R.string.taxi_region), R.drawable.ic_tour_uzb),
-            HomeOrderModel(getString(R.string.med_turizm), R.drawable.med_turism),
-            HomeOrderModel(getString(R.string.inside_of_city), R.drawable.taxi_international),
-            HomeOrderModel(getString(R.string.tourism), R.drawable.turism_),
+            HomeOrderModel(getString(R.string.med_turizm), R.drawable.med_turizm_image),
+            HomeOrderModel(getString(R.string.international_taxi), R.drawable.taxi_international),
+            HomeOrderModel(getString(R.string.tourism), R.drawable.turism_image),
         )
     }
 
@@ -152,12 +162,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         fragmentHomeBinding.apply {
             newsCardView.setOnClickListener {
-                exitTransition = MaterialElevationScale(false).apply {
-                    duration = 250.toLong()
-                }
-                reenterTransition = MaterialElevationScale(true).apply {
-                    duration = 250.toLong()
-                }
+//                exitTransition = MaterialElevationScale(false).apply {
+//                    duration = 250.toLong()
+//                }
+//                reenterTransition = MaterialElevationScale(true).apply {
+//                    duration = 250.toLong()
+//                }
 
                 val direction: NavDirections =
                     HomeFragmentDirections.actionHomeFragmentToFragmentNewsView2(

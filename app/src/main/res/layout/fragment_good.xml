@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,319 +7,338 @@
     tools:context=".fragments.charity.Main.FragmentCharityMain"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <RelativeLayout
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="@dimen/margin_padding_4dp"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:id="@+id/toolbar"
-        android:layout_height="?attr/actionBarSize">
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/bell"
-            android:layout_alignParentEnd="true"
-            android:padding="@dimen/margin_padding_12dp"
-            android:src="@drawable/ic_bell"
-            android:layout_marginEnd="@dimen/margin_padding_4dp"
-            android:layout_centerVertical="true"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <RelativeLayout
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:elevation="@dimen/margin_padding_4dp"
+            android:layout_width="match_parent"
+            android:id="@+id/toolbar"
+            android:layout_height="?attr/actionBarSize">
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/drawer_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:tint="@color/black"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_padding_16"
+                android:src="@drawable/ic_drawer_icon" />
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/bell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/margin_padding_4dp"
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_bell" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/mainImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/text_size_20sp"
-            android:fontFamily="@font/inter_medium"
-            android:layout_centerInParent="true"
-            android:text="@string/good"
-            android:textColor="@color/black" />
-    </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/mainImageView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/margin_padding_60dp"
+                android:fontFamily="@font/inter_medium"
+                android:text="@string/good"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/text_size_20sp" />
+        </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="none"
-        android:layout_marginHorizontal="@dimen/margin_padding_16"
-        android:id="@+id/nestedScrollView">
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/margin_padding_8dp"
-            android:orientation="vertical">
+            android:scrollbars="none"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:id="@+id/nestedScrollView">
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="#EAFFF2"
-                android:paddingVertical="@dimen/margin_padding_16"
-                android:layout_height="wrap_content">
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/margin_padding_24dp"
-                    android:layout_height="@dimen/margin_padding_24dp"
-                    android:src="@drawable/ic_attention"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/margin_padding_16"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:fontFamily="@font/inter_medium"
-                    android:textColor="@color/black"
-                    android:layout_marginEnd="@dimen/margin_padding_16"
-                    android:lineSpacingExtra="@dimen/margin_padding_4dp"
-                    android:layout_marginStart="@dimen/margin_padding_12dp"
-                    android:text="100 сум от каждой поездки начисляется на пожертвование от вашей имени."/>
-
-
-            </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_24dp"
-                android:orientation="horizontal">
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="@dimen/dimen_48dp"
-                    android:layout_height="@dimen/item_height_56dp"
-                    android:src="@drawable/ic_good_star_1"/>
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/margin_padding_8dp"
+                android:orientation="vertical">
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <androidx.appcompat.widget.AppCompatTextView
+                    android:background="@drawable/background_white_corner_12"
+                    android:backgroundTint="#EAFFF2"
+                    android:paddingVertical="@dimen/margin_padding_16"
+                    android:layout_height="wrap_content">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/margin_padding_24dp"
+                        android:layout_height="@dimen/margin_padding_24dp"
+                        android:src="@drawable/ic_attention"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="@dimen/margin_padding_16"/>
+
+                    <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/benevolent_man"
-                        android:fontFamily="@font/inter_semibold"
-                        android:textColor="@color/black"/>
-
-                    <ProgressBar
-                        style="?android:attr/progressBarStyleHorizontal"
-                        android:layout_width="match_parent"
-                        android:layout_height="8dp"
-                        android:layout_marginTop="6dp"
                         android:layout_gravity="center_vertical"
-                        android:progress="40"
-                        android:layout_centerVertical="true"
-                        android:progressDrawable="@drawable/horizantal_progressbar_transparent" />
+                        android:fontFamily="@font/inter_medium"
+                        android:textColor="@color/black"
+                        android:layout_marginEnd="@dimen/margin_padding_16"
+                        android:lineSpacingExtra="@dimen/margin_padding_4dp"
+                        android:layout_marginStart="@dimen/margin_padding_12dp"
+                        android:text="100 сум от каждой поездки начисляется на пожертвование от вашей имени."/>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_24dp"
+                    android:orientation="horizontal">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="@dimen/dimen_48dp"
+                        android:layout_height="@dimen/item_height_56dp"
+                        android:src="@drawable/ic_good_star_1"/>
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="@dimen/margin_padding_16"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/benevolent_man"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="@color/black"/>
+
+                        <ProgressBar
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="8dp"
+                            android:layout_marginTop="6dp"
+                            android:layout_gravity="center_vertical"
+                            android:progress="10"
+                            android:layout_centerVertical="true"
+                            android:progressDrawable="@drawable/horizantal_progressbar_transparent" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp">
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_regular"
+                                android:text="1 уровен"
+                                android:id="@+id/level"
+                                android:textColor="@color/dark_black"
+                                android:textSize="@dimen/text_size_13sp" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="5/20"
+                                android:id="@+id/trips"
+                                android:textColor="@color/dark_black"
+                                android:layout_alignParentEnd="true"
+                                android:fontFamily="@font/inter_regular"
+                                android:textSize="@dimen/text_size_13sp"/>
+
+                        </RelativeLayout>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/margin_padding_24dp"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:background="@drawable/background_white_corner_12"
+                        android:backgroundTint="@color/grey"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                        <TextView
+                            android:id="@+id/number"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/margin_padding_8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="5"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/number"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="@dimen/margin_padding_8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/trips"
+                            android:textColor="#3E4958"
+                            android:textSize="@dimen/text_size_18sp" />
+
+                    </RelativeLayout>
 
                     <RelativeLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
+                        android:layout_marginStart="@dimen/margin_padding_8dp"
+                        android:background="@drawable/background_white_corner_12"
+                        android:backgroundTint="@color/grey"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp">
+                        android:layout_weight="1">
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
+                            android:id="@+id/donated_from_trips_all"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/inter_regular"
-                            android:text="1 уровен"
-                            android:id="@+id/level"
-                            android:textColor="@color/dark_black"
-                            android:textSize="@dimen/text_size_13sp" />
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/margin_padding_8dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="500 Sum"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/text_size_18sp" />
 
-                        <androidx.appcompat.widget.AppCompatTextView
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="5/20"
-                            android:id="@+id/trips"
-                            android:textColor="@color/dark_black"
-                            android:layout_alignParentEnd="true"
-                            android:fontFamily="@font/inter_regular"
-                            android:textSize="@dimen/text_size_13sp"/>
+                            android:layout_below="@id/donated_from_trips_all"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="@dimen/margin_padding_8dp"
+                            android:fontFamily="@font/inter_medium"
+                            android:text="@string/donated"
+                            android:textColor="#3E4958"
+                            android:textSize="@dimen/text_size_18sp" />
 
                     </RelativeLayout>
                 </androidx.appcompat.widget.LinearLayoutCompat>
-            </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <androidx.appcompat.widget.LinearLayoutCompat
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/margin_padding_24dp"
-                android:layout_height="wrap_content">
-                <RelativeLayout
-                    android:layout_width="0dp"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/icon_size_20dp"
+                    android:backgroundTint="@color/grey"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/icon_size_20dp"
+                    android:layout_height="@dimen/item_height_56dp"
                     android:background="@drawable/background_white_corner_12"
-                    android:backgroundTint="@color/grey"
-                    android:layout_marginEnd="@dimen/margin_padding_8dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
+                    android:backgroundTint="@color/grey">
 
                     <TextView
-                        android:id="@+id/number"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/margin_padding_8dp"
-                        android:fontFamily="@font/inter_bold"
-                        android:text="5"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_18sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/number"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="@dimen/margin_padding_8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/trips"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/donated_from_trips_today"
+                        android:layout_marginStart="@dimen/margin_padding_16"
+                        android:fontFamily="@font/inter_semibold"
+                        android:layout_marginEnd="@dimen/dimen_32dp"
+                        android:text="@string/today"
                         android:textColor="#3E4958"
                         android:textSize="@dimen/text_size_18sp" />
 
-                </RelativeLayout>
-
-                <RelativeLayout
-                    android:layout_width="0dp"
-                    android:layout_marginStart="@dimen/margin_padding_8dp"
-                    android:background="@drawable/background_white_corner_12"
-                    android:backgroundTint="@color/grey"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
-
                     <TextView
-                        android:id="@+id/donated_from_trips_all"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="@dimen/margin_padding_8dp"
+                        android:layout_marginEnd="@dimen/margin_padding_16"
                         android:fontFamily="@font/inter_bold"
-                        android:text="500 Sum"
+                        android:text="00 Sum"
+                        android:id="@+id/donated_from_trips_today"
                         android:textColor="@color/green"
                         android:textSize="@dimen/text_size_18sp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="@dimen/icon_size_20dp"
+                    android:layout_height="@dimen/item_height_56dp"
+                    android:background="@drawable/background_white_corner_12"
+                    android:backgroundTint="@color/grey">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/donated_from_trips_all"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="@dimen/margin_padding_8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/donated"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/donated_overall"
+                        android:layout_marginStart="@dimen/margin_padding_16"
+                        android:fontFamily="@font/inter_semibold"
+                        android:layout_marginEnd="@dimen/dimen_32dp"
+                        android:text="@string/totalDonationAmoubt"
                         android:textColor="#3E4958"
                         android:textSize="@dimen/text_size_18sp" />
 
-                </RelativeLayout>
+                    <TextView
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/margin_padding_16"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="55 600 Sum"
+                        android:id="@+id/donated_overall"
+                        android:textColor="@color/green"
+                        android:textSize="@dimen/text_size_18sp" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/makeDonation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginTop="@dimen/margin_padding_16"
+                    android:background="@drawable/background_white_corner_12"
+                    android:backgroundTint="@color/green"
+                    android:padding="@dimen/margin_padding_16dp"
+                    android:text="@string/makeDonation"
+                    android:textAppearance="@style/boldStyleLight"
+                    android:textSize="@dimen/text_size_18sp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_padding_24dp"
+                    android:id="@+id/history"
+                    android:fontFamily="@font/inter_semibold"
+                    android:text="@string/donationHistory"
+                    android:layout_gravity="center_horizontal"
+                    android:drawableStart="@drawable/ic_time_green"
+                    android:drawablePadding="@dimen/dimens_10dp"
+                    android:textColor="@color/green"
+                    android:textSize="@dimen/text_size_15sp" />
+
             </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="@dimen/icon_size_20dp"
-                android:backgroundTint="@color/grey"/>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/icon_size_20dp"
-                android:layout_height="@dimen/item_height_56dp"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="@color/grey">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/donated_from_trips_today"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:fontFamily="@font/inter_semibold"
-                    android:layout_marginEnd="@dimen/dimen_32dp"
-                    android:text="@string/today"
-                    android:textColor="#3E4958"
-                    android:textSize="@dimen/text_size_18sp" />
-
-                <TextView
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_padding_16"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="00 Sum"
-                    android:id="@+id/donated_from_trips_today"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_18sp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_marginTop="@dimen/icon_size_20dp"
-                android:layout_height="@dimen/item_height_56dp"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="@color/grey">
+        </androidx.core.widget.NestedScrollView>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/donated_overall"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:fontFamily="@font/inter_semibold"
-                    android:layout_marginEnd="@dimen/dimen_32dp"
-                    android:text="@string/totalDonationAmoubt"
-                    android:textColor="#3E4958"
-                    android:textSize="@dimen/text_size_18sp" />
-
-                <TextView
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/margin_padding_16"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="55 600 Sum"
-                    android:id="@+id/donated_overall"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_18sp" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/makeDonation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_marginTop="@dimen/margin_padding_16"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="@color/green"
-                android:padding="@dimen/margin_padding_16dp"
-                android:text="@string/makeDonation"
-                android:textAppearance="@style/boldStyleLight"
-                android:textSize="@dimen/text_size_18sp" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_24dp"
-                android:id="@+id/history"
-                android:fontFamily="@font/inter_semibold"
-                android:text="@string/donationHistory"
-                android:layout_gravity="center_horizontal"
-                android:drawableStart="@drawable/ic_time_green"
-                android:drawablePadding="@dimen/dimens_10dp"
-                android:textColor="@color/green"
-                android:textSize="@dimen/text_size_15sp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
 
 
 
 
-    </androidx.core.widget.NestedScrollView>
-
-
-
-
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

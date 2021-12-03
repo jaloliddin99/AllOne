@@ -9,7 +9,7 @@ import com.tesseract.AllOneClient.model.charity.projects.Data
 
 class MakeDonationAdapter(
     private val onClickAction: OnItemCLicked,
-    private val dataList: ArrayList<Data>
+    private val dataList: MutableSet<Data>
 ) : RecyclerView.Adapter<MakeDonationAdapter.ClinicViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ClinicViewHolder {
@@ -23,7 +23,7 @@ class MakeDonationAdapter(
         return ClinicViewHolder(binding)
 
     }
-    fun addList(list: List<Data>) {
+    fun addList(list: MutableSet<Data>) {
         var counter=0
         counter+=itemCount
         dataList.addAll(list)
@@ -31,7 +31,7 @@ class MakeDonationAdapter(
     }
 
     override fun onBindViewHolder(holder: ClinicViewHolder, position: Int) {
-        val newsItem : Data =dataList[position]
+        val newsItem : Data =dataList.elementAt(position)
         holder.bind(newsItem)
     }
 

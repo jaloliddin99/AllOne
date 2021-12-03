@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -27,26 +28,23 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.recyclerview.widget.RecyclerView
 
-
-
-
 @AndroidEntryPoint
 class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener {
 
-    private lateinit var binding: FragmentGoodChooseYourCardBinding
+    private var _binding: FragmentGoodChooseYourCardBinding?=null
+    private val binding get() = _binding!!
     val args:FragmentChooseYourCarsArgs by navArgs()
     private lateinit var addCardAdapter: SelectCardToDonate
     private lateinit var getCardData: List<GetCardData>
-    private var clientCardId :Int=0
+    private var clientCardId :Int=-111
     private lateinit var viewModel: GetCardViewModel
     private lateinit var viewModelDonate:DonateViewModel
-    lateinit var dialog: Dialog
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentGoodChooseYourCardBinding.inflate(inflater, container, false)
+        _binding= FragmentGoodChooseYourCardBinding.inflate(inflater, container, false)
         viewModel= ViewModelProvider(this).get(GetCardViewModel::class.java)
         viewModelDonate=ViewModelProvider(this).get(DonateViewModel::class.java)
         return binding.root
@@ -58,8 +56,6 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getCardDataList(headerMapUniversal(requireContext()))
-
-        loader()
 
         binding.apply {
             backToHome.setOnClickListener {
@@ -78,7 +74,6 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
             amount.text= formatPhone(args.donationAmount)+" "+getString(R.string.summa1)
 
 
-
             addCard.setOnClickListener {
                 findNavController().navigate(FragmentChooseYourCarsDirections.actionGlobalAddCardFragment())
             }
@@ -86,26 +81,37 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
             recyclerView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
             signIn.setOnClickListener {
-                dialog.show()
+                if (clientCardId==-111){
+                    Toast.makeText(context, getString(R.string.please_endter_card), Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                binding.loader.loader.visibility=View.VISIBLE
                viewModelDonate.donate(headerMapUniversal(requireContext()),args.projectId,  clientCardId, args.charityProjectCardId, args.donationAmount.toDouble())
             }
 
             viewModelDonate.donateSuccess.observe(viewLifecycleOwner, {
-                dialog.dismiss()
+                binding.loader.loader.visibility=View.GONE
+                signIn.visibility=View.GONE
                 successfullyPaid.animate().alpha(1f).duration=500
             })
 
             returnBack.setOnClickListener {
-                findNavController().popBackStack()
+                if (successfullyPaid.alpha==1f){
+                    findNavController().popBackStack()
+                }
+
             }
             history.setOnClickListener {
-                findNavController().navigate(FragmentChooseYourCarsDirections.actionFragmentChooseYourCarsToFragmentDonationHistory())
+                if (successfullyPaid.alpha==1f){
+                    findNavController().navigate(FragmentChooseYourCarsDirections.actionFragmentChooseYourCarsToFragmentDonationHistory())
+
+                }
             }
 
         }
 
         viewModel.cardDataList.observe(requireActivity(),  {
-            dialog.dismiss()
+            binding.loader.loader.visibility=View.GONE
             getCardData=it
             addCardAdapter= SelectCardToDonate(it as ArrayList<GetCardData>, this, requireContext())
             binding.recyclerView.adapter=addCardAdapter
@@ -127,32 +133,19 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
 
     }
 
-    private fun loader(){
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
-    }
+
 
     override fun onItemClick(card: GetCardData) {
 
     }
 
-    fun hasPreview(): Boolean {
-        return getCurrentItem() > 0
-    }
 
     operator fun hasNext(): Boolean {
         return binding.recyclerView.adapter != null &&
                 getCurrentItem() < binding.recyclerView.adapter!!.itemCount - 1
     }
 
-    fun preview() {
-        val position = getCurrentItem()
-        if (position > 0) setCurrentItem(position - 1, true)
-    }
+
 
     operator fun next() {
         val adapter: RecyclerView.Adapter<*> = binding.recyclerView.adapter ?: return
@@ -170,6 +163,11 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
         if (smooth) binding.recyclerView.smoothScrollToPosition(position) else binding.recyclerView.scrollToPosition(
             position
         )
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

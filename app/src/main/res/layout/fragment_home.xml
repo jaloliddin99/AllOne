@@ -13,20 +13,31 @@
         android:layout_width="match_parent"
         android:background="@color/green"
         android:layout_height="match_parent">
+
         <RelativeLayout
-            android:elevation="@dimen/margin_padding_4dp"
-            android:layout_width="match_parent"
             android:id="@+id/toolbar"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_height="?attr/actionBarSize"
+            android:elevation="@dimen/margin_padding_4dp">
+
             <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/drawer_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/margin_padding_16"
+                android:src="@drawable/ic_drawer_icon" />
+
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/bell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:padding="@dimen/margin_padding_12dp"
-                android:src="@drawable/ic_bell_white"
+                android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/margin_padding_4dp"
-                android:layout_centerVertical="true"/>
+                android:padding="@dimen/margin_padding_12dp"
+                android:src="@drawable/ic_bell_white" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/mainImageView"
@@ -60,7 +71,7 @@
                     android:text="@string/welcome_A"
                     android:textAlignment="center"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/text_size_16sp" />
+                    android:textSize="@dimen/text_size_20sp" />
 
 
                 <com.google.android.material.card.MaterialCardView
@@ -191,37 +202,39 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:overScrollMode="never"
-                    android:layout_marginStart="@dimen/margin_padding_8dp"
-                    android:layout_marginEnd="@dimen/margin_padding_16"
-                    android:clipToPadding="false"
-                    android:id="@+id/recyclerViewOrders"/>
 
-
-                <RelativeLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
+                    android:orientation="vertical"
                     android:layout_height="match_parent"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:layout_marginTop="@dimen/margin_padding_24dp"
                     android:background="@drawable/white_background_top_corner">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/service"
+                        android:layout_marginTop="@dimen/margin_padding_16"
+                        android:layout_marginStart="@dimen/margin_padding_16"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_15sp"
+                        android:fontFamily="@font/inter_bold"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewOrders"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_padding_8dp"
+                        android:layout_marginEnd="@dimen/margin_padding_16"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@id/recyclerViewOrders"
                         android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/margin_padding_16dp"
-                            android:layout_marginTop="@dimen/margin_padding_24dp"
-                            android:fontFamily="@font/inter_bold"
-                            android:text="@string/active_order"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_20sp"
-                            />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerView"
@@ -291,7 +304,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="170dp"
                             android:layout_marginHorizontal="@dimen/margin_padding_16"
-                            android:layout_marginBottom="@dimen/margin_padding_24dp"
+                            android:layout_marginBottom="70dp"
                             app:cardCornerRadius="@dimen/margin_padding_12dp"
                             app:cardElevation="0dp"
                             app:rippleColor="@android:color/transparent">
@@ -328,7 +341,7 @@
 
                     </LinearLayout>
 
-                </RelativeLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
 
             </LinearLayout>

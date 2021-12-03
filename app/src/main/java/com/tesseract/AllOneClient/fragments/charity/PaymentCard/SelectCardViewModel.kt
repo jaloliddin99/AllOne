@@ -22,7 +22,11 @@ class SelectCardViewModel @Inject constructor(private val repository: NetworkRep
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         creditCard.postValue(it.body()?.content)
+                    }else{
+                        errorM.postValue(it.body()?.message)
                     }
+                }else{
+                    errorM.postValue(it.message())
                 }
             }
         }catch (e:Exception){

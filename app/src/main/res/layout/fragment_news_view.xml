@@ -8,6 +8,22 @@
     tools:context=".fragments.main.home.news.newsView.FragmentNewsView"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="@dimen/dimen_32dp"
+        android:layout_height="@dimen/dimen_32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/ic_arrow_left"
+        android:elevation="@dimen/icon_size_20dp"
+        android:padding="@dimen/margin_padding_8dp"
+        android:id="@+id/backToHome"
+        android:layout_marginTop="30dp"
+        android:layout_marginStart="@dimen/margin_padding_12dp"
+        app:tint="@color/white"
+        android:background="?attr/selectableItemBackground"
+        android:focusable="true"
+        android:clickable="true"/>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -51,6 +67,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_size_15sp"
+                    android:paddingBottom="@dimen/margin_padding_24dp"
                     android:fontFamily="@font/inter_regular"
                     android:id="@+id/description"
                     android:textColor="@color/black"

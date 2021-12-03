@@ -4,10 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.databinding.LayoutGoodDonationItemBinding
-import com.tesseract.AllOneClient.model.charity.history.Order
+import com.tesseract.AllOneClient.model.charity.history.Charities
 
 class GoodHistoryItemsAdapter(
-    private val orders:ArrayList<Order>
+    private val charities:ArrayList<Charities>
 )
     : RecyclerView.Adapter<GoodHistoryItemsAdapter.ClinicViewHolder>() {
 
@@ -19,20 +19,20 @@ class GoodHistoryItemsAdapter(
     }
 
     override fun onBindViewHolder(holder: ClinicViewHolder, position: Int) {
-        val order : Order =orders[position]
-        holder.bind(order)
+        val charities : Charities =charities[position]
+        holder.bind(charities)
     }
 
-    override fun getItemCount()=orders.size
+    override fun getItemCount()=charities.size
 
     inner class ClinicViewHolder(private val itemBinding: LayoutGoodDonationItemBinding)
         : RecyclerView.ViewHolder(itemBinding.root){
 
 
-        fun bind(order: Order) {
-            itemBinding.amount.text=order.amount
-            itemBinding.time.text=order.time
-            itemBinding.title.text=order.title
+        fun bind(charities: Charities) {
+            itemBinding.amount.text=charities.amount
+            itemBinding.time.text=charities.time
+            itemBinding.title.text=charities.title
         }
 
 

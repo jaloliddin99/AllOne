@@ -5,11 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.tesseract.AllOneClient.MainActivity
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentChangeLanguageBinding
+import com.tesseract.AllOneClient.utils.statusBarColor
 
 class ChangeLanguageFragment: Fragment() {
     private var _binding: FragmentChangeLanguageBinding?=null
@@ -21,7 +24,11 @@ class ChangeLanguageFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding= FragmentChangeLanguageBinding.inflate(inflater, container, false)
-
+        requireActivity().statusBarColor(
+            ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
+            ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
+            true
+        )
         return binding.root
     }
 

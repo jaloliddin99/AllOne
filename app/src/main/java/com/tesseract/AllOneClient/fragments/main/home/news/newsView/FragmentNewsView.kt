@@ -11,6 +11,7 @@ import android.view.WindowManager
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.FragmentNewsViewBinding
@@ -22,18 +23,21 @@ class FragmentNewsView:Fragment() {
     private val binding get() = _binding!!
     val args:FragmentNewsViewArgs by navArgs()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        sharedElementEnterTransition =
-            com.google.android.material.transition.MaterialContainerTransform()
-                .apply {
-                    this.containerColor = Color.TRANSPARENT
-                    this.startContainerColor = Color.TRANSPARENT
-                    duration = 250.toLong()
-                    scrimColor = Color.TRANSPARENT
+//    override fun onCreate(savedInstanceState: Bundle?) {
+//        super.onCreate(savedInstanceState)
+//
+//        sharedElementEnterTransition =
+//            com.google.android.material.transition.MaterialContainerTransform()
+//                .apply {
+//                    this.containerColor = Color.TRANSPARENT
+//                    this.startContainerColor = Color.TRANSPARENT
+//                    duration = 250.toLong()
+//                    scrimColor = Color.TRANSPARENT
+//
+//                }
+//    }
 
-                }
-    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,8 +63,10 @@ class FragmentNewsView:Fragment() {
             description.text=args.description
             date.text=args.data
 
+            backToHome.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
-
     }
 
     override fun onStop() {

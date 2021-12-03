@@ -45,7 +45,15 @@ class ChangeDataFragment: Fragment(R.layout.fragment_change_data),
 
         changeDataFragment.name.setText(SaveData.getName(requireContext()))
         changeDataFragment.selectDate.setText(SaveData.getBirthdate(requireContext()))
-        changeDataFragment.selectGender.setText(SaveData.getGender(requireContext()))
+
+
+        if (SaveData.getGender(requireContext())=="male"){
+            changeDataFragment.selectGender.setText(getString(R.string.male))
+        }else{
+            changeDataFragment.selectGender.setText(getString(R.string.female))
+        }
+
+
 
 
         changeDataFragment.backToHome.setOnClickListener {
@@ -96,16 +104,17 @@ class ChangeDataFragment: Fragment(R.layout.fragment_change_data),
         })
 
         changeDataFragment.selectGender.setOnClickListener {
-            DialogPoll(this).show(parentFragmentManager, "fragmentManager")
+            DialogPoll(this).show(parentFragmentManager, tag)
         }
 
         changeDataFragment.selectDate.setOnClickListener {
-            DialogDateOfBirth(getString(R.string.day_of_birth), this).show(parentFragmentManager, "fragmentManager")
+            DialogDateOfBirth(getString(R.string.day_of_birth), this).show(parentFragmentManager, tag)
         }
     }
 
     override fun userGender(gender: String, id: Int) {
         changeDataFragment.selectGender.text = gender
+
         if (id==1){
             maleFemale="male"
         }else if (id==2){

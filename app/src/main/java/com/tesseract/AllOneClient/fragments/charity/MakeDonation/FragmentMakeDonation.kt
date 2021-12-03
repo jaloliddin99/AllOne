@@ -21,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentMakeDonation : Fragment(), MakeDonationAdapter.OnItemCLicked {
 
-    var binding:FragmentMakeDonationBinding?=null
+    var _binding:FragmentMakeDonationBinding?=null
+    val binding get() = _binding!!
     private lateinit var makeDonationAdapter: MakeDonationAdapter
     private var isCurrentFragment: Boolean = true
     private lateinit var viewModel: ProjectViewModel
@@ -30,9 +31,9 @@ class FragmentMakeDonation : Fragment(), MakeDonationAdapter.OnItemCLicked {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentMakeDonationBinding.inflate(inflater, container, false)
+        _binding= FragmentMakeDonationBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(ProjectViewModel::class.java)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,14 +43,11 @@ class FragmentMakeDonation : Fragment(), MakeDonationAdapter.OnItemCLicked {
         Common.donationProjects = 1
         viewModel.startMain(headerMapUniversal(requireContext()))
 
-
-
-
-        binding?.apply {
+        binding.apply {
             val layoutManager=GridLayoutManager(context, 2)
 
             recyclerView.layoutManager=layoutManager
-            makeDonationAdapter=MakeDonationAdapter(this@FragmentMakeDonation, ArrayList())
+            makeDonationAdapter=MakeDonationAdapter(this@FragmentMakeDonation, mutableSetOf())
             recyclerView.adapter=makeDonationAdapter
 
             recyclerView.addOnScrollListener(object : EndlessRecyclerViewScrollListener(layoutManager){
@@ -69,8 +67,9 @@ class FragmentMakeDonation : Fragment(), MakeDonationAdapter.OnItemCLicked {
     }
 
     private fun orderHistory() {
-        val arrayList = ArrayList<Data>()
+        val arrayList:MutableSet<Data> = HashSet()
         viewModel.data.observe(viewLifecycleOwner, {
+            binding.loader.loader.visibility=View.GONE
             arrayList.addAll(it)
             if (arrayList.size!=0){
                 makeDonationAdapter.addList(arrayList)
@@ -84,5 +83,10 @@ class FragmentMakeDonation : Fragment(), MakeDonationAdapter.OnItemCLicked {
         val action=FragmentMakeDonationDirections.actionFragmentMakeDonationToFragmentPaymentCardSelection(position)
         isCurrentFragment=false
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

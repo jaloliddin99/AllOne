@@ -2,9 +2,13 @@ package com.tesseract.AllOneClient.fragments.charity.Main
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,24 +20,35 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentCharityMain:Fragment() {
-    private lateinit var binding:FragmentGoodBinding
+    private var _binding:FragmentGoodBinding?=null
+    private val binding get() = _binding!!
     private lateinit var viewModel: CharityMainViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentGoodBinding.inflate(inflater, container, false)
+        _binding= FragmentGoodBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(CharityMainViewModel::class.java)
         return binding.root
     }
 
+    @SuppressLint("WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.charityMainGet(headerMapUniversal(requireContext()))
 
+        binding.loader.loader.visibility=View.VISIBLE
         charity()
+
+        val drawerLayout: DrawerLayout =requireActivity().findViewById(R.id.drawerLayout)
+
+        binding.drawerIcon.setOnClickListener {
+            if(!drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.openDrawer(Gravity.START)
+            else drawerLayout.closeDrawer(Gravity.END);
+            drawerLayout.openDrawer(Gravity.START)
+        }
 
     }
 
@@ -50,7 +65,13 @@ class FragmentCharityMain:Fragment() {
                 findNavController().navigate(action)
             }
 
+            viewModel.charityErrorMain.observe(viewLifecycleOwner, {
+                binding.loader.loader.visibility=View.GONE
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+
             viewModel.charityMain.observe(viewLifecycleOwner, {
+                binding.loader.loader.visibility=View.GONE
                 level.text=it.level.toString()
                 trips.text="${it.level}/ ${it.trips}"
                 donatedOverall.text=  formatPhone(it.donated_overall)+" "+getString(R.string.summa1)
@@ -60,7 +81,10 @@ class FragmentCharityMain:Fragment() {
 
             })
         }
+    }
 
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

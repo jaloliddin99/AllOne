@@ -8,6 +8,8 @@
     tools:context=".fragments.charity.ChooseYourCard.FragmentChooseYourCars"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+
+
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -194,7 +196,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_gravity="bottom"
-            android:elevation="0dp"
+            android:elevation="@dimen/margin_padding_16"
             android:layout_marginStart="@dimen/margin_padding_16"
             android:layout_marginEnd="@dimen/margin_padding_16"
             android:layout_marginBottom="@dimen/margin_padding_24dp"
@@ -284,6 +286,16 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

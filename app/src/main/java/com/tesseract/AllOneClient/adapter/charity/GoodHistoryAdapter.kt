@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.databinding.LayoutGoodDonationBinding
 import com.tesseract.AllOneClient.model.charity.history.Data
-import com.tesseract.AllOneClient.model.charity.history.Order
+import com.tesseract.AllOneClient.model.charity.history.Charities
 import java.lang.Exception
 
 class GoodHistoryAdapter(
-    private val dataList:ArrayList<Data>,
+    private val dataList:MutableSet<Data>,
     private val context: Context
 )
     : RecyclerView.Adapter<GoodHistoryAdapter.ClinicViewHolder>() {
@@ -21,7 +21,7 @@ class GoodHistoryAdapter(
             LayoutGoodDonationBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ClinicViewHolder(binding)
     }
-    fun addList(list: List<Data>) {
+    fun addList(list: MutableSet<Data>) {
         var counter=0
         counter+=itemCount
         dataList.addAll(list)
@@ -33,7 +33,7 @@ class GoodHistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: ClinicViewHolder, position: Int) {
-        val data : Data =dataList[position]
+        val data : Data =dataList.elementAt(position)
         holder.bind(data)
     }
 
@@ -47,7 +47,7 @@ class GoodHistoryAdapter(
             itemBinding.recyclerView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
 
             try {
-                itemBinding.recyclerView.adapter=GoodHistoryItemsAdapter(data.orders as ArrayList<Order>)
+                itemBinding.recyclerView.adapter=GoodHistoryItemsAdapter(data.charities as ArrayList<Charities>)
             }catch (e:Exception){
 
             }

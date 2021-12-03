@@ -44,13 +44,6 @@
             app:popExitAnim="@anim/fade_out"  />
 
         <action
-            android:id="@+id/action_homeFragment_to_orderFragment"
-            app:destination="@id/orderFragment"
-            app:enterAnim="@anim/fade_in"
-            app:exitAnim="@anim/fade_out"
-            app:popEnterAnim="@anim/fade_in"
-            app:popExitAnim="@anim/fade_out"  />
-        <action
             android:id="@+id/action_homeFragment_to_fragmentPostServiceSelection"
             app:destination="@id/fragmentPostServiceSelection"
             app:enterAnim="@anim/fade_in"
@@ -65,6 +58,13 @@
             app:destination="@id/fragmentAllNews" />
 
     </fragment>
+    <action
+        android:id="@+id/action_homeFragment_to_orderFragment"
+        app:destination="@id/orderFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out"  />
 
     <action
         android:id="@+id/action_global_composeFragment"
@@ -111,26 +111,34 @@
 
 
     </fragment>
+    <action
+        android:id="@+id/action_profileFragment_to_bonusFragment2"
+        app:destination="@id/bonusFragment2"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+    <action
+        android:id="@+id/action_profileFragment_to_changeLanguageFragment"
+        app:destination="@id/changeLanguageFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
+
+    <action
+        android:id="@+id/action_profileFragment_to_fragmentTechnicalSupport"
+        app:destination="@id/fragmentTechnicalSupport"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.tesseract.AllOneClient.fragments.profile.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
-        <action
-            android:id="@+id/action_profileFragment_to_bonusFragment2"
-            app:destination="@id/bonusFragment2"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_profileFragment_to_changeLanguageFragment"
-            app:destination="@id/changeLanguageFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_profileFragment_to_fragmentTechnicalSupport"
-            app:destination="@id/fragmentTechnicalSupport"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out" />
+
         <action
             android:id="@+id/action_profileFragment_to_addCardFragment2"
             app:destination="@id/addCardFragment2"
@@ -146,12 +154,15 @@
             app:destination="@id/changePhoneFragment"
             app:enterAnim="@anim/slide_in"
             app:exitAnim="@anim/slide_out" />
-        <action
-            android:id="@+id/action_profileFragment_to_aboutProgramFragment"
-            app:destination="@id/aboutProgramFragment"
-            app:enterAnim="@anim/slide_in"
-            app:exitAnim="@anim/slide_out" />
+
     </fragment>
+    <action
+        android:id="@+id/action_profileFragment_to_aboutProgramFragment"
+        app:destination="@id/aboutProgramFragment"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/bonusFragment2"
         android:name="com.tesseract.AllOneClient.fragments.profile.BonusFragment"
@@ -786,6 +797,14 @@
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
     </fragment>
+
+    <action
+        android:id="@+id/action_global_charity"
+        app:destination="@id/fragmentGoodMain"
+        app:enterAnim="@anim/fade_in"
+        app:exitAnim="@anim/fade_out"
+        app:popEnterAnim="@anim/fade_in"
+        app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/fragmentGoodMain"
         android:name="com.tesseract.AllOneClient.fragments.charity.Main.FragmentCharityMain"

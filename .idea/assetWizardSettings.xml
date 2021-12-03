@@ -298,8 +298,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_profile_user" />
-                            <entry key="sourceFile" value="D:\jobs\AllOne\profile user.svg" />
+                            <entry key="outputName" value="ic_drawer_icon" />
+                            <entry key="sourceFile" value="D:\jobs\AllOne\drawer icon.svg" />
                           </map>
                         </option>
                       </PersistentState>

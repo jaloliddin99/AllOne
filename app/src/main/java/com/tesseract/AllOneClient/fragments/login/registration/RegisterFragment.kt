@@ -64,19 +64,19 @@ class RegisterFragment : Fragment(R.layout.fragment_register),
             val lastname = binding?.txtLastname?.text.toString()
             val gender = binding?.yourGender?.text.toString()
             val birthday = binding?.yourBirthday?.text.toString()
-            if (name.isNullOrEmpty()) {
+            if (name.isEmpty()) {
                 binding?.txtName?.error = getString(R.string.enter_your_name_please)
                 return@setOnClickListener
             }
-            if (lastname.isNullOrEmpty()) {
+            if (lastname.isEmpty()) {
                 binding?.txtLastname?.error =  getString(R.string.enter_your_lastname_please)
                 return@setOnClickListener
             }
-            if (gender.isNullOrEmpty()) {
+            if (gender.isEmpty()) {
                 binding?.yourGender?.error =  getString(R.string.choose_your_gender)
                 return@setOnClickListener
             }
-            if (birthday.isNullOrEmpty()) {
+            if (birthday.isEmpty()) {
                 binding?.yourBirthday?.error = getString(R.string.enter_your_bday)
                 return@setOnClickListener
             }

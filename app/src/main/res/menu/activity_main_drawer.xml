@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+<!--        <item-->
+<!--            android:id="@+id/orderHistory"-->
+<!--            android:icon="@drawable/ic_time_left"-->
+<!--            android:title="@string/order_history" />-->
+        <item
+            android:id="@+id/bonusCard"
+            android:icon="@drawable/ic_bonus_money"
+            android:title="@string/bonus_card" />
+        <item
+            android:id="@+id/paymentMethod"
+            android:icon="@drawable/ic_add_card"
+            android:title="@string/payment_methodd" />
+<!--        <item-->
+<!--            android:id="@+id/charity"-->
+<!--            android:icon="@drawable/ic_heart"-->
+<!--            android:title="@string/charity" />-->
+        <item
+            android:id="@+id/language"
+            android:icon="@drawable/ic_language"
+            android:title="@string/adwawdwa" />
+        <item
+            android:id="@+id/aboutProgram"
+            android:icon="@drawable/ic_about_program"
+            android:title="@string/about_prog" />
+    </group>
+</menu>

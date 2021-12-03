@@ -1,43 +1,57 @@
 package com.tesseract.AllOneClient.fragments.profile
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.constants.SaveData.getBalance
 import com.tesseract.AllOneClient.constants.SaveData.getName
 import com.tesseract.AllOneClient.databinding.FragmentProfileBinding
+import com.tesseract.AllOneClient.fragments.profile.addcard.getCards.GetCardViewModel
 import com.tesseract.AllOneClient.utils.getNavOptions
+import com.tesseract.AllOneClient.utils.headerMapUniversal
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
     private var _binding: FragmentProfileBinding?=null
     private val binding get() = _binding!!
-
+    private lateinit var viewModel: GetCardViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding= FragmentProfileBinding.inflate(inflater, container, false)
-
+        viewModel= ViewModelProvider(this).get(GetCardViewModel::class.java)
         return binding.root
     }
 
+    @SuppressLint("WrongConstant", "SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.backToHome.setOnClickListener {
-            findNavController().popBackStack()
+        val drawerLayout: DrawerLayout =requireActivity().findViewById(R.id.drawerLayout)
+
+        binding.drawerIcon.setOnClickListener {
+            if(!drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.openDrawer(Gravity.START)
+            else drawerLayout.closeDrawer(Gravity.END)
+            drawerLayout.openDrawer(Gravity.START)
         }
 
         binding.logOut.setOnClickListener {
@@ -45,10 +59,22 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             activity?.finish()
         }
         binding.apply {
+            viewModel.getCardDataList(headerMapUniversal(requireContext()))
 
-            if (SaveData.getProfileImage(requireContext())?.isNotEmpty() == true){
-                binding.imageProfile.setImageURI(Uri.parse(SaveData.getProfileImage(requireContext())))
-            }
+            viewModel.cardDataList.observe(requireActivity(), {
+
+                if (it.isNotEmpty()){
+                    binding.cardNumber.visibility=View.VISIBLE
+                    val cardNumFormat=(it[0].cardNumber)?.replaceRange(6, 12, "******")
+                    binding.cardNumber.text="${it[0].type} ${SaveData.formatCard(cardNumFormat!!)}"
+                }else{
+                    binding.cardNumber.visibility=View.GONE
+                }
+
+            })
+
+
+
 
 
             changeImage.setOnClickListener {
