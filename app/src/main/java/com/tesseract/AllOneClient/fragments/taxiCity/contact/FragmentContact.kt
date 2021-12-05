@@ -43,7 +43,6 @@ class FragmentContact : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         init()
 
         binding.apply {
@@ -52,11 +51,13 @@ class FragmentContact : Fragment(),
             searchText.addTextChangedListener(textWatcher)
 
             backToHome.setOnClickListener {
-                findNavController().popBackStack()
+                contactSelected.isCancelled=true
+                setBackStackData("selectedContact", contactSelected, true)
             }
 
             select.setOnClickListener {
                 if (select.alpha.toInt() == 1) {
+                    contactSelected.isCancelled=false
                     setBackStackData("selectedContact", contactSelected, true)
                 }
             }

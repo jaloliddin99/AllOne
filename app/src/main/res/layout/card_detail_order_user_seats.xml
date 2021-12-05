@@ -42,29 +42,34 @@
                     android:text="№1 - "
                     android:id="@+id/txtFirstSeat"
                     android:textSize="15sp"
-                    android:textColor="?android:attr/textColorPrimary"/>
+                    android:fontFamily="@font/inter_regular"
+
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="№2 - "
+                    android:fontFamily="@font/inter_regular"
                     android:id="@+id/txtSecondSeat"
                     android:textSize="15sp"
-                    android:textColor="?android:attr/textColorPrimary"/>
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="№3 - "
+                    android:fontFamily="@font/inter_regular"
                     android:id="@+id/txtThirdSeat"
                     android:textSize="15sp"
-                    android:textColor="?android:attr/textColorPrimary"/>
+                    android:textColor="@color/black"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="№3 - "
+                    android:fontFamily="@font/inter_regular"
                     android:id="@+id/txtFourthSeat"
                     android:textSize="15sp"
-                    android:textColor="?android:attr/textColorPrimary"/>
+                    android:textColor="@color/black"/>
 
 
             </LinearLayout>
@@ -85,19 +90,20 @@
                     <Space
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:layout_weight="1.5"/>
 
                     <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.5">
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/firstSeat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
-                            android:id="@+id/firstSeat"
-                            app:tint="@color/veryDarkColor"
-                            android:src="@drawable/ic_rec_large" />
+                            android:src="@drawable/ic_rec_large"
+                            app:tint="@color/veryDarkColor" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -113,7 +119,8 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <RelativeLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageView
@@ -152,13 +159,14 @@
                             android:textSize="15sp" />
                     </RelativeLayout>
                     <RelativeLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content">
 
                         <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/fourthSeat"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/fourthSeat"
                             android:layout_centerInParent="true"
                             android:src="@drawable/ic_reg_small" />
                         <TextView

@@ -46,11 +46,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/inter_medium"
-            android:text="@string/user_details"
-            android:textColor="?android:attr/textColorPrimary"
-            android:textSize="@dimen/text_size_24sp"
-            android:textStyle="bold" />
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/enter_your_details"
+            android:textColor="@color/black"
+
+            android:textSize="@dimen/text_size_24sp" />
 
         <LinearLayout
             android:layout_below="@+id/user_details"
@@ -75,7 +75,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_padding_8dp"
-                android:background="@drawable/background_white_corner_12"
+                android:background="@drawable/purple_background_12dp_corner_border"
                 android:backgroundTint="@color/grey"
                 android:drawableEnd="@drawable/ic_user"
                 android:fontFamily="@font/inter_regular"
@@ -86,7 +86,7 @@
                 android:padding="@dimen/margin_padding_16dp"
                 android:paddingStart="@dimen/margin_padding_24dp"
                 android:paddingEnd="@dimen/margin_padding_24dp"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:textSize="@dimen/text_size_14sp" />
 
             <androidx.appcompat.widget.AppCompatTextView
@@ -100,14 +100,14 @@
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_white_corner_12"
+                android:background="@drawable/purple_background_12dp_corner_border"
                 android:padding="@dimen/margin_padding_16dp"
                 android:imeOptions="actionDone"
                 android:inputType="textCapWords"
                 android:maxLines="1"
                 android:id="@+id/txt_lastname"
                 android:backgroundTint="@color/grey"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:paddingStart="@dimen/margin_padding_24dp"
                 android:paddingEnd="@dimen/margin_padding_24dp"
                 android:hint="Юсупов"
@@ -129,10 +129,10 @@
                 android:id="@+id/your_gender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_white_corner_12"
+                android:background="@drawable/purple_background_12dp_corner_border"
                 android:padding="@dimen/margin_padding_16dp"
                 android:backgroundTint="@color/grey"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:paddingStart="@dimen/margin_padding_24dp"
                 android:paddingEnd="@dimen/margin_padding_24dp"
                 android:hint="@string/male"
@@ -153,10 +153,10 @@
                 android:id="@+id/your_birthday"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/background_white_corner_12"
+                android:background="@drawable/purple_background_12dp_corner_border"
                 android:padding="@dimen/margin_padding_16dp"
                 android:backgroundTint="@color/grey"
-                android:textColor="?android:attr/textColorPrimary"
+                android:textColor="@color/black"
                 android:paddingStart="@dimen/margin_padding_24dp"
                 android:paddingEnd="@dimen/margin_padding_24dp"
                 android:hint="@string/_12_1996"
@@ -186,5 +186,13 @@
         android:layout_marginBottom="@dimen/margin_padding_24dp"
         android:textAppearance="@style/boldStyleLight"
         android:textSize="@dimen/text_size_18sp" />
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
 
 </RelativeLayout>

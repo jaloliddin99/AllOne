@@ -270,4 +270,9 @@ class FragmentCityActiveMap : Fragment(), CityOrderFinished.OnLickListener, Dial
         val action = FragmentCityActiveMapDirections.actionGlobalComposeFragment()
         findNavController().navigate(action)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.charity.SelectCardToDonate
+import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentCityPaymentMethodBinding
 import com.tesseract.AllOneClient.dialogs.main.DialogBonusMoney
 import com.tesseract.AllOneClient.fragments.profile.addcard.getCards.GetCardViewModel
@@ -23,7 +24,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, SelectCardToDonate.OnItemClickListener{
-    private lateinit var binding: FragmentCityPaymentMethodBinding
+    private var _binding: FragmentCityPaymentMethodBinding?=null
+    private val binding get() = _binding!!
+
 
     private lateinit var viewModel2: GetCardViewModel
     private lateinit var addCardAdapter: SelectCardToDonate
@@ -35,7 +38,7 @@ class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, 
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentCityPaymentMethodBinding.inflate(inflater, container, false)
+        _binding=FragmentCityPaymentMethodBinding.inflate(inflater, container, false)
         return  binding.root
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -44,6 +47,9 @@ class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, 
         viewModel2 = ViewModelProvider(this).get(GetCardViewModel::class.java)
         viewModel2.getCardDataList(headerMapUniversal(requireContext()))
 
+        binding.backToHome.setOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         radioController()
@@ -160,7 +166,7 @@ class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, 
 
             bonusAmount.setOnClickListener {
                 if (bonusAmount.isChecked){
-                    DialogBonusMoney(this@FragmentCityPaymentMethod, "34000.00").show(
+                    DialogBonusMoney(this@FragmentCityPaymentMethod, SaveData.getBalance(requireContext())!!).show(
                         parentFragmentManager,
                         tag
                     )
@@ -168,8 +174,14 @@ class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, 
             }
 
             confirm.setOnClickListener {
-                paymentType
-                val citySHareCardBonusModel=CityShareCardBonusModel(getCardData1.type!!, getCardData1.cardNumber!!, getCardData1.id!!, this@FragmentCityPaymentMethod.bonusAmount, paymentType)
+                val citySHareCardBonusModel=CityShareCardBonusModel(
+                    getCardData1.type!!,
+                    getCardData1.cardNumber!!,
+                    getCardData1.id!!,
+                    this@FragmentCityPaymentMethod.bonusAmount,
+                    paymentType,
+
+                )
                 setBackStackData("FragmentCityPaymentMethod", citySHareCardBonusModel, true)
             }
         }

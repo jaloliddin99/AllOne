@@ -13,26 +13,27 @@
         android:layout_width="match_parent"
         android:id="@+id/toolbar"
         android:layout_height="?attr/actionBarSize">
+
         <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/backToHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/backToHome"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/margin_padding_12dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
+            android:focusable="true"
             android:padding="@dimen/margin_padding_12dp"
-            android:src="@drawable/ic_arrow_left"
-            android:layout_marginStart="@dimen/margin_padding_12dp"
-            android:layout_centerVertical="true"
-            android:focusable="true" />
+            android:src="@drawable/ic_arrow_left" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/payment_method"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20sp"
+            android:layout_centerInParent="true"
             android:fontFamily="@font/inter_medium"
-            android:layout_centerInParent="true"/>
+            android:text="@string/payment_methods"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
 
     </RelativeLayout>
 
@@ -188,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/money"
                     android:layout_marginTop="@dimen/margin_padding_16dp"
-                    android:text="Наличными"
+                    android:text="@string/with_money"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_15sp" />
 
@@ -235,7 +236,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/money1"
                     android:layout_marginTop="@dimen/margin_padding_16dp"
-                    android:text="Картой"
+                    android:text="@string/with_card"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_15sp" />
 

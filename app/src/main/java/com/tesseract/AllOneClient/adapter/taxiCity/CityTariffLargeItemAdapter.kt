@@ -39,7 +39,7 @@ class CityTariffLargeItemAdapter(
         fun bind(model: Content) {
             Picasso.get().load(model.img).into(itemBinding.carImage)
             itemBinding.price.text=SaveData.formatPhone(model.price)+" "+context.getString(R.string.summa1)
-            itemBinding.tariff.text=model.tariff
+            itemBinding.tariff.text=model.title
             itemBinding.timeLeft.text=model.arrival_time
 
 

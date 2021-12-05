@@ -8,20 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.doOnPreDraw
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.FragmentNavigatorExtras
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.transition.MaterialElevationScale
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.R
@@ -30,11 +23,8 @@ import com.tesseract.AllOneClient.adapter.order.ActiveOrderAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentHomeBinding
 import com.tesseract.AllOneClient.dialogs.parcel.ModalDialogParcelSelection
-import com.tesseract.AllOneClient.fragments.order.orderHome.OrderViewModel
 import com.tesseract.AllOneClient.model.home.HomeOrderModel
-import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderHistoryDataListModel
 import com.tesseract.AllOneClient.model.home.news.NewsItemModel
-import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     private val fragmentHomeBinding get() = _fragmentHomeBinding!!
 
     private lateinit var activeOrderAdapter: ActiveOrderAdapter
-    private lateinit var viewModel: OrderViewModel
+
     private lateinit var homeViewModel: HomeViewModel
 
     override fun onDestroyView() {
@@ -63,7 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         savedInstanceState: Bundle?
     ): View {
         _fragmentHomeBinding = FragmentHomeBinding.inflate(inflater, container, false)
-        viewModel = ViewModelProvider(this).get(OrderViewModel::class.java)
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
         requireActivity().statusBarColor(
             ResourcesCompat.getColor(resources, R.color.green, requireActivity().theme),
@@ -76,8 +65,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     @SuppressLint("SetTextI18n", "WrongConstant")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-//        postponeEnterTransition()
-//        view.doOnPreDraw { startPostponedEnterTransition() }
         exitTransition=null
         reenterTransition=null
 
@@ -90,21 +77,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }
 
         Common.countPageMain = 1
-        viewModel.startMain(headerMapUniversal(requireContext()))
+
 
         loadItems()
         fragmentHomeBinding.apply {
-            val layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             activeOrderAdapter = ActiveOrderAdapter(ArrayList(), requireContext(), true)
-            recyclerView.layoutManager = layoutManager
-            recyclerView.adapter = activeOrderAdapter
 
-            recyclerView.addOnScrollListener(object :
-                EndlessRecyclerViewScrollListener(layoutManager) {
-                override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                    viewModel.activeNextMain(headerMapUniversal(requireContext()))
-                }
-            })
             balanceText.text = SaveData.getBalance(requireContext())
             txtNameField.text =
                 getString(R.string.welcome_A) + " " + (SaveData.getName(requireContext())
@@ -116,10 +94,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             recyclerViewOrders.adapter=HomeOrdersAdapter(homeOrderModel, this@HomeFragment, requireContext())
         }
         setNews()
-        fragmentHomeBinding.recyclerView.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+
         clickListeners()
-        activeOrders()
+
+        fragmentHomeBinding.bonus.setOnClickListener {
+            val action=HomeFragmentDirections.actionProfileFragmentToBonusFragment2()
+            findNavController().navigate(action)
+        }
     }
 
     private fun clickListeners() {
@@ -129,10 +110,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentAllNews()
                 findNavController().navigate(action)
             }
-            showMore.setOnClickListener {
-                val action = HomeFragmentDirections.actionHomeFragmentToOrderFragment()
-                findNavController().navigate(action)
-            }
+
         }
 
     }
@@ -151,7 +129,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     private lateinit var newsItemModel: NewsItemModel
     private fun setNews() {
         homeViewModel.newsItemModel(headerMapUniversal(requireContext()))
-        homeViewModel.responseMessage.observe(viewLifecycleOwner, Observer {
+        homeViewModel.responseMessage.observe(viewLifecycleOwner, {
             newsItemModel = it
             fragmentHomeBinding.apply {
                 Picasso.get().load(it.image).into(newsImage)
@@ -162,13 +140,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         fragmentHomeBinding.apply {
             newsCardView.setOnClickListener {
-//                exitTransition = MaterialElevationScale(false).apply {
-//                    duration = 250.toLong()
-//                }
-//                reenterTransition = MaterialElevationScale(true).apply {
-//                    duration = 250.toLong()
-//                }
-
                 val direction: NavDirections =
                     HomeFragmentDirections.actionHomeFragmentToFragmentNewsView2(
                         newsItemModel.image!!,
@@ -185,29 +156,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
             }
         }
-
     }
-
-
-    private fun activeOrders() {
-        val arrayList = ArrayList<OrderHistoryDataListModel>()
-        viewModel.activeOrdersMain.observe(requireActivity(), {
-
-            for (i in it.content?.orderHistoryDataData?.indices!!) {
-                val orderHistoryList = OrderHistoryDataListModel(
-                    it.content?.orderHistoryDataData!![i].id,
-                    it.content?.orderHistoryDataData!![i].date,
-                    it.content?.orderHistoryDataData!![i].orders,
-                )
-                arrayList.add(orderHistoryList)
-            }
-            if (arrayList.size != 0) {
-                activeOrderAdapter.addList(arrayList)
-            }
-            arrayList.clear()
-        })
-    }
-
     override fun onStart() {
         super.onStart()
         activity?.window?.navigationBarColor = context?.getColor(R.color.white)!!
@@ -264,16 +213,19 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 findNavController().navigate(action)
 
             }
+
             4 -> {
                 val action=HomeFragmentDirections.actionGlobalChat(1)
                 findNavController().navigate(action)
 
             }
+
             5 -> {
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentTourismMain()
                 findNavController().navigate(action)
             }
         }
     }
+
 
 }

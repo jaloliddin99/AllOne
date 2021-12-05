@@ -57,23 +57,38 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             false
         })
 
+        binding?.txtSignIn?.addTextChangedListener(object :TextWatcher{
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
-        binding?.signIn?.setOnClickListener {
-            val isNotEmpty: Boolean = viewModel.isNotEmpty(binding?.txtSignIn?.text.toString())
-            if (!isNotEmpty) {
-                binding?.txtSignIn?.error = getString(R.string.enter_your_phone)
-                return@setOnClickListener
             }
 
-            phoneNumber = binding?.txtSignIn?.text.toString()
-                .replace("(", "")
-                .replace(")", "")
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                if (s?.length==17){
+                    requireView().hideKeyboard()
+                }
+            }
 
-            viewModel.saveDetails(phoneNumber.replace(" ", ""))
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+        })
+
+
+        binding?.signIn?.setOnClickListener {
+            if (binding?.txtSignIn?.text?.toString()?.length==17){
+                phoneNumber = binding?.txtSignIn?.text.toString()
+                    .replace("(", "")
+                    .replace(")", "")
+
+                viewModel.saveDetails(phoneNumber.replace(" ", ""))
+            }else{
+                binding?.txtSignIn?.error = getString(R.string.enter_your_phone)
+            }
+
         }
 
         viewModel.text.observe(requireActivity(), {
-            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
             if (it.equals("Ok")){
                 if (SaveData.isSignInFragment){
                     val action =
@@ -90,43 +105,15 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 Toast.makeText(context, "bomadi", Toast.LENGTH_LONG).show()
             }
         })
-//        binding?.txtSignIn?.addTextChangedListener(textWatcher)
-//        binding?.txtSignIn?.setOnKeyListener(object : View.OnKeyListener {
-//            override fun onKey(v: View?, keyCode: Int, event: KeyEvent?): Boolean {
-//                if (keyCode == KeyEvent.KEYCODE_DEL) {
-//                    if (binding?.txtSignIn?.text.toString().endsWith(" ")){
-//                        binding?.txtSignIn?.setText(binding?.txtSignIn?.text?.trim())
-//                        binding?.txtSignIn?.text?.length?.let { binding?.txtSignIn?.setSelection(it) }
-//                    }
-//                }
-//                return false
-//            }
-//        })
+
+    }
+
+    fun View.hideKeyboard() {
+        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(windowToken, 0)
     }
 
 
-
-//    private val textWatcher = object : TextWatcher {
-//        override fun afterTextChanged(s: Editable?) {
-//
-//        }
-//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-//
-//        }
-//        @SuppressLint("SetTextI18n")
-//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-//            if (start == 3 ||start == 6 || start == 10|| start == 13) {
-//                binding?.txtSignIn?.setText(binding!!.txtSignIn.text.toString() + " ")
-//                binding?.txtSignIn?.setSelection(binding?.txtSignIn?.text.toString().length)
-//            }
-//        }
-//    }
-//
-//    fun showKeyboard() {
-//        val inputMethodManager: InputMethodManager =
-//            requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-//        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-//    }
 
 
 }

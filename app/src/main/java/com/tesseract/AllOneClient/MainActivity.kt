@@ -75,25 +75,22 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.bottomNav.getOrCreateBadge(R.id.orderFragment).number = 3
-        val radius = resources.getDimension(R.dimen.margin_padding_12dp)
+//        binding.bottomNav.getOrCreateBadge(R.id.orderFragment).number = 3
+//        val radius = resources.getDimension(R.dimen.margin_padding_12dp)
 
-        val bottomBarBackground = binding.bottomNav.background as MaterialShapeDrawable
-        bottomBarBackground.shapeAppearanceModel = bottomBarBackground.shapeAppearanceModel
-            .toBuilder()
-            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
-            .build()
+//        val bottomBarBackground = binding.bottomNav.background as MaterialShapeDrawable
+//        bottomBarBackground.shapeAppearanceModel = bottomBarBackground.shapeAppearanceModel
+//            .toBuilder()
+//            .setTopRightCorner(CornerFamily.ROUNDED, radius)
+//            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
+//            .build()
 
         languageConfig()
 
         binding.navView.setNavigationItemSelectedListener (object :NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
                 when(item.itemId){
-//                    R.id.orderHistory->{
-//                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_orderFragment)
-//                        binding.drawerLayout.closeDrawers()
-//                    }
+
                     R.id.bonusCard->{
                         findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_bonusFragment2)
                         binding.drawerLayout.closeDrawers()

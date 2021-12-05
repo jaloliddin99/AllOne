@@ -34,6 +34,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
+import java.lang.Exception
 
 @AndroidEntryPoint
 class OrderFragment : Fragment(R.layout.fragment_order),
@@ -171,7 +172,12 @@ class OrderFragment : Fragment(R.layout.fragment_order),
 
         val arrayList = ArrayList<OrderHistoryDataListModel>()
         viewModel.orderHistory.observe(requireActivity(),  {
-            fragmentOrderBinding.loader.loader.visibility=View.GONE
+            try {
+                fragmentOrderBinding.loader.loader.visibility=View.GONE
+            }catch (e:Exception){
+
+            }
+
             for (i in it.content?.orderHistoryDataData?.indices!!) {
                 val orderHistoryList = OrderHistoryDataListModel(
                     it.content?.orderHistoryDataData!![i].id,
@@ -190,8 +196,13 @@ class OrderFragment : Fragment(R.layout.fragment_order),
     private fun activeOrders() {
         val arrayList = ArrayList<OrderHistoryDataListModel>()
         viewModel.activeOrders.observe(requireActivity(), {
-            for (i in it.content?.orderHistoryDataData?.indices!!) {
+            try {
                 fragmentOrderBinding.loader.loader.visibility=View.GONE
+            }catch (e:Exception){
+
+            }
+            for (i in it.content?.orderHistoryDataData?.indices!!) {
+
                 val orderHistoryList = OrderHistoryDataListModel(
                     it.content?.orderHistoryDataData!![i].id,
                     it.content?.orderHistoryDataData!![i].date,

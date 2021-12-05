@@ -505,10 +505,11 @@ interface APIInterface {
 
     //CITY API ================================================
 
+    @FormUrlEncoded
     @POST("city/route_tariffs")
     suspend fun cityTariffItems(
         @HeaderMap headers: Map<String, String>,
-        @QueryMap map: Map<String, String>
+        @Field("points[]") points:ArrayList<String>,
     ):Response<CityTariffMainModel>
 
 
@@ -516,7 +517,7 @@ interface APIInterface {
     @POST("city/new_order")
     suspend fun cityNewOrder(
         @HeaderMap headers: Map<String, String>,
-        @FieldMap map: Map<String, String>,
+        @Field("points[]") points:ArrayList<String>,
         @Field("tariff") tariff: String,
         @Field("has_overhead_luggage") has_overhead_luggage: Int,
         @Field("has_conditioner") has_conditioner: Int,

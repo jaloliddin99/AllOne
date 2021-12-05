@@ -27,8 +27,7 @@
             android:layout_marginEnd="@dimen/margin_padding_16dp"
             android:textSize="@dimen/text_size_15sp"
             android:fontFamily="@font/inter_semibold"
-            android:layout_height="wrap_content"
-            android:text="taxI oblast"/>
+            android:layout_height="wrap_content"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -47,13 +46,15 @@
                 android:textSize="@dimen/text_size_18sp"
                 android:id="@+id/tariff"
                 />
+            <androidx.legacy.widget.Space
+                android:layout_width="@dimen/margin_padding_4dp"
+                android:layout_height="wrap_content"/>
 
             <TextView
                 android:id="@+id/deal_money"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/inter_semibold"
-                android:text="120 000 сум"
                 android:textColor="@color/green"
                 android:textSize="@dimen/text_size_18sp" />
         </LinearLayout>
@@ -131,17 +132,18 @@
                     android:drawableStart="@drawable/ic_watch"
                     android:drawablePadding="@dimen/margin_padding_8dp"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="Дата: "
+                    android:text="@string/dateDot"
                     android:textColor="@color/black"
                     android:textSize="15sp"
                     />
-
+                <androidx.legacy.widget.Space
+                    android:layout_width="@dimen/margin_padding_4dp"
+                    android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/beginning_ending_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_regular"
-                    android:text="23.05.2021  15:00-16:00"
                     android:textColor="@color/black"
                     android:textSize="15sp" />
 
@@ -167,17 +169,20 @@
                         android:drawableStart="@drawable/ic_car_icon"
                         android:drawablePadding="@dimen/margin_padding_8dp"
                         android:fontFamily="@font/inter_semibold"
-                        android:text="Заказ "
+                        android:text="@string/orderrr"
                         android:textColor="@color/black"
                         android:textSize="15sp"
                         />
+
+                    <androidx.legacy.widget.Space
+                        android:layout_width="@dimen/margin_padding_4dp"
+                        android:layout_height="wrap_content"/>
 
                     <TextView
                         android:id="@+id/order_number"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_regular"
-                        android:text="№18"
                         android:textColor="@color/black"
                         android:textSize="15sp" />
 
@@ -186,6 +191,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="0dp"
+                    android:id="@+id/podrobne"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
                     android:layout_weight="2"

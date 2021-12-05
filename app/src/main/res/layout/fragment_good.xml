@@ -317,6 +317,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_padding_24dp"
                     android:id="@+id/history"
+                    android:layout_marginBottom="70dp"
                     android:fontFamily="@font/inter_semibold"
                     android:text="@string/donationHistory"
                     android:layout_gravity="center_horizontal"

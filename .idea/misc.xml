@@ -128,6 +128,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/interior_chat_you.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/progress_circle.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/purple_background_12dp_corner.xml" value="0.269140625" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/purple_background_12dp_corner_border.xml" value="0.3081081081081081" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/tab_indicator.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/text_border.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/white_background_top_corner.xml" value="0.2671875" />
@@ -257,7 +258,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_region_search.xml" value="0.33" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_region_taxi_confirmation.xml" value="0.22" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_region_taxi_confirmation2.xml" value="0.251953125" />
-        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_register.xml" value="0.22" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_register.xml" value="0.33" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_rename_cards.xml" value="0.25390625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_save_location.xml" value="0.251953125" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/fragment_save_selected_location.xml" value="0.251953125" />

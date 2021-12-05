@@ -27,7 +27,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/type"
-                android:text="Маленький кузов"
                 android:fontFamily="@font/inter_medium"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_15sp"/>
@@ -38,7 +37,6 @@
                 android:id="@+id/description"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="170 см в длину, 100 в ширину, 90 в высоту"
                 android:textSize="11sp"
                 android:fontFamily="@font/inter_medium"
                 android:textColor="#4D272727"/>
@@ -50,10 +48,10 @@
             android:id="@+id/checkbox"
             android:gravity="center"
             android:foregroundGravity="center"
+            android:enabled="false"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:textColor="@color/black"
-            android:checked="false"
             app:layout_constraintEnd_toEndOf="parent"
             android:button="@drawable/cancel_order"
             android:layout_height="@dimen/margin_padding_24dp">

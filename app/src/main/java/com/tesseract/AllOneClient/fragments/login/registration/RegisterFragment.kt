@@ -3,7 +3,10 @@ package com.tesseract.AllOneClient.fragments.login.registration
 import android.content.Intent
 import android.graphics.Point
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -33,79 +36,96 @@ import java.util.*
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register),
     DialogPoll.OnSelectListener, DialogDateOfBirth.OnDaySelectListener{
-    private var binding: FragmentRegisterBinding? = null
+    private var _binding: FragmentRegisterBinding? = null
+    private val binding get() = _binding!!
     private var maleFemale:String=""
     private lateinit var viewModel: RegisterViewModel
 
     val args:RegisterFragmentArgs by navArgs()
 
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentRegisterBinding.inflate(inflater, container, false)
+
+        return binding.root
+    }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val registerBinding = FragmentRegisterBinding.bind(view)
-        binding = registerBinding
+
         viewModel=ViewModelProvider(this).get(RegisterViewModel::class.java)
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
 
             findNavController().popBackStack()
         }
 
         val location = IntArray(2)
-        binding?.yourGender?.getLocationOnScreen(location)
+        binding.yourGender.getLocationOnScreen(location)
 
         xValue= location[0].toFloat()
         yValue= location[1].toFloat()
 
 
 
-        binding?.btnRegister?.setOnClickListener {
-            val name = binding?.txtName?.text.toString()
-            val lastname = binding?.txtLastname?.text.toString()
-            val gender = binding?.yourGender?.text.toString()
-            val birthday = binding?.yourBirthday?.text.toString()
+        binding.btnRegister.setOnClickListener {
+            val name = binding.txtName.text.toString()
+            val lastname = binding.txtLastname.text.toString()
+            val gender = binding.yourGender.text.toString()
+            val birthday = binding.yourBirthday.text.toString()
             if (name.isEmpty()) {
-                binding?.txtName?.error = getString(R.string.enter_your_name_please)
+                binding.txtName.error = getString(R.string.enter_your_name_please)
                 return@setOnClickListener
             }
             if (lastname.isEmpty()) {
-                binding?.txtLastname?.error =  getString(R.string.enter_your_lastname_please)
+                binding.txtLastname.error =  getString(R.string.enter_your_lastname_please)
                 return@setOnClickListener
             }
             if (gender.isEmpty()) {
-                binding?.yourGender?.error =  getString(R.string.choose_your_gender)
+                binding.yourGender.error =  getString(R.string.choose_your_gender)
                 return@setOnClickListener
             }
             if (birthday.isEmpty()) {
-                binding?.yourBirthday?.error = getString(R.string.enter_your_bday)
+                binding.yourBirthday.error = getString(R.string.enter_your_bday)
                 return@setOnClickListener
             }
 
             SaveData.getData(requireContext())
             saveNameOnly(requireContext(), name)
-
+            binding.loader.loader.visibility=View.VISIBLE
             val finalToken = "Bearer " + SaveData.getData(requireContext())
             viewModel.register(finalToken, "$name $lastname", maleFemale, birthday)
 
         }
 
+        binding.loader.loader.visibility=View.GONE
+
         viewModel.text.observe(requireActivity(), {
+            binding.loader.loader.visibility=View.GONE
             if (it.equals("registered")){
-                activity?.let {
-                    val intent = Intent(it, MainActivity::class.java)
-                    it.startActivity(intent)
-                }
+                val intent = Intent(requireActivity(), MainActivity::class.java)
+                requireActivity().startActivity(intent)
                 loginUser(requireContext(), true)
-                activity?.finish()
+                requireActivity().finish()
             }
         })
 
+        viewModel.errorMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            binding.loader.loader.visibility=View.GONE
+        })
+
         viewModel.userDetails.observe(requireActivity(), {
-            it.id?.let { it1 ->
-                saveUserId(
-                    requireContext(),
-                    it1
-                )
+            it.id.let { it1 ->
+                if (it1 != null) {
+                    saveUserId(
+                        requireContext(),
+                        it1
+                    )
+                }
             }
             savePhone(requireContext(), it.phone)
             saveName(requireContext(), it.name)
@@ -115,23 +135,21 @@ class RegisterFragment : Fragment(R.layout.fragment_register),
             createdTime(requireContext(), it.created_at)
 
 
-            activity?.let {
-                val intent = Intent(it, MainActivity::class.java)
-                it.startActivity(intent)
-            }
+            val intent = Intent(requireActivity(), MainActivity::class.java)
+            requireActivity().startActivity(intent)
 
             loginUser(requireContext(), true)
 
-            activity?.finish()
+            requireActivity().finish()
 
         })
 
 
-        binding?.yourGender?.setOnClickListener {
+        binding.yourGender.setOnClickListener {
             DialogPoll(this).show(parentFragmentManager, "fragmentManager")
         }
 
-        binding?.yourBirthday?.setOnClickListener {
+        binding.yourBirthday.setOnClickListener {
             DialogDateOfBirth(getString(R.string.day_of_birth), this).show(parentFragmentManager, "DialogFragmentManager")
         }
     }

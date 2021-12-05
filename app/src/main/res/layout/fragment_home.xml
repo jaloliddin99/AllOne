@@ -189,6 +189,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="bottom"
                                 android:layout_weight="1"
+                                android:id="@+id/bonus"
                                 android:drawableEnd="@drawable/ic_arrow_right_white"
                                 android:drawablePadding="@dimen/margin_padding_12dp"
                                 android:text="@string/go_to"
@@ -236,34 +237,6 @@
                         android:layout_below="@id/recyclerViewOrders"
                         android:orientation="vertical">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/recyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
-
-                        <FrameLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/margin_padding_16"
-                            android:layout_marginTop="@dimen/margin_padding_12dp"
-                            android:layout_marginBottom="@dimen/margin_padding_16"
-                            android:background="@drawable/background_grey">
-
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/showMore"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:drawableStart="@drawable/ic_car_icon"
-                                android:drawableEnd="@drawable/ic_arrow_right"
-                                android:drawablePadding="@dimen/margin_padding_8dp"
-                                android:drawableTint="@color/green"
-                                android:fontFamily="@font/inter_medium"
-                                android:paddingHorizontal="@dimen/margin_padding_24dp"
-                                android:paddingVertical="20dp"
-                                android:text="Все активные заказы (10)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/text_size_15sp" />
-                        </FrameLayout>
 
 
                         <androidx.constraintlayout.widget.ConstraintLayout

@@ -303,12 +303,12 @@ constructor(private val apiInterface: APIInterface) {
 
     //CITY ==============================
 
-    suspend fun cityRouteTariffs(token: Map<String, String>, points: Map<String, String>) =
+    suspend fun cityRouteTariffs(token: Map<String, String>, points: ArrayList<String>) =
         apiInterface.cityTariffItems(token, points)
 
     suspend fun cityNewOrder(
         token: Map<String, String>,
-        points: Map<String, String>,
+        points:ArrayList<String>,
         tariff: String,
         has_overhead_luggage: Int,
         has_conditioner: Int,

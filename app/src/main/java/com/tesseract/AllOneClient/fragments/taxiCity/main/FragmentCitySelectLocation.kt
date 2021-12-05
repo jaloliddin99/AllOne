@@ -6,11 +6,13 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.location.GpsStatus
 import android.location.LocationListener
 import android.location.LocationManager
 import androidx.fragment.app.Fragment
 
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
@@ -53,14 +55,16 @@ import java.lang.Exception
 class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     CityAddressesHistoryAdapter.OnLocationClickListener, SearchQueryTypeRegionLocationsAdapter.OnItemClickListener{
 
-    private lateinit var binding:FragmentCityMapBinding
+    private var _binding:FragmentCityMapBinding?=null
+    private val binding get() = _binding!!
+
 
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
     private lateinit var mMap: GoogleMap
     private var MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private var isGPS = false
-    private val value:Float= 10F
+    private val value:Float= 15F
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
 
     private lateinit var viewModel: CitySelectLocationViewModel
@@ -77,7 +81,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentCityMapBinding.inflate(inflater, container, false)
+        _binding=FragmentCityMapBinding.inflate(inflater, container, false)
         activity?.statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
             ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
@@ -118,10 +122,19 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
                 findNavController().popBackStack()
             }
             goToTariffs.setOnClickListener {
-                val action=FragmentCitySelectLocationDirections.actionFragmentCityMapToFragmentCityOrderMaps(
-                    this@FragmentCitySelectLocation.startDestination,
-                    this@FragmentCitySelectLocation.endDestination, startName, endName)
-                findNavController().navigate(action)
+                if (this@FragmentCitySelectLocation.startDestination.isNotEmpty()&&
+                        this@FragmentCitySelectLocation.endDestination.isNotEmpty()&&
+                        startName.isNotEmpty()&&endName.isNotEmpty()){
+
+                    val action=FragmentCitySelectLocationDirections.actionFragmentCityMapToFragmentCityOrderMaps(
+                        this@FragmentCitySelectLocation.startDestination,
+                        this@FragmentCitySelectLocation.endDestination, startName, endName)
+                    findNavController().navigate(action)
+
+                }else{
+                    Toast.makeText(context, "Please, select location first", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
         }
 
@@ -134,28 +147,32 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             requireActivity(),
             object : KeyboardVisibilityEventListener {
                 override fun onVisibilityChanged(isOpen: Boolean) {
-                    if (isOpen) {
-                        mBottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
-                        binding.bottomSHeet.visibility=View.GONE
-                        binding.backToHome.setColorFilter(ContextCompat.getColor(requireContext(),
-                            R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
-                        binding.yourAddress.visibility=View.GONE
-                        if (binding.startDestination.hasFocus()){
-                            binding.yourAddress1.text=getString(R.string.where_)
-                        }else if (binding.endDestination.hasFocus()){
-                            binding.yourAddress1.text=getString(R.string.to_where_)
+                    try {
+                        if (isOpen) {
+                            mBottomSheetBehavior?.state = BottomSheetBehavior.STATE_EXPANDED
+                            binding.bottomSHeet.visibility=View.GONE
+                            binding.backToHome.setColorFilter(ContextCompat.getColor(requireContext(),
+                                R.color.white), android.graphics.PorterDuff.Mode.SRC_IN)
+                            binding.yourAddress.visibility=View.GONE
+                            if (binding.startDestination.hasFocus()){
+                                binding.yourAddress1.text=getString(R.string.where_)
+                            }else if (binding.endDestination.hasFocus()){
+                                binding.yourAddress1.text=getString(R.string.to_where_)
+                            }
+                            binding.yourAddress1.setTextColor(requireContext().getColor(R.color.white))
+                        } else {
+                            mBottomSheetBehavior?.state=BottomSheetBehavior.STATE_COLLAPSED
+                            binding.bottomSHeet.visibility=View.VISIBLE
+                            binding.backToHome.setColorFilter(ContextCompat.getColor(requireContext(),
+                                R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
+                            binding.yourAddress1.setTextColor(requireContext().getColor(R.color.black))
                         }
-                        binding.yourAddress1.setTextColor(requireContext().getColor(R.color.white))
-                    } else {
-                        mBottomSheetBehavior?.state=BottomSheetBehavior.STATE_COLLAPSED
-                        binding.bottomSHeet.visibility=View.VISIBLE
-                        binding.backToHome.setColorFilter(ContextCompat.getColor(requireContext(),
-                            R.color.black), android.graphics.PorterDuff.Mode.SRC_IN)
-                        binding.yourAddress1.setTextColor(requireContext().getColor(R.color.black))
+                    }catch (e:Exception){
+
                     }
+
                 }
             })
-
 
     }
 
@@ -170,6 +187,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             locationListener?.let { locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0f, it)
             }
         }
+
 
         val bottomSheet: View = requireView().findViewById(R.id.bottomSheetNestedScrollView)
         mBottomSheetBehavior= BottomSheetBehavior.from(bottomSheet)
@@ -197,9 +215,10 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val sydney = LatLng(41.0, 69.0)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val sydney = LatLng(41.357935, 69.383639)
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18f))
         mMap.uiSettings.isCompassEnabled=false
+
 
         if (ActivityCompat.checkSelfPermission( requireContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION
@@ -211,29 +230,37 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             return
         }
 
+        askLocation()
+        binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
+        binding.endDestination.addTextChangedListener(startDestinationTextWatcher)
+
+        viewModelReverse.data.observe(viewLifecycleOwner, {
+            startName= it.address.toString()
+            binding.startDestination.setText(it.address)
+            binding.yourAddress1.text=it.address
+
+        })
+
+        isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        if (!isGPS){
+            showSettingsAlert()
+        }
+    }
+
+    private fun askLocation(){
         val yourLocation:LatLng
         val myLocation = locationManager!!.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
         if (myLocation!=null){
             viewModelReverse.getLocationReverse(headerMapUniversal(requireContext()), "${myLocation.latitude},${myLocation.longitude}")
+            startDestination="${myLocation.latitude},${myLocation.longitude}"
             yourLocation= LatLng(myLocation.latitude, myLocation.longitude)
             mMap.addMarker(MarkerOptions().position(yourLocation).icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_dest)))
             val update: CameraUpdate =CameraUpdateFactory.newLatLngZoom(yourLocation, value)
             mMap.animateCamera(update)
             binding.requestFocus.setOnClickListener {
                 mMap.animateCamera(update)
+                askLocation()
             }
-        }
-
-        viewModelReverse.data.observe(viewLifecycleOwner, {
-            binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
-            binding.endDestination.addTextChangedListener(startDestinationTextWatcher)
-            binding.startDestination.setText(it.address)
-            binding.yourAddress1.text=it.address
-        })
-
-        isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        if (!isGPS){
-            showSettingsAlert()
         }
     }
 
@@ -274,8 +301,10 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         alertDialog.setTitle("GPS is not Enabled!")
         alertDialog.setMessage("Do you want to turn on GPS?")
         alertDialog.setPositiveButton("Yes") { _, _ ->
+
             val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
             startActivity(intent)
+
         }
         alertDialog.setNegativeButton("No") { dialog, _ -> dialog.cancel() }
         alertDialog.show()
@@ -327,6 +356,12 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
         override fun afterTextChanged(s: Editable?) {
         }
+    }
+
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

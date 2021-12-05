@@ -20,7 +20,7 @@ class CityTariffViewModel @Inject constructor(private val repository: NetworkRep
     val cityTariffMainModelObserver=MutableLiveData<CityTariffMainModel>()
     val errorM=MutableLiveData<String>()
 
-    fun cityTariffMainModel(token: Map<String, String>, points: Map<String, String>)=viewModelScope.launch {
+    fun cityTariffMainModel(token: Map<String, String>, points: ArrayList<String>)=viewModelScope.launch {
         try {
             repository.cityRouteTariffs(token,points ).let {
                 if (it.isSuccessful){
@@ -41,7 +41,7 @@ class CityTariffViewModel @Inject constructor(private val repository: NetworkRep
 
     fun cityNewOrderPost(
         token: Map<String, String>,
-        points: Map<String, String>,
+        points:ArrayList<String>,
         tariff: String,
         has_overhead_luggage: Int,
         has_conditioner: Int,

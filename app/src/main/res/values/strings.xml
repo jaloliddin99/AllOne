@@ -692,6 +692,11 @@
     <string name="charity">Благотворителность</string>
     <string name="adwawdwa">Язык приложения</string>
     <string name="historyy">История</string>
+    <string name="enter_code_you_sent">Введите код для авторизации</string>
+    <string name="codeIsSentIn">Отправить код зановo</string>
+    <string name="enter_your_details">Введите ваши данные</string>
+    <string name="places">Места:</string>
+    <string name="dateDot">Дата:</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

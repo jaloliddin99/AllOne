@@ -16,6 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         android:layout_height="@dimen/item_height_56dp"
+        android:layout_marginTop="@dimen/dimen_32dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_main_logo" />
 
@@ -43,16 +44,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/uzbLan"
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:textAlignment="center"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
                 android:elevation="@dimen/dimens_0dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_corner_12"
@@ -62,11 +60,6 @@
                 android:textAppearance="@style/mediumStyle"
                 android:textSize="@dimen/text_size_18sp" />
 
-            <androidx.legacy.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
 
         </LinearLayout>
 
@@ -74,19 +67,16 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
             android:orientation="horizontal">
 
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/rusLan"
                 android:layout_weight="5"
                 android:layout_width="0dp"
                 android:elevation="@dimen/dimens_0dp"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_corner_12"
                 android:drawableStart="@drawable/ic_russian_flag"
@@ -96,10 +86,6 @@
                 android:textAppearance="@style/mediumStyle"
                 android:textSize="@dimen/text_size_18sp" />
 
-            <androidx.legacy.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
 
         </LinearLayout>
@@ -107,18 +93,15 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
             android:orientation="horizontal">
 
-            <androidx.legacy.widget.Space
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/enLan"
                 android:layout_weight="5"
                 android:layout_width="0dp"
+                android:layout_marginHorizontal="@dimen/margin_padding_16"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_white_corner_12"
                 android:drawableStart="@drawable/ic_english_flag"
@@ -129,10 +112,6 @@
                 android:textAppearance="@style/mediumStyle"
                 android:textSize="@dimen/text_size_18sp" />
 
-            <androidx.legacy.widget.Space
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
 
 
         </LinearLayout>

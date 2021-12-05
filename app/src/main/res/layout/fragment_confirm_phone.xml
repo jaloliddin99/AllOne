@@ -24,15 +24,6 @@
             android:padding="@dimen/margin_padding_12dp"
             android:src="@drawable/ic_arrow_left" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            android:textColor="@color/black"
-            android:textSize="@dimen/text_size_20sp"
-            android:fontFamily="@font/inter_medium"
-            android:layout_centerInParent="true"/>
-
     </RelativeLayout>
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -77,6 +68,15 @@
             app:OtpLineColor="@color/green"
             app:OtpViewType="line" />
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_padding_24dp"
+            android:gravity="center"
+            android:text="@string/enter_code_you_sent"
+            android:textAppearance="@style/mediumStyle"
+            android:textSize="@dimen/text_size_14sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -84,16 +84,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/margin_padding_36dp"
+        android:layout_marginBottom="@dimen/margin_padding_24dp"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/countdownTimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/margin_padding_16"
             android:text="@string/sendAgain"
-            android:textColor="@color/green"
+            android:textColor="#99272727"
             android:textSize="@dimen/text_size_14sp" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -104,11 +105,20 @@
             android:layout_marginEnd="@dimen/margin_padding_16"
 
             android:background="@drawable/background_white_corner_12"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="#DBDFE0"
             android:padding="@dimen/margin_padding_16dp"
             android:text="@string/nect"
             android:textAppearance="@style/boldStyleLight"
             android:textSize="@dimen/text_size_18sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+        <include layout="@layout/loader_lottie"
+            android:id="@+id/loader"/>
+    </FrameLayout>
+
 </RelativeLayout>

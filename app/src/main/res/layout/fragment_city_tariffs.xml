@@ -114,6 +114,7 @@
         android:id="@+id/bottomSheetNestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:background="@drawable/white_background_top_corner"
         android:elevation="@dimen/margin_padding_24dp"
         app:behavior_hideable="false"
@@ -390,7 +391,7 @@
                                 android:ellipsize="end"
                                 android:fontFamily="@font/inter_semibold"
                                 android:maxLines="1"
-                                android:text="Uzcard **** 9648"
+                                android:text="@string/with_money"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -426,14 +427,13 @@
                             android:layout_marginStart="@dimen/icon_size_20dp"
                             android:src="@drawable/ic_overhead_luggage" />
 
-
                         <androidx.appcompat.widget.AppCompatTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/margin_padding_16"
                             android:fontFamily="@font/inter_regular"
-                            android:text="@string/air_conditioner"
+                            android:text="@string/withOverheadLuggage"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
 
@@ -515,7 +515,7 @@
                             android:layout_height="@dimen/icon_size_20dp"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/icon_size_20dp"
-                            android:src="@drawable/ic_bag" />
+                            android:src="@drawable/ic_people" />
 
 
                         <androidx.appcompat.widget.AppCompatTextView
@@ -524,7 +524,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="@dimen/margin_padding_16"
+                            android:ellipsize="end"
                             android:fontFamily="@font/inter_regular"
+                            android:maxLines="1"
                             android:text="@string/order_for_your_friend"
                             android:textColor="@color/black"
                             android:textSize="15sp" />
@@ -560,7 +562,7 @@
                             android:layout_height="@dimen/icon_size_20dp"
                             android:layout_gravity="center"
                             android:layout_marginStart="@dimen/icon_size_20dp"
-                            android:src="@drawable/ic_bag"
+                            android:src="@drawable/ic_chat_icon"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -592,7 +594,6 @@
                                 android:ellipsize="end"
                                 android:fontFamily="@font/inter_semibold"
                                 android:maxLines="1"
-                                android:text="cnoicesococnoicesoco "
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
                         </androidx.appcompat.widget.LinearLayoutCompat>

@@ -43,6 +43,7 @@ import com.tesseract.AllOneClient.dialogs.sockets.DialogOrderCancelled
 import com.tesseract.AllOneClient.fragments.order.mapActiveRegion.MapActivityRegionViewModel
 import com.tesseract.AllOneClient.model.order.MapActiveRegionModel.RoutindDetails
 import com.tesseract.AllOneClient.model.taxiCity.CityShareCardBonusModel
+import com.tesseract.AllOneClient.model.taxiCity.Contact
 import com.tesseract.AllOneClient.model.taxiCity.ContactModel
 import com.tesseract.AllOneClient.model.taxiCity.StationModel
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.Content
@@ -77,7 +78,9 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     private var endLat = 0.0
     private var endLong = 0.0
     private val args: FragmentCityTariffsArgs by navArgs()
-    private lateinit var binding: FragmentCityTariffsBinding
+    private var _binding: FragmentCityTariffsBinding?=null
+    private val binding get() = _binding!!
+
     private lateinit var cityTariffAdapter: CityTariffAdapter
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
     private var mBottomSheetBehavior2: BottomSheetBehavior<*>? = null
@@ -95,7 +98,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         savedInstanceState: Bundle?
     ): View {
 
-        binding = FragmentCityTariffsBinding.inflate(inflater, container, false)
+        _binding = FragmentCityTariffsBinding.inflate(inflater, container, false)
         requireActivity().statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, requireActivity().theme),
             ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
@@ -130,7 +133,9 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
 
         binding.btnGotoSearch.setOnClickListener {
-            createNewOrder()
+            if (isInProgress){
+                createNewOrder()
+            }
 
         }
 
@@ -194,9 +199,18 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
         //** eoie **//
 
-        for ((key, value) in map) {
-            println("map $key = $value")
+        if (content.tariff=="parcel_delivery"){
+            CityReceiverModalDialog(this@FragmentCityTariffs).show(parentFragmentManager, tag)
+            return
         }
+
+        if (content.tariff=="cargo"){
+            if (cargoType=="no"){
+                Toast.makeText(context, "Please, select the cargo type", Toast.LENGTH_SHORT).show()
+                return
+            }
+        }
+
 
         Log.i(TAG, "createNewOrder: tariff ${content.tariff}\n" +
                 "hasOverheadLuggage $hasOverheadLuggage, \n" +
@@ -232,12 +246,14 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         )
     }
 
+    private var isInProgress=true
     @SuppressLint("SetTextI18n")
     private fun modifyUI(){
 
 
         binding.apply {
 
+            isInProgress=false
             mBottomSheetBehavior2?.setPeekHeight(dipToPixels(requireContext(), 220f).toInt(), true)
             mBottomSheetBehavior?.setPeekHeight(0, true)
 
@@ -246,6 +262,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
             btnGotoSearch.text=getString(R.string.cancel)
             btnGotoSearch.backgroundTintList=ContextCompat.getColorStateList(requireContext(), R.color.red)
+
+
 
             lac.tariff.text=content.tariff
             lac.price.text=SaveData.formatPhone(orderAmount.toString())+" "+getString(R.string.summa1)
@@ -283,7 +301,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     }
 
 
-    val map = mutableMapOf<String, String>()
+    val map =ArrayList<String>()
 
     private var isStartGiven by Delegates.notNull<Boolean>()
     private var isEndGiven by Delegates.notNull<Boolean>()
@@ -292,14 +310,17 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         isEndGiven = false
 
         map.clear()
+
         if (args.startLocation.isNotEmpty()) {
-            map["points[]"] = args.startLocation
+            map.add(args.startLocation)
             isStartGiven = true
         }
+
         if (args.endLocation.isNotEmpty()) {
-            map["points[]"] = args.endLocation
+            map.add(args.endLocation)
             isEndGiven = true
         }
+
         viewModel.cityTariffMainModel(headerMapUniversal(requireContext()), map)
         if (isStartGiven && isEndGiven) {
             Log.i(TAG, "onViewCreated: ${args.startLocation}  ${args.endLocation}")
@@ -412,15 +433,16 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
                 contentList=it.content
 
-                cityOrderModelDialogAdapter =
-                    CityTariffLargeItemAdapter(it.content, this@FragmentCityTariffs, requireContext())
+                cityOrderModelDialogAdapter = CityTariffLargeItemAdapter(it.content, this@FragmentCityTariffs, requireContext())
+
                 recyclerBigCarImages.adapter = cityOrderModelDialogAdapter
-                recyclerBigCarImages.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                recyclerBigCarImages.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+
                 recyclerBigCarImages.scrollToPosition(Common.cityTariffRecyclerView)
                 recyclerBigCarImages.setHasFixedSize(true)
-
                 indicator.attachToRecyclerView(recyclerBigCarImages)
+
+
             })
 
             recyclerViewCargo.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
@@ -474,18 +496,25 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                 }
             }
 
-            getBackStackData<ContactModel>("selectedContact", true){
-                receiverNameText.text=it.name
-                forAnother=1
+            getBackStackData<Contact>("selectedContact", true){
 
-                Log.i(TAG, "recyclerViewController: ${it.name} ${it.phone}")
+                if (it.isCancelled){
+                    forAnother=0
+                }else{
+                    receiverNameText.text=it.name
+                    forAnother=1
+                    contact=it
+                    forAnotherPhoneNumber=it.numbers[0].replace(" ", "")
+                }
 
-                forAnotherPhoneNumber=it.phone.replace(" ", "")
+                restoreState()
             }
 
             getBackStackData<String>("commentKey", true){
                 comment.text=it
                 this@FragmentCityTariffs.comment=it
+
+                restoreState()
             }
 
             getBackStackData<CityShareCardBonusModel>("FragmentCityPaymentMethod", true){
@@ -493,8 +522,14 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                 cardNumAndType.text=it.cardType+" **** " +it.cardNumber.substring(
                     it.cardNumber.length-4, it.cardNumber.length)
 
-                usedBonus=1
-                usedBonusAmount=it.bonusAmount.toDouble()
+
+                if (it.bonusAmount.toDouble()==0.0){
+                    usedBonus=0
+                }else{
+                    usedBonus=1
+                    usedBonusAmount=it.bonusAmount.toDouble()
+                }
+
 
                 paymentType=it.paymentType
 
@@ -504,15 +539,19 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                         " cardNumber ${it.cardNumber},\n" +
                         "cardType ${it.cardType}")
 
+                restoreState()
 
             }
 
             commentForDriver.setOnClickListener {
-                CityReceiverModalDialog(this@FragmentCityTariffs).show(parentFragmentManager, tag)
+                val action=FragmentCityTariffsDirections.actionGlobalAddComment()
+                findNavController().navigate(action)
             }
         }
 
     }
+
+    private var contact: Contact?=null
 
     private fun updateUI() {
         binding.apply {
@@ -523,11 +562,11 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
     private fun gotoSearch() {
 
-        binding.btnGotoSearch.setOnClickListener {
-            val action =
-                FragmentCityTariffsDirections.actionGlobalCityActiveOrder(2)
-            findNavController().navigate(action)
-        }
+//        binding.btnGotoSearch.setOnClickListener {
+//            val action =
+//                FragmentCityTariffsDirections.actionGlobalCityActiveOrder(2)
+//            findNavController().navigate(action)
+//        }
 
     }
 
@@ -580,8 +619,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                 .icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_chess_shape))
         )
         mMap.moveCamera(CameraUpdateFactory.newLatLng(yourLocation))
-//        val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(yourLocation, 10f)
-//        mMap.animateCamera(update)
 
     }
 
@@ -649,11 +686,11 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         getBackStackData<ArrayList<StationModel>>("CityNewStations", true) {
             stationList = it
             map.clear()
-            map["points[]"] = args.startLocation
+            map.add(args.startLocation)
             for (i in it.indices) {
-                map["points[]"] = it[i].stationLatLng
+                map.add(it[i].stationLatLng)
             }
-            map["points[]"] = args.endLocation
+            map.add(args.endLocation)
             viewModel.cityTariffMainModel(headerMapUniversal(requireContext()), map)
             val list = ArrayList<Double>()
             list.add(startLong)
@@ -684,8 +721,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             prepareRoutingRequest()
         }
 
-        routeViewModel.locationRouting.observe(viewLifecycleOwner, Observer {
-            Log.i(TAG, "onMapReady: iscalled")
+        routeViewModel.locationRouting.observe(viewLifecycleOwner, {
             decodeToLatLng(it)
         })
 
@@ -701,8 +737,26 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         }
         mMap.isMyLocationEnabled = false
 
-
     }
+
+    private fun restoreState(){
+        if (comment.isNotEmpty()){
+            binding.comment.text=comment
+        }
+
+        if (paymentType=="cash"){
+            binding.cardNumAndType.text=getString(R.string.with_money)
+        }else if (paymentType=="card"){
+            binding.cardNumAndType.text=cityShareCardBonusModel.cardType+" **** " +cityShareCardBonusModel.cardNumber.substring(
+                cityShareCardBonusModel.cardNumber.length-4, cityShareCardBonusModel.cardNumber.length)
+        }
+
+        if (forAnother==1){
+            binding.receiverNameText.text=contact?.name
+        }
+    }
+
+
 
     private fun <T> Fragment.getBackStackData(
         key: String,
@@ -721,17 +775,58 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     override fun receiverDetails(phoneNum: String, receiverComment: String) {
         receiverPhoneNum=phoneNum
         this.receiverComment=receiverComment
+
+
+        Log.i(TAG, "createNewOrder: tariff ${content.tariff}\n" +
+                "hasOverheadLuggage $hasOverheadLuggage, \n" +
+                "hasAirConditioner $hasAirConditioner, \n" +
+                "forAnother $forAnother, \n" +
+                "forAnotherPhoneNumber $forAnotherPhoneNumber, \n" +
+                "receiverPhoneNum $receiverPhoneNum, \n" +
+                "receiverComment ${this.receiverComment}, \n" +
+                "usedBonus $usedBonus, \n" +
+                "usedBonusAmount $usedBonusAmount, \n" +
+                "orderAmount $orderAmount, \n" +
+                "paymentType $paymentType, \n" +
+                "comment $comment, \n" +
+                "cityShareCardBonusModel.cardId ${ cityShareCardBonusModel.cardId} \n" +
+                "cargoType $cargoType")
+
+        viewModel.cityNewOrderPost(
+            headerMapUniversal(requireContext()),
+            map,
+            content.tariff,
+            hasOverheadLuggage,
+            hasAirConditioner,
+            forAnother,
+            forAnotherPhoneNumber,
+            receiverPhoneNum,
+            this.receiverComment,
+            usedBonus,
+            usedBonusAmount,
+            orderAmount,
+            paymentType,
+            comment,
+            cityShareCardBonusModel.cardId,
+            cargoType,
+        )
     }
 
-    private lateinit var opt: Opt
+    private var opt: Opt?=null
 
     override fun onCargoSelect(opt: Opt) {
         this.opt=opt
-        Toast.makeText(context, opt.title, Toast.LENGTH_SHORT).show()
+        cargoType=opt.type
     }
 
     override fun orderAgain() {
         createNewOrder()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+
 
 }

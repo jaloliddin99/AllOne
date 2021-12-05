@@ -102,13 +102,13 @@ class HomeAdapter(
 
         @SuppressLint("SetTextI18n")
         fun parcelBind(order: OrderList) {
-            itemView.setOnClickListener {
+            itemBinding.parcel.podrobne.setOnClickListener {
                 EventBus.getDefault()
                     .post(MessageEventActiveOrder(order.orderType, order.id))
             }
             itemBinding.parcel.title.text = order.title
             itemBinding.parcel.tariff.text = order.tariff+": "
-            itemBinding.parcel.orderNumber.text = "№23"
+            itemBinding.parcel.orderNumber.text = "№${order.id}"
             itemBinding.parcel.startDestination.text = order.from
             itemBinding.parcel.endDestination.text = order.to
             itemBinding.parcel.beginningEndingTime.text = order.date
@@ -124,14 +124,14 @@ class HomeAdapter(
 
         @SuppressLint("SetTextI18n")
         fun bind(order: OrderList) {
-            itemView.setOnClickListener {
+            itemBinding.region.podrobne.setOnClickListener {
                 EventBus.getDefault()
                     .post(MessageEventActiveOrder(order.orderType, order.id))
             }
 
             itemBinding.region.title.text = order.title
             itemBinding.region.tariff.text = order.tariff+": "
-            itemBinding.region.orderNumber.text = "№23"
+            itemBinding.region.orderNumber.text ="№${order.id}"
             itemBinding.region.bannedSeats.text = order.places
             itemBinding.region.status.text = order.status
             itemBinding.region.dealMoney.text =
@@ -146,14 +146,14 @@ class HomeAdapter(
 
         @SuppressLint("SetTextI18n")
         fun city(order: OrderList) {
-            itemView.setOnClickListener {
+            itemBinding.city.podrobne.setOnClickListener {
                 EventBus.getDefault()
                     .post(MessageEventActiveOrder(order.orderType, order.id))
             }
 
             itemBinding.city.title.text = order.title
             itemBinding.city.tariff.text = order.tariff+": "
-            itemBinding.city.orderNumber.text = "№23"
+            itemBinding.city.orderNumber.text = "№${order.id}"
             itemBinding.city.status.text = order.status
             itemBinding.city.dealMoney.text =
                 order.amount?.let { SaveData.formatPhone(it) } + " " + context.getString(com.tesseract.AllOneClient.R.string.summa1)
