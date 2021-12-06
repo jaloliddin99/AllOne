@@ -1,13 +1,11 @@
 package com.tesseract.AllOneClient.dialogs.city
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
-import androidx.appcompat.widget.AppCompatEditText
+import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -17,20 +15,21 @@ import com.tesseract.AllOneClient.databinding.DialogCityReceiverModalDialogBindi
 import kotlinx.android.synthetic.main.layout_city_contact.*
 
 class CityReceiverModalDialog(private val listener:OnOrderClickListener):BottomSheetDialogFragment() {
-    private lateinit var binding: DialogCityReceiverModalDialogBinding
+    private var _binding: DialogCityReceiverModalDialogBinding?=null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding=DialogCityReceiverModalDialogBinding.inflate(inflater, container, false)
+    ): View {
+        _binding=DialogCityReceiverModalDialogBinding.inflate(inflater, container, false)
         dialog!!.setOnShowListener { dialog ->
             val d = dialog as BottomSheetDialog
             val bottomSheet = d.findViewById<FrameLayout>(R.id.design_bottom_sheet)
             val lyout = bottomSheet!!.parent as CoordinatorLayout
             val behavior: BottomSheetBehavior<*> =
                 BottomSheetBehavior.from(bottomSheet)
-            behavior.peekHeight = bottomSheet!!.height
+            behavior.peekHeight = bottomSheet.height
             lyout.parent.requestLayout()
         }
         return binding.root
@@ -40,8 +39,14 @@ class CityReceiverModalDialog(private val listener:OnOrderClickListener):BottomS
         super.onViewCreated(view, savedInstanceState)
 
         binding.apply {
+            receiverName.setText("+998 ")
             order.setOnClickListener {
-                if (receiverName.text.toString().isEmpty()){
+                if (receiverName.text.toString().length!=17){
+                    Toast.makeText(
+                        context,
+                        "Please, enter correct phone number",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     return@setOnClickListener
                 }
                 if (receiverComment.text.toString().isEmpty()){
@@ -51,23 +56,6 @@ class CityReceiverModalDialog(private val listener:OnOrderClickListener):BottomS
                 listener.receiverDetails(receiverName.text.toString(), receiverComment.text.toString())
                 dialog?.dismiss()
             }
-        }
-    }
-
-
-    @SuppressLint("ClickableViewAccessibility")
-    private fun AppCompatEditText.onRightDrawableClicked(onClicked: (view: AppCompatEditText) -> Unit) {
-        this.setOnTouchListener { v, event ->
-            var hasConsumed = false
-            if (v is AppCompatEditText) {
-                if (event.x >= v.width - v.totalPaddingRight) {
-                    if (event.action == MotionEvent.ACTION_UP) {
-                        onClicked(this)
-                    }
-                    hasConsumed = true
-                }
-            }
-            hasConsumed
         }
     }
 
@@ -84,4 +72,8 @@ class CityReceiverModalDialog(private val listener:OnOrderClickListener):BottomS
         fun receiverDetails(phoneNum:String, receiverComment:String)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

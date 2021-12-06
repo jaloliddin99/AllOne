@@ -31,14 +31,14 @@ class DialogBonusMoney(
         binding?.apply {
             maximumBOnus.text = bonusAmountSent + getString(R.string.summa1)
             cancelImage.setOnClickListener {
-                bonusListener.bonusAmount("")
+                bonusListener.bonusAmount("0.0")
                 dialog?.dismiss()
             }
             cancelButton.setOnClickListener {
                 if (bonusAmountSent.toFloat()>=1000f){
                     bonusListener.bonusAmount(chosenBonusAmount)
                 }else{
-                    bonusListener.bonusAmount("")
+                    bonusListener.bonusAmount("0.0")
                 }
                 dialog?.dismiss()
             }

@@ -33,8 +33,10 @@ class CityTariffAdapter(
             if (selectedPosition >= 0) {
                 notifyItemChanged(selectedPosition)
             }
-            selectedPosition = holder.adapterPosition
+            isMainSelected = false
+            selectedPosition = holder.absoluteAdapterPosition
             notifyItemChanged(selectedPosition)
+
             notifyItemChanged(markPosition)
         }
     }
@@ -56,27 +58,22 @@ class CityTariffAdapter(
                 SaveData.formatPhone(model.price) + context.getString(R.string.summa1)
             itemBinding.type.text = model.title
 
-            if (selectedPosition == adapterPosition) {
-
-                isMainSelected = false
+            if (selectedPosition == absoluteAdapterPosition) {
                 itemView.isSelected = true
 
                 itemBinding.mainBg.setBackgroundResource(R.drawable.bg_item_clicked_round_yellow)
-                listener.onItemClick(model, adapterPosition)
+                listener.onItemClick(model, absoluteAdapterPosition)
             } else {
                 itemView.isSelected = false
                 itemBinding.mainBg.setBackgroundResource(R.drawable.bg_item_not_clicked_8dp)
             }
 
-//            if (mapModelList.lastIndex==adapterPosition){
-//                if (!isMainSelected){
-//                    itemBinding.mainBg.setBackgroundResource(R.drawable.bg_item_not_clicked_8dp)
-//                }
-//            }
-            if (markPosition == adapterPosition&&isMainSelected) {
+            if (markPosition == absoluteAdapterPosition&&isMainSelected) {
                 itemBinding.mainBg.setBackgroundResource(R.drawable.bg_item_clicked_round_yellow)
-                listener.onItemClick(model, adapterPosition)
+                listener.onItemClick(model, absoluteAdapterPosition)
             }
+
+
         }
 
     }

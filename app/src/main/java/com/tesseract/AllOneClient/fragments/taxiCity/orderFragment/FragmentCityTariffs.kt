@@ -122,7 +122,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         recyclerViewController()
         modalDialogController()
         clickListeners()
-        gotoSearch()
         updateUI()
 
         SocketHandler.setSocket()
@@ -135,6 +134,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         binding.btnGotoSearch.setOnClickListener {
             if (isInProgress){
                 createNewOrder()
+            }else{
+
             }
 
         }
@@ -249,8 +250,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     private var isInProgress=true
     @SuppressLint("SetTextI18n")
     private fun modifyUI(){
-
-
         binding.apply {
 
             isInProgress=false
@@ -259,10 +258,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
             lottieAnimation.visibility=View.VISIBLE
 
-
             btnGotoSearch.text=getString(R.string.cancel)
             btnGotoSearch.backgroundTintList=ContextCompat.getColorStateList(requireContext(), R.color.red)
-
 
 
             lac.tariff.text=content.tariff
@@ -295,7 +292,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                 lac.comment.text=this@FragmentCityTariffs.comment
                 lac.linearComment.visibility=View.VISIBLE
             }
-
         }
 
     }
@@ -424,6 +420,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             recyclerCarImages.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             viewModel.cityTariffMainModelObserver.observe(viewLifecycleOwner, {
+                arrivalTime.text=it.content[Common.cityTariffRecyclerView].arrival_time
                 cityTariffAdapter = CityTariffAdapter(Common.cityTariffRecyclerView, it.content, this@FragmentCityTariffs, requireContext())
                 recyclerCarImages.scrollToPosition(Common.cityTariffRecyclerView)
                 recyclerCarImages.adapter = cityTariffAdapter
@@ -461,6 +458,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                         cityTariffAdapter = CityTariffAdapter(Common.cityTariffRecyclerView, contentList, this@FragmentCityTariffs, requireContext())
                         recyclerCarImages.scrollToPosition(Common.cityTariffRecyclerView)
                         recyclerCarImages.adapter = cityTariffAdapter
+
+                        arrivalTime.text=content.arrival_time
 
                         if (content.tariff=="parcel_delivery"){
                             parcel.visibility=View.VISIBLE
@@ -560,16 +559,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         }
     }
 
-    private fun gotoSearch() {
-
-//        binding.btnGotoSearch.setOnClickListener {
-//            val action =
-//                FragmentCityTariffsDirections.actionGlobalCityActiveOrder(2)
-//            findNavController().navigate(action)
-//        }
-
-    }
-
     private fun getPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             requestPermissions(
@@ -608,6 +597,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             MarkerOptions().position(start)
                 .icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_dest))
         )
+
         for (i in locationsLatLng.indices) {
             mMap.addMarker(
                 MarkerOptions().position(locationsLatLng[i])
@@ -647,6 +637,9 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
         binding.recyclerBigCarImages.scrollToPosition(Common.cityTariffRecyclerView)
 
+        arrivalTime.text=content.arrival_time
+
+        Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
     }
 
     override fun onShowViewPager(content: Content) {
@@ -775,6 +768,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     override fun receiverDetails(phoneNum: String, receiverComment: String) {
         receiverPhoneNum=phoneNum
         this.receiverComment=receiverComment
+
 
 
         Log.i(TAG, "createNewOrder: tariff ${content.tariff}\n" +

@@ -14,6 +14,6 @@
     android:paddingHorizontal="@dimen/margin_padding_16"
     android:gravity="center_vertical"
     android:paddingVertical="@dimen/margin_padding_16dp"
-    android:textColor="?android:attr/textColorPrimary"
-    android:textSize="@dimen/text_size_13sp"
+    android:textColor="@color/black"
+    android:textSize="@dimen/text_size_16sp"
     xmlns:android="http://schemas.android.com/apk/res/android" />

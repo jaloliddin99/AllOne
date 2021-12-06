@@ -21,7 +21,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentSaveUpdateLocation :Fragment() {
-    private lateinit var binding: FragmentSaveSelectedLocationBinding
+    private var _binding: FragmentSaveSelectedLocationBinding?=null
+    private val binding get() = _binding!!
     private val args:FragmentSaveUpdateLocationArgs by navArgs()
     private lateinit var viewModel: CRUDLocationViewModel
 
@@ -30,7 +31,7 @@ class FragmentSaveUpdateLocation :Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= FragmentSaveSelectedLocationBinding.inflate(inflater, container, false)
+        _binding= FragmentSaveSelectedLocationBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(CRUDLocationViewModel::class.java)
         return binding.root
     }
@@ -39,6 +40,7 @@ class FragmentSaveUpdateLocation :Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.loader.loader.visibility=View.GONE
         binding.apply {
             if (args.shareSavedLoc!=null){
                 deleteAddress.visibility=View.VISIBLE
@@ -55,7 +57,6 @@ class FragmentSaveUpdateLocation :Fragment() {
 
             select.setOnClickListener {
                 if (args.shareSavedLoc==null){
-                    Log.i(TAG, "onViewCreated: ceisoisei ${args.latLng}")
                     postNewAddress(args.type, placeName.text.toString(), args.address, args.latLng)
                 }else{
                     updateCurrent()
@@ -63,22 +64,25 @@ class FragmentSaveUpdateLocation :Fragment() {
             }
 
             deleteAddress.setOnClickListener {
+
                 deleteCurrent()
             }
 
-            viewModel.deleteSavedAddressObserver.observe(viewLifecycleOwner, Observer {
+            viewModel.deleteSavedAddressObserver.observe(viewLifecycleOwner,  {
                 Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
-                findNavController().navigate(R.id.action_global_saved_location_list, null, getNavOptions())
-
-            })
-
-            viewModel.updateSavedAddressModel.observe(viewLifecycleOwner, Observer {
-                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                binding.loader.loader.visibility=View.GONE
                 findNavController().navigate(R.id.action_global_saved_location_list, null, getNavOptions())
             })
 
-            viewModel.successM.observe(viewLifecycleOwner, Observer {
+            viewModel.updateSavedAddressModel.observe(viewLifecycleOwner,  {
+                Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+                binding.loader.loader.visibility=View.GONE
+                findNavController().navigate(R.id.action_global_saved_location_list, null, getNavOptions())
+            })
+
+            viewModel.successM.observe(viewLifecycleOwner, {
                 Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                binding.loader.loader.visibility=View.GONE
                 findNavController().navigate(R.id.action_global_saved_location_list, null, getNavOptions())
             })
         }
@@ -90,6 +94,7 @@ class FragmentSaveUpdateLocation :Fragment() {
         map["name"]=name
         map["address"]=address
         map["latlng"]=latLng
+        binding.loader.loader.visibility=View.VISIBLE
         viewModel.storeNewAddress(headerMapUniversal(requireContext()), map)
     }
 
@@ -100,16 +105,22 @@ class FragmentSaveUpdateLocation :Fragment() {
             args.shareSavedLoc?.latLng!!,
             binding.placeName.text.toString()
         )
+        binding.loader.loader.visibility=View.VISIBLE
 
         viewModel.updateSavedAddress(headerMapUniversal(requireContext()), args.shareSavedLoc?.id!!, updateBOdy)
     }
 
     private fun deleteCurrent(){
+        binding.loader.loader.visibility=View.VISIBLE
         viewModel.deleteSavedAddress(headerMapUniversal(requireContext()), args.shareSavedLoc?.id!!)
 
     }
 
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 
 
 

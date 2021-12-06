@@ -18,7 +18,8 @@ import com.tesseract.AllOneClient.model.taxiCity.StationModel
 
 class FragmentStations : Fragment(R.layout.fragment_city_new_stations) , StationAdapter.OnDeleteListener{
 
-    private lateinit var binding: FragmentCityNewStationsBinding
+    private var _binding: FragmentCityNewStationsBinding?=null
+    private val binding get() = _binding!!
     private val args:FragmentStationsArgs by navArgs()
 
     private lateinit var stationAdapter: StationAdapter
@@ -30,7 +31,7 @@ class FragmentStations : Fragment(R.layout.fragment_city_new_stations) , Station
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding=FragmentCityNewStationsBinding.inflate(inflater, container, false)
+        _binding=FragmentCityNewStationsBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -99,5 +100,10 @@ class FragmentStations : Fragment(R.layout.fragment_city_new_stations) , Station
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
         if (doBack)
             findNavController().popBackStack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 }

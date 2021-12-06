@@ -9,14 +9,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.taxiCity.AdapterSavedLocations
 import com.tesseract.AllOneClient.databinding.FragmentSaveLocationBinding
-import com.tesseract.AllOneClient.fragments.parcel.parcelMain.FragmentParcelMainDirections
 import com.tesseract.AllOneClient.fragments.taxiCity.main.CitySelectLocationViewModel
 import com.tesseract.AllOneClient.model.taxiCity.getSavedAddress.SavedLocationData
-import com.tesseract.AllOneClient.utils.getNavOptions
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickListener {
 
 
-    var binding: FragmentSaveLocationBinding? = null
+    var _binding: FragmentSaveLocationBinding? = null
+    private val binding get() = _binding!!
     private lateinit var cityMainViewModel: CitySelectLocationViewModel
 
     override fun onCreateView(
@@ -34,21 +32,25 @@ class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickLi
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentSaveLocationBinding.inflate(inflater, container, false)
+        _binding = FragmentSaveLocationBinding.inflate(inflater, container, false)
         cityMainViewModel = ViewModelProvider(this).get(CitySelectLocationViewModel::class.java)
         requireActivity().statusBarColor(
             ResourcesCompat.getColor(resources, com.tesseract.AllOneClient.R.color.white, requireActivity().theme),
             ResourcesCompat.getColor(resources, com.tesseract.AllOneClient.R.color.white, requireActivity().theme),
             true
         )
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
 
-        binding?.backToHome?.setOnClickListener {
+        binding.backToHome.setOnClickListener {
+            val action=FragmentSaveLocationDirections.actionFragmentSaveLocationToFragmentCityMap()
+            findNavController().navigate(action)
+        }
+        binding.backTo.setOnClickListener {
             val action=FragmentSaveLocationDirections.actionFragmentSaveLocationToFragmentCityMap()
             findNavController().navigate(action)
         }
@@ -66,11 +68,11 @@ class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickLi
         var savedLocationDataHome:SavedLocationData?=null
         var savedLocationDataWork:SavedLocationData?=null
         var savedLocationData: ArrayList<SavedLocationData>
-        binding?.apply {
+        binding.apply {
             cityMainViewModel.savedLocations(headerMapUniversal(requireContext()))
             cityMainViewModel.savedLocations.observe(viewLifecycleOwner, {
-                recyclerView.layoutManager =
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                loader.loader.visibility=View.GONE
+                recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 savedLocationData=it as ArrayList<SavedLocationData>
 
                 if (savedLocationData.size>0){
@@ -129,4 +131,10 @@ class FragmentSaveLocation : Fragment(), AdapterSavedLocations.OnLocationClickLi
         val action = FragmentSaveLocationDirections.actionGlobalCrudLocation(type, type="", latLng="", address="")
         findNavController().navigate(action)
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
+
 }

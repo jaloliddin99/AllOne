@@ -31,7 +31,7 @@
         android:inputType="phone"
         android:paddingHorizontal="@dimen/margin_padding_24dp"
         android:textSize="@dimen/text_size_14sp"
-        app:mask="+998 9_ ___ __ __" />
+        app:mask="____ __ ___ __ __" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,28 +63,23 @@
         android:backgroundTint="@color/green"
         android:id="@+id/order"
         android:layout_marginVertical="@dimen/margin_padding_24dp">
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:orientation="vertical">
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_size_18sp"
+                android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/inter_semibold"
                 android:text="@string/orders"
-                android:textColor="@color/white"/>
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/price"
-                android:layout_gravity="center_horizontal"
-                android:text="24000сум"
-                android:fontFamily="@font/inter_regular"
                 android:textColor="@color/white"
-                android:textSize="@dimen/text_size_13sp"/>
+                android:textSize="@dimen/text_size_18sp" />
+
+
 
         </androidx.appcompat.widget.LinearLayoutCompat>
     </RelativeLayout>
