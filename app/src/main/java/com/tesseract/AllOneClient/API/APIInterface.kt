@@ -50,6 +50,7 @@ import com.tesseract.AllOneClient.model.parcel.SelectLocationModel
 import com.tesseract.AllOneClient.model.parcel.parcelSearch.ParcelSearchFoundModel
 import com.tesseract.AllOneClient.model.parcel.parcelUpdate.ParcelUpdateModel
 import com.tesseract.AllOneClient.model.profile.SendCode
+import com.tesseract.AllOneClient.model.profile.bonus.BonusMainModel
 import com.tesseract.AllOneClient.model.profile.card.ActivateCard
 import com.tesseract.AllOneClient.model.profile.card.StoreCard
 import com.tesseract.AllOneClient.model.profile.getCards.GetCardModel
@@ -125,6 +126,23 @@ interface APIInterface {
         @Field("phone") phone: String,
         @Field("code") code: String
     ): Response<RegisterModel>
+
+    @FormUrlEncoded
+    @POST("settings/update_avatar")
+    suspend fun updateAvatar(
+        @HeaderMap headers: Map<String, String>,
+        @Field("avatar") phone: String
+    ):Response<ClinicAddToFavouriteModel>
+
+    @GET("bonuses/history")
+    suspend fun getAllBonuses(
+        @HeaderMap headers: Map<String, String>,
+        @Query("page") phone: Int,
+    ):Response<BonusMainModel>
+
+
+
+
 
     //interArea new order
 
@@ -714,7 +732,6 @@ interface APIInterface {
         @Query("country_id") country_id: Int,
         @Query("currency_id") currency_id: Int,
         @Query("sort") sort:String,
-        @QueryMap markId: Map<String, String>?,
         @Query("car_id") car_id:Int,
         @Query("page") page:Int
     ):Response<CarRentCarsModel>

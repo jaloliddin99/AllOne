@@ -697,6 +697,12 @@
     <string name="enter_your_details">Введите ваши данные</string>
     <string name="places">Места:</string>
     <string name="dateDot">Дата:</string>
+    <string name="newPhoneNumber">Новый номер телефона</string>
+    <string name="newest">новейший</string>
+    <string name="alphabetically">по алфавиту</string>
+    <string name="ascending_price">возрастающая цена</string>
+    <string name="descending_price">цена по убыванию</string>
+    <string name="car_not_found">По этому направлению нет маршрутов!</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

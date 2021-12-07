@@ -139,10 +139,14 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
         )
     }
 
-    private var uzbId by Delegates.notNull<Int>()
-    private var uzb_default_currency_id by Delegates.notNull<Int>()
-    private var world_default_currency_id by Delegates.notNull<Int>()
-    private lateinit var default_sort :String
+    companion object{
+        private var uzbId by Delegates.notNull<Int>()
+        var uzb_default_currency_id by Delegates.notNull<Int>()
+        var world_default_currency_id by Delegates.notNull<Int>()
+        lateinit var default_sort :String
+    }
+
+
 
     override fun onItemClick(position: Int) {
         if (position==0){

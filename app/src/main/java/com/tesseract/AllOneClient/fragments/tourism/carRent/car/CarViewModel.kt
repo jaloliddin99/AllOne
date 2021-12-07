@@ -18,14 +18,14 @@ class CarViewModel @Inject constructor(private val repository: NetworkRepository
 
     val errorM=MutableLiveData<String>()
 
-    fun startCarViewModel(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String, idMap: Map<String, String>?, carId:Int){
-        carRentRequest(token, query, countryId, currencyId, sort, idMap, carId)
+    fun startCarViewModel(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String,  carId:Int){
+        carRentRequest(token, query, countryId, currencyId, sort,  carId)
     }
 
-    fun carRentRequest(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String, idMap:Map<String, String>?, carId:Int)
+    fun carRentRequest(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String,  carId:Int)
     =viewModelScope.launch {
         try {
-            repository.getCarRentCar(token, query, countryId, currencyId, sort, idMap, carId, Common.carRentPageId).let {
+            repository.getCarRentCar(token, query, countryId, currencyId, sort,  carId, Common.carRentPageId).let {
                 if (it.isSuccessful){
                     Common.carRentPageId++
                     if (it.body()?.success==true){

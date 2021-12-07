@@ -42,10 +42,6 @@ class CarRentIndexMainAdapter  (
             itemBinding.recyclerView.adapter=CarRentIndexMainItemAdapter(element.cars)
 
 
-            itemBinding.all.setOnClickListener {
-                listener.onItemClicked(element)
-            }
-
         }
     }
 

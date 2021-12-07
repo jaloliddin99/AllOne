@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -48,6 +49,8 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.loader.loader.visibility=View.VISIBLE
+
         if (currencyContent.name.isNotEmpty()) {
             binding.currency.text = currencyContent.name
         }
@@ -55,14 +58,17 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             binding.countryName.text = countryContent.name
         }
         if (sorting.isNotEmpty()) {
-            binding.byPopularity.text = sorting
+            binding.byPopularity.text = getSorting(sorting)
         }
 
+        if (args.location=="uzbekistan"){
+            binding.countryName.visibility=View.GONE
+        }
+
+        searchViewListener()
         Common.tourIndexMain = 1
         if (isFirst) {
             if (args.location == "uzbekistan") {
-                binding.countryName.text = getString(R.string.uzbekistan)
-
                 sorting=args.defaultSort
                 countryContent.id=args.uzbId
                 currencyContent.id=args.uzbDefaultCurrencyId
@@ -70,7 +76,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 viewModel.startMainIndex(
                     headerMapUniversal(requireContext()),
                     args.location,
-                    "",
+                    queryTextChange,
                     args.uzbId,
                     currencyContent.id,
                     sorting
@@ -84,7 +90,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 viewModel.startMainIndex(
                     headerMapUniversal(requireContext()),
                     args.location,
-                    "",
+                    queryTextChange,
                     countryContent.id,
                     currencyContent.id,
                     sorting
@@ -93,11 +99,11 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         }
         if (!isFirst && !isFirstView) {
             if (args.location == "uzbekistan") {
-                binding.countryName.text = getString(R.string.uzbekistan)
+               // binding.countryName.text = getString(R.string.uzbekistan)
                 viewModel.startMainIndex(
                     headerMapUniversal(requireContext()),
                     args.location,
-                    "",
+                    queryTextChange,
                     args.uzbId,
                     currencyContent.id,
                     sorting
@@ -106,7 +112,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                 viewModel.startMainIndex(
                     headerMapUniversal(requireContext()),
                     args.location,
-                    "",
+                    queryTextChange,
                     countryContent.id,
                     currencyContent.id,
                     sorting
@@ -134,7 +140,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                         viewModel.mainIndex(
                             headerMapUniversal(requireContext()),
                             args.location,
-                            "",
+                            queryTextChange,
                             args.uzbId,
                             currencyContent.id,
                             sorting
@@ -143,7 +149,7 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                         viewModel.mainIndex(
                             headerMapUniversal(requireContext()),
                             args.location,
-                            "",
+                            queryTextChange,
                             countryContent.id,
                             currencyContent.id,
                             sorting
@@ -171,83 +177,39 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
             }
         }
         adapterSet()
-
         getBackStackData<Int>("cancelledInfo", true) {
             load()
         }
 
         getBackStackData<String>("onSortClickKey", true) {
-            binding.byPopularity.text = it
             sorting = it
-
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-
-            if (args.location == "uzbekistan") {
-                binding.countryName.text=getString(R.string.uzbekistan)
-            }
-
-            if (currencyContent.name.isNotEmpty()) {
-                binding.currency.text = currencyContent.name
-            }
-
-            if (countryContent.name.isNotEmpty()) {
-                binding.countryName.text = countryContent.name
-            }
+            restoreSavedView()
             load()
         }
 
         getBackStackData<Content>("onCountrySelectKey", true) {
-            binding.countryName.text = it.name
             countryContent = it
-            if (sorting.isNotEmpty()) {
-                binding.byPopularity.text = sorting
-            }
-            if (currencyContent.name.isNotEmpty()) {
-                binding.currency.text = currencyContent.name
-            }
+            restoreSavedView()
             load()
         }
 
-
         getBackStackData<Content>("onCurrencySelectedKey", true) {
-            binding.currency.text = it.name
             currencyContent = it
-
-            if (args.location == "uzbekistan") {
-                binding.countryName.text=getString(R.string.uzbekistan)
-            }
-            if (countryContent.name.isNotEmpty()) {
-                binding.countryName.text = countryContent.name
-            }
-            Toast.makeText(context, "aww $sorting", Toast.LENGTH_SHORT).show()
-            if (sorting.isNotEmpty()) {
-                binding.byPopularity.text = sorting
-            }
+            restoreSavedView()
             load()
         }
     }
 
     private fun load() {
         Common.tourIndexMain = 1
-        if (args.location == "uzbekistan") {
-            viewModel.startMainIndex(
-                headerMapUniversal(requireContext()),
-                args.location,
-                "",
-                countryContent.id,
-                currencyContent.id,
-                sorting
-            )
-        } else {
-            viewModel.startMainIndex(
-                headerMapUniversal(requireContext()),
-                args.location,
-                "",
-                countryContent.id,
-                currencyContent.id,
-                sorting
-            )
-        }
+        viewModel.startMainIndex(
+            headerMapUniversal(requireContext()),
+            args.location,
+            queryTextChange,
+            countryContent.id,
+            currencyContent.id,
+            sorting
+        )
     }
 
 
@@ -304,5 +266,52 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
                     key
                 )
             }
+    }
+
+    private fun getSorting(sortKey:String):String{
+        return  when (sortKey) {
+            "by_popularity" -> getString(R.string.by_popularity)
+            "newest" -> getString(R.string.newest)
+            "alphabetically" -> getString(R.string.alphabetically)
+            "ascending_price" -> getString(R.string.ascending_price)
+            else -> getString(R.string.descending_price)
+        }
+    }
+
+    private fun restoreSavedView(){
+        if (currencyContent.name.isNotEmpty()){
+            binding.currency.text = currencyContent.name
+        }
+        if (countryContent.name.isNotEmpty()) {
+            binding.countryName.text = countryContent.name
+        }
+        if (sorting.isNotEmpty()) {
+            binding.byPopularity.text = getSorting(sorting)
+        }
+    }
+    private var queryTextChange:String=""
+    private fun searchViewListener(){
+        binding.apply {
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    queryTextChange=newText!!
+                    viewModel.startMainIndex(
+                        headerMapUniversal(requireContext()),
+                        args.location,
+                        queryTextChange,
+                        countryContent.id,
+                        currencyContent.id,
+                        sorting
+                    )
+                    return true
+                }
+
+            })
+        }
     }
 }

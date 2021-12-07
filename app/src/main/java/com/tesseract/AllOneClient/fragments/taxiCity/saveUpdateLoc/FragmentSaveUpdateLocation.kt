@@ -57,6 +57,12 @@ class FragmentSaveUpdateLocation :Fragment() {
 
             select.setOnClickListener {
                 if (args.shareSavedLoc==null){
+
+                    if (placeName.text.toString().isEmpty()){
+                        Toast.makeText(context, "Please, enter note", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
                     postNewAddress(args.type, placeName.text.toString(), args.address, args.latLng)
                 }else{
                     updateCurrent()

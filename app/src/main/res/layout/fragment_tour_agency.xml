@@ -233,15 +233,16 @@
             android:textColor="#E6110000"
             android:lineSpacingExtra="@dimen/margin_padding_4dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_height_56dp"
-            app:cornerRadius="@dimen/margin_padding_12dp"
-            android:insetTop="@dimen/dimens_0dp"
-            android:insetBottom="@dimen/dimens_0dp"
-            android:text="@string/other_tours"
-            android:layout_marginTop="@dimen/icon_size_20dp"
-            android:layout_marginBottom="@dimen/icon_size_20dp"/>
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="@dimen/item_height_56dp"-->
+<!--            app:cornerRadius="@dimen/margin_padding_12dp"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:insetTop="@dimen/dimens_0dp"-->
+<!--            android:insetBottom="@dimen/dimens_0dp"-->
+<!--            android:text="@string/other_tours"-->
+<!--            android:layout_marginTop="@dimen/icon_size_20dp"-->
+<!--            android:layout_marginBottom="@dimen/icon_size_20dp"/>-->
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 

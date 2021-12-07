@@ -128,7 +128,7 @@
         android:background="@drawable/background_white_corner_12"
         android:backgroundTint="@color/green"
         android:padding="@dimen/margin_padding_16dp"
-        android:text="@string/signIn"
+        android:text="@string/back"
         android:textAppearance="@style/boldStyleLight"
         android:textSize="@dimen/text_size_18sp" />
 

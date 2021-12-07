@@ -100,6 +100,12 @@ constructor(private val apiInterface: APIInterface) {
     suspend fun updatePhone(token: Map<String, String>, phone: String, code: String) =
         apiInterface.updatePhone(token, phone, code)
 
+    suspend fun updateAvatar(token: Map<String, String>, avatar:String)=
+        apiInterface.updateAvatar(token, avatar)
+
+    suspend fun getAllBonuses(token: Map<String, String>, page:Int)=
+        apiInterface.getAllBonuses(token, page)
+
     suspend fun getParcelRouteTariffPrices(
         token: Map<String, String>,
         orderType: String,
@@ -448,9 +454,8 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun getCarRentCar(token:Map<String, String>,
                               query:String, countryId:Int,
-                              currencyId:Int, sort:String,
-                              idMap:Map<String, String>?, carId:Int, page:Int)
-    =apiInterface.getCarRentCars(token, query, countryId, currencyId, sort, idMap, carId, page)
+                              currencyId:Int, sort:String,carId:Int, page:Int)
+    =apiInterface.getCarRentCars(token, query, countryId, currencyId, sort, carId, page)
 
     suspend fun getCarCompanies(token: Map<String, String>)=apiInterface.getCarCompanies(token)
 

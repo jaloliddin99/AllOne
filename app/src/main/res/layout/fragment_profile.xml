@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.profile.ProfileFragment">
+    tools:context=".fragments.profile.main.ProfileFragment">
 
     <RelativeLayout
         android:id="@+id/toolbar"
@@ -69,12 +69,27 @@
                     app:cardCornerRadius="45dp"
                     app:cardElevation="0dp">
 
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_gravity="center"
+                        android:elevation="@dimen/margin_padding_8dp"
+                        android:layout_height="wrap_content">
+                        <include layout="@layout/loader_lottie"
+                            android:id="@+id/loader"
+                            android:layout_gravity="center"
+                            android:visibility="gone"
+                            android:layout_height="50dp"
+                            android:layout_width="50dp" />
+                    </FrameLayout>
+
+
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/imageProfile"
                         android:src="@drawable/ic_profile_user"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop" />
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -185,7 +200,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:textSize="@dimen/text_size_15sp"
-                                android:text="@string/user_id"
+                                android:id="@+id/userId"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/white" />
                         </LinearLayout>
@@ -210,7 +225,6 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/inter_bold"
-                                    android:text="34 000"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/text_size_24sp"
                                     android:textStyle="bold" />
@@ -221,7 +235,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/margin_padding_4dp"
                                     android:fontFamily="@font/inter_regular"
-                                    android:text="Sum"
+                                    android:text="@string/summa1"
                                     android:textColor="@color/white"
                                     android:textSize="@dimen/text_size_18sp" />
 
@@ -236,7 +250,7 @@
                                 android:layout_weight="1"
                                 android:drawableEnd="@drawable/ic_arrow_right_white"
                                 android:drawablePadding="@dimen/margin_padding_12dp"
-                                android:text="Перейти"
+                                android:text="@string/go_to"
                                 android:textAlignment="textEnd"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/text_size_13sp"
@@ -250,7 +264,9 @@
                 <LinearLayout
 
                     android:id="@+id/changeData"
+                    android:layout_marginTop="@dimen/margin_padding_16"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:orientation="horizontal">
 
@@ -282,10 +298,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -297,6 +313,7 @@
                 <LinearLayout
                     android:id="@+id/changePhoneNum"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:orientation="horizontal">
 
@@ -336,10 +353,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -350,6 +367,7 @@
 
                 <LinearLayout
                     android:id="@+id/myCards"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/item_height_56dp"
 
@@ -359,7 +377,6 @@
                         android:layout_width="@dimen/icon_size_20dp"
                         android:layout_height="@dimen/icon_size_20dp"
                         android:layout_gravity="center"
-                        android:layout_marginStart="@dimen/margin_padding_4dp"
                         android:src="@drawable/ic_parment_card_add" />
 
                     <LinearLayout
@@ -392,10 +409,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -407,12 +424,13 @@
                 <LinearLayout
                     android:id="@+id/change_language"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/icon_size_20dp"
-                        android:layout_height="@dimen/icon_size_20dp"
+                        android:layout_width="@dimen/margin_padding_24dp"
+                        android:layout_height="@dimen/margin_padding_24dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_language"
                         app:tint="@color/green" />
@@ -438,10 +456,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -454,6 +472,7 @@
 
                     android:id="@+id/aboutAppBtn"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:orientation="horizontal">
 
@@ -478,7 +497,7 @@
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_medium"
 
-                            android:text="@string/about_prog"
+                            android:text="@string/about_app"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_17sp" />
 
@@ -486,10 +505,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -501,6 +520,7 @@
                 <LinearLayout
                     android:id="@+id/technicalSupport"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:orientation="horizontal">
 
@@ -533,10 +553,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 
@@ -548,16 +568,16 @@
                 <LinearLayout
                     android:id="@+id/logOut"
                     android:layout_width="match_parent"
+                    android:layout_marginStart="@dimen/margin_padding_8dp"
                     android:layout_height="@dimen/item_height_56dp"
                     android:layout_marginBottom="70dp"
                     android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="@dimen/icon_size_20dp"
-                        android:layout_height="@dimen/icon_size_20dp"
+                        android:layout_width="@dimen/margin_padding_24dp"
+                        android:layout_height="@dimen/margin_padding_24dp"
                         android:layout_gravity="center_vertical"
                         android:src="@drawable/ic_exit"
-
                         app:tint="@color/green" />
 
                     <LinearLayout
@@ -582,10 +602,10 @@
                     </LinearLayout>
 
                     <androidx.appcompat.widget.AppCompatImageView
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:layout_gravity="center"
+                        android:layout_marginEnd="@dimen/margin_padding_8dp"
                         android:src="@drawable/ic_arrow_right" />
                 </LinearLayout>
 

@@ -45,7 +45,6 @@
                 android:id="@+id/name"
                 android:ellipsize="end"
                 android:layout_height="wrap_content"
-                android:text="Shox International  Hospital"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_15sp"
                 android:fontFamily="@font/inter_semibold"/>
@@ -58,8 +57,7 @@
                 android:layout_width="wrap_content"
                 android:drawablePadding="@dimen/margin_padding_4dp"
                 android:layout_height="wrap_content"
-                android:text="4.8"
-                android:drawableStart="@drawable/ic_star"
+                android:drawableStart="@drawable/ic_yellow_star_small"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_12sp"
                 android:fontFamily="@font/inter_semibold"/>
@@ -69,7 +67,6 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Многопрофильная клиника"
             android:layout_marginTop="4dp"
             android:paddingVertical="@dimen/dimen_2dp"
             android:id="@+id/price_from"
@@ -84,7 +81,6 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:ellipsize="end"
-            android:text="г. Ташкент, Узбекистан "
             android:drawableStart="@drawable/ic_location_sma"
             android:drawablePadding="6dp"
             android:id="@+id/addr"

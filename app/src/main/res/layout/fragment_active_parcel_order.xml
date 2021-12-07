@@ -98,19 +98,25 @@
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_18sp" />
 
+                        <androidx.legacy.widget.Space
+                            android:layout_marginTop="@dimen/margin_padding_16dp"
+                            android:layout_toEndOf="@id/title"
+                            android:id="@+id/space"
+                            android:layout_width="@dimen/margin_padding_4dp"
+                            android:layout_height="wrap_content"/>
+
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/amount"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_padding_16dp"
-                            android:layout_toEndOf="@id/title"
+                            android:layout_toEndOf="@id/space"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="40 000 сум"
                             android:textColor="@color/green"
                             android:textSize="@dimen/text_size_18sp" />
 
                         <androidx.appcompat.widget.AppCompatTextView
-                            android:id="@+id/tariff"
+                            android:id="@+id/order"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/title"
@@ -121,8 +127,7 @@
                             android:fontFamily="@font/inter_regular"
                             android:text="@string/orderrr"
                             android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_15sp"
-                            />
+                            android:textSize="@dimen/text_size_15sp" />
 
 
                     </RelativeLayout>
@@ -132,16 +137,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/title"
+
                         android:layout_gravity="bottom"
                         android:layout_marginHorizontal="@dimen/margin_padding_16"
                         android:layout_marginTop="@dimen/icon_size_20dp"
-                        android:drawableStart="@drawable/ic_car_icon_grey"
+                        android:gravity="center"
+                        android:drawableStart="@drawable/ic_overhead_luggage"
                         android:drawablePadding="@dimen/margin_padding_16"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/orderrr"
+                        android:fontFamily="@font/inter_regular"
+                        android:text="@string/withOverheadLuggage"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/text_size_18sp"
-                        android:visibility="gone" />
+                        android:textSize="@dimen/text_size_15sp" />
 
                     <FrameLayout
                         android:layout_width="match_parent"
@@ -173,6 +179,10 @@
                                 android:text="@string/status"
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/text_size_15sp" />
+
+                            <androidx.legacy.widget.Space
+                                android:layout_width="@dimen/margin_padding_4dp"
+                                android:layout_height="wrap_content"/>
 
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/orderStatus"

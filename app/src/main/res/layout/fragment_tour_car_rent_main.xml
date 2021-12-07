@@ -40,16 +40,6 @@
 
         </RelativeLayout>
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="44dp"
-            android:layout_marginHorizontal="@dimen/margin_padding_16"
-            android:background="@drawable/bg_grey_rounded"
-            app:iconifiedByDefault="false"
-            app:queryBackground="@null"
-            app:queryHint="@string/search_automobile" />
-
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -77,18 +67,6 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_18sp" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/all"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:drawableEnd="@drawable/ic_arrow_right"
-                        android:drawablePadding="@dimen/margin_padding_8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/alll"
-                        android:drawableTint="@color/green"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_15sp" />
                 </RelativeLayout>
 
 

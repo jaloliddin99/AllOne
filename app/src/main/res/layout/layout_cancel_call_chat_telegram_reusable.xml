@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat android:layout_width="match_parent"
+<androidx.appcompat.widget.LinearLayoutCompat
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="@dimen/margin_padding_16dp"
@@ -7,9 +8,10 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:clipToPadding="false"
+        android:layout_weight="1"
         android:padding="@dimen/margin_padding_4dp"
         android:orientation="vertical">
 
@@ -23,10 +25,13 @@
             android:outlineAmbientShadowColor="#4D000000"
             android:outlineSpotShadowColor="#4D000000"
             android:padding="@dimen/margin_padding_16dp"
+            android:textAlignment="center"
+            android:foregroundGravity="center"
             android:src="@drawable/ic_ix_shape"
             android:translationZ="@dimen/margin_padding_4dp"
             app:borderWidth="0dp"
-            app:fabCustomSize="@dimen/margin_padding_72dp"
+            app:fabSize="normal"
+            app:fabCustomSize="66dp"
             app:rippleColor="@color/white"
             app:tint="#FF6060" />
 
@@ -71,7 +76,7 @@
                 android:src="@drawable/ic_call"
                 android:translationZ="@dimen/margin_padding_4dp"
                 app:borderWidth="0dp"
-                app:fabCustomSize="@dimen/margin_padding_72dp"
+                app:fabCustomSize="66dp"
                 app:rippleColor="@color/white"
                 app:tint="@color/green" />
 
@@ -123,7 +128,7 @@
                 android:src="@drawable/ic_chat_color"
                 android:translationZ="@dimen/margin_padding_4dp"
                 app:borderWidth="0dp"
-                app:fabCustomSize="@dimen/margin_padding_72dp"
+                app:fabCustomSize="66dp"
                 app:rippleColor="@color/white"
                 app:tint="@color/yellow" />
 
@@ -146,9 +151,10 @@
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.appcompat.widget.LinearLayoutCompat
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_padding_4dp"
+        android:layout_weight="1"
         android:clipToPadding="false"
         android:orientation="vertical">
 
@@ -164,7 +170,7 @@
             android:src="@drawable/ic_telegram_blue"
             android:translationZ="@dimen/margin_padding_4dp"
             app:borderWidth="0dp"
-            app:fabCustomSize="@dimen/margin_padding_72dp"
+            app:fabCustomSize="66dp"
             app:rippleColor="@color/white"
             app:tint="#00B2FF" />
 

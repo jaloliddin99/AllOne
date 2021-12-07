@@ -26,6 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+
         android:background="@drawable/white_background_top_corner"
         android:elevation="26dp"
         android:translationZ="@dimen/margin_padding_8dp">
@@ -283,6 +284,7 @@
                             android:layout_gravity="center"
                             android:layout_marginEnd="@dimen/margin_padding_8dp"
                             android:layout_weight="1"
+                            android:id="@+id/paymentTypeM"
                             android:drawableStart="@drawable/ic_small_money"
                             android:drawablePadding="@dimen/dimens_10dp"
                             android:fontFamily="@font/inter_semibold"
@@ -585,15 +587,18 @@
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/comment"
+                            <androidx.appcompat.widget.AppCompatEditText
+                                android:id="@+id/commentType"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:background="@null"
                                 android:ellipsize="end"
                                 android:fontFamily="@font/inter_semibold"
+                                android:inputType="none"
                                 android:maxLines="1"
                                 android:textColor="@color/black"
-                                android:textSize="15sp" />
+                                android:textSize="15sp"
+                                android:visibility="visible" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
 

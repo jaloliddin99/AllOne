@@ -77,7 +77,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/aroundTheWOrld"
-
                     android:background="@drawable/chip_drawable"
                     android:textSize="@dimen/text_size_13sp"
                     android:textColor="@color/black"

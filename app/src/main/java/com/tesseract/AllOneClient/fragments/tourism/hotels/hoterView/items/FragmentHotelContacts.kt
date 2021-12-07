@@ -1,6 +1,5 @@
 package com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.items
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.widget.ImageViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -109,7 +107,6 @@ class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding=null
     }
 

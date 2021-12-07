@@ -1,10 +1,14 @@
-package com.tesseract.AllOneClient.fragments.profile
+package com.tesseract.AllOneClient.fragments.profile.main
 
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
+import android.util.Base64
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +20,9 @@ import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.tesseract.AllOneClient.R
+import com.tesseract.AllOneClient.constants.Links
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.constants.SaveData.getBalance
 import com.tesseract.AllOneClient.constants.SaveData.getName
@@ -25,6 +31,7 @@ import com.tesseract.AllOneClient.fragments.profile.addcard.getCards.GetCardView
 import com.tesseract.AllOneClient.utils.getNavOptions
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import java.io.ByteArrayOutputStream
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment(R.layout.fragment_profile) {
@@ -32,17 +39,19 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
     private var _binding: FragmentProfileBinding?=null
     private val binding get() = _binding!!
     private lateinit var viewModel: GetCardViewModel
+    private lateinit var viewModelProfile:ProfileViewModel
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding= FragmentProfileBinding.inflate(inflater, container, false)
+        viewModelProfile=ViewModelProvider(this).get(ProfileViewModel::class.java)
         viewModel= ViewModelProvider(this).get(GetCardViewModel::class.java)
         return binding.root
     }
 
-    @SuppressLint("WrongConstant", "SetTextI18n")
+    @SuppressLint("WrongConstant", "SetTextI18n", "CheckResult")
     @RequiresApi(Build.VERSION_CODES.R)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -59,6 +68,7 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
             activity?.finish()
         }
         binding.apply {
+            binding.userId.text="ID: ${SaveData.getUserId(requireContext())}"
             viewModel.getCardDataList(headerMapUniversal(requireContext()))
 
             viewModel.cardDataList.observe(requireActivity(), {
@@ -73,6 +83,15 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
 
             })
 
+            viewModelProfile.errorM.observe(viewLifecycleOwner, {
+                loader.loader.visibility=View.GONE
+                Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            })
+            viewModelProfile.updateAvatar.observe(viewLifecycleOwner, {
+                loader.loader.visibility=View.GONE
+                Glide.with(requireContext()).load(Links.BASE_URL+"/image/bc207c28-626e-496e-9e7b-e0d43a152a3f?w=565")
+                    .into(imageProfile)
+            })
 
 
 
@@ -163,9 +182,23 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE_INTENT) {
-                if (data!!.clipData == null) {
-                    binding.imageProfile.setImageURI(data.data)
-                    SaveData.saveProfileImage(requireContext(), data.data.toString())
+
+                val selectedFile: Uri? = data?.data
+
+                if (selectedFile != null) {
+                    val bitmap =
+                        MediaStore.Images.Media.getBitmap(
+                            requireContext().contentResolver,
+                            selectedFile
+                        )
+                    val outputStream = ByteArrayOutputStream()
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                    val byteArray: ByteArray = outputStream.toByteArray()
+                    val encodedString: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
+
+                    viewModelProfile.updateAvatar(headerMapUniversal(requireContext()), encodedString)
+                    binding.loader.loader.visibility=View.VISIBLE
+
 
                 }
             }

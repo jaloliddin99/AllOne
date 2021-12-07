@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.DialogFragment
 import com.tesseract.AllOneClient.R
@@ -14,7 +15,8 @@ class DialogShowTime(
     private val title: String,
     private var dayListener: OnDaySelectListener): DialogFragment(R.layout.dialog_show_day) {
 
-    private var binding: DialogShowDayBinding?=null
+    private var _binding: DialogShowDayBinding?=null
+    private val binding get() = _binding!!
     private var date: String=""
     private var  isChanged=false
 
@@ -23,33 +25,34 @@ class DialogShowTime(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.dialog_show_day, container, false)
+        _binding= DialogShowDayBinding.inflate(inflater, container, false)
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background);
-        return view
+        return binding.root
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val showTimeBinding= DialogShowDayBinding.bind(view)
-
-        binding=showTimeBinding
-
-        binding?.cancelImg?.setOnClickListener {
+        binding.cancelImg.setOnClickListener {
             dialog?.dismiss()
         }
 
-        binding?.title?.text=title
+        binding.title.text=title
 
-        binding?.confirmDay?.setOnClickListener {
+        binding.confirmDay.setOnClickListener {
             if (isChanged){
                 dayListener.selectDayListener(date)
             }else{
-                var day: String = ""
-                var month: String = ""
-                val dayOfMonth=binding?.datePicker1?.dayOfMonth
-                val monthOfYear=binding?.datePicker1?.month
+                var day = ""
+                val month: String
+                val dayOfMonth= binding.datePicker1.dayOfMonth
+
+
+                val someValue=binding.datePicker1.month.toString().toInt()
+                Toast.makeText(context, "$someValue", Toast.LENGTH_SHORT).show()
+                val monthOfYear:Int= someValue +1
+
                 day = if (dayOfMonth in 0..9) {
                     "0$dayOfMonth"
                 } else {
@@ -62,27 +65,25 @@ class DialogShowTime(
                     "$monthOfYear"
                 }
 
-                date= "$day.$month.${binding?.datePicker1?.year}"
+                date= "$day.$month.${binding.datePicker1.year}"
                 dayListener.selectDayListener(date)
             }
             dialog?.dismiss()
         }
 
-        binding?.datePicker1?.minDate=System.currentTimeMillis()-1000
-        binding?.datePicker1?.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
+        binding.datePicker1.minDate=System.currentTimeMillis()-1000
+        binding.datePicker1.setOnDateChangedListener { _, year, monthOfYear, dayOfMonth ->
             isChanged=true
-            var day: String = ""
-            var month: String = ""
-            day = if (dayOfMonth in 0..9) {
+            val day: String = if (dayOfMonth in 0..9) {
                 "0$dayOfMonth"
             } else {
                 "$dayOfMonth"
             }
 
-            month = if (monthOfYear in 0..9) {
-                "0$monthOfYear"
+            val month: String = if ((monthOfYear+1) in 0..9) {
+                "0${(monthOfYear+1)}"
             } else {
-                "$monthOfYear"
+                "${(monthOfYear+1)}"
             }
 
             date= "$day.$month.$year"
@@ -94,7 +95,7 @@ class DialogShowTime(
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        dialog?.window?.attributes?.windowAnimations = R.style.DialogAnimation;
+        dialog?.window?.attributes?.windowAnimations  = R.style.DialogAnimation;
     }
 
     interface OnDaySelectListener{
@@ -103,8 +104,11 @@ class DialogShowTime(
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.9).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
+    }
 }

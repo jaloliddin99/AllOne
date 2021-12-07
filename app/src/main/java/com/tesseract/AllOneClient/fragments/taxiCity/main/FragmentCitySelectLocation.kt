@@ -20,7 +20,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -91,11 +90,11 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             recyclerView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             viewModel.savedLocations(headerMapUniversal(requireContext()))
 
-            viewModel.savedLocations.observe(viewLifecycleOwner, Observer {
+            viewModel.savedLocations.observe(viewLifecycleOwner, {
                 recyclerView.adapter=CityAddressesHistoryAdapter(it, this@FragmentCitySelectLocation)
             })
 
-            viewModel.locationList.observe(viewLifecycleOwner, Observer {
+            viewModel.locationList.observe(viewLifecycleOwner, {
                 try {
                     recyclerView.adapter= SearchQueryTypeRegionLocationsAdapter(it, this@FragmentCitySelectLocation)
                 }catch (e:Exception){
@@ -147,6 +146,9 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
                                 binding.yourAddress1.text=getString(R.string.where_)
                             }else if (binding.endDestination.hasFocus()){
                                 binding.yourAddress1.text=getString(R.string.to_where_)
+                                if (binding.endDestination.text.toString().isEmpty()){
+                                    viewModel.savedLocations(headerMapUniversal(requireContext()))
+                                }
                             }
                             binding.yourAddress1.setTextColor(requireContext().getColor(R.color.white))
                         } else {
@@ -221,7 +223,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
         askLocation()
         binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
-        binding.endDestination.addTextChangedListener(startDestinationTextWatcher)
+        binding.endDestination.addTextChangedListener(startDestinationTextWatcher2)
 
         viewModelReverse.data.observe(viewLifecycleOwner, {
             startName= it.address.toString()
@@ -331,6 +333,23 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     }
 
     private val startDestinationTextWatcher=object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            if (s.toString().isEmpty()) {
+                viewModel.savedLocations(headerMapUniversal(requireContext()))
+            } else {
+                viewModel.getLocationSearch(headerMapUniversal(requireContext()), s.toString())
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {
+        }
+    }
+
+    private val startDestinationTextWatcher2=object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
         }

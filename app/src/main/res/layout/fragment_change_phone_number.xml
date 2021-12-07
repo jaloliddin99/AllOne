@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
         <RelativeLayout
             android:elevation="@dimen/margin_padding_4dp"
@@ -52,7 +52,7 @@
                 android:layout_marginStart="@dimen/margin_padding_16"
                 android:layout_marginTop="@dimen/margin_padding_36dp"
                 android:paddingTop="@dimen/margin_padding_24dp"
-                android:text="@string/phoneNumber"
+                android:text="@string/newPhoneNumber"
                 android:textAppearance="@style/boldStyle"
                 android:textSize="@dimen/text_size_14sp" />
 
@@ -108,19 +108,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="14dp"
-                    android:id="@+id/sendNumber"
-                    android:drawablePadding="@dimen/margin_padding_12dp"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="@string/send"
-                    android:textColor="@color/green"
-                    android:textSize="@dimen/text_size_15sp"
-                    app:drawableEndCompat="@drawable/ic_arrow_right_green" />
 
 
             </LinearLayout>
@@ -230,11 +217,11 @@
             android:layout_marginBottom="@dimen/margin_padding_24dp"
             android:background="@drawable/background_green_corner_12"
             android:elevation="0dp"
-            android:backgroundTint="@color/dark_grey"
+            android:backgroundTint="@color/green"
             android:fontFamily="@font/inter_bold"
             android:padding="@dimen/margin_padding_16dp"
             android:textAllCaps="false"
-            android:text="@string/save"
+            android:text="@string/send"
             android:textColor="@color/white"
             android:textSize="@dimen/text_size_14sp"
             app:elevation="0dp" />

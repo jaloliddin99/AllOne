@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelIndexAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelIndexBinding
 import com.tesseract.AllOneClient.fragments.tourism.tourPackages.FragmentTourismPackagesDirections
@@ -55,21 +57,21 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
             binding.countryName.text=countryContent.name
         }
         if (sorting.isNotEmpty()){
-            binding.bySorting.text=sorting
+            binding.bySorting.text=getSorting(sorting)
         }
 
+        searchViewListener()
+
+
         if (isFirst){
-            Toast.makeText(context, "isFirst", Toast.LENGTH_SHORT).show()
             sorting=args.defaultSort
             countryContent.id=args.uzbId
             currencyContent.id=args.uzbDefaultCurrencyId
-            viewModel.startHotelIndex(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, sorting)
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting)
         }
         if (!isFirstView&&!isFirst){
-            Toast.makeText(context, "isSecond", Toast.LENGTH_SHORT).show()
-            viewModel.startHotelIndex(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, sorting)
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting)
         }
-
 
         adapter=HotelIndexAdapter(this, mutableSetOf())
 
@@ -89,7 +91,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                     viewModel.hotelIndex(
                         headerMapUniversal(requireContext()),
-                        "",
+                        queryTextChange,
                         countryContent.id,
                         currencyContent.id,
                         sorting
@@ -114,7 +116,6 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                 findNavController().navigate(action)
             }
 
-
         }
 
         adapterSet()
@@ -124,41 +125,21 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
         }
 
         getBackStackData<String>("onSortClickKey", true) {
-            binding.bySorting.text=it
             sorting=it
-            if (currencyContent.name.isNotEmpty()) {
-                binding.currency.text = currencyContent.name
-            }
-
-            if (countryContent.name.isNotEmpty()) {
-                binding.countryName.text = countryContent.name
-            }
-
+            restoreSavedView()
             load()
         }
 
         getBackStackData<Content>("onCountrySelectKey", true) {
-            binding.countryName.text = it.name
             countryContent = it
-            if (sorting.isNotEmpty()){
-                binding.bySorting.text=sorting
-            }
-            if (currencyContent.name.isNotEmpty()) {
-                binding.currency.text = currencyContent.name
-            }
+            restoreSavedView()
             load()
         }
 
         getBackStackData<Content>("onCurrencySelectedKey", true) {
-            binding.currency.text = it.name
-            currencyContent = it
-            if (countryContent.name.isNotEmpty()) {
-                binding.countryName.text = countryContent.name
-            }
-            if (sorting.isNotEmpty()){
-                binding.bySorting.text=sorting
-            }
 
+            currencyContent = it
+            restoreSavedView()
             load()
         }
     }
@@ -167,7 +148,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
         Common.hotelIndexPager = 1
         viewModel.hotelIndex(
             headerMapUniversal(requireContext()),
-           "",
+            queryTextChange,
             countryContent.id,
             currencyContent.id,
             sorting
@@ -198,13 +179,11 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
             arrayList.clear()
             binding.counter.text = arrayList2.size.toString()
 
-
         })
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding=null
     }
 
@@ -227,6 +206,52 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                     key
                 )
             }
+    }
+
+    private fun getSorting(sortKey:String):String{
+        return  when (sortKey) {
+            "by_popularity" -> getString(R.string.by_popularity)
+            "newest" -> getString(R.string.newest)
+            "alphabetically" -> getString(R.string.alphabetically)
+            "ascending_price" -> getString(R.string.ascending_price)
+            else -> getString(R.string.descending_price)
+        }
+    }
+
+    private fun restoreSavedView(){
+        if (currencyContent.name.isNotEmpty()){
+            binding.currency.text = currencyContent.name
+        }
+        if (countryContent.name.isNotEmpty()) {
+            binding.countryName.text = countryContent.name
+        }
+        if (sorting.isNotEmpty()) {
+            binding.bySorting.text = getSorting(sorting)
+        }
+    }
+    private var queryTextChange:String=""
+    private fun searchViewListener(){
+        binding.apply {
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    queryTextChange=newText!!
+                    viewModel.hotelIndex(
+                        headerMapUniversal(requireContext()),
+                        queryTextChange,
+                        countryContent.id,
+                        currencyContent.id,
+                        sorting
+                    )
+                    return true
+                }
+
+            })
+        }
     }
 
 }

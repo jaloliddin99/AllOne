@@ -195,10 +195,10 @@
                 android:id="@+id/relativeView"
                 android:layout_width="match_parent"
                 android:layout_height="1200dp"
-                android:overScrollMode="never"
                 android:background="#CCffffff"
                 android:elevation="50dp"
                 android:orientation="vertical"
+                android:overScrollMode="never"
                 android:visibility="visible">
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -215,9 +215,9 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_tariff"
-                android:overScrollMode="never"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:overScrollMode="never" />
         </RelativeLayout>
 
     </androidx.appcompat.widget.LinearLayoutCompat>

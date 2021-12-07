@@ -15,8 +15,10 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/dimen_32dp"
+        android:layout_height="@dimen/dimen_32dp"
+        android:padding="@dimen/dimens_6dp"
+        android:elevation="@dimen/margin_padding_12dp"
         android:layout_gravity="end"
         android:layout_margin="@dimen/icon_size_20dp"
         android:background="?android:selectableItemBackground"

@@ -159,18 +159,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:id="@+id/filter"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:drawablePadding="@dimen/margin_padding_8dp"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/alll"
-                        android:drawableEnd="@drawable/ic_arrow_right"
-                        android:drawableTint="@color/green"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_13sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
                 <androidx.recyclerview.widget.RecyclerView
                     android:layout_marginTop="@dimen/margin_padding_12dp"

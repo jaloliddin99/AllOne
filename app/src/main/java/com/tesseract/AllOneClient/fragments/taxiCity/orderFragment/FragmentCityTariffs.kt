@@ -135,31 +135,129 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             if (isInProgress){
                 createNewOrder()
             }else{
-
+                demodifyUI()
             }
 
         }
 
-        mSocket.on("chat_client_2") { args ->
-            if (args[0] != null) {
-                val response = args[0] as ListenOrderAccept
-                activity?.runOnUiThread {
-                    if (response.status=="cancelled"){
-                        DialogOrderCancelled(this).show(parentFragmentManager, tag)
-                    }
-                }
-            }
-        }
+
 
         viewModel.cityNewOrder.observe(viewLifecycleOwner, {
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
             modifyUI()
 //            mSocket.emit("chat_send", JSONObject(Gson().toJson(sendMessage)))
 //            val sendMessage= ListenOrderAccept("")
+
+            Toast.makeText(context, "${it.content.order_id}", Toast.LENGTH_SHORT).show()
+
+            mSocket.on("client_order_${it.content.order_id}") { args ->
+                if (args[0] != null) {
+                    val response = args[0] as ListenOrderAccept
+                    requireActivity().runOnUiThread {
+
+                        if (response.status=="client_cancelled"){
+                            DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                        }
+
+                        if (response.status=="driver_appointed"){
+                            DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                        }
+
+                        if (response.status=="client_cancelled"){
+                            DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                        }
+                        if (response.status=="client_cancelled"){
+                            DialogOrderCancelled(this).show(parentFragmentManager, tag)
+                        }
+
+                    }
+                }
+            }
         })
         viewModel.error.observe(viewLifecycleOwner,{
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
+    }
+
+    private var isInProgress=true
+    @SuppressLint("SetTextI18n")
+    private fun modifyUI(){
+        binding.apply {
+
+            mMap.animateCamera(CameraUpdateFactory.zoomTo(11f))
+            isInProgress=false
+            mBottomSheetBehavior2?.setPeekHeight(dipToPixels(requireContext(), 220f).toInt(), true)
+            mBottomSheetBehavior?.setPeekHeight(0, true)
+            bottomSheet.visibility=View.GONE
+
+
+            lottieAnimation.visibility=View.VISIBLE
+
+            btnGotoSearch.text=getString(R.string.cancel)
+            btnGotoSearch.backgroundTintList=ContextCompat.getColorStateList(requireContext(), R.color.red)
+
+            lac.tariff.text=content.tariff
+            lac.price.text=SaveData.formatPhone(orderAmount.toString())+" "+getString(R.string.summa1)
+
+            lac.pickup.text=args.startName
+            lac.toWhere.text=args.endName
+            lac.paymentType.text=paymentType
+
+            if (forAnother==1){
+                lac.lineOrderForOtherPerson.visibility=View.VISIBLE
+                lac.linearOrderForOther.visibility=View.VISIBLE
+                lac.orderForOtherOtherPerson.text=forAnotherPhoneNumber
+            }else{
+                lac.lineOrderForOtherPerson.visibility=View.GONE
+                lac.linearOrderForOther.visibility=View.GONE
+            }
+
+            if (this@FragmentCityTariffs.hasAirConditioner==1){
+                lac.lineConditioner.visibility=View.VISIBLE
+                lac.linearConditioner.visibility=View.VISIBLE
+            }else{
+                lac.lineConditioner.visibility=View.GONE
+                lac.linearConditioner.visibility=View.GONE
+            }
+
+            if (this@FragmentCityTariffs.comment.isEmpty()){
+                lac.linearComment.visibility=View.GONE
+            }else{
+                lac.comment.text=this@FragmentCityTariffs.comment
+                lac.linearComment.visibility=View.VISIBLE
+            }
+        }
+
+    }
+    private fun demodifyUI(){
+        isInProgress=true
+        mBottomSheetBehavior2?.setPeekHeight(dipToPixels(requireContext(), 0f).toInt(), true)
+        mBottomSheetBehavior?.setPeekHeight(dipToPixels(requireContext(), 400f).toInt(), true)
+        bottomSheet.visibility=View.VISIBLE
+
+
+        lottieAnimation.visibility=View.GONE
+
+        binding.btnGotoSearch.text=getString(R.string.orders)
+        binding.btnGotoSearch.backgroundTintList=ContextCompat.getColorStateList(requireContext(), R.color.green)
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(16f))
+
+        val latLngBounds:LatLngBounds.Builder=LatLngBounds.Builder()
+        for (i in map.indices){
+            val latLng=LatLng(map[i].split(",")[0].toDouble(), map[i].split(",")[1].toDouble())
+            latLngBounds.include(latLng)
+        }
+
+
+        val cameraUpdate:CameraUpdate=CameraUpdateFactory.newLatLngBounds(latLngBounds.build(), dipToPixels(requireContext(), 30f).toInt())
+        mMap.animateCamera(cameraUpdate, 10, object :GoogleMap.CancelableCallback{
+            override fun onFinish() {
+            }
+            override fun onCancel() {
+            }
+
+        })
+
     }
 
 
@@ -190,15 +288,12 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         }
 
         orderAmount=content.price.toDouble()
-
         if (hasAirConditioner==1){
             orderAmount=content.price_with_ac.toDouble()
         }
         if (usedBonus==1){
             orderAmount -= usedBonusAmount
         }
-
-        //** eoie **//
 
         if (content.tariff=="parcel_delivery"){
             CityReceiverModalDialog(this@FragmentCityTariffs).show(parentFragmentManager, tag)
@@ -247,54 +342,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         )
     }
 
-    private var isInProgress=true
-    @SuppressLint("SetTextI18n")
-    private fun modifyUI(){
-        binding.apply {
-
-            isInProgress=false
-            mBottomSheetBehavior2?.setPeekHeight(dipToPixels(requireContext(), 220f).toInt(), true)
-            mBottomSheetBehavior?.setPeekHeight(0, true)
-
-            lottieAnimation.visibility=View.VISIBLE
-
-            btnGotoSearch.text=getString(R.string.cancel)
-            btnGotoSearch.backgroundTintList=ContextCompat.getColorStateList(requireContext(), R.color.red)
-
-
-            lac.tariff.text=content.tariff
-            lac.price.text=SaveData.formatPhone(orderAmount.toString())+" "+getString(R.string.summa1)
-
-            lac.pickup.text=args.startName
-            lac.toWhere.text=args.endName
-            lac.paymentType.text=paymentType
-
-            if (forAnother==1){
-                lac.lineOrderForOtherPerson.visibility=View.VISIBLE
-                lac.linearOrderForOther.visibility=View.VISIBLE
-                lac.orderForOtherOtherPerson.text=forAnotherPhoneNumber
-            }else{
-                lac.lineOrderForOtherPerson.visibility=View.GONE
-                lac.linearOrderForOther.visibility=View.GONE
-            }
-
-            if (this@FragmentCityTariffs.hasAirConditioner==1){
-                lac.lineConditioner.visibility=View.VISIBLE
-                lac.linearConditioner.visibility=View.VISIBLE
-            }else{
-                lac.lineConditioner.visibility=View.GONE
-                lac.linearConditioner.visibility=View.GONE
-            }
-
-            if (this@FragmentCityTariffs.comment.isEmpty()){
-                lac.linearComment.visibility=View.GONE
-            }else{
-                lac.comment.text=this@FragmentCityTariffs.comment
-                lac.linearComment.visibility=View.VISIBLE
-            }
-        }
-
-    }
 
 
     val map =ArrayList<String>()
@@ -319,7 +366,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
         viewModel.cityTariffMainModel(headerMapUniversal(requireContext()), map)
         if (isStartGiven && isEndGiven) {
-            Log.i(TAG, "onViewCreated: ${args.startLocation}  ${args.endLocation}")
             startLat = args.startLocation.split(",")[0].toDouble()
             startLong = args.startLocation.split(",")[1].toDouble()
             endLat = args.endLocation.split(",")[0].toDouble()
@@ -347,8 +393,9 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
     }
 
+    private lateinit var bottomSheet:View
     private fun modalDialogController() {
-        val bottomSheet: View = requireView().findViewById(R.id.bottomSheetNestedScrollView)
+        bottomSheet = requireView().findViewById(R.id.bottomSheetNestedScrollView)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         (mBottomSheetBehavior as BottomSheetBehavior<*>).setBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -510,7 +557,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             }
 
             getBackStackData<String>("commentKey", true){
-                comment.text=it
+                commentType.setText(it)
                 this@FragmentCityTariffs.comment=it
 
                 restoreState()
@@ -634,11 +681,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     override fun onItemClick(content: Content, position: Int) {
         this.content=content
         Common.cityTariffRecyclerView=position
-
         binding.recyclerBigCarImages.scrollToPosition(Common.cityTariffRecyclerView)
-
         arrivalTime.text=content.arrival_time
-
         Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
     }
 
@@ -708,6 +752,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             val routingModel = RoutindDetails(false, listBig)
 
             routeViewModel.mapGetRouting(headerMapUniversal(requireContext()), routingModel)
+
+            restoreState()
         }
 
         if (!isCityTariffPreviousBackstack) {
@@ -733,15 +779,22 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     }
 
     private fun restoreState(){
+
         if (comment.isNotEmpty()){
-            binding.comment.text=comment
+            Toast.makeText(context, "hello $comment", Toast.LENGTH_SHORT).show()
+            binding.commentType.setText(comment)
         }
 
         if (paymentType=="cash"){
             binding.cardNumAndType.text=getString(R.string.with_money)
+            binding.paymentTypeM.text=getString(R.string.with_money)
         }else if (paymentType=="card"){
             binding.cardNumAndType.text=cityShareCardBonusModel.cardType+" **** " +cityShareCardBonusModel.cardNumber.substring(
                 cityShareCardBonusModel.cardNumber.length-4, cityShareCardBonusModel.cardNumber.length)
+
+            binding.paymentTypeM.text=cityShareCardBonusModel.cardType+" **** " +cityShareCardBonusModel.cardNumber.substring(
+                cityShareCardBonusModel.cardNumber.length-4, cityShareCardBonusModel.cardNumber.length)
+
         }
 
         if (forAnother==1){

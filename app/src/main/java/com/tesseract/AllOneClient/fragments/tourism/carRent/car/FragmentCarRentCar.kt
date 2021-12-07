@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,10 +13,10 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.carRent.CarRentCarsAdapter
-import com.tesseract.AllOneClient.adapter.tourism.carRent.CarRentSelectedItems
 import com.tesseract.AllOneClient.databinding.FragmentCarRentCarsBinding
-import com.tesseract.AllOneClient.fragments.tourism.tourPackages.FragmentTourismPackagesDirections
+import com.tesseract.AllOneClient.fragments.tourism.mainTourism.FragmentTourismMain
 import com.tesseract.AllOneClient.model.tourism.carRent.cars.Data
 import com.tesseract.AllOneClient.model.tourism.countries.Content
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
@@ -33,8 +34,8 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
     private val args:FragmentCarRentCarArgs by navArgs()
 
     private lateinit var viewModel: CarViewModel
-    val mapKeys = mutableMapOf<String, String>()
-
+    private var isFirst:Boolean=true
+    private var isFirstView:Boolean=true
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,9 +55,33 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
         if (countryContent.id!=-10){
             binding.countryName.text=countryContent.name
         }
-        binding.recyclerViewChip.layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        if (sorting.isNotEmpty()){
+            binding.bySorting.text=getSorting(sorting)
+        }
+
         Common.carRentPageId=1
-        viewModel.startCarViewModel(headerMapUniversal(requireContext()), "", -10, -10, "", mapKeys, args.carId)
+        if (isFirst){
+            countryContent.id=FragmentTourismMain.world_default_currency_id
+            sorting=FragmentTourismMain.default_sort
+            currencyContent.id=FragmentTourismMain.uzb_default_currency_id
+            viewModel.startCarViewModel(
+                headerMapUniversal(requireContext()),
+                queryTextChange,
+                countryContent.id,
+                currencyContent.id,
+                sorting,
+                args.carId)
+        }
+        if (!isFirstView&&!isFirst){
+            viewModel.startCarViewModel(
+                headerMapUniversal(requireContext()),
+                queryTextChange,
+                countryContent.id,
+                currencyContent.id,
+                sorting,
+                args.carId)
+        }
+
 
         adapter=CarRentCarsAdapter(this, mutableSetOf())
         binding.apply {
@@ -71,20 +96,16 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
             recyclerView1.addOnScrollListener(object :
                 EndlessRecyclerViewScrollListener(layoutManager2) {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
-                    viewModel.carRentRequest(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, "", null, args.carId)
+                    viewModel.carRentRequest(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting,  args.carId)
                 }
             })
 
         }
         adapterSet()
-
+        searchViewListener()
         binding.apply {
-
-            first.setOnClickListener {
-                direct(10)
-            }
-            second.setOnClickListener {
-                direct(11)
+            bySorting.setOnClickListener {
+                direct(1)
             }
 
             countryName.setOnClickListener {
@@ -100,87 +121,28 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
             load()
         }
 
-        getBackStackData<Content>("onCountrySelectKey", true) {
-            binding.countryName.text = it.name
-            countryContent = it
-            if (currencyContent.id != -10) {
-                binding.currency.text = currencyContent.name
-            }
-
+        getBackStackData<String>("onSortClickKey", true) {
+            sorting=it
+            restoreSavedView()
             load()
+        }
 
+        getBackStackData<Content>("onCountrySelectKey", true) {
+            countryContent = it
+            restoreSavedView()
+            load()
         }
 
         getBackStackData<Content>("onCurrencySelectedKey", true) {
-            binding.currency.text = it.name
+
             currencyContent = it
-            if (countryContent.id != -10) {
-                binding.countryName.text = countryContent.name
-            }
+            restoreSavedView()
             load()
-        }
-
-        getBackStackData<Content>("onCarCompaniesSelected", true) {
-            carCompanies = it
-
-
-            if (countryContent.id != -10) {
-                binding.countryName.text = countryContent.name
-            }
-            if (currencyContent.id != -10) {
-                binding.currency.text = currencyContent.name
-            }
-
-            if (carModels.id!=-10){
-                val list= arrayListOf(
-                    carCompanies,
-                    carModels
-                )
-                binding.recyclerViewChip.adapter=CarRentSelectedItems(list)
-            }else{
-                val list= arrayListOf(
-                    carCompanies
-                )
-                binding.recyclerViewChip.adapter=CarRentSelectedItems(list)
-            }
-
-            load()
-
-        }
-
-        getBackStackData<Content>("onCarModelsSelected", true) {
-            carModels=it
-
-            if (countryContent.id != -10) {
-                binding.countryName.text = countryContent.name
-            }
-            if (currencyContent.id != -10) {
-                binding.currency.text = currencyContent.name
-            }
-
-           if ( carCompanies.id!=-10){
-               val list= arrayListOf(
-                   carCompanies,
-                   carModels
-               )
-               binding.recyclerViewChip.adapter=CarRentSelectedItems(list)
-           }else{
-               val list= arrayListOf(
-                   carModels
-               )
-               binding.recyclerViewChip.adapter=CarRentSelectedItems(list)
-           }
-
-            load()
-
         }
 
     }
 
     companion object{
-        private var carCompanies = Content(-10, "")
-        private var carModels = Content(-10, "")
-
         private var countryContent = Content(-10, "")
         private var currencyContent = Content(-10, "")
     }
@@ -190,13 +152,14 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
             FragmentCarRentCarDirections.actionFragmentCarRentCarToFragmentTourismFIlter(
                 idNum
             )
+        isFirst=false
         findNavController().navigate(action)
     }
 
 
     private fun load() {
         Common.carRentPageId = 1
-        viewModel.startCarViewModel(headerMapUniversal(requireContext()), "", countryContent.id, currencyContent.id, "", mapKeys, args.carId)
+        viewModel.startCarViewModel(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting,  args.carId)
     }
 
     private fun adapterSet() {
@@ -230,6 +193,7 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
 
     override fun carSelected(position: Data) {
         val action=FragmentCarRentCarDirections.actionFragmentCarRentCarToFragmentCarView(position.id)
+        isFirstView=false
         findNavController().navigate(action)
     }
 
@@ -246,6 +210,53 @@ class FragmentCarRentCar:Fragment(), CarRentCarsAdapter.OnChipClickListener {
                 )
             }
     }
+
+    private fun getSorting(sortKey:String):String{
+        return  when (sortKey) {
+            "by_popularity" -> getString(R.string.by_popularity)
+            "newest" -> getString(R.string.newest)
+            "alphabetically" -> getString(R.string.alphabetically)
+            "ascending_price" -> getString(R.string.ascending_price)
+            else -> getString(R.string.descending_price)
+        }
+    }
+
+    private var sorting :String=""
+    private fun restoreSavedView(){
+        if (currencyContent.name.isNotEmpty()){
+            binding.currency.text = currencyContent.name
+        }
+        if (countryContent.name.isNotEmpty()) {
+            binding.countryName.text = countryContent.name
+        }
+        if (sorting.isNotEmpty()) {
+            binding.bySorting.text = getSorting(sorting)
+        }
+    }
+    private var queryTextChange:String=""
+    private fun searchViewListener(){
+        binding.apply {
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                override fun onQueryTextSubmit(query: String?): Boolean {
+
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    queryTextChange=newText!!
+                    Toast.makeText(context, queryTextChange, Toast.LENGTH_SHORT).show()
+                    viewModel.carRentRequest(headerMapUniversal(requireContext()),
+                        queryTextChange,
+                        countryContent.id,
+                        currencyContent.id,
+                        sorting,  args.carId)
+                    return false
+                }
+
+            })
+        }
+    }
+
 
 
 

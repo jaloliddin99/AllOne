@@ -2,7 +2,9 @@ package com.tesseract.AllOneClient.fragments.main.home.SearchTaxi
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -21,16 +23,23 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
     SearchTaxisAdapter.OnItemClickListener, SearchTaxiAdapter2.OnItemClickListener {
-    private var binding: FragmentSearchTaxisBinding? = null
+    private var _binding: FragmentSearchTaxisBinding? = null
+    private val binding get() = _binding!!
     private val shareViewModel: ShareDataViewModel by activityViewModels()
     private lateinit var searchTaxisAdapter: SearchTaxisAdapter
     private lateinit var searchTaxiAdapter2: SearchTaxiAdapter2
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding= FragmentSearchTaxisBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val searchTaxisBinding = FragmentSearchTaxisBinding.bind(view)
-        binding = searchTaxisBinding
-
         viewModelListener()
     }
 
@@ -38,23 +47,23 @@ class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
         shareViewModel.mutableSearchItem.observe(viewLifecycleOwner, {
             loadItems(it)
             searchTaxisAdapter = SearchTaxisAdapter(requireContext(), it.your_request as ArrayList<YourRequest>,  this)
-            binding?.recyclerQuery?.layoutManager =
+            binding.recyclerQuery.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            binding?.recyclerQuery?.adapter = searchTaxisAdapter
+            binding.recyclerQuery.adapter = searchTaxisAdapter
 
             searchTaxiAdapter2 = SearchTaxiAdapter2(requireContext(), it.other_options,  this)
-            binding?.recyclerViewOptions?.layoutManager =
+            binding.recyclerViewOptions.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            binding?.recyclerViewOptions?.adapter = searchTaxiAdapter2
+            binding.recyclerViewOptions.adapter = searchTaxiAdapter2
         })
     }
     @SuppressLint("SetTextI18n")
     private fun loadItems(it: Content){
-        binding?.apply {
+        binding.apply {
             topReuse.found.text=it.found
             tariff.text=it.order.tariff
             places.text=it.order.places
-            price.text=SaveData.formatPhone(it.order.price)+context?.getString(R.string.summa1)
+            price.text=SaveData.formatPhone(it.order.price)+requireContext().getString(R.string.summa1)
         }
     }
 
@@ -68,6 +77,11 @@ class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
         val action =
             FragmentSearchTaxiDirections.actionFragmentSearchTaxiToFragmentRegionDriverInfo(position, false)
         findNavController().navigate(action)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 

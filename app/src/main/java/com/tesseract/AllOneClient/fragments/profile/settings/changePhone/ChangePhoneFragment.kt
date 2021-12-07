@@ -65,21 +65,11 @@ class ChangePhoneFragment : Fragment() {
 
             phoneNumberField.addTextChangedListener(textWatcher)
 
-            sendNumber.setOnClickListener {
-                phoneNumber = phoneNumberField.text.toString()
-                if (!isSent) {
-                    val isNotEmpty: Boolean =
-                        viewModel.isNotEmpty(phoneNumberField.text.toString())
-                    if (!isNotEmpty) {
-                        phoneNumberField.error = getString(R.string.enter_your_phone)
-                        return@setOnClickListener
-                    }
-                    binding.loader.loader.visibility=View.VISIBLE
-                    viewModel.sendCode(headerMapUniversal(requireContext()), phoneNumber.replace(" ", ""))
-                }
-            }
-
             send.setOnClickListener {
+
+
+                phoneNumber = phoneNumberField.text.toString()
+
                 if (isSent) {
                     if (isFilled) {
                         binding.loader.loader.visibility=View.VISIBLE
@@ -89,6 +79,22 @@ class ChangePhoneFragment : Fragment() {
                             codeField.text.toString()
                         )
                     }
+                }
+
+                if (!isSent) {
+                    val phoneNum= phoneNumber
+
+                    if (phoneNum.length!=17)
+                        return@setOnClickListener
+                    send.text=getString(R.string.save)
+                    val isNotEmpty: Boolean =
+                        viewModel.isNotEmpty(phoneNumberField.text.toString())
+                    if (!isNotEmpty) {
+                        phoneNumberField.error = getString(R.string.enter_your_phone)
+                        return@setOnClickListener
+                    }
+                    binding.loader.loader.visibility=View.VISIBLE
+                    viewModel.sendCode(headerMapUniversal(requireContext()),phoneNum)
                 }
             }
 

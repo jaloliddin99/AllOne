@@ -12,6 +12,7 @@ import com.tesseract.AllOneClient.adapter.tourism.tourPackages.PackageTextItem
 import com.tesseract.AllOneClient.databinding.FragmentPackageDescriptionBinding
 import com.tesseract.AllOneClient.fragments.tourism.packagesView.PackageViewModel
 import com.tesseract.AllOneClient.model.tourism.packageView.Include
+import com.tesseract.AllOneClient.utils.gotoContact
 
 class FragmentPackageItemDescription:Fragment(), PackageTextItem.OnLocationClickListener {
 
@@ -45,7 +46,7 @@ class FragmentPackageItemDescription:Fragment(), PackageTextItem.OnLocationClick
     }
 
     override fun onItemClick(type: Include?) {
-
+        gotoContact(type?.text!!, requireContext())
     }
 
 }

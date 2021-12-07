@@ -23,6 +23,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.home.TariffAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentTarifBinding
+import com.tesseract.AllOneClient.dialogs.main.DialogTariffNotFound
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.model.home.getRegions.GetRegionDetails
 import com.tesseract.AllOneClient.model.home.getRegions.RegionPopbackStask
@@ -82,15 +83,18 @@ class FragmentTaxiRegionsSelection : Fragment(),
             binding.endDestinationTextChange.text = getString(R.string.change)
         }
 
-
-
         binding.apply {
             viewModel.routeList.observe(requireActivity(), Observer {
-                tariffAdapter =
-                    TariffAdapter(requireContext(), it, this@FragmentTaxiRegionsSelection)
-                recyclerTariff.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-                recyclerTariff.adapter = tariffAdapter
+
+                if (it.isNullOrEmpty()){
+                    DialogTariffNotFound("${Common.startRegion} ${Common.startDistrict}","${Common.endRegion} ${Common.endDistrict}" )
+                        .show(parentFragmentManager, tag)
+                }else{
+
+                    recyclerTariff.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                    tariffAdapter = TariffAdapter(requireContext(), it, this@FragmentTaxiRegionsSelection)
+                    recyclerTariff.adapter = tariffAdapter
+                }
             })
             recyclerTariff.setHasFixedSize(true)
             isEnabled = false

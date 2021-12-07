@@ -135,7 +135,7 @@
         app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.tesseract.AllOneClient.fragments.profile.ProfileFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.main.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile">
 
@@ -165,7 +165,7 @@
         app:popExitAnim="@anim/fade_out" />
     <fragment
         android:id="@+id/bonusFragment2"
-        android:name="com.tesseract.AllOneClient.fragments.profile.BonusFragment"
+        android:name="com.tesseract.AllOneClient.fragments.profile.bonus.BonusFragment"
         android:label="fragment_bonus"
         tools:layout="@layout/fragment_bonus">
         <action

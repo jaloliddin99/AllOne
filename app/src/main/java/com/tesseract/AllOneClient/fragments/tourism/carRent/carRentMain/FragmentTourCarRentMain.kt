@@ -33,7 +33,7 @@ class FragmentTourCarRentMain:Fragment(), CarRentPopularAdapter.OnChipClickListe
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentTourCarRentMainBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(IndexViewModel::class.java)
         return binding.root
@@ -58,6 +58,10 @@ class FragmentTourCarRentMain:Fragment(), CarRentPopularAdapter.OnChipClickListe
                 recyclerView2.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 recyclerView2.adapter=CarRentIndexMainAdapter(this@FragmentTourCarRentMain, it.content.car_types, requireContext())
             })
+
+            backToHome.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
 

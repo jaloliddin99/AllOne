@@ -18,8 +18,10 @@ import com.tesseract.AllOneClient.adapter.medTourism.clinics.PagerAdapter
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelPagerAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelViewBinding
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
+import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_order_taxi.*
 import java.lang.Exception
 
 @AndroidEntryPoint
@@ -75,6 +77,14 @@ class FragmentHotelView :Fragment() {
             Picasso.get().load(it.content.poster).into(binding.poster)
             binding.rating.text=it.content.rating
             binding.rateCount.text="(${it.content.rate_count})"
+
+            binding.call.setOnClickListener { view->
+                if (it.content.phone_number.isNullOrEmpty()){
+                    Toast.makeText(context, "Phone number not found", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                gotoContact(it.content.phone_number[0], requireContext())
+            }
 
             binding.apply {
                 tabLayout.addTab(tabLayout.newTab())

@@ -26,8 +26,13 @@ class AboutProgramFragment:Fragment(R.layout.fragment_about_program) {
 
         binding=fragmentAboutProgramBinding
 
+        binding?.goBack?.setOnClickListener {
+            findNavController().popBackStack()
+        }
+
         binding?.backToHome?.setOnClickListener {
             findNavController().popBackStack()
+
         }
     }
 }

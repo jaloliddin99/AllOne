@@ -113,7 +113,7 @@ class FragmentActiveParcelOrder : Fragment() {
                 )
             }
 
-            binding.id.text=it.id?.toString()
+            binding.id.text="№"+it.id?.toString()
             binding.parcelType.text=it.parcelType
 
             if (it.hasOverHeadLuggage == true){
@@ -157,6 +157,7 @@ class FragmentActiveParcelOrder : Fragment() {
                 binding.hasOverheadLuggage.visibility=View.GONE
                 binding.userSeats.visibility=View.GONE
             }
+            binding.order.text=getString(R.string.orderrr)+" №"+it.id
             binding.to.text=it.to
             binding.pickup.text=it.pickup
             binding.driverCar.text=it.driverCar
@@ -176,6 +177,10 @@ class FragmentActiveParcelOrder : Fragment() {
             binding.postCarPhotos.setHasFixedSize(true)
 
         })
+
+        binding.signIn.setOnClickListener{
+            findNavController().popBackStack()
+        }
 
         viewModel.errorM.observe(requireActivity(), {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
