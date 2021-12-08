@@ -20,7 +20,7 @@ class ModalDialogParcelSelection(private val listener: ClickListener) : BottomSh
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding= DialogModelPostTypeSelectionBinding.inflate(inflater, container, false)
         dialog!!.setOnShowListener { dialog ->
@@ -29,7 +29,7 @@ class ModalDialogParcelSelection(private val listener: ClickListener) : BottomSh
             val lyout = bottomSheet!!.parent as CoordinatorLayout
             val behavior: BottomSheetBehavior<*> =
                 BottomSheetBehavior.from(bottomSheet)
-            behavior.peekHeight = bottomSheet!!.height
+            behavior.peekHeight = bottomSheet.height
             lyout.parent.requestLayout()
         }
         return binding!!.root

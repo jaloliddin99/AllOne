@@ -106,6 +106,9 @@ constructor(private val apiInterface: APIInterface) {
     suspend fun getAllBonuses(token: Map<String, String>, page:Int)=
         apiInterface.getAllBonuses(token, page)
 
+    suspend fun getContacts(token: Map<String, String>)=
+        apiInterface.getContacts(token)
+
     suspend fun getParcelRouteTariffPrices(
         token: Map<String, String>,
         orderType: String,

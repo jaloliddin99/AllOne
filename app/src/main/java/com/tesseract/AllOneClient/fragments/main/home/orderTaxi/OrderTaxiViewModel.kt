@@ -30,10 +30,9 @@ class OrderTaxiViewModel @Inject constructor(private val repository: NetworkRepo
             repository.getRouteTariffPrices(token, orderType, startPoint, endPoint).let {
                 if (it.isSuccessful) {
                     if (it.body()?.success == true) {
-                        parcelList.postValue(it.body()?.content?.parcels)
-                        placeList.postValue(it.body()?.content?.places)
+                        parcelList.postValue(it.body()?.content?.parcels!!)
+                        placeList.postValue(it.body()?.content?.places!!)
                     }else{
-                        Log.i(TAG, "getRouteTariffPrices: awdwdawd${it.message()}")
                     }
                 }else{
                     Log.i(TAG, "getRouteTariffPres: awdwdawd${it.message()}")

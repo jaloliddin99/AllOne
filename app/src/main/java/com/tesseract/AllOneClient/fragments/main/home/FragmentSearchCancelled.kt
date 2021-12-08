@@ -5,26 +5,32 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.NonNull
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomsheet.BottomSheetBehavior
+import androidx.navigation.fragment.navArgs
 import com.tesseract.AllOneClient.R
+import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentSearchCancelledBinding
+import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
+import com.tesseract.AllOneClient.model.home.SearchModel.Content
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FragmentSearchCancelled: Fragment(R.layout.fragment_search_cancelled) {
 
     private var _binding: FragmentSearchCancelledBinding?=null
     private val binding get() = _binding!!
-    private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
+    private val args: FragmentSearchCancelledArgs by navArgs()
+
+    private val shareViewModel: ShareDataViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentSearchCancelledBinding.inflate(inflater, container, false)
-
         return binding.root
     }
 
@@ -35,37 +41,37 @@ class FragmentSearchCancelled: Fragment(R.layout.fragment_search_cancelled) {
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
         }
+        if (args.isFromRegion){
+            shareViewModel.mutableSearchItem.observe(viewLifecycleOwner, {
+                loadItems(it)
+            })
+        }else{
+            shareViewModel.parcelItem.observe(viewLifecycleOwner, {
 
-        binding.bookNow.backgroundTintList =
-            context?.resources?.getColorStateList(R.color.red)
+            })
+        }
 
+    }
 
-        val bottomSheet: View = view.findViewById(R.id.bottomSheetNestedScrollView)
-
-        mBottomSheetBehavior=BottomSheetBehavior.from(bottomSheet)
-        (mBottomSheetBehavior as BottomSheetBehavior<*>).setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding.bookNow.backgroundTintList =
-                            context?.resources?.getColorStateList(R.color.red)
-                        binding.bookNow.text=getString(R.string.cancel)
-                    }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        binding.bookNow.backgroundTintList =
-                            context?.resources?.getColorStateList(R.color.green)
-                        binding.bookNow.text=getString(R.string.book_now)
-                    }
-                }
-
-            }
-
-            override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {
-
-            }
-        })
+//    @SuppressLint("SetTextI18n")
+//    private fun loadItems(it: com.tesseract.AllOneClient.model.parcel.parcelSearch.Content){
+//        binding.apply {
+//            reusable.found.text=it.found
+//            tariff.text=it.order.tariff
+//            orderId.text="${requireContext().getString(R.string.orderrr)} ${it.order.id}"
+//            price.text= SaveData.formatPhone(it.order.price)+requireContext().getString(R.string.summa1)
+//        }
+//    }
 
 
+    @SuppressLint("SetTextI18n")
+    private fun loadItems(it: Content){
+        binding.apply {
+            tariff.text=it.order.tariff
+            places.text=it.order.places
+            price.text= SaveData.formatPhone(it.order.price)+requireContext().getString(R.string.summa1)
+
+        }
     }
     override fun onDestroyView() {
         super.onDestroyView()

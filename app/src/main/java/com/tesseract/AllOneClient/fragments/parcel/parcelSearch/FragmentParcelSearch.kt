@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,9 @@ import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentParcelSearchBinding
 import com.tesseract.AllOneClient.fragments.main.home.SearchTaxi.SearchTaxiViewModel
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
+import com.tesseract.AllOneClient.fragments.profile.techSupport.ContactViewModel
+import com.tesseract.AllOneClient.utils.gotoContact
+import com.tesseract.AllOneClient.utils.gotoTelegram
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +33,7 @@ class FragmentParcelSearch:Fragment(),ParcelSearchFoundTopAdapter.OnItemClickLis
     private lateinit var viewModel: SearchTaxiViewModel
     private lateinit var topAdapter:ParcelSearchFoundTopAdapter
     private lateinit var bottomAdapter:ParcelSearchFoundBottomAdapter
+    private lateinit var viewModel2: ContactViewModel
 
     private val args:FragmentParcelSearchArgs by navArgs()
 
@@ -40,12 +45,32 @@ class FragmentParcelSearch:Fragment(),ParcelSearchFoundTopAdapter.OnItemClickLis
     ): View {
         binding = FragmentParcelSearchBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(SearchTaxiViewModel::class.java)
+        viewModel2= ViewModelProvider(this).get(ContactViewModel::class.java)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModelListener()
+
+        viewModel2.contactError.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel2.contacts.observe(viewLifecycleOwner, {
+
+            binding.bottomReuse.telegramAccout.text=it.content.tg_account
+            binding.bottomReuse.operatorNumber.text=it.content.phone_number
+
+            binding.bottomReuse.telegram.setOnClickListener {view->
+                gotoTelegram(it.content.tg_account, requireContext())
+            }
+
+            binding.bottomReuse.call.setOnClickListener {view->
+                gotoContact(it.content.phone_number, requireContext())
+            }
+
+        })
 
     }
 

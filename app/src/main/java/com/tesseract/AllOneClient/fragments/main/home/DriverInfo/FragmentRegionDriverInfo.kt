@@ -39,8 +39,11 @@ import com.tesseract.AllOneClient.adapter.home.RegionDriverInfoAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentRegionDriwerInfoBinding
 import com.tesseract.AllOneClient.dialogs.main.otherOptionDialogs.DialogChooseSeats
+import com.tesseract.AllOneClient.fragments.main.home.orderTaxi.OrderTaxiViewModel
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
+import com.tesseract.AllOneClient.model.home.RouteTariffPrices.RouteTariffPlaceListModel
 import com.tesseract.AllOneClient.model.home.SearchModel.Content
+import com.tesseract.AllOneClient.model.home.SearchModel.Order
 import com.tesseract.AllOneClient.model.home.SearchModel.OtherOption
 import com.tesseract.AllOneClient.utils.dipToPixels
 import com.tesseract.AllOneClient.utils.headerMapUniversal
@@ -62,6 +65,7 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     private var userSeatIsSelected:Boolean=false
 
     private lateinit var viewModel: UpdateNewOrderViewModel
+    private lateinit var priceListViewModel:OrderTaxiViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
     private  var _binding: FragmentRegionDriwerInfoBinding? = null
     private val binding get() = _binding!!
@@ -92,7 +96,7 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     ): View {
         _binding= FragmentRegionDriwerInfoBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(UpdateNewOrderViewModel::class.java)
-
+        priceListViewModel=ViewModelProvider(this).get(OrderTaxiViewModel::class.java)
         activity?.statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
             ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
@@ -141,11 +145,27 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
 
     private fun booking(){
         binding.apply {
+
+
+            priceListViewModel.getRouteTariffPrices(headerMapUniversal(requireContext()),order.tariff_type, order.start_point.toString(), order.end_point.toString())
+
+            priceListViewModel.placeList.observe(viewLifecycleOwner, {
+                arrayList=it as ArrayList<RouteTariffPlaceListModel>
+            })
             selectPlaceCardView.setOnClickListener {
+                if (arrayList.isEmpty()){
+                    Toast.makeText(
+                        context,
+                        "Seat prices not found, please check your internet",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
                 otherOption=content.other_options[args.selectedPosition]
                 DialogChooseSeats(
                     otherOption,
-                    content.order,
+                    arrayList,
                     this@FragmentRegionDriverInfo
                 ).show(
                     parentFragmentManager,
@@ -181,14 +201,17 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     private var driverId:Int=-11
     private lateinit var otherOption: OtherOption
     private var location=""
-    private lateinit var content:Content
+    private lateinit var order: Order
+    private lateinit var content: Content
+    private var arrayList=ArrayList<RouteTariffPlaceListModel>()
     @SuppressLint("SetTextI18n")
+
     private fun imageTextSetter(){
         shareViewModel.mutableSearchItem.observe(viewLifecycleOwner,  {
             content=it
-            orderId=it.order.id.toInt()
+            orderId=it.order.id
             tariff=it.order.tariff
-
+            order=it.order
 
             binding.apply {
                 if (args.isYourRequest){
@@ -340,29 +363,29 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
         binding.apply {
             var counter=0
             for (element in it.your_request[args.selectedPosition].free_places){
-                if (element.toString()=="1"){
+                if (element.toString()=="0"){
                     counter++
                 }
             }
             freePlaces.text=counter.toString()
 
-            if (it.your_request[args.selectedPosition].free_places[0].toString()=="1"){
+            if (it.your_request[args.selectedPosition].free_places[0].toString()=="0"){
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-            if (it.your_request[args.selectedPosition].free_places[1].toString()=="1"){
+            if (it.your_request[args.selectedPosition].free_places[1].toString()=="0"){
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.your_request[args.selectedPosition].free_places[2].toString()=="1"){
+            if (it.your_request[args.selectedPosition].free_places[2].toString()=="0"){
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-            if (it.your_request[args.selectedPosition].free_places[3].toString()=="1"){
+            if (it.your_request[args.selectedPosition].free_places[3].toString()=="0"){
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
@@ -374,30 +397,30 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
 
             var counter=0
             for (element in it.other_options[args.selectedPosition].free_places){
-                if (element.toString()=="1"){
+                if (element.toString()=="0"){
                     counter++
                 }
             }
             freePlaces.text=counter.toString()
 
-            if (it.other_options[args.selectedPosition].free_places[0].toString()=="1"){
+            if (it.other_options[args.selectedPosition].free_places[0].toString()=="0"){
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.other_options[args.selectedPosition].free_places[1].toString()=="1"){
+            if (it.other_options[args.selectedPosition].free_places[1].toString()=="0"){
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.other_options[args.selectedPosition].free_places[2].toString()=="1"){
+            if (it.other_options[args.selectedPosition].free_places[2].toString()=="0"){
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-            if (it.other_options[args.selectedPosition].free_places[3].toString()=="1"){
+            if (it.other_options[args.selectedPosition].free_places[3].toString()=="0"){
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)

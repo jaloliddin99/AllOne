@@ -13,7 +13,7 @@ import com.tesseract.AllOneClient.model.home.SearchModel.YourRequest
 
 class SearchTaxiAdapter2(
     private var context: Context,
-    private var yourRequest: List<OtherOption>,
+    private var yourRequest: List<YourRequest>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<SearchTaxiAdapter2.SearchTaxisViewHolder>() {
 
@@ -24,7 +24,7 @@ class SearchTaxiAdapter2(
     }
 
     override fun onBindViewHolder(holder: SearchTaxisViewHolder, position: Int) {
-        val searchItem : OtherOption =yourRequest[position]
+        val searchItem : YourRequest =yourRequest[position]
         holder.bind(searchItem)
     }
 
@@ -34,7 +34,7 @@ class SearchTaxiAdapter2(
     inner class SearchTaxisViewHolder(private val itemBinding: LayoutSearchTaxisQueryBinding)
         : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
-        fun bind(yourRequest: OtherOption) {
+        fun bind(yourRequest: YourRequest) {
             if (yourRequest.has_luggage){
                 itemBinding.hasLuggage.text=context.getString(R.string.large_baggage)
             }else{
@@ -45,24 +45,22 @@ class SearchTaxiAdapter2(
             }else{
                 itemBinding.hasConditioner.text=context.getString(R.string.withoutConditioner)
             }
-            if (yourRequest.free_places[0].toString()=="1"){
+            if (yourRequest.free_places[0].toString()=="0"){
                 itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-
-            if (yourRequest.free_places[1].toString()=="1"){
+            if (yourRequest.free_places[1].toString()=="0"){
                 itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-
-            if (yourRequest.free_places[2].toString()=="1"){
+            if (yourRequest.free_places[2].toString()=="0"){
                 itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-            if (yourRequest.free_places[3].toString()=="1"){
+            if (yourRequest.free_places[3].toString()=="0"){
                 itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
@@ -70,7 +68,7 @@ class SearchTaxiAdapter2(
 
             var counter=0
             for (element in yourRequest.free_places){
-                if (element.toString()=="1"){
+                if (element.toString()=="0"){
                     counter++
                 }
             }

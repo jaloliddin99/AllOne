@@ -26,6 +26,7 @@ import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentPostServiceSelectionBinding
 import com.tesseract.AllOneClient.dialogs.ExtraLargeBaggage
 import com.tesseract.AllOneClient.dialogs.main.DialogShowTime
+import com.tesseract.AllOneClient.dialogs.main.DialogTariffNotFound
 import com.tesseract.AllOneClient.dialogs.main.DialogThreeBaggage
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.model.home.payments.ShareParcelModel
@@ -36,7 +37,7 @@ import java.io.ByteArrayOutputStream
 
 
 @AndroidEntryPoint
-class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
+class FragmentParcelMain : Fragment(),
     DialogShowTime.OnDaySelectListener,
     ExtraLargeBaggage.SendDataListener,
     AddBaggageImagesAdapter.OnImageClickListener {
@@ -84,6 +85,10 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         viewModel.parcelList.observe(requireActivity(), {
 
             if (it.size < 3) {
+                DialogTariffNotFound("${Common.startRegion} ${Common.startDistrict}", "${Common.endRegion} ${Common.endDistrict}")
+                    .show(parentFragmentManager, tag)
+                binding.bottomSheet.visibility=View.GONE
+                binding.loader.loader.visibility=View.GONE
                 binding.linearLayout.visibility = View.GONE
                 return@observe
             }
@@ -161,7 +166,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
         responsibleForLocationSelection()
         layoutBaggage()
         layoutDialogs()
-
         showHideEdittext()
         newParcelOrder()
         comments()
@@ -195,6 +199,7 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
                 binding.startDestinationChange.text = getString(R.string.change)
             }
         }
+
         if (Common.destination == 11) {
             if (Common.endRegionId.isNotEmpty() && Common.endDistrictId.isNotEmpty()) {
                 binding.endDestination.text = "${Common.endRegion} ${Common.endDistrict}"
@@ -263,8 +268,8 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             parentFragmentManager.let {
                 DialogThreeBaggage(
                     binding.boxImagesLayout.baggageType.text.toString(),
-                    "30x30 ",
-                    "до 500 - Грамм",
+                    getString(R.string.razmer30to30),
+                    getString(R.string.massa500),
                     binding.boxImagesLayout.price.text.toString(),
                 ).show(it, tag)
             }
@@ -273,8 +278,8 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             parentFragmentManager.let {
                 DialogThreeBaggage(
                     binding.boxImagesLayout.baggageShape1.text.toString(),
-                    "30x30 ",
-                    "до 5 - kg",
+                    getString(R.string.razmer40to40),
+                    getString(R.string.massa5kg),
                     binding.boxImagesLayout.price1.text.toString(),
                 ).show(it, tag)
             }
@@ -283,8 +288,8 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             parentFragmentManager.let {
                 DialogThreeBaggage(
                     binding.boxImagesLayout.baggageType2.text.toString(),
-                    "30x30 ",
-                    "до 10 - kg",
+                    getString(R.string.razmer50to50),
+                    getString(R.string.massa10Kg),
                     binding.boxImagesLayout.price2.text.toString(),
                 ).show(it, tag)
             }
@@ -293,8 +298,8 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             parentFragmentManager.let {
                 DialogThreeBaggage(
                     binding.boxImagesLayout.baggageType3.text.toString(),
-                    "50x50 ",
-                    "до 50 - kg",
+                    getString(R.string.razmer50to50),
+                    getString(R.string.massa50kg),
                     binding.boxImagesLayout.price3.text.toString(),
                 ).show(it, tag)
             }
@@ -363,15 +368,13 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             }
             boxImagesLayout.extraLargeBox.setOnClickListener {
 
-                parentFragmentManager.let {
-                    ExtraLargeBaggage(
-                        "50x50 ",
-                        "до 50 - kg",
-                        viewModelSeatPrices,
-                        selectedParcelPlaceBegore,
-                        this@FragmentParcelMain
-                    ).show(it, tag)
-                }
+                ExtraLargeBaggage(
+                    getString(R.string.razmer50to50),
+                    getString(R.string.massa50kg),
+                    viewModelSeatPrices,
+                    selectedParcelPlaceBegore,
+                    this@FragmentParcelMain
+                ).show(parentFragmentManager, tag)
             }
         }
 
@@ -412,12 +415,6 @@ class FragmentParcelMain : Fragment(R.layout.fragment_post_service_selection),
             val baggage = selectedSeat
             val baggagePlaces = printArray(selectedParcelPlaceBegore)
             val orderAmount = money.toString().replace(" ", "")
-
-            val details1 = mutableMapOf<String, ArrayList<String>>()
-
-            details1["baggage_photo[]"] = imageBase64
-
-
 
 
             val shareParcelModel = ShareParcelModel(

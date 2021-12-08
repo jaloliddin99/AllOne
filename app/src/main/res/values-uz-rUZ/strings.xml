@@ -538,6 +538,22 @@
     <string name="income">Daromad</string>
     <string name="get_bonus">Bonuslarni qanday yig\'ish kerak</string>
     <string name="chose_gender">Jinsni tanlang</string>
+    <string name="enter_code_you_sent">Avtorizatsiya uchun kodni kiriting</string>
+    <string name="codeIsSentIn">Kodni qayta yuboring</string>
+    <string name="enter_your_details">Tafsilotlaringizni kiriting</string>
+    <string name="places">Joylar:</string>
+    <string name="dateDot">Sana:</string>
+    <string name="newPhoneNumber">Yangi telefon raqami</string>
+    <string name="newest">eng yangi</string>
+    <string name="alphabetically">alifbo tartibida</string>
+    <string name="ascending_price">ortib borayotgan narx</string>
+    <string name="descending_price">pasayuvchi narx</string>
+    <string name="car_not_found">Bu yo\'nalishda hech qanday marshrut yo\'q!</string>
+    <string name="withoutBaggage">Yuqori yuk yo\'q</string>
+    <string name="withoutConditioner">Konditsioner yo\'q</string>
+    <string name="inside_city">Shahar ichida</string>
+    <string name="inter_regional">Viloyatlararo</string>
+    <string name="inter_national">Xalqaro</string>
 
 
 </resources>

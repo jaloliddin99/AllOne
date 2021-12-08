@@ -56,9 +56,15 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
                 viewModel.parcelSearchRequest(headerMapUniversal(requireContext()), args.orderId)
                 viewModel.parcelSearchModel.observe(viewLifecycleOwner, {
                     shareViewModel.parcelSearchItem(it)
-                    val action= FragmentLocationDirections.actionFragmentLocationToFragmentParcelSearch(args.orderId)
                     isCurrentFragment=false
-                    findNavController().navigate(action)
+                    if (it.other_options.isEmpty()&&it.your_request.isEmpty()){
+                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled()
+                        findNavController().navigate(action)
+                    }else{
+                        val action= FragmentLocationDirections.actionFragmentLocationToFragmentParcelSearch(args.orderId)
+                        findNavController().navigate(action)
+                    }
+
                 })
 
                 viewModel.parcelError.observe(viewLifecycleOwner, {
@@ -72,9 +78,14 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
                 viewModel.searchRegionTaxiOrder(headerMapUniversal(requireContext()),args.orderId)
                 viewModel.searchTaxiResponse.observe(viewLifecycleOwner, {
                     shareViewModel.searchOrder(it)
-                    val action= FragmentLocationDirections.actionFragmentLocationToFragmentSearchTaxi2()
                     isCurrentFragment2=false
-                    findNavController().navigate(action)
+                    if (it.other_options.isEmpty()&&it.your_request.isEmpty()){
+                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled()
+                        findNavController().navigate(action)
+                    }else{
+                        val action= FragmentLocationDirections.actionFragmentLocationToFragmentSearchTaxi2()
+                        findNavController().navigate(action)
+                    }
                 })
                 viewModel.interAreaError.observe(viewLifecycleOwner, {
                     Toast.makeText(context, it, Toast.LENGTH_SHORT).show()

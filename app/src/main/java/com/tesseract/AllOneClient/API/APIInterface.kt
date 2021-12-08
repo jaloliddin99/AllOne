@@ -1,5 +1,6 @@
 package com.tesseract.AllOneClient.API
 
+import com.tesseract.AllOneClient.model.ContactsModel
 import com.tesseract.AllOneClient.model.tourism.agency.agencyView.TravelAgencyView
 import com.tesseract.AllOneClient.model.tourism.agency.packageView.TravelPackageView
 import com.tesseract.AllOneClient.model.tourism.hotels.index.HotelIndex
@@ -141,6 +142,10 @@ interface APIInterface {
     ):Response<BonusMainModel>
 
 
+    @GET("contacts")
+    suspend fun getContacts(
+        @HeaderMap headers: Map<String, String>
+    ):Response<ContactsModel>
 
 
 

@@ -8,18 +8,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.DialogChooseSeatsBinding
-import com.tesseract.AllOneClient.model.home.SearchModel.Order
+import com.tesseract.AllOneClient.model.home.RouteTariffPrices.RouteTariffPlaceListModel
 import com.tesseract.AllOneClient.model.home.SearchModel.OtherOption
 
 class DialogChooseSeats(
-    val otherOption:OtherOption,
-    private val order:Order,
+    val otherOption: OtherOption,
+    private val orderTaxiList:List<RouteTariffPlaceListModel>,
     private val listener:OnDialogCloseListener
 ):DialogFragment() {
 
@@ -50,7 +49,7 @@ class DialogChooseSeats(
         savedInstanceState: Bundle?
     ): View {
         _binding= DialogChooseSeatsBinding.inflate(inflater, container, false)
-        dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background);
+        dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background)
         isCancelable = false
         return binding.root
     }
@@ -68,16 +67,16 @@ class DialogChooseSeats(
         Log.i(TAG, "onViewCreated: dialog ${otherOption.free_places}")
 
 
-        if ( otherOption.free_places[0].toString()=="1"){
+        if ( otherOption.free_places[0].toString()=="0"){
             firstSeatSelectedConst=false
         }
-        if ( otherOption.free_places[1].toString()=="1"){
+        if ( otherOption.free_places[1].toString()=="0"){
             secondSeatSelectedConst =false
         }
-        if ( otherOption.free_places[2].toString()=="1"){
+        if ( otherOption.free_places[2].toString()=="0"){
             thirdSeatSelectedConst=false
         }
-        if ( otherOption.free_places[3].toString()=="1"){
+        if ( otherOption.free_places[3].toString()=="0"){
             fourthSeatSelectedConst =false
         }
 
@@ -89,10 +88,10 @@ class DialogChooseSeats(
             dialog?.dismiss()
         }
 
-        binding.txtFirstSeat.text = SaveData.formatPhone(order.place_prices.component1())
-        binding.txtSecondSeat.text = SaveData.formatPhone(order.place_prices.component2())
-        binding.txtThirdSeat.text = SaveData.formatPhone(order.place_prices.component3())
-        binding.txtFourthSeat.text = SaveData.formatPhone(order.place_prices.component4())
+        binding.txtFirstSeat.text = SaveData.formatPhone(orderTaxiList[0].price!!)
+        binding.txtSecondSeat.text = SaveData.formatPhone(orderTaxiList[1].price!!)
+        binding.txtThirdSeat.text = SaveData.formatPhone(orderTaxiList[2].price!!)
+        binding.txtFourthSeat.text = SaveData.formatPhone(orderTaxiList[3].price!!)
         binding.continueButton.setOnClickListener {
             if (chosenSeats.size>0){
                 chosenSeats.sort()
@@ -143,7 +142,7 @@ class DialogChooseSeats(
                                 )
                             }
                         chosenSeats.remove(1)
-                        totalSum -= order.place_prices.component1().toFloat()
+                        totalSum -= orderTaxiList[0].price!!.toFloat()
                     }
                 }
             }
@@ -169,7 +168,7 @@ class DialogChooseSeats(
                             }
                         secondSeatSelected = true
                         chosenSeats.remove(2)
-                        totalSum -= order.place_prices.component2().toFloat()
+                        totalSum -= orderTaxiList[1].price!!.toFloat()
 
                     }
                 }
@@ -196,7 +195,7 @@ class DialogChooseSeats(
                             }
                         thirdSeatSelected = true
                         chosenSeats.remove(3)
-                        totalSum -= order.place_prices.component3().toFloat()
+                        totalSum -= orderTaxiList[2].price!!.toFloat()
                     }
                 }
             }
@@ -222,7 +221,7 @@ class DialogChooseSeats(
                             }
                         fourthSeatSelected = true
                         chosenSeats.remove(4)
-                        totalSum -= order.place_prices.component4().toFloat()
+                        totalSum -= orderTaxiList[3].price!!.toFloat()
 
                     }
                 }
@@ -312,7 +311,7 @@ class DialogChooseSeats(
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun firstSeatEnabled() {
         chosenSeats.add(1)
-        totalSum += order.place_prices.component1().toFloat()
+        totalSum += orderTaxiList[0].price!!.toFloat()
 
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
             binding.firstSeat.setColorFilter(
@@ -333,7 +332,7 @@ class DialogChooseSeats(
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun secondSeatEnabled() {
         chosenSeats.add(2)
-        totalSum += order.place_prices.component2().toFloat()
+        totalSum += orderTaxiList[1].price!!.toFloat()
         Log.i("total sum ", "" + totalSum)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
             binding.secondSeat.setColorFilter(
@@ -353,7 +352,7 @@ class DialogChooseSeats(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun thirdSeatEnabled() {
-        totalSum += order.place_prices.component3().toFloat()
+        totalSum += orderTaxiList[2].price!!.toFloat()
         chosenSeats.add(3)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
             binding.thirdSeat.setColorFilter(
@@ -373,7 +372,7 @@ class DialogChooseSeats(
 
     @SuppressLint("UseCompatLoadingForDrawables")
     private fun fourthSeatEnabled() {
-        totalSum += order.place_prices.component4().toFloat()
+        totalSum += orderTaxiList[2].price!!.toFloat()
         chosenSeats.add(4)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
             binding.fourthSeat.setColorFilter(

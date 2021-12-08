@@ -63,6 +63,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_padding_12dp"
+                    android:layout_marginStart="@dimen/margin_padding_12dp"
                     android:layout_weight="64"
                     android:orientation="vertical">
 
@@ -71,7 +72,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
                         android:text="@string/text"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="@dimen/text_size_18sp" />
 
                     <androidx.appcompat.widget.AppCompatTextView
@@ -80,7 +81,7 @@
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/text_2"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
@@ -115,7 +116,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"
                         android:text="@string/operator"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -125,7 +126,7 @@
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_medium"
                         android:text="г.Ташкент"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -151,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_weight="1"
-                    android:src="@drawable/ic_change_phone_num" />
+                    android:src="@drawable/ic_telegram_blue" />
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -165,8 +166,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_medium"
-                        android:text="@string/operator"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:text="@string/telegram"
+                        android:textColor="@color/black"
                         android:textSize="15sp" />
 
 
@@ -175,8 +176,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_padding_4dp"
                         android:fontFamily="@font/inter_medium"
-                        android:text="г.Ташкент"
-                        android:textColor="?android:attr/textColorPrimary"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -199,34 +199,147 @@
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_alignParentBottom="true"
-            android:layout_gravity="bottom"
-            android:elevation="50dp"
-            android:background="@color/white"
-            android:layout_height="wrap_content">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/book_now"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="0dp"
-                android:layout_marginStart="@dimen/margin_padding_16dp"
-                android:layout_marginEnd="@dimen/margin_padding_16dp"
-                android:layout_marginBottom="@dimen/margin_padding_16"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="@color/red"
-                android:padding="@dimen/margin_padding_16dp"
-                android:text="@string/cancel"
-                android:textAppearance="@style/boldStyleLight"
-                android:textSize="@dimen/text_size_18sp" />
-
-        </RelativeLayout>
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="bottom"
+        android:translationZ="@dimen/margin_padding_8dp"
+        android:background="@drawable/dark_green_top12"
+        android:elevation="@dimen/margin_padding_8dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_line"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_gravity="center"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_item"
+            android:layout_marginTop="@dimen/dimens_10dp"
+            android:layout_marginHorizontal="@dimen/margin_padding_16"
+            android:elevation="0dp"
+            app:cardCornerRadius="@dimen/margin_padding_12dp"
+            app:cardElevation="0dp">
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_padding_16dp"
+                        android:layout_marginTop="@dimen/margin_padding_16dp"
+                        android:layout_marginEnd="@dimen/margin_padding_16dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_semibold"
+                            android:id="@+id/tariff"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_size_18sp"
+                            android:textStyle="bold" />
+                        <androidx.legacy.widget.Space
+                            android:layout_width="@dimen/margin_padding_4dp"
+                            android:layout_height="wrap_content"/>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="@color/green"
+                            android:textSize="@dimen/text_size_18sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_padding_16dp"
+                        android:layout_marginBottom="@dimen/margin_padding_12dp"
+                        android:orientation="horizontal">
+
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/banned_seats"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="@string/mesto"
+                                android:textColor="@color/black"
+                                android:textSize="15sp" />
+                            <androidx.legacy.widget.Space
+                                android:layout_width="@dimen/margin_padding_4dp"
+                                android:layout_height="wrap_content"/>
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/places"
+                                android:textSize="@dimen/text_size_15sp"
+                                android:fontFamily="@font/inter_regular"
+                                android:textColor="@color/black"/>
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <Space
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_padding_8dp"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/ic_white_car" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/cancel"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_padding_16dp"
+            android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:layout_marginBottom="@dimen/margin_padding_16"
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="@color/red"
+            android:elevation="0dp"
+            android:padding="@dimen/margin_padding_16dp"
+            android:text="@string/cancel"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

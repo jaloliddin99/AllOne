@@ -133,7 +133,7 @@
                                 android:layout_weight="3"
                                 android:drawableEnd="@drawable/ic_arrow_right_green"
                                 android:drawablePadding="@dimen/margin_padding_12dp"
-                                android:fontFamily="@font/inter_medium"
+                                android:fontFamily="@font/inter_regular"
                                 android:gravity="end|center"
                                 android:text="@string/select"
                                 android:textColor="@color/green"
@@ -164,14 +164,14 @@
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
 
-                            <TextView
+                            <androidx.appcompat.widget.AppCompatTextView
                                 android:id="@+id/endDestinationTextChange"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="3"
                                 android:drawableEnd="@drawable/ic_arrow_right_green"
                                 android:drawablePadding="@dimen/margin_padding_12dp"
-                                android:fontFamily="@font/inter_medium"
+                                android:fontFamily="@font/inter_regular"
                                 android:gravity="end|center"
                                 android:text="@string/select"
                                 android:textColor="@color/green"
@@ -555,7 +555,7 @@
                     android:id="@+id/relativeView"
                     android:layout_width="match_parent"
                     android:layout_height="1400dp"
-                    android:background="#CCffffff"
+                    android:background="#FFFFFF"
                     android:elevation="50dp"
                     android:orientation="vertical"
                     android:visibility="visible">
@@ -579,60 +579,55 @@
     <include layout="@layout/loader_lottie"
         android:id="@+id/loader"/>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:id="@+id/bottomSheet"
         android:background="@drawable/dark_green_top12"
         android:backgroundTint="@color/white"
-        android:elevation="25dp">
+        android:elevation="25dp"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_line" />
+
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_marginBottom="@dimen/margin_padding_16"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/nullMoney"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/go_to_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/margin_padding_16dp"
+            android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:layout_marginBottom="@dimen/margin_padding_24dp"
+            android:alpha="0.4"
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="@color/green"
+            android:elevation="0dp"
+            android:padding="@dimen/margin_padding_16dp"
+            android:text="@string/next"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp"
+            app:elevation="0dp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_padding_12dp"
-                android:src="@drawable/ic_line" />
-
-
-            <TextView
-                android:id="@+id/text_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/line"
-                android:layout_marginStart="@dimen/margin_padding_16"
-                android:layout_marginTop="@dimen/margin_padding_12dp"
-                android:layout_marginBottom="@dimen/margin_padding_16"
-                android:fontFamily="@font/inter_bold"
-                android:text="@string/nullMoney"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/go_to_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_16dp"
-                android:layout_marginEnd="@dimen/margin_padding_16dp"
-                android:layout_marginBottom="@dimen/margin_padding_24dp"
-                android:alpha="0.4"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="@color/green"
-                android:elevation="0dp"
-                android:padding="@dimen/margin_padding_16dp"
-                android:text="@string/next"
-                android:textAppearance="@style/boldStyleLight"
-                android:textSize="@dimen/text_size_18sp"
-                app:elevation="0dp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

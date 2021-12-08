@@ -1,6 +1,5 @@
 package com.tesseract.AllOneClient.fragments.main.home.SearchTaxi
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

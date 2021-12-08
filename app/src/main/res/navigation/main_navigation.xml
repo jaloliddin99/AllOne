@@ -179,7 +179,7 @@
         tools:layout="@layout/fragment_change_language" />
     <fragment
         android:id="@+id/fragmentTechnicalSupport"
-        android:name="com.tesseract.AllOneClient.fragments.profile.FragmentTechnicalSupport"
+        android:name="com.tesseract.AllOneClient.fragments.profile.techSupport.FragmentTechnicalSupport"
         android:label="fragment_technical_support"
         tools:layout="@layout/fragment_technical_support" />
     <fragment
@@ -357,6 +357,9 @@
         android:label="fragment_search_cancelled"
         tools:layout="@layout/fragment_search_cancelled">
 
+        <argument
+            android:name="isFromRegion"
+            app:argType="boolean" />
     </fragment>
     <fragment
         android:id="@+id/fragmentRegionDriverInfo"

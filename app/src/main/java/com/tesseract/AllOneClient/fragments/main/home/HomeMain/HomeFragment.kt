@@ -72,7 +72,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         fragmentHomeBinding.drawerIcon.setOnClickListener {
             if(!drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.openDrawer(Gravity.START)
-            else drawerLayout.closeDrawer(Gravity.END);
+            else drawerLayout.closeDrawer(Gravity.END)
             drawerLayout.openDrawer(Gravity.START)
         }
 

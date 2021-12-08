@@ -44,24 +44,24 @@ class SearchTaxisAdapter(
             }else{
                 itemBinding.hasConditioner.text=context.getString(R.string.withoutConditioner)
             }
-            if (yourRequest.free_places[0].toString()=="1"){
+            if (yourRequest.free_places[0].toString()=="0"){
                 itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (yourRequest.free_places[1].toString()=="1"){
+            if (yourRequest.free_places[1].toString()=="0"){
                 itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (yourRequest.free_places[2].toString()=="1"){
+            if (yourRequest.free_places[2].toString()=="0"){
                 itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
-            if (yourRequest.free_places[3].toString()=="1"){
+            if (yourRequest.free_places[3].toString()=="0"){
                 itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
                 itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
@@ -69,7 +69,7 @@ class SearchTaxisAdapter(
 
             var counter=0
             for (element in yourRequest.free_places){
-                if (element.toString()=="1"){
+                if (element.toString()=="0"){
                     counter++
                 }
             }

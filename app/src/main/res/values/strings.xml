@@ -705,6 +705,9 @@
     <string name="car_not_found">По этому направлению нет маршрутов!</string>
     <string name="withoutBaggage">Без верхнего багажа</string>
     <string name="withoutConditioner">Нет кондиционера</string>
+    <string name="inside_city">Внутри города</string>
+    <string name="inter_regional">Межобластная</string>
+    <string name="inter_national">Международная</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

@@ -47,7 +47,6 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="AJR Loyihasi"
             android:id="@+id/title"
             android:layout_marginTop="@dimen/margin_padding_12dp"
             android:layout_gravity="center"
@@ -80,20 +79,18 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/card_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/inter_semibold"
-                    android:text="8600 0304 0504 9696"
                     android:textColor="@color/black"
-                    android:id="@+id/card_number"
                     android:textSize="@dimen/text_size_15sp" />
 
                 <TextView
+                    android:id="@+id/cardholder_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/cardholder_name"
                     android:fontFamily="@font/inter_regular"
-                    android:text="Sardor Rahimxon"
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_13sp" />
 

@@ -539,6 +539,22 @@
     <string name="income">Earnings</string>
     <string name="get_bonus">How to collect bonuses</string>
     <string name="chose_gender">Choose gender</string>
+    <string name="enter_code_you_sent">" Enter the code for authorization"</string>
+    <string name="codeIsSentIn">Send code again</string>
+    <string name="enter_your_details">Enter your details</string>
+    <string name="places">Places:</string>
+    <string name="dateDot">Date:</string>
+    <string name="newPhoneNumber">New phone number</string>
+    <string name="newest">newest</string>
+    <string name="alphabetically">alphabetically</string>
+    <string name="ascending_price">rising price</string>
+    <string name="descending_price">descending price</string>
+    <string name="car_not_found">There are no routes in this direction!</string>
+    <string name="withoutBaggage">No overhead luggage</string>
+    <string name="withoutConditioner">No air conditioner</string>
+    <string name="inside_city">Inside the city</string>
+    <string name="inter_regional">Interregional</string>
+    <string name="inter_national">International</string>
 
 
 </resources>
