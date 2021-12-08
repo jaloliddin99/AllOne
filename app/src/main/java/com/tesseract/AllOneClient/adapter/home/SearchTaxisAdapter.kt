@@ -37,34 +37,34 @@ class SearchTaxisAdapter(
             if (yourRequest.has_luggage){
                 itemBinding.hasLuggage.text=context.getString(R.string.large_baggage)
             }else{
-                itemBinding.hasLuggage.text=""
+                itemBinding.hasLuggage.text=context.getString(R.string.withoutBaggage)
             }
             if (yourRequest.has_conditioner){
                 itemBinding.hasConditioner.text=context.getString(R.string.has_air_conditioner)
             }else{
-                itemBinding.hasConditioner.text=""
+                itemBinding.hasConditioner.text=context.getString(R.string.withoutConditioner)
             }
-            if (yourRequest.free_places[0].toString()=="0"){
-                itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
-            }else{
+            if (yourRequest.free_places[0].toString()=="1"){
                 itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                itemBinding.rec1.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (yourRequest.free_places[1].toString()=="0"){
-                itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
-            }else{
+            if (yourRequest.free_places[1].toString()=="1"){
                 itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                itemBinding.rec4.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (yourRequest.free_places[2].toString()=="0"){
-                itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
-            }else{
+            if (yourRequest.free_places[2].toString()=="1"){
                 itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
-            }
-            if (yourRequest.free_places[3].toString()=="0"){
-                itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN);
             }else{
+                itemBinding.rec3.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+            if (yourRequest.free_places[3].toString()=="1"){
                 itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                itemBinding.rec2.setColorFilter(ContextCompat.getColor(context, R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
             var counter=0

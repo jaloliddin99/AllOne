@@ -18,7 +18,10 @@ import com.tesseract.AllOneClient.databinding.FragmentSearchTaxisBinding
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.model.home.SearchModel.Content
 import com.tesseract.AllOneClient.model.home.SearchModel.YourRequest
+import com.tesseract.AllOneClient.utils.gotoContact
+import com.tesseract.AllOneClient.utils.gotoTelegram
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.reuse_search_for_order_bottom.*
 
 @AndroidEntryPoint
 class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
@@ -55,6 +58,7 @@ class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
             binding.recyclerViewOptions.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.recyclerViewOptions.adapter = searchTaxiAdapter2
+
         })
     }
     @SuppressLint("SetTextI18n")
@@ -64,6 +68,12 @@ class FragmentSearchTaxi : Fragment(R.layout.fragment_search_taxis),
             tariff.text=it.order.tariff
             places.text=it.order.places
             price.text=SaveData.formatPhone(it.order.price)+requireContext().getString(R.string.summa1)
+            forBottom.telegram.setOnClickListener {
+                gotoTelegram("@allone_call_center", requireContext())
+            }
+            forBottom.call.setOnClickListener {
+                gotoContact("+998330070079", requireContext())
+            }
         }
     }
 

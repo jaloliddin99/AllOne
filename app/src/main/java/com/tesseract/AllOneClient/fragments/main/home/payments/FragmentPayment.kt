@@ -327,7 +327,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
                     " used_bonus $usedBonus,\n" +
                     " bonus_amount $bonusAmount\norderAmount $moneyTotalPrice" +
                     "\n baggageAmount $baggageTotalAmount \n" +
-                    "comment $comment\n  cardData ${getCardData[binding.PagerUzCard.currentItem].id!!}"
+                    "comment $comment\n  cardData "
         )
         binding.loader.loader.visibility=View.VISIBLE
         viewModel.interAreaNewOrder(
@@ -352,7 +352,7 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             moneyTotalPrice,
             if (baggageTotalAmount.isEmpty()) 0.0 else baggageTotalAmount.toDouble(),
             comment,
-            getCardData[binding.PagerUzCard.currentItem].id!!
+            if (paymentType=="card") getCardData[binding.PagerUzCard.currentItem].id!! else 1
         )
         SaveData.isCurrentFragment = true
     }

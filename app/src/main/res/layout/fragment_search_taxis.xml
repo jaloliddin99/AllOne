@@ -150,18 +150,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="Стандарт: "
                             android:id="@+id/tariff"
                             android:textColor="@color/black"
                             android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
-
+                        <androidx.legacy.widget.Space
+                            android:layout_width="@dimen/margin_padding_4dp"
+                            android:layout_height="wrap_content"/>
                         <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/price"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/inter_semibold"
-                            android:text="@string/_120_000"
                             android:textColor="@color/green"
                             android:textSize="@dimen/text_size_18sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -187,10 +187,12 @@
                                 android:text="@string/mesto"
                                 android:textColor="@color/black"
                                 android:textSize="15sp" />
+                            <androidx.legacy.widget.Space
+                                android:layout_width="@dimen/margin_padding_4dp"
+                                android:layout_height="wrap_content"/>
                             <androidx.appcompat.widget.AppCompatTextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text=" #1, #2"
                                 android:id="@+id/places"
                                 android:textSize="@dimen/text_size_15sp"
                                 android:fontFamily="@font/inter_regular"

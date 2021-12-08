@@ -207,8 +207,8 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
                     location=it.your_request[args.selectedPosition].driver_last_location
                 }else{
                     otherOptions(it)
-                    driverId=it.your_request[args.selectedPosition].id
-                    location=it.your_request[args.selectedPosition].driver_last_location
+                    driverId=it.other_options[args.selectedPosition].id
+                    location=it.other_options[args.selectedPosition].driver_last_location
                     selectPlaceCardView.visibility=View.VISIBLE
                     placeNotAccording.visibility=View.VISIBLE
                     materialCardView.visibility=View.GONE
@@ -218,7 +218,8 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
                     driverLocation.text=it.other_options[args.selectedPosition].driver_location
                     driverRating.text=it.other_options[args.selectedPosition].driver_rating.toString()
                 }
-                regionDriverInfoAdapter= RegionDriverInfoAdapter(it.your_request[args.selectedPosition].driver_car_photos, this@FragmentRegionDriverInfo)
+                regionDriverInfoAdapter= RegionDriverInfoAdapter(if (args.isYourRequest) it.your_request[args.selectedPosition].driver_car_photos
+                else it.other_options[args.selectedPosition].driver_car_photos, this@FragmentRegionDriverInfo)
                 recyclerCarImages.adapter=regionDriverInfoAdapter
                 recyclerCarImages.setHasFixedSize(true)
 
@@ -334,26 +335,6 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     }
 
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        when (requestCode) {
-            MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                    if (!isGPS) {
-                        showSettingsAlert()
-                    }
-                }
-                return
-            }
-        }
-    }
-
 
     private fun yourRequest(it: Content){
         binding.apply {
@@ -365,26 +346,26 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             }
             freePlaces.text=counter.toString()
 
-            if (it.your_request[args.selectedPosition].free_places[0].toString()=="0"){
-                rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-            }else{
+            if (it.your_request[args.selectedPosition].free_places[0].toString()=="1"){
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
-            }
-            if (it.your_request[args.selectedPosition].free_places[1].toString()=="0"){
-                rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
+                rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+            if (it.your_request[args.selectedPosition].free_places[1].toString()=="1"){
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.your_request[args.selectedPosition].free_places[2].toString()=="0"){
-                rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-            }else{
+            if (it.your_request[args.selectedPosition].free_places[2].toString()=="1"){
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
-            }
-            if (it.your_request[args.selectedPosition].free_places[3].toString()=="0"){
-                rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
+                rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+            if (it.your_request[args.selectedPosition].free_places[3].toString()=="1"){
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
         }
     }
@@ -399,27 +380,27 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             }
             freePlaces.text=counter.toString()
 
-            if (it.other_options[args.selectedPosition].free_places[0].toString()=="0"){
-                rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-            }else{
+            if (it.other_options[args.selectedPosition].free_places[0].toString()=="1"){
                 rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                rec1.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.other_options[args.selectedPosition].free_places[1].toString()=="0"){
-                rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-            }else{
+            if (it.other_options[args.selectedPosition].free_places[1].toString()=="1"){
                 rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                rec4.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
 
-            if (it.other_options[args.selectedPosition].free_places[2].toString()=="0"){
-                rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
-            }else{
+            if (it.other_options[args.selectedPosition].free_places[2].toString()=="1"){
                 rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
-            }
-            if (it.other_options[args.selectedPosition].free_places[3].toString()=="0"){
-                rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }else{
+                rec3.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
+            }
+            if (it.other_options[args.selectedPosition].free_places[3].toString()=="1"){
                 rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
+            }else{
+                rec2.setColorFilter(ContextCompat.getColor(requireContext(), R.color.red), android.graphics.PorterDuff.Mode.SRC_IN)
             }
         }
     }

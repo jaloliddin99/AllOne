@@ -187,6 +187,10 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/text_size_15sp" />
 
+                <androidx.legacy.widget.Space
+                    android:layout_width="@dimen/margin_padding_4dp"
+                    android:layout_height="wrap_content"/>
+
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/baggage"
                     android:layout_width="wrap_content"

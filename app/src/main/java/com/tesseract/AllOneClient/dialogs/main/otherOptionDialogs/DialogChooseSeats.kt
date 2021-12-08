@@ -37,7 +37,8 @@ class DialogChooseSeats(
     private var totalSum: Float = 0f
 
 
-    private var binding: DialogChooseSeatsBinding? = null
+    private var _binding: DialogChooseSeatsBinding? = null
+    private val binding get() = _binding!!
 
     interface OnDialogCloseListener{
         fun selectedSeatsInformation(selectedPositions: ArrayList<Int>, totalSum: Float, userSeatIsSelected:Boolean)
@@ -48,10 +49,10 @@ class DialogChooseSeats(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding= DialogChooseSeatsBinding.inflate(inflater, container, false)
+        _binding= DialogChooseSeatsBinding.inflate(inflater, container, false)
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.bg_white_background);
         isCancelable = false
-        return binding!!.root
+        return binding.root
     }
 
 
@@ -65,6 +66,8 @@ class DialogChooseSeats(
         super.onViewCreated(view, savedInstanceState)
 
         Log.i(TAG, "onViewCreated: dialog ${otherOption.free_places}")
+
+
         if ( otherOption.free_places[0].toString()=="1"){
             firstSeatSelectedConst=false
         }
@@ -79,19 +82,18 @@ class DialogChooseSeats(
         }
 
 
-        binding?.cancelImage?.setOnClickListener {
+        binding.cancelImage.setOnClickListener {
             chosenSeats.clear()
             totalSum = 0f
             listener.selectedSeatsInformation(chosenSeats, totalSum, false)
             dialog?.dismiss()
         }
 
-        binding?.txtFirstSeat?.text = SaveData.formatPhone(order.place_prices.component1())
-
-        binding?.txtSecondSeat?.text = SaveData.formatPhone(order.place_prices.component2())
-        binding?.txtThirdSeat?.text = SaveData.formatPhone(order.place_prices.component3())
-        binding?.txtFourthSeat?.text = SaveData.formatPhone(order.place_prices.component4())
-        binding?.continueButton?.setOnClickListener {
+        binding.txtFirstSeat.text = SaveData.formatPhone(order.place_prices.component1())
+        binding.txtSecondSeat.text = SaveData.formatPhone(order.place_prices.component2())
+        binding.txtThirdSeat.text = SaveData.formatPhone(order.place_prices.component3())
+        binding.txtFourthSeat.text = SaveData.formatPhone(order.place_prices.component4())
+        binding.continueButton.setOnClickListener {
             if (chosenSeats.size>0){
                 chosenSeats.sort()
                 listener.selectedSeatsInformation(chosenSeats, totalSum, true)
@@ -116,8 +118,9 @@ class DialogChooseSeats(
             fourthSeatDisabled()
         }
     }
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun clickListeners(){
-        binding?.apply {
+        binding.apply {
             firstSeat.setOnClickListener {
                 if (!firstSeatSelectedConst){
                     if (firstSeatSelected) {
@@ -125,17 +128,17 @@ class DialogChooseSeats(
                     } else {
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.firstSeat?.setColorFilter(
+                                binding.firstSeat.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
-                        binding?.firstSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
-                        binding?.firstSeatText?.setTextColor(Color.BLACK)
+                        binding.firstSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
+                        binding.firstSeatText.setTextColor(Color.BLACK)
                         firstSeatSelected = true
-                        binding?.numOne?.setTextColor(requireContext().getColor(R.color.dark_grey))
+                        binding.numOne.setTextColor(requireContext().getColor(R.color.dark_grey))
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.checkOne?.setColorFilter(
+                                binding.checkOne.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
@@ -151,16 +154,16 @@ class DialogChooseSeats(
                     } else {
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.secondSeat?.setColorFilter(
+                                binding.secondSeat.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
-                        binding?.secondSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
-                        binding?.secondSeatText?.setTextColor(Color.BLACK)
-                        binding?.numTwo?.setTextColor(requireContext().getColor(R.color.dark_grey))
+                        binding.secondSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
+                        binding.secondSeatText.setTextColor(Color.BLACK)
+                        binding.numTwo.setTextColor(requireContext().getColor(R.color.dark_grey))
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.checkTwo?.setColorFilter(
+                                binding.checkTwo.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
@@ -178,16 +181,16 @@ class DialogChooseSeats(
                     } else {
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.thirdSeat?.setColorFilter(
+                                binding.thirdSeat.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
-                        binding?.thirdSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
-                        binding?.thirdSeatText?.setTextColor(Color.BLACK)
-                        binding?.numThree?.setTextColor(requireContext().getColor(R.color.dark_grey))
+                        binding.thirdSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
+                        binding.thirdSeatText.setTextColor(Color.BLACK)
+                        binding.numThree.setTextColor(requireContext().getColor(R.color.dark_grey))
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.checkThree?.setColorFilter(
+                                binding.checkThree.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
@@ -204,16 +207,16 @@ class DialogChooseSeats(
                     } else {
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.fourthSeat?.setColorFilter(
+                                binding.fourthSeat.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
-                        binding?.fourthSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
-                        binding?.fourthSeatText?.setTextColor(Color.BLACK)
-                        binding?.numFour?.setTextColor(requireContext().getColor(R.color.dark_grey))
+                        binding.fourthSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image_unchecked))
+                        binding.fourthSeatText.setTextColor(Color.BLACK)
+                        binding.numFour.setTextColor(requireContext().getColor(R.color.dark_grey))
                         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }
                             ?.let { it2 ->
-                                binding?.checkFour?.setColorFilter(
+                                binding.checkFour.setColorFilter(
                                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                                 )
                             }
@@ -235,16 +238,16 @@ class DialogChooseSeats(
     private fun firstSeatDisabled() {
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.red) }
             ?.let { it2 ->
-                binding?.firstSeat?.setColorFilter(
+                binding.firstSeat.setColorFilter(
                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
-        binding?.firstSeatRadio?.setImageDrawable(null)
-        binding?.firstSeatText?.setTextColor(Color.BLACK)
+        binding.firstSeatRadio.setImageDrawable(null)
+        binding.firstSeatText.setTextColor(Color.BLACK)
         firstSeatSelected = true
-        binding?.numOne?.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.numOne.setTextColor(requireContext().getColor(R.color.dark_grey))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }?.let { it2 ->
-            binding?.checkOne?.setColorFilter(
+            binding.checkOne.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
@@ -253,16 +256,16 @@ class DialogChooseSeats(
     private fun secondSeatDisabled() {
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.red) }
             ?.let { it2 ->
-                binding?.secondSeat?.setColorFilter(
+                binding.secondSeat.setColorFilter(
                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
-        binding?.secondSeatRadio?.setImageDrawable(null)
-        binding?.secondSeatText?.setTextColor(Color.BLACK)
+        binding.secondSeatRadio.setImageDrawable(null)
+        binding.secondSeatText.setTextColor(Color.BLACK)
         secondSeatSelected = true
-        binding?.numTwo?.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.numTwo.setTextColor(requireContext().getColor(R.color.dark_grey))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }?.let { it2 ->
-            binding?.checkTwo?.setColorFilter(
+            binding.checkTwo.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
@@ -272,16 +275,16 @@ class DialogChooseSeats(
     private fun thirdSeatDisabled() {
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.red) }
             ?.let { it2 ->
-                binding?.thirdSeat?.setColorFilter(
+                binding.thirdSeat.setColorFilter(
                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
-        binding?.thirdSeatRadio?.setImageDrawable(null)
-        binding?.thirdSeatText?.setTextColor(Color.BLACK)
+        binding.thirdSeatRadio.setImageDrawable(null)
+        binding.thirdSeatText.setTextColor(Color.BLACK)
         thirdSeatSelected = true
-        binding?.numThree?.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.numThree.setTextColor(requireContext().getColor(R.color.dark_grey))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }?.let { it2 ->
-            binding?.checkThree?.setColorFilter(
+            binding.checkThree.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
@@ -290,57 +293,59 @@ class DialogChooseSeats(
     private fun fourthSeatDisabled() {
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.red) }
             ?.let { it2 ->
-                binding?.fourthSeat?.setColorFilter(
+                binding.fourthSeat.setColorFilter(
                     it2, android.graphics.PorterDuff.Mode.SRC_IN
                 )
             }
-        binding?.fourthSeatRadio?.setImageDrawable(null)
-        binding?.fourthSeatText?.setTextColor(Color.BLACK)
+        binding.fourthSeatRadio.setImageDrawable(null)
+        binding.fourthSeatText.setTextColor(Color.BLACK)
         fourthSeatSelected = true
-        binding?.numFour?.setTextColor(requireContext().getColor(R.color.dark_grey))
+        binding.numFour.setTextColor(requireContext().getColor(R.color.dark_grey))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.dark_grey) }?.let { it2 ->
-            binding?.checkFour?.setColorFilter(
+            binding.checkFour.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
 
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun firstSeatEnabled() {
         chosenSeats.add(1)
         totalSum += order.place_prices.component1().toFloat()
 
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.firstSeat?.setColorFilter(
+            binding.firstSeat.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
-        binding?.firstSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
-        binding?.firstSeatText?.setTextColor(Color.WHITE)
+        binding.firstSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
+        binding.firstSeatText.setTextColor(Color.WHITE)
         firstSeatSelected = false
-        binding?.numOne?.setTextColor(requireContext().getColor(R.color.green))
+        binding.numOne.setTextColor(requireContext().getColor(R.color.green))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.checkOne?.setColorFilter(
+            binding.checkOne.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun secondSeatEnabled() {
         chosenSeats.add(2)
         totalSum += order.place_prices.component2().toFloat()
         Log.i("total sum ", "" + totalSum)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.secondSeat?.setColorFilter(
+            binding.secondSeat.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
-        binding?.secondSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
-        binding?.secondSeatText?.setTextColor(Color.WHITE)
+        binding.secondSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
+        binding.secondSeatText.setTextColor(Color.WHITE)
         secondSeatSelected = false
-        binding?.numTwo?.setTextColor(requireContext().getColor(R.color.green))
+        binding.numTwo.setTextColor(requireContext().getColor(R.color.green))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.checkTwo?.setColorFilter(
+            binding.checkTwo.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
@@ -351,38 +356,44 @@ class DialogChooseSeats(
         totalSum += order.place_prices.component3().toFloat()
         chosenSeats.add(3)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.thirdSeat?.setColorFilter(
+            binding.thirdSeat.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
-        binding?.thirdSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
-        binding?.thirdSeatText?.setTextColor(Color.WHITE)
-        binding?.numThree?.setTextColor(requireContext().getColor(R.color.green))
+        binding.thirdSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
+        binding.thirdSeatText.setTextColor(Color.WHITE)
+        binding.numThree.setTextColor(requireContext().getColor(R.color.green))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.checkThree?.setColorFilter(
+            binding.checkThree.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
         thirdSeatSelected = false
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     private fun fourthSeatEnabled() {
         totalSum += order.place_prices.component4().toFloat()
         chosenSeats.add(4)
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.fourthSeat?.setColorFilter(
+            binding.fourthSeat.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
-        binding?.fourthSeatRadio?.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
-        binding?.fourthSeatText?.setTextColor(Color.WHITE)
-        binding?.numFour?.setTextColor(requireContext().getColor(R.color.green))
+        binding.fourthSeatRadio.setImageDrawable(context?.getDrawable(R.drawable.ic_radio_image))
+        binding.fourthSeatText.setTextColor(Color.WHITE)
+        binding.numFour.setTextColor(requireContext().getColor(R.color.green))
         context?.let { it1 -> ContextCompat.getColor(it1, R.color.green) }?.let { it2 ->
-            binding?.checkFour?.setColorFilter(
+            binding.checkFour.setColorFilter(
                 it2, android.graphics.PorterDuff.Mode.SRC_IN
             )
         }
         fourthSeatSelected = false
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

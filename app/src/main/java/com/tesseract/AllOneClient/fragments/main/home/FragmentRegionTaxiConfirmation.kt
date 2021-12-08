@@ -50,8 +50,6 @@ class FragmentRegionTaxiConfirmation: Fragment(), DialogOrderCancelled.OnLickLis
                 override fun onTick(millisUntilFinished: Long) {
                     val progress=(1.0-millisUntilFinished.toDouble()/time.toDouble())*100
 
-                    Log.i("TAG", "onTick: $progress")
-
                     wrongProgress.progress= progress.toFloat()
                 }
 
@@ -75,7 +73,7 @@ class FragmentRegionTaxiConfirmation: Fragment(), DialogOrderCancelled.OnLickLis
                     if (direction=="cancelled"){
                         DialogOrderCancelled(this).show(parentFragmentManager, tag)
                     }
-                    if (direction=="accepted"){
+                    if (direction=="driver_appointed"){
                         val action=FragmentRegionTaxiConfirmationDirections.actionFragmentRegionTaxiConfirmationToFragmentRegionTaxiConfirmation2(this.args.tariff, this.args.orderId, this.args.driverId)
                         findNavController().navigate(action)
                     }
