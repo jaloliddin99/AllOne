@@ -17,7 +17,7 @@ class FragmentGetBonusText : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentGetBonusBinding.inflate(inflater, container, false)
 
         return binding.root

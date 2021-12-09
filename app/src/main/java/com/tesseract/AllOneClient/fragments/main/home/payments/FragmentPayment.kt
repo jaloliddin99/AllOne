@@ -27,6 +27,7 @@ import com.tesseract.AllOneClient.utils.dipToPixels
 import com.tesseract.AllOneClient.utils.getNavOptions
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
@@ -108,8 +109,12 @@ class FragmentPayment : Fragment(), DialogBonusMoney.OnBonusSelected {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        viewModel2.cardDataList.observe(requireActivity(), {
-            binding.loader.loader.visibility=View.GONE
+        viewModel2.cardDataList.observe(viewLifecycleOwner, {
+            try {
+                binding.loader.loader.visibility=View.GONE
+            }catch (e:Exception){
+
+            }
             binding.apply {
                 if (it.isNotEmpty()) {
                     PagerUzCard.visibility = View.VISIBLE

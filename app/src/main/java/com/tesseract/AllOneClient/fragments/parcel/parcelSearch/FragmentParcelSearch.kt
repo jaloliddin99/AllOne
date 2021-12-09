@@ -96,8 +96,6 @@ class FragmentParcelSearch:Fragment(),ParcelSearchFoundTopAdapter.OnItemClickLis
             tariff.text=it.order.tariff
             orderId.text="${requireContext().getString(R.string.orderrr)} ${it.order.id}"
             price.text= SaveData.formatPhone(it.order.price)+requireContext().getString(R.string.summa1)
-
-
         }
     }
 

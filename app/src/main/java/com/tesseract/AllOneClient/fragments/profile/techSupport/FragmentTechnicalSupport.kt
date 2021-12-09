@@ -15,6 +15,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.databinding.FragmentTechnicalSupportBinding
 import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.gotoTelegram
+import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import java.lang.Exception
@@ -44,6 +45,7 @@ class FragmentTechnicalSupport:Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.contacts(headerMapUniversal(requireContext()))
         viewModel.contactError.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             binding.loader.loader.visibility=View.GONE

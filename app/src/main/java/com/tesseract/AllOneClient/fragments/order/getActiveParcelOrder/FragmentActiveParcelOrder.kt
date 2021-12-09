@@ -121,7 +121,7 @@ class FragmentActiveParcelOrder : Fragment() {
                 binding.userSeats.visibility=View.VISIBLE
 
                 if (!it.placePrices?.firstPlace.isNullOrEmpty()){
-                    binding.cardUserSeats.txtFirstSeat.text="№1 -  ${SaveData.formatPhone(it.placePrices?.firstPlace!!)} ${requireContext().getString(R.string.summa1)}"
+                    binding.cardUserSeats.txtFirstSeat.text="№1 - ${SaveData.formatPhone(it.placePrices?.firstPlace!!)} ${requireContext().getString(R.string.summa1)}"
                     binding.cardUserSeats.firstSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
                 }else{
                     binding.cardUserSeats.txtFirstSeat.visibility=View.GONE
@@ -129,7 +129,7 @@ class FragmentActiveParcelOrder : Fragment() {
 
                 }
                 if (!it.placePrices?.secondPlace.isNullOrEmpty()){
-                    binding.cardUserSeats.txtSecondSeat.text="№2 -  ${SaveData.formatPhone(it.placePrices?.secondPlace!!)} ${requireContext().getString(R.string.summa1)}"
+                    binding.cardUserSeats.txtSecondSeat.text="№2 - ${SaveData.formatPhone(it.placePrices?.secondPlace!!)} ${requireContext().getString(R.string.summa1)}"
                     binding.cardUserSeats.secondSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
                 }else{
                     binding.cardUserSeats.txtSecondSeat.visibility=View.GONE
@@ -138,7 +138,7 @@ class FragmentActiveParcelOrder : Fragment() {
                 }
 
                 if (!it.placePrices?.thirdPlace.isNullOrEmpty()){
-                    binding.cardUserSeats.txtThirdSeat.text="№3 -  ${SaveData.formatPhone(it.placePrices?.thirdPlace!!)} ${requireContext().getString(R.string.summa1)}"
+                    binding.cardUserSeats.txtThirdSeat.text="№3 - ${SaveData.formatPhone(it.placePrices?.thirdPlace!!)} ${requireContext().getString(R.string.summa1)}"
                     binding.cardUserSeats.thirdSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                 }else{
                     binding.cardUserSeats.txtThirdSeat.visibility=View.GONE
@@ -146,7 +146,7 @@ class FragmentActiveParcelOrder : Fragment() {
 
                 }
                 if (!it.placePrices?.fourthPlace.isNullOrEmpty()){
-                    binding.cardUserSeats.txtFourthSeat.text="№4 -  ${SaveData.formatPhone(it.placePrices?.fourthPlace!!)} ${requireContext().getString(R.string.summa1)}"
+                    binding.cardUserSeats.txtFourthSeat.text="№4 - ${SaveData.formatPhone(it.placePrices?.fourthPlace!!)} ${requireContext().getString(R.string.summa1)}"
                     binding.cardUserSeats.fourthSeat.setColorFilter(ContextCompat.getColor(requireContext(), R.color.green), android.graphics.PorterDuff.Mode.SRC_IN)
                 }else{
                     binding.cardUserSeats.txtFourthSeat.visibility=View.GONE
@@ -191,9 +191,6 @@ class FragmentActiveParcelOrder : Fragment() {
             findNavController().popBackStack()
         }
 
-        binding.showFromMap.setOnClickListener {
-
-        }
     }
 
 

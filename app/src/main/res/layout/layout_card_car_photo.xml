@@ -7,8 +7,9 @@
     android:layout_marginEnd="@dimen/margin_padding_12dp"
     android:layout_width="147dp"
     app:cardCornerRadius="@dimen/margin_padding_12dp"
+    app:cardElevation="@dimen/dimens_0dp"
     android:layout_height="87dp">
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:id="@+id/car_image"
         android:layout_height="wrap_content"

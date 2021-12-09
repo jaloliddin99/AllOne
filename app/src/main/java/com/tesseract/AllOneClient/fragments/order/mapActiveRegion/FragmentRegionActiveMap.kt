@@ -131,11 +131,11 @@ class FragmentRegionActiveMap : Fragment(), OnMapReadyCallback, DialogDriverRati
             driverTelegram=it.driverTelegram!!
             driverId= it.driverId?.toInt()!!
 
-            setSelectedPrices(it.placePrices!!)
-            val pickup = LatLng(pickupLatLng.split(",")[0].toDouble(), pickupLatLng.split(",")[1].toDouble())
-            mMap.addMarker(MarkerOptions().position(pickup).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_my_location_on_map)))
-            val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(pickup, value)
-            mMap.animateCamera(update)
+//            setSelectedPrices(it.placePrices!!)
+//            val pickup = LatLng(pickupLatLng.split(",")[0].toDouble(), pickupLatLng.split(",")[1].toDouble())
+//            mMap.addMarker(MarkerOptions().position(pickup).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_my_location_on_map)))
+//            val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(pickup, value)
+//            mMap.animateCamera(update)
 
             val driverLocation = LatLng(driverLastLocation.split(",")[0].toDouble(), driverLastLocation.split(",")[1].toDouble())
             mMap.addMarker(MarkerOptions().position(driverLocation).icon(context?.bitmapDescriptorFromVector(R.drawable.ic_car_top_30_degree)))

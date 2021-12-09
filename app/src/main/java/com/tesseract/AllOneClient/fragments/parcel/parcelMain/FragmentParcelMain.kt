@@ -93,6 +93,8 @@ class FragmentParcelMain : Fragment(),
                 return@observe
             }
 
+            binding.bottomSheet.visibility=View.VISIBLE
+
             firstSeat =
                 if (it[0].parcel == "small") it[0].price.toString() else if (it[1].parcel == "small") it[1].price.toString() else it[2].price.toString()
             secondSeat =
@@ -329,6 +331,8 @@ class FragmentParcelMain : Fragment(),
                     updateTotalMoney()
                 }
 
+                makeButtonGreen()
+
             }
             binding.boxImagesLayout.middleBox.setOnClickListener {
                 if (isSecondBoxChecked) {
@@ -347,6 +351,7 @@ class FragmentParcelMain : Fragment(),
                     invalidateFirst()
                     updateTotalMoney()
                 }
+                makeButtonGreen()
             }
             binding.boxImagesLayout.largeBox.setOnClickListener {
                 if (isThirdBoxChecked) {
@@ -365,6 +370,7 @@ class FragmentParcelMain : Fragment(),
                     invalidateFourth()
                     updateTotalMoney()
                 }
+                makeButtonGreen()
             }
             boxImagesLayout.extraLargeBox.setOnClickListener {
 
@@ -393,6 +399,7 @@ class FragmentParcelMain : Fragment(),
     private var commentText = ""
     private var selectedLocation = ""
     private var selectedLocationDisplay = ""
+
     private fun newParcelOrder() {
         binding.goToPayment.setOnClickListener {
 
@@ -404,11 +411,24 @@ class FragmentParcelMain : Fragment(),
                 return@setOnClickListener
             }
 
+            val receiverName = binding.receiverName.text.toString()
+            val receiverPhone = binding.phoneNumber.text.toString()
+
+            if (receiverName.isEmpty()){
+                binding.receiverName.error = getString(R.string.please_enter_receiver_name)
+                return@setOnClickListener
+            }
+            if (receiverPhone.isEmpty()){
+                binding.phoneNumber.error = getString(R.string.please_enter_receiver_number)
+                return@setOnClickListener
+            }
+
+
+
             val start = Common.startDistrictId
             val end = Common.endDistrictId
             val depDate = selectedDate
-            val receiverName = binding.receiverName.text.toString()
-            val receiverPhone = binding.phoneNumber.text.toString()
+
             val hasOverheadLuggage: Boolean = binding.hasOverheadLuggage.isChecked
             val fourYourFriend: Boolean = binding.forYourFriend.isChecked
             val phoneNumber = binding.phoneNumberForOther.text.toString().replace(" ", "")
@@ -490,9 +510,15 @@ class FragmentParcelMain : Fragment(),
     }
 
     private fun makeButtonGreen(){
-        if (selectedLocation.isNotEmpty() || selectedDate.isNotEmpty() || selectedSeat.isNotEmpty()){
+        if (selectedLocation.isNotEmpty() &&
+            selectedDate.isNotEmpty() && selectedSeat.isNotEmpty()){
             binding.goToPayment.background.setColorFilter(
                 requireContext().getColor(R.color.green),
+                PorterDuff.Mode.MULTIPLY
+            )
+        }else{
+            binding.goToPayment.background.setColorFilter(
+                requireContext().getColor(R.color.dark_grey),
                 PorterDuff.Mode.MULTIPLY
             )
         }
@@ -570,6 +596,8 @@ class FragmentParcelMain : Fragment(),
                 updateTotalMoney()
                 isFourthBoxChecked = false
             }
+
+            makeButtonGreen()
         }
     }
 

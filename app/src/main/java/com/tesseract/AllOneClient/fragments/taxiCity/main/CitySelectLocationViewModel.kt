@@ -23,7 +23,7 @@ class CitySelectLocationViewModel @Inject constructor(private val repository: Ne
             repository.getSavedAddresses(token).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        savedLocations.postValue(it.body()?.getDistrictContent)
+                        savedLocations.postValue(it.body()?.getDistrictContent!!)
                     }
                 }
                 Log.i(TAG, "savedLocations Exception333: ${it.message()} ${it.code()}")
@@ -41,9 +41,9 @@ class CitySelectLocationViewModel @Inject constructor(private val repository: Ne
             repository.getLocationSearch(token, location).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        locationList.postValue(it.body()?.getDistrictContent)
+                        locationList.postValue(it.body()?.getDistrictContent!!)
                     }else{
-                        locationSearchError.postValue(it.body()?.message)
+                        locationSearchError.postValue(it.body()?.message!!)
                     }
                 }
             }

@@ -146,9 +146,6 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
     private fun booking(){
         binding.apply {
 
-
-            priceListViewModel.getRouteTariffPrices(headerMapUniversal(requireContext()),order.tariff_type, order.start_point.toString(), order.end_point.toString())
-
             priceListViewModel.placeList.observe(viewLifecycleOwner, {
                 arrayList=it as ArrayList<RouteTariffPlaceListModel>
             })
@@ -212,6 +209,14 @@ class FragmentRegionDriverInfo: Fragment(R.layout.fragment_region_driwer_info)
             orderId=it.order.id
             tariff=it.order.tariff
             order=it.order
+
+            priceListViewModel.getRouteTariffPrices(
+                headerMapUniversal(requireContext()),
+                order.tariff_type,
+                order.start_point.toString(),
+                order.end_point.toString()
+            )
+
 
             binding.apply {
                 if (args.isYourRequest){

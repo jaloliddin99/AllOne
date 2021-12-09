@@ -58,8 +58,6 @@ class FragmentOrderRegionAboutTrip: Fragment() {
             binding.loader.loader.visibility=View.GONE
             binding.amount.text=it.amount+requireContext().getString(R.string.emptySpace)+requireContext().getString(R.string.summa1)
             binding.bonusAmount.text=it.bonusAmount+it.amount+requireContext().getString(R.string.emptySpace)+requireContext().getString(R.string.summa1)
-            binding.date.text=it.time
-            binding.distance.text=it.distance
             binding.driverName.text=it.driverName
             binding.from.text=it.from
             binding.paymentType.text=it.paymentType
@@ -74,14 +72,14 @@ class FragmentOrderRegionAboutTrip: Fragment() {
 
         })
 
-        binding.mapFrom.setOnClickListener {
-            val action= FragmentOrderRegionAboutTripDirections.actionGlobalShowFromMap(fromLatlng)
-            findNavController().navigate(action)
-        }
-        binding.mapTo.setOnClickListener {
-            val action= FragmentOrderRegionAboutTripDirections.actionGlobalShowFromMap(toLatlng)
-            findNavController().navigate(action)
-        }
+//        binding.mapFrom.setOnClickListener {
+//            val action= FragmentOrderRegionAboutTripDirections.actionGlobalShowFromMap(fromLatlng)
+//            findNavController().navigate(action)
+//        }
+//        binding.mapTo.setOnClickListener {
+//            val action= FragmentOrderRegionAboutTripDirections.actionGlobalShowFromMap(toLatlng)
+//            findNavController().navigate(action)
+//        }
 
         viewModel.errorCatch.observe(requireActivity(), {
             binding.loader.loader.visibility=View.GONE

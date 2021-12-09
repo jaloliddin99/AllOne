@@ -42,6 +42,7 @@
 
     </RelativeLayout>
 
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
@@ -52,11 +53,11 @@
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:animateLayoutChanges="true"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_padding_16dp"
             android:layout_marginTop="@dimen/margin_padding_24dp"
             android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:animateLayoutChanges="true"
             android:orientation="vertical">
 
             <TextView
@@ -283,11 +284,11 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:ellipsize="end"
                                 android:fontFamily="@font/inter_medium"
+                                android:maxLines="1"
                                 android:text="@string/enter_your_address"
                                 android:textColor="@color/black"
-                                android:ellipsize="end"
-                                android:maxLines="1"
                                 android:textSize="@dimen/diment_text_size_15sp"
                                 android:textStyle="bold" />
 
@@ -318,10 +319,11 @@
                     </androidx.appcompat.widget.LinearLayoutCompat>
 
                     <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/linearLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/linearLayout"
                         android:orientation="vertical">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -331,6 +333,7 @@
                             android:textColor="?android:attr/textColorPrimary"
                             android:textSize="@dimen/text_size_18sp"
                             android:textStyle="bold" />
+
                         <include
                             android:id="@+id/box_images_layout"
                             layout="@layout/layout_order_baggage_post" />
@@ -575,7 +578,6 @@
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
 
-
     <include layout="@layout/loader_lottie"
         android:id="@+id/loader"/>
 
@@ -584,6 +586,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         android:id="@+id/bottomSheet"
+        android:visibility="gone"
         android:background="@drawable/dark_green_top12"
         android:backgroundTint="@color/white"
         android:elevation="25dp"
@@ -618,9 +621,8 @@
             android:layout_marginStart="@dimen/margin_padding_16dp"
             android:layout_marginEnd="@dimen/margin_padding_16dp"
             android:layout_marginBottom="@dimen/margin_padding_24dp"
-            android:alpha="0.4"
             android:background="@drawable/background_white_corner_12"
-            android:backgroundTint="@color/green"
+            android:backgroundTint="@color/dark_grey"
             android:elevation="0dp"
             android:padding="@dimen/margin_padding_16dp"
             android:text="@string/next"

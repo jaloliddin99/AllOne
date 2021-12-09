@@ -65,6 +65,7 @@ class FragmentRegionTaxiConfirmation: Fragment(), DialogOrderCancelled.OnLickLis
 
         val mSocket = SocketHandler.getSocket()
 
+        //manashu endpoint bilan
         mSocket.on("client_order_${args.orderId}") { args ->
             if (args[0] != null) {
                 val response = args[0] as JSONObject
@@ -73,7 +74,9 @@ class FragmentRegionTaxiConfirmation: Fragment(), DialogOrderCancelled.OnLickLis
                     if (direction=="cancelled"){
                         DialogOrderCancelled(this).show(parentFragmentManager, tag)
                     }
+                    //manashu joyini ewityapman
                     if (direction=="driver_appointed"){
+
                         val action=FragmentRegionTaxiConfirmationDirections.actionFragmentRegionTaxiConfirmationToFragmentRegionTaxiConfirmation2(this.args.tariff, this.args.orderId, this.args.driverId)
                         findNavController().navigate(action)
                     }

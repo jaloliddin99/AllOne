@@ -216,6 +216,8 @@
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_tariff"
                 android:layout_width="match_parent"
+                android:paddingBottom="@dimen/margin_padding_24dp"
+                android:clipToPadding="false"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never" />
         </RelativeLayout>

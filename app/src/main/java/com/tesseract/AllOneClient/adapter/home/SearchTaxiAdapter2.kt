@@ -13,7 +13,7 @@ import com.tesseract.AllOneClient.model.home.SearchModel.YourRequest
 
 class SearchTaxiAdapter2(
     private var context: Context,
-    private var yourRequest: List<YourRequest>,
+    private var yourRequest: List<OtherOption>,
     private val listener: OnItemClickListener
 ) : RecyclerView.Adapter<SearchTaxiAdapter2.SearchTaxisViewHolder>() {
 
@@ -24,7 +24,7 @@ class SearchTaxiAdapter2(
     }
 
     override fun onBindViewHolder(holder: SearchTaxisViewHolder, position: Int) {
-        val searchItem : YourRequest =yourRequest[position]
+        val searchItem : OtherOption =yourRequest[position]
         holder.bind(searchItem)
     }
 
@@ -34,7 +34,7 @@ class SearchTaxiAdapter2(
     inner class SearchTaxisViewHolder(private val itemBinding: LayoutSearchTaxisQueryBinding)
         : RecyclerView.ViewHolder(itemBinding.root), View.OnClickListener{
 
-        fun bind(yourRequest: YourRequest) {
+        fun bind(yourRequest: OtherOption) {
             if (yourRequest.has_luggage){
                 itemBinding.hasLuggage.text=context.getString(R.string.large_baggage)
             }else{

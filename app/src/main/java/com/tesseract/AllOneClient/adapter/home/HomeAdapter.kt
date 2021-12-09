@@ -111,9 +111,9 @@ class HomeAdapter(
             itemBinding.parcel.orderNumber.text = "№${order.id}"
             itemBinding.parcel.startDestination.text = order.from
             itemBinding.parcel.endDestination.text = order.to
-            itemBinding.parcel.beginningEndingTime.text = order.date
             itemBinding.parcel.dealMoney.text =
                 order.amount?.let { SaveData.formatPhone(it) } + " " + context.getString(com.tesseract.AllOneClient.R.string.summa1)
+            itemBinding.parcel.status.text=order.status
 
         }
 
@@ -134,6 +134,8 @@ class HomeAdapter(
             itemBinding.region.orderNumber.text ="№${order.id}"
             itemBinding.region.bannedSeats.text = order.places
             itemBinding.region.status.text = order.status
+            itemBinding.region.startDestination.text = order.from
+            itemBinding.region.endDestination.text = order.to
             itemBinding.region.dealMoney.text =
                 order.amount?.let { SaveData.formatPhone(it) } + " " + context.getString(com.tesseract.AllOneClient.R.string.summa1)
 

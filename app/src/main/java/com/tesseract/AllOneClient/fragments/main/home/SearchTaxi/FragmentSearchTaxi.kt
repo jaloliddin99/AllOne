@@ -22,6 +22,7 @@ import com.tesseract.AllOneClient.model.home.SearchModel.Content
 import com.tesseract.AllOneClient.model.home.SearchModel.YourRequest
 import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.gotoTelegram
+import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.reuse_search_for_order_bottom.*
 
@@ -49,6 +50,8 @@ class FragmentSearchTaxi : Fragment(),
         super.onViewCreated(view, savedInstanceState)
         viewModelListener()
 
+
+        viewModel.contacts(headerMapUniversal(requireContext()))
         viewModel.contactError.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
@@ -77,7 +80,7 @@ class FragmentSearchTaxi : Fragment(),
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.recyclerQuery.adapter = searchTaxisAdapter
 
-            searchTaxiAdapter2 = SearchTaxiAdapter2(requireContext(), it.your_request,  this)
+            searchTaxiAdapter2 = SearchTaxiAdapter2(requireContext(), it.other_options,  this)
             binding.recyclerViewOptions.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.recyclerViewOptions.adapter = searchTaxiAdapter2

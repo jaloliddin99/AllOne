@@ -32,15 +32,18 @@
             android:orientation="horizontal">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_location"
                 android:drawablePadding="@dimen/margin_padding_8dp"
+
                 android:id="@+id/driver_location"
                 android:drawableTint="@color/light_gray"
                 android:fontFamily="@font/inter_regular"
-                android:text="От Вас 24 км."
                 android:textColor="@color/light_gray"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="@dimen/text_size_13sp" />
 
             <RelativeLayout
@@ -56,7 +59,10 @@
             </RelativeLayout>
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
+                android:layout_width="@dimen/dimens_0dp"
+                android:layout_weight="1"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/ic_snow"
                 android:drawablePadding="@dimen/margin_padding_8dp"

@@ -15,7 +15,6 @@
         android:background="@color/transparentColor"
         android:elevation="@dimen/margin_padding_4dp" />
 
-
     <include
         android:id="@+id/loader"
         layout="@layout/loader_lottie" />
@@ -70,6 +69,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="@dimen/dimens_0dp"
                 android:background="@drawable/bg_grey_rounded"
                 android:padding="@dimen/margin_padding_12dp">
 
@@ -696,62 +696,55 @@
     </androidx.core.widget.NestedScrollView>
 
 
-    <RelativeLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="@drawable/dark_green_top12"
-        android:elevation="25dp">
+        android:elevation="25dp"
+        android:orientation="vertical">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/line"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:src="@drawable/ic_line" />
+
+
+        <TextView
+            android:id="@+id/text_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/line"
+            android:layout_marginStart="@dimen/margin_padding_16"
+            android:layout_marginTop="@dimen/margin_padding_12dp"
+            android:layout_marginBottom="@dimen/margin_padding_16"
+            android:fontFamily="@font/inter_bold"
+            android:text="@string/nullMoney"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_20sp" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/go_to_payment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_marginStart="@dimen/margin_padding_16dp"
+            android:layout_marginEnd="@dimen/margin_padding_16dp"
+            android:layout_marginBottom="@dimen/margin_padding_24dp"
+            android:background="@drawable/background_white_corner_12"
+            android:backgroundTint="#DBDFE0"
+            android:elevation="0dp"
+            android:padding="@dimen/margin_padding_16dp"
+            android:text="@string/next"
+            android:textAppearance="@style/boldStyleLight"
+            android:textSize="@dimen/text_size_18sp"
+            app:elevation="0dp" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/line"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="@dimen/margin_padding_12dp"
-                android:src="@drawable/ic_line" />
-
-
-            <TextView
-                android:id="@+id/text_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/line"
-                android:layout_marginStart="@dimen/margin_padding_16"
-                android:layout_marginTop="@dimen/margin_padding_12dp"
-                android:layout_marginBottom="@dimen/margin_padding_16"
-                android:fontFamily="@font/inter_bold"
-                android:text="@string/nullMoney"
-                android:textColor="@color/black"
-                android:textSize="@dimen/text_size_20sp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/go_to_payment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_padding_16dp"
-                android:layout_marginEnd="@dimen/margin_padding_16dp"
-                android:layout_marginBottom="@dimen/margin_padding_24dp"
-                android:background="@drawable/background_white_corner_12"
-                android:backgroundTint="#DBDFE0"
-                android:elevation="0dp"
-                android:padding="@dimen/margin_padding_16dp"
-                android:text="@string/next"
-                android:textAppearance="@style/boldStyleLight"
-                android:textSize="@dimen/text_size_18sp"
-                app:elevation="0dp" />
-
-        </androidx.appcompat.widget.LinearLayoutCompat>
-
-
-    </RelativeLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

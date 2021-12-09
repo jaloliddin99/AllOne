@@ -41,8 +41,9 @@ import com.tesseract.AllOneClient.adapter.home.RegionDriverInfoAdapter
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.FragmentParcelSelectedOrderBinding
 import com.tesseract.AllOneClient.dialogs.parcel.DialogParcelChooseSeats
-import com.tesseract.AllOneClient.fragments.main.home.DriverInfo.FragmentRegionDriverInfoDirections
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
+import com.tesseract.AllOneClient.fragments.parcel.parcelMain.PostServiceSelectionViewModel
+import com.tesseract.AllOneClient.model.home.RouteTariffPrices.RouteTariffPlaceListModel
 import com.tesseract.AllOneClient.model.parcel.parcelSearch.Content
 import com.tesseract.AllOneClient.model.parcel.parcelSearch.OtherOption
 import com.tesseract.AllOneClient.utils.dipToPixels
@@ -63,9 +64,11 @@ class FragmentParcelSelectedItem: Fragment()
     private val value: Float = 14F
     private var userSeatIsSelected:Boolean=false
 
+    private lateinit var viewModelParcelList: PostServiceSelectionViewModel
     private lateinit var viewModel: UpdateParcelViewModel
     private val shareViewModel: ShareDataViewModel by activityViewModels()
-    private lateinit var binding: FragmentParcelSelectedOrderBinding
+    private var _binding: FragmentParcelSelectedOrderBinding?=null
+    private val binding get() = _binding!!
     private lateinit var regionDriverInfoAdapter: RegionDriverInfoAdapter
 
     override fun onDetach() {
@@ -92,10 +95,10 @@ class FragmentParcelSelectedItem: Fragment()
         savedInstanceState: Bundle?
     ): View {
 
-        binding= FragmentParcelSelectedOrderBinding.inflate(inflater, container, false)
+        _binding= FragmentParcelSelectedOrderBinding.inflate(inflater, container, false)
         viewModel= ViewModelProvider(this).get(UpdateParcelViewModel::class.java)
 
-
+        viewModelParcelList=ViewModelProvider(this).get(PostServiceSelectionViewModel::class.java)
 
         activity?.statusBarColor(
             ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
@@ -135,6 +138,9 @@ class FragmentParcelSelectedItem: Fragment()
             findNavController().navigate(action)
         })
 
+        viewModelParcelList.placeList.observe(viewLifecycleOwner, {
+            arrayList=it as ArrayList<RouteTariffPlaceListModel>
+        })
 
 
         bottomSheetStateChangeListener()
@@ -142,14 +148,23 @@ class FragmentParcelSelectedItem: Fragment()
         imageTextSetter()
         booking()
     }
-
+    private var arrayList=ArrayList<RouteTariffPlaceListModel>()
     private fun booking(){
         binding.apply {
             selectPlaceCardView.setOnClickListener {
+                if (arrayList.size!=3){
+                    Toast.makeText(
+                        context,
+                        "Seat prices not found, please check your internet",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    return@setOnClickListener
+                }
+
                 otherOption=content.other_options[args.selectedPosition]
                 DialogParcelChooseSeats(
                     otherOption,
-                    content.order,
+                    arrayList,
                     this@FragmentParcelSelectedItem
                 ).show(
                     parentFragmentManager,
@@ -182,6 +197,7 @@ class FragmentParcelSelectedItem: Fragment()
     @SuppressLint("SetTextI18n")
     private fun imageTextSetter(){
         shareViewModel.parcelItem.observe(viewLifecycleOwner,  {
+            viewModelParcelList.getRouteTariffPrices(headerMapUniversal(requireContext()), it.order.tariff_type, it.order.start_point.toString(), it.order.end_point.toString())
             content=it
             binding.apply {
                 if (args.isYourRequest){
@@ -191,7 +207,7 @@ class FragmentParcelSelectedItem: Fragment()
                     selectPlaceCardView.visibility= View.GONE
                     materialCardView.visibility= View.VISIBLE
                     tariff.text=it.order.tariff
-
+                    regionDriverInfoAdapter= RegionDriverInfoAdapter(it.your_request[args.selectedPosition].driver_car_photos, this@FragmentParcelSelectedItem)
                     driverIdCar=it.your_request[args.selectedPosition].id
                     price.text= SaveData.formatPhone(it.order.price)+context?.getString(R.string.summa1)
                     driverLocation.text=it.your_request[args.selectedPosition].driver_location
@@ -206,12 +222,12 @@ class FragmentParcelSelectedItem: Fragment()
                     placeNotAccording.visibility= View.VISIBLE
                     materialCardView.visibility= View.GONE
                     tariff.text=it.order.tariff
-
+                    regionDriverInfoAdapter= RegionDriverInfoAdapter(it.other_options[args.selectedPosition].driver_car_photos, this@FragmentParcelSelectedItem)
                     price.text= SaveData.formatPhone(it.order.price)+context?.getString(R.string.summa1)
                     driverLocation.text=it.other_options[args.selectedPosition].driver_location
                     driverRating.text=it.other_options[args.selectedPosition].driver_rating.toString()
                 }
-                regionDriverInfoAdapter= RegionDriverInfoAdapter(it.other_options[args.selectedPosition].driver_car_photos, this@FragmentParcelSelectedItem)
+
                 recyclerCarImages.adapter=regionDriverInfoAdapter
                 recyclerCarImages.setHasFixedSize(true)
 
@@ -505,6 +521,11 @@ class FragmentParcelSelectedItem: Fragment()
 
         }
 
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding=null
     }
 
 }

@@ -708,6 +708,8 @@
     <string name="inside_city">Внутри города</string>
     <string name="inter_regional">Межобластная</string>
     <string name="inter_national">Международная</string>
+    <string name="please_enter_receiver_number">Пожалуйста, введите номер телефона получателя</string>
+    <string name="please_enter_receiver_name">Пожалуйста, введите имя получателя</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

@@ -58,7 +58,7 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
                     shareViewModel.parcelSearchItem(it)
                     isCurrentFragment=false
                     if (it.other_options.isEmpty()&&it.your_request.isEmpty()){
-                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled()
+                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled(false)
                         findNavController().navigate(action)
                     }else{
                         val action= FragmentLocationDirections.actionFragmentLocationToFragmentParcelSearch(args.orderId)
@@ -80,7 +80,7 @@ class FragmentLocation : Fragment(R.layout.fragment_location) {
                     shareViewModel.searchOrder(it)
                     isCurrentFragment2=false
                     if (it.other_options.isEmpty()&&it.your_request.isEmpty()){
-                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled()
+                        val action=FragmentLocationDirections.actionFragmentLocationToFragmentSearchCancelled(true)
                         findNavController().navigate(action)
                     }else{
                         val action= FragmentLocationDirections.actionFragmentLocationToFragmentSearchTaxi2()
