@@ -25,7 +25,7 @@ class RegisterViewModel @Inject constructor(private val repository: NetworkRepos
 
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        userDetails.postValue(it.body()?.content)
+                        userDetails.postValue(it.body()?.content!!)
                         text.postValue("registered")
                     }else{
                         errorMessage.postValue(it.message())

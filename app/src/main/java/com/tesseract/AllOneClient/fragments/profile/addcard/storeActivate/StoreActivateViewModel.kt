@@ -27,7 +27,7 @@ class StoreActivateViewModel @Inject constructor(private val repository: Network
             repository.postActivateCard(token, id, code).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        activateCardMsg.postValue(it.body()?.message)
+                        activateCardMsg.postValue(it.body()?.message.toString())
                     }else{
                         errorMessageActiveCards.postValue("Ok")
                     }
@@ -51,9 +51,9 @@ class StoreActivateViewModel @Inject constructor(private val repository: Network
             repository.postStoreCard(token, name, num, validity).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        postStoreCardDataResponse.postValue(it.body()?.content)
+                        postStoreCardDataResponse.postValue(it.body()?.content!!)
                     }else{
-                        errorMessage.postValue(it.body()?.message)
+                        errorMessage.postValue(it.body()?.message.toString())
                     }
                 }else{
                     errorMessage.postValue("No internet1"+it.message()+" "+it.code())

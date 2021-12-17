@@ -26,7 +26,7 @@ class CRUDLocationViewModel @Inject constructor(private val repository: NetworkR
             repository.postNewAddress(token, fields).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        successM.postValue(it.body()?.message)
+                        successM.postValue(it.body()?.message.toString())
                     }
                 }
             }

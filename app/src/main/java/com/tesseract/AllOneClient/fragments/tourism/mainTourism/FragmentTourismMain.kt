@@ -29,12 +29,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlin.properties.Delegates
 
 @AndroidEntryPoint
-class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
+class FragmentTourismMain : Fragment(),
     PopularPlacesAdapter.OnChipClickListener, ExploreAdapter.OnExploreListener {
     private var _binding: FragmentTourismMainBinding?=null
     private val binding get() = _binding!!
-    private lateinit var mainMedModel: List<MainMedModel>
-    private lateinit var clinicMainAdapter: ClinicMainAdapter
     private lateinit var viewModel: TourismMainViewModel
 
 
@@ -80,14 +78,35 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
             findNavController().popBackStack()
         }
 
+        binding.apply {
 
-        loadItems()
+            view1.setOnClickListener {
+                val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan",uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
+                findNavController().navigate(action)
+            }
+            view2.setOnClickListener {
+                val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
+                findNavController().navigate(action)
+            }
+            view3.setOnClickListener {
+                val action=FragmentTourismMainDirections.actionGlobalTravelAgency(uzbId, default_sort)
+                findNavController().navigate(action)
+            }
+            view5.setOnClickListener {
+                val action=FragmentTourismMainDirections.actionGlobalCarRentMain()
+                findNavController().navigate(action)
+            }
+            view6.setOnClickListener {
+                val action=FragmentTourismMainDirections.actionGlobalMedOrTourFavourites("tourism")
+                findNavController().navigate(action)
+            }
+            view4.setOnClickListener {
+                val action=FragmentTourismMainDirections.actionGlobalHotelIndex(uzbId, uzb_default_currency_id, default_sort)
+                findNavController().navigate(action)
 
-        clinicMainAdapter=
-            ClinicMainAdapter(mainMedModel, this)
-        binding.recyclerView.adapter=clinicMainAdapter
-        binding.recyclerView.layoutManager= GridLayoutManager(requireContext(), 2)
-        binding.recyclerView.setHasFixedSize(true)
+            }
+        }
+
 
         binding.explore.setOnClickListener {
             val action=FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourExplore()
@@ -128,16 +147,7 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
 
 
 
-    private fun loadItems(){
-        mainMedModel= listOf(
-            MainMedModel(getString(R.string.tour_uzb), R.drawable.ic_tour_uzb),
-            MainMedModel(getString(R.string.tour_world), R.drawable.ic_travel_goude),
-            MainMedModel(getString(R.string.tour_firms), R.drawable.ic_travel_big_car),
-            MainMedModel(getString(R.string.hotels), R.drawable.ic_children_bag),
-            MainMedModel(getString(R.string.carRent), R.drawable.ic_tour_avto_procat),
-            MainMedModel(getString(R.string.mySaved), R.drawable.ic_saved)
-        )
-    }
+
 
     companion object{
         private var uzbId by Delegates.notNull<Int>()
@@ -148,34 +158,7 @@ class FragmentTourismMain : Fragment(), ClinicMainAdapter.OnImageClickListener,
 
 
 
-    override fun onItemClick(position: Int) {
-        if (position==0){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("uzbekistan",uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
-            findNavController().navigate(action)
-        }
-        if (position==1){
-            val action= FragmentTourismMainDirections.actionFragmentTourismMainToFragmentTourismPackages("world", uzbId, uzb_default_currency_id, world_default_currency_id, default_sort)
-            findNavController().navigate(action)
-        }
-        if (position==2){
-            val action=FragmentTourismMainDirections.actionGlobalTravelAgency(uzbId, default_sort)
-            findNavController().navigate(action)
-        }
-        if (position==4){
-            val action=FragmentTourismMainDirections.actionGlobalCarRentMain()
-            findNavController().navigate(action)
-        }
-        if (position==5){
-            val action=FragmentTourismMainDirections.actionGlobalMedOrTourFavourites("tourism")
-            findNavController().navigate(action)
-        }
-        if (position==3){
-            val action=FragmentTourismMainDirections.actionGlobalHotelIndex(uzbId, uzb_default_currency_id, default_sort)
-            findNavController().navigate(action)
-        }
 
-
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

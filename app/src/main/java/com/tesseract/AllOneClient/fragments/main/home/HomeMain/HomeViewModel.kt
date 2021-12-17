@@ -20,7 +20,7 @@ class HomeViewModel @Inject constructor(private val repository: NetworkRepositor
             repository.getNewsMain(token).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        responseMessage.postValue(it.body()?.getDistrictContent)
+                        responseMessage.postValue(it.body()?.getDistrictContent!!)
                     }
                 }
             }

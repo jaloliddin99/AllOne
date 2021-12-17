@@ -22,9 +22,9 @@ class OrderParcelViewModel @Inject constructor(private val repository: NetworkRe
             repository.getParcelDeliveryOrder(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        orderParcelATData.postValue(it.body()?.content)
+                        orderParcelATData.postValue(it.body()?.content!!)
                     }else{
-                        errorMessage.postValue(it.body()?.message)
+                        errorMessage.postValue(it.body()?.message.toString())
                     }
                 }
             }

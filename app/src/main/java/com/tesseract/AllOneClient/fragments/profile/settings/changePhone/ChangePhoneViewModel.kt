@@ -43,7 +43,7 @@ class ChangePhoneViewModel @Inject constructor(private val repository: NetworkRe
         repository.updatePhone(token, phone, code).let {
             if (it.isSuccessful){
                 if (it.body()?.success==true){
-                    userDetails.postValue(it.body()?.content)
+                    userDetails.postValue(it.body()?.content!!)
                 }
             }
         }

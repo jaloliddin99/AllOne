@@ -21,9 +21,9 @@ class RegionAboutTripViewModel @Inject constructor(private val repository: Netwo
             repository.getTaxiOrderHistory(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        historyView.postValue(it.body()?.content)
+                        historyView.postValue(it.body()?.content!!)
                     }else{
-                        errorCatch.postValue(it.body()?.message)
+                        errorCatch.postValue(it.body()?.message.toString())
                     }
                 }else{
                     errorCatch.postValue("no internet")

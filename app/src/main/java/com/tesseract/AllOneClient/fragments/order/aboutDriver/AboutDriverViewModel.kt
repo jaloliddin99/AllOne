@@ -22,7 +22,7 @@ class AboutDriverViewModel @Inject constructor(private val repository: NetworkRe
             repository.getAboutDriver(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        aboutDriverData.postValue(it.body()?.content)
+                        aboutDriverData.postValue(it.body()?.content!!)
                     }else{
                         errorMessage.postValue("No internet")
                     }

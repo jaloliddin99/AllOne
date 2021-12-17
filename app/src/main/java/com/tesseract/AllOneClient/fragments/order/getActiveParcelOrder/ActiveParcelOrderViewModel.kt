@@ -22,7 +22,7 @@ class ActiveParcelOrderViewModel @Inject constructor(private val repository: Net
             repository.getParcelActiveOrders(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        getActiveParcelData.postValue(it.body()?.content)
+                        getActiveParcelData.postValue(it.body()?.content!!)
                     }else{
                         errorM.postValue(1)
                     }

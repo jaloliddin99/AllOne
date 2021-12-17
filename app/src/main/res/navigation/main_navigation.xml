@@ -653,13 +653,6 @@
             app:destination="@id/fragmentClinicInfo" />
     </fragment>
 
-
-
-    <fragment
-        android:id="@+id/fragmentActiveTour"
-        android:name="com.tesseract.AllOneClient.fragments.tourism.activeTour.FragmentActiveTour"
-        android:label="fragment_active_tour"
-        tools:layout="@layout/fragment_active_tour" />
     <fragment
         android:id="@+id/fragmentRegionMapFirst"
         android:name="com.tesseract.AllOneClient.fragments.order.mapActiveRegion.FragmentRegionActiveMap"

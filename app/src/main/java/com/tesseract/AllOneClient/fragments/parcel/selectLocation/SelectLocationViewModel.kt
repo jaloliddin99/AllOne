@@ -24,9 +24,9 @@ class SelectLocationViewModel @Inject constructor(private val repository: Networ
             repository.getLocationReverse(token, latLng).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        data.postValue(it.body()?.content)
+                        data.postValue(it.body()?.content!!)
                     }else{
-                        errorMessage.postValue(it.body()?.message)
+                        errorMessage.postValue(it.body()?.message.toString())
                     }
                 }else{
                     errorMessage.postValue("Connect to internet")

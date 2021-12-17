@@ -71,10 +71,7 @@ class OrderViewModel @Inject constructor(private val repository: NetworkReposito
 
     }
 
-    fun clear(){
-        Log.i("active orders", "is null")
-        activeOrders.value=null
-    }
+
 
     fun activeNext(token: Map<String, String>) = viewModelScope.launch {
         loading.value = true

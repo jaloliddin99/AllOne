@@ -15,11 +15,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.MainActivity
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.constants.SaveData
@@ -54,9 +56,6 @@ class ConfirmPhoneFragment: Fragment(R.layout.fragment_confirm_phone) {
 
         viewModel=ViewModelProvider(this).get(ConfirmPhoneViewModel::class.java)
 
-        binding.backToHome.setOnClickListener {
-            findNavController().popBackStack()
-        }
 
         val number=args.phone.replace(" ", "")
         binding.loader.loader.visibility=View.GONE
@@ -79,6 +78,8 @@ class ConfirmPhoneFragment: Fragment(R.layout.fragment_confirm_phone) {
 
         binding.otpView.addTextChangedListener(textWatcher)
 
+
+
         val countDownTimer:CountDownTimer=object :CountDownTimer(120000L, 1000){
             override fun onTick(l: Long) {
 
@@ -100,6 +101,22 @@ class ConfirmPhoneFragment: Fragment(R.layout.fragment_confirm_phone) {
 
         }
         countDownTimer.start()
+
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    countDownTimer.cancel()
+                    findNavController().popBackStack()
+
+                }
+            })
+
+
+        binding.backToHome.setOnClickListener {
+            countDownTimer.cancel()
+            findNavController().popBackStack()
+        }
 
         viewModel.textPhone.observe(requireActivity(), {
             countDownTimer.cancel()

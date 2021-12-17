@@ -30,7 +30,7 @@ class ConfirmPhoneViewModel @Inject constructor(private val repository: NetworkR
                             textPhone.postValue("not_registered")
                         }else{
                             textPhone.postValue("registered")
-                            userDetails.postValue(it.body()?.content?.data)
+                            userDetails.postValue(it.body()?.content?.data!!)
                         }
 
                     }else{

@@ -102,7 +102,7 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
                 }
 
             }else{
-                Toast.makeText(context, "bomadi", Toast.LENGTH_LONG).show()
+                Toast.makeText(context, "error", Toast.LENGTH_LONG).show()
             }
         })
 

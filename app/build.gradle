@@ -145,12 +145,12 @@ dependencies {
     //flowLayout
     implementation 'com.nex3z:flow-layout:1.3.0'
 
-    //chuck...
-    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
-    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
-
-    /////REMOVE BEFORE RELEASE
-    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
+//    //chuck...
+//    debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
+//    releaseImplementation "com.github.chuckerteam.chucker:library-no-op:3.5.2"
+//
+//    /////REMOVE BEFORE RELEASE
+//    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
     implementation 'com.shreyaspatil:MaterialNavigationView:1.2'
 

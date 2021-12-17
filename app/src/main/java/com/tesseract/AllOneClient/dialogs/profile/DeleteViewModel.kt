@@ -19,9 +19,9 @@ class DeleteViewModel @Inject constructor(private val repository: NetworkReposit
             repository.deleteCard(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        successM.postValue(it.body()?.message)
+                        successM.postValue(it.body()?.message!!)
                     }else{
-                        errorM.postValue(it.body()?.message)
+                        errorM.postValue(it.body()?.message.toString())
                     }
                 }else{
                     errorM.postValue("something went wrong1 "+it.message()+" "+it.code())

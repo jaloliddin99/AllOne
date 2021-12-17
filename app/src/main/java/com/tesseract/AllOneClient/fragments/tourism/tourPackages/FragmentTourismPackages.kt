@@ -1,6 +1,8 @@
 package com.tesseract.AllOneClient.fragments.tourism.tourPackages
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,7 @@ import com.tesseract.AllOneClient.model.tourism.indexUzb.Data
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
+import java.lang.Exception
 
 @AndroidEntryPoint
 class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListener {
@@ -227,17 +230,21 @@ class FragmentTourismPackages : Fragment(), TourPackagesAdapter.OnExploreListene
         val arrayList: MutableSet<Data> = HashSet()
         val arrayList2: MutableSet<Data> = HashSet()
         viewModel.mainIndex.observe(viewLifecycleOwner, {
-            binding.loader.loader.visibility = View.GONE
-            arrayList2.addAll(it)
+            try {
+                binding.loader.loader.visibility = View.GONE
+                arrayList2.addAll(it)
+                for (i in it.indices) {
+                    arrayList.add(it[i])
+                }
+                if (arrayList.size != 0) {
+                    adapter.addList(arrayList)
+                }
+                arrayList.clear()
+                binding.count.text = arrayList2.size.toString()
+            }catch (e:Exception){
+                Log.i(TAG, "adapterSet: ${e.message}")
+            }
 
-            for (i in it.indices) {
-                arrayList.add(it[i])
-            }
-            if (arrayList.size != 0) {
-                adapter.addList(arrayList)
-            }
-            arrayList.clear()
-            binding.count.text = arrayList2.size.toString()
 
         })
     }

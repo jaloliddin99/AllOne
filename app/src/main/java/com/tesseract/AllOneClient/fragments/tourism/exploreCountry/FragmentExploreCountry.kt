@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -13,12 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.Common.Common
+import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.order.DriverCarImagesAdapter
 import com.tesseract.AllOneClient.adapter.tourism.explore.ExploreCPAdapter
 import com.tesseract.AllOneClient.databinding.FragmentExploreCountryViewBinding
 import com.tesseract.AllOneClient.model.tourism.expCountryPackage.Data
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
 import com.tesseract.AllOneClient.utils.headerMapUniversal
+import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,6 +41,7 @@ class FragmentExploreCountry:Fragment(), ExploreCPAdapter.OnExploreListener {
     ): View {
         _binding= FragmentExploreCountryViewBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(ExploreCountryViewModel::class.java)
+
         return binding.root
     }
 
@@ -45,6 +50,8 @@ class FragmentExploreCountry:Fragment(), ExploreCPAdapter.OnExploreListener {
 
         Common.countryPageee=1
         viewModel.starterExploreCP(headerMapUniversal(requireContext()), args.exploreId)
+
+        requireActivity().window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
         adapter= ExploreCPAdapter(this, mutableSetOf())
 
@@ -104,6 +111,15 @@ class FragmentExploreCountry:Fragment(), ExploreCPAdapter.OnExploreListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+    override fun onStop() {
+        super.onStop()
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        requireActivity().window.clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 
     override fun onExploreListener(position: Data) {

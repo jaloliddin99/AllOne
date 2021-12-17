@@ -121,7 +121,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             HomeOrderModel(getString(R.string.send_post), R.drawable.ic_box_3),
             HomeOrderModel(getString(R.string.taxi_region), R.drawable.ic_tour_uzb),
             HomeOrderModel(getString(R.string.med_turizm), R.drawable.med_turizm_image),
-            HomeOrderModel(getString(R.string.international_taxi), R.drawable.taxi_international),
+            HomeOrderModel(getString(R.string.international_taxi), R.drawable.tour_worldd),
             HomeOrderModel(getString(R.string.tourism), R.drawable.turism_image),
         )
     }
@@ -208,10 +208,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
             }
             3 -> {
-
                 val action = HomeFragmentDirections.actionHomeFragmentToFragmentMainClinic()
                 findNavController().navigate(action)
-
             }
 
             4 -> {

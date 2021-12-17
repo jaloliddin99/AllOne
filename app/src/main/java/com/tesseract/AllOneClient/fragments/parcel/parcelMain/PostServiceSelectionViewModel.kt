@@ -31,8 +31,8 @@ class PostServiceSelectionViewModel @Inject constructor(private val repository: 
             repository.getParcelRouteTariffPrices(token, orderType, startPoint, endPoint).let {
                 if (it.isSuccessful) {
                     if (it.body()?.success == true) {
-                        parcelList.postValue(it.body()?.content?.parcels)
-                        placeList.postValue(it.body()?.content?.places)
+                        parcelList.postValue(it.body()?.content?.parcels!!)
+                        placeList.postValue(it.body()?.content?.places!!)
                     }else{
                         parcelError.postValue(it.message())
                     }

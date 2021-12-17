@@ -19,9 +19,9 @@ class UpdateCardViewModel @Inject constructor(private val repository: NetworkRep
             repository.updateCard(token, id, cardName).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
-                        successM.postValue(it.body()?.message)
+                        successM.postValue(it.body()?.message!!)
                     }else{
-                        errorM.postValue(it.body()?.message)
+                        errorM.postValue(it.body()?.message!!)
                     }
                 }else{
                     errorM.postValue("something went wrong")

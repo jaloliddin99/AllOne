@@ -23,9 +23,9 @@ class GetActiveOrderViewModel @Inject constructor(private val repository: Networ
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         if (it.body()?.content!=null){
-                            getActiveOrderModelData.postValue(it.body()?.content)
+                            getActiveOrderModelData.postValue(it.body()?.content!!)
                         }else{
-                            message.postValue(it.body()?.message)
+                            message.postValue(it.body()?.message.toString())
                         }
 
                     }else{

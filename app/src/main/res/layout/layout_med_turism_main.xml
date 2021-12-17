@@ -8,8 +8,7 @@
     android:layout_marginTop="@dimen/margin_padding_8dp"
     android:backgroundTint="#F6F6F6"
     android:background="@drawable/background_grey"
-    android:layout_height="wrap_content">
-
+    android:layout_height="80dp">
     <androidx.appcompat.widget.AppCompatTextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,18 +17,13 @@
         android:textSize="@dimen/text_size_13sp"
         android:textColor="@color/black"
         android:fontFamily="@font/inter_semibold"/>
-
-
     <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/ic_clinics"
-        android:id="@+id/image"
         android:layout_below="@id/clinic"
-        android:layout_marginTop="@dimen/margin_padding_12dp"/>
-
-
-
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:src="@drawable/ic_clinics" />
 
 </RelativeLayout>
