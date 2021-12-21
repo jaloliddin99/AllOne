@@ -67,6 +67,8 @@ class CityTariffViewModel @Inject constructor(private val repository: NetworkRep
                         }else{
                             error.postValue(it.body()?.message)
                         }
+                    }else{
+                        error.postValue(it.message())
                     }
                 Log.i(TAG, "cityNewOrderPost: ${it.message()} ${it.code()}")
             }

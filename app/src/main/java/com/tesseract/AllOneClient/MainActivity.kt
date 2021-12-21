@@ -1,10 +1,12 @@
 package com.tesseract.AllOneClient
 
+import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
 import android.content.res.Configuration
 import android.content.res.Resources
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -66,8 +68,6 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
 
-
-
 //        binding.bottomNav.getOrCreateBadge(R.id.orderFragment).number = 3
 //        val radius = resources.getDimension(R.dimen.margin_padding_12dp)
 
@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
 //            .build()
 
         languageConfig()
+        getPermissions()
 
         binding.navView.setNavigationItemSelectedListener (object :NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -107,7 +108,6 @@ class MainActivity : AppCompatActivity() {
                         findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_aboutProgramFragment)
                         binding.drawerLayout.closeDrawers()
                     }
-
 
                 }
 
@@ -406,5 +406,15 @@ class MainActivity : AppCompatActivity() {
         val config: Configuration = resources.configuration
         config.setLocale(locale)
         resources.updateConfiguration(config, resources.displayMetrics)
+    }
+
+    private fun getPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestPermissions(
+                arrayOf(
+                    Manifest.permission.READ_CONTACTS
+                ), 1
+            )
+        }
     }
 }

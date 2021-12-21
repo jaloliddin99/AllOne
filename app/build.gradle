@@ -155,7 +155,10 @@ dependencies {
     implementation 'com.shreyaspatil:MaterialNavigationView:1.2'
 
     //play store lcoation
-    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation "org.jetbrains.anko:anko-commons:0.10.8"
+    implementation 'com.google.android.gms:play-services-location:19.0.0'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+
 
 
 

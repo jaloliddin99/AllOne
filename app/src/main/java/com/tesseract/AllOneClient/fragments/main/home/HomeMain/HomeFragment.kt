@@ -101,6 +101,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             val action=HomeFragmentDirections.actionProfileFragmentToBonusFragment2()
             findNavController().navigate(action)
         }
+
+        fragmentHomeBinding.userId.text="ID: ${SaveData.getUserId(requireContext())}"
     }
 
     private fun clickListeners() {

@@ -2,12 +2,11 @@ package com.tesseract.AllOneClient.fragments.taxiCity.main
 
 import android.Manifest
 import android.content.Context
-import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
-import android.provider.Settings
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -15,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.NonNull
-import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -23,9 +21,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.home.SearchQueryTypeRegionLocationsAdapter
@@ -39,6 +40,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
+
 @AndroidEntryPoint
 class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     CityAddressesHistoryAdapter.OnLocationClickListener, SearchQueryTypeRegionLocationsAdapter.OnItemClickListener{
@@ -50,7 +52,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
     private lateinit var mMap: GoogleMap
-    private var MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private var isGPS = false
     private val value:Float= 15F
     private var mBottomSheetBehavior: BottomSheetBehavior<*>? = null
@@ -62,7 +63,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private var endDestination=""
     private var startName=""
     private var endName=""
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -111,8 +111,8 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             }
             goToTariffs.setOnClickListener {
                 if (this@FragmentCitySelectLocation.startDestination.isNotEmpty()&&
-                        this@FragmentCitySelectLocation.endDestination.isNotEmpty()&&
-                        startName.isNotEmpty()&&endName.isNotEmpty()){
+                    this@FragmentCitySelectLocation.endDestination.isNotEmpty()&&
+                    startName.isNotEmpty()&&endName.isNotEmpty()){
 
                     val action=FragmentCitySelectLocationDirections.actionFragmentCityMapToFragmentCityOrderMaps(
                         this@FragmentCitySelectLocation.startDestination,
@@ -146,9 +146,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
                                 binding.yourAddress1.text=getString(R.string.where_)
                             }else if (binding.endDestination.hasFocus()){
                                 binding.yourAddress1.text=getString(R.string.to_where_)
-                                if (binding.endDestination.text.toString().isEmpty()){
-                                    viewModel.savedLocations(headerMapUniversal(requireContext()))
-                                }
                             }
                             binding.yourAddress1.setTextColor(requireContext().getColor(R.color.white))
                         } else {
@@ -173,7 +170,9 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
         if (context?.let { ContextCompat.checkSelfPermission(it, Manifest.permission.ACCESS_FINE_LOCATION) } != PackageManager.PERMISSION_GRANTED)
         {
-            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION) }
+            activity?.let { ActivityCompat.requestPermissions(it, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
+            ) }
         } else {
             locationListener?.let { locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0f, it)
             }
@@ -206,7 +205,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        val sydney = LatLng(41.357935, 69.383639)
+        val sydney = LatLng(41.00, 69.00)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18f))
         mMap.uiSettings.isCompassEnabled=false
 
@@ -221,7 +220,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             return
         }
 
-        askLocation()
+       // askLocation()
         binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
         binding.endDestination.addTextChangedListener(startDestinationTextWatcher2)
 
@@ -234,24 +233,70 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
         isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (!isGPS){
-            showSettingsAlert()
+            turnOnGPS()
+        }else{
+            getDeviceLocation()
+        }
+
+    }
+
+
+    private lateinit var mFusedLocationProviderClient:FusedLocationProviderClient
+
+    private fun getDeviceLocation(){
+        mFusedLocationProviderClient=LocationServices.getFusedLocationProviderClient(requireActivity())
+        try {
+            val location = mFusedLocationProviderClient.lastLocation
+
+            location.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    moveCamera(LatLng(it.result.latitude, it.result.longitude), 15f)
+                    askLocation(LatLng(it.result.latitude, it.result.longitude))
+                }
+            }
+
+        }catch (e:java.lang.Exception){
+
+        }
+
+    }
+
+    private fun turnOnGPS() {
+        val request = LocationRequest.create().apply {
+            interval = 2000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(request)
+        val client: SettingsClient = LocationServices.getSettingsClient(requireActivity())
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+        task.addOnFailureListener {
+            if (it is ResolvableApiException) {
+                try {
+                    it.startResolutionForResult(requireActivity(), 12345)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                }
+            }
+        }.addOnSuccessListener {
+            getDeviceLocation()
         }
     }
 
-    private fun askLocation(){
-        val yourLocation:LatLng
-        val myLocation = locationManager!!.getLastKnownLocation(LocationManager.PASSIVE_PROVIDER)
-        if (myLocation!=null){
-            viewModelReverse.getLocationReverse(headerMapUniversal(requireContext()), "${myLocation.latitude},${myLocation.longitude}")
-            startDestination="${myLocation.latitude},${myLocation.longitude}"
-            yourLocation= LatLng(myLocation.latitude, myLocation.longitude)
-            mMap.addMarker(MarkerOptions().position(yourLocation).icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_dest)))
-            val update: CameraUpdate =CameraUpdateFactory.newLatLngZoom(yourLocation, value)
+    private fun moveCamera(latLng: LatLng, zoom:Float){
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng,zoom))
+    }
+
+
+
+    private fun askLocation(latLng: LatLng){
+        viewModelReverse.getLocationReverse(headerMapUniversal(requireContext()), "${latLng.latitude},${latLng.longitude}")
+        startDestination="${latLng.latitude},${latLng.longitude}"
+        val yourLocation = LatLng(latLng.latitude, latLng.longitude)
+        mMap.addMarker(MarkerOptions().position(yourLocation).icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_dest)))
+        val update: CameraUpdate =CameraUpdateFactory.newLatLngZoom(yourLocation, value)
+        mMap.animateCamera(update)
+        binding.requestFocus.setOnClickListener {
             mMap.animateCamera(update)
-            binding.requestFocus.setOnClickListener {
-                mMap.animateCamera(update)
-                askLocation()
-            }
+            askLocation(latLng)
         }
     }
 
@@ -270,35 +315,16 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
                 ) {
                     isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
                     if (!isGPS){
-                        showSettingsAlert()
+                        turnOnGPS()
                     }
                     Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show()
                 } else {
-
-                    // permission denied, boo! Disable the
-
-                    // functionality that depends on this permission.
                     Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT)
                         .show()
                 }
                 return
             }
         }
-    }
-
-
-    private fun showSettingsAlert() {
-        val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle("GPS is not Enabled!")
-        alertDialog.setMessage("Do you want to turn on GPS?")
-        alertDialog.setPositiveButton("Yes") { _, _ ->
-
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-
-        }
-        alertDialog.setNegativeButton("No") { dialog, _ -> dialog.cancel() }
-        alertDialog.show()
     }
 
     override fun onItemClick(type: SavedLocationData) {
@@ -370,6 +396,10 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    companion object {
+        private const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 
 }

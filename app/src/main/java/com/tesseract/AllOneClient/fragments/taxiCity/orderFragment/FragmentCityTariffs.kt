@@ -18,7 +18,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -28,7 +27,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.gson.Gson
 import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.Common.Common.isCityTariffPreviousBackstack
 import com.tesseract.AllOneClient.R
@@ -44,7 +42,6 @@ import com.tesseract.AllOneClient.fragments.order.mapActiveRegion.MapActivityReg
 import com.tesseract.AllOneClient.model.order.MapActiveRegionModel.RoutindDetails
 import com.tesseract.AllOneClient.model.taxiCity.CityShareCardBonusModel
 import com.tesseract.AllOneClient.model.taxiCity.Contact
-import com.tesseract.AllOneClient.model.taxiCity.ContactModel
 import com.tesseract.AllOneClient.model.taxiCity.StationModel
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.Content
 import com.tesseract.AllOneClient.model.taxiCity.tariffs.ListenOrderAccept
@@ -57,7 +54,6 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_city_tariffs.*
-import org.json.JSONObject
 import kotlin.properties.Delegates
 
 
@@ -118,7 +114,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
         CityTariffAdapter.isMainSelected=true
 
-        getPermissions()
         recyclerViewController()
         modalDialogController()
         clickListeners()
@@ -606,16 +601,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         }
     }
 
-    private fun getPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.READ_CONTACTS
-                ), 1
-            )
-        }
-    }
-
     private fun decodeToLatLng(list: List<List<Double>>) {
         val latLngList = ArrayList<LatLng>()
         for (i in list.indices) {
@@ -683,7 +668,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         Common.cityTariffRecyclerView=position
         binding.recyclerBigCarImages.scrollToPosition(Common.cityTariffRecyclerView)
         arrivalTime.text=content.arrival_time
-        Toast.makeText(context, "$position", Toast.LENGTH_SHORT).show()
     }
 
     override fun onShowViewPager(content: Content) {
@@ -781,7 +765,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
     private fun restoreState(){
 
         if (comment.isNotEmpty()){
-            Toast.makeText(context, "hello $comment", Toast.LENGTH_SHORT).show()
             binding.commentType.setText(comment)
         }
 
