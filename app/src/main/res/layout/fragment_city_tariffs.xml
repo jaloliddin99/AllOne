@@ -235,6 +235,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/addNewStation"
                 android:layout_width="wrap_content"

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".fragments.profile.ChangeLanguageFragment">
+    tools:context=".fragments.profile.changeLang.ChangeLanguageFragment">
 
     <RelativeLayout
         android:elevation="@dimen/margin_padding_4dp"
@@ -37,64 +37,63 @@
 
     </RelativeLayout>
 
-    <androidx.core.widget.NestedScrollView
+
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginTop="@dimen/item_height_56dp"
+        android:paddingStart="@dimen/margin_padding_16"
+        android:paddingEnd="@dimen/margin_padding_16">
 
-        <androidx.appcompat.widget.LinearLayoutCompat
+        <RadioGroup
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/margin_padding_16"
-            android:paddingEnd="@dimen/margin_padding_16">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_padding_24dp">
 
-            <RadioGroup
+            <RadioButton
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_padding_24dp">
+                android:layout_height="@dimen/item_height_56dp"
+                android:layoutDirection="rtl"
+                android:text="@string/english"
+                android:fontFamily="@font/inter_medium"
+                android:id="@+id/english"
+                android:textSize="@dimen/text_size_18sp" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_height_56dp"
-                    android:layoutDirection="rtl"
-                    android:text="@string/english"
-                    android:fontFamily="@font/inter_medium"
-                    android:id="@+id/english"
-                    android:textSize="@dimen/text_size_18sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/dark_grey" />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height_56dp"
+                style="@style/RadioButtonStyle"
+                android:layoutDirection="rtl"
+                android:id="@+id/russian"
+                android:text="@string/russian"
+                android:fontFamily="@font/inter_medium"
+                android:textSize="@dimen/text_size_18sp" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_height_56dp"
-                    style="@style/RadioButtonStyle"
-                    android:layoutDirection="rtl"
-                    android:id="@+id/russian"
-                    android:text="@string/russian"
-                    android:fontFamily="@font/inter_medium"
-                    android:textSize="@dimen/text_size_18sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/dark_grey" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:background="@color/dark_grey" />
+            <RadioButton
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/item_height_56dp"
+                style="@style/RadioButtonStyle"
+                android:layoutDirection="rtl"
+                android:fontFamily="@font/inter_medium"
+                android:text="O’zbek"
+                android:id="@+id/uzbek"
+                android:textSize="@dimen/text_size_18sp" />
 
-                <RadioButton
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_height_56dp"
-                    style="@style/RadioButtonStyle"
-                    android:layoutDirection="rtl"
-                    android:fontFamily="@font/inter_medium"
-                    android:text="O’zbek"
-                    android:id="@+id/uzbek"
-                    android:textSize="@dimen/text_size_18sp" />
+        </RadioGroup>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
-            </RadioGroup>
-        </androidx.appcompat.widget.LinearLayoutCompat>
-    </androidx.core.widget.NestedScrollView>
+    <include layout="@layout/loader_lottie"
+        android:id="@+id/loader"/>
 
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

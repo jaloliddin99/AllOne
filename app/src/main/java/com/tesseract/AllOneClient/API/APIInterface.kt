@@ -119,6 +119,13 @@ interface APIInterface {
         @Field("phone") phone: String
     ): Response<SendCode>
 
+    @FormUrlEncoded
+    @POST("change_lang")
+    suspend fun changeLang(
+        @HeaderMap headers: Map<String, String>,
+        @Field("lang") lang:String
+    ):Response<ClinicAddToFavouriteModel>
+
 
     @FormUrlEncoded
     @POST("settings/update_phone")

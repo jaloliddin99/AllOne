@@ -99,7 +99,6 @@ class FragmentOrderTaxi : Fragment(),
                 item.start,
                 item.end
             )
-            println(item.type + "   " + item.start + "jaloldo  " + item.end)
             binding.loader.loader.visibility = View.VISIBLE
 
             startId = item.start.toInt()
@@ -111,12 +110,18 @@ class FragmentOrderTaxi : Fragment(),
                 tariffName.text = item.name
                 tariffPrice.text =
                     item.price.let { SaveData.formatPhone(it!!) } + " " + getString(R.string.summa1)
-
             }
         })
 
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
+        }
+
+        if (args.tariff==3){
+            binding.apply {
+                premium.visibility=View.GONE
+                haveLuggage.visibility=View.GONE
+            }
         }
 
         chooseDialogs()

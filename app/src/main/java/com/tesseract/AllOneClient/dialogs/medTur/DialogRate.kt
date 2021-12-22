@@ -52,7 +52,7 @@ class DialogRate(private val clinicId:Int, private val isClinic:Boolean) : Botto
             }
 
             loader.loader.visibility=View.GONE
-            ratingBar.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            ratingBar.setOnRatingBarChangeListener { _, rating, _ ->
                 ratingBarItem=rating.toInt()
             }
 

@@ -383,6 +383,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             val routingModel = RoutindDetails(false, listBig)
 
             routeViewModel.mapGetRouting(headerMapUniversal(requireContext()), routingModel)
+        }else{
+
         }
 
 
@@ -508,6 +510,12 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                         }else{
                             parcel.visibility=View.GONE
                         }
+                        if (content.tariff=="peregon"||content.tariff=="accumulator"||content.tariff=="for_products"||content.tariff=="parcel_delivery"
+                            ||content.tariff=="peregon"){
+                            binding.airConditioner.visibility=View.GONE
+                        }else{
+                            binding.airConditioner.visibility=View.VISIBLE
+                        }
                         if (content.tariff=="cargo"){
                             recyclerViewCargo.visibility=View.VISIBLE
                             recyclerViewCargo.adapter=CityTariffCargoItems(content.opt, this@FragmentCityTariffs)
@@ -522,6 +530,10 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
             recyclerBigCarImages.onFlingListener = null
             PagerSnapHelper().attachToRecyclerView(recyclerBigCarImages)
+
+            if (args.endLocation.isEmpty()){
+                addNewStation.visibility=View.GONE
+            }
 
             addNewStation.setOnClickListener {
                 if (isStartGiven && isEndGiven) {
@@ -684,12 +696,17 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         mMap = googleMap
         mMap.uiSettings.isCompassEnabled = false
 
-        val startDestination=LatLng(args.startLocation.split(",")[0].toDouble(),args.startLocation.split(",")[1].toDouble() )
-        val endDestination=LatLng(args.endLocation.split(",")[0].toDouble(),args.endLocation.split(",")[1].toDouble() )
-
         val latLngBounds:LatLngBounds.Builder=LatLngBounds.Builder()
+        val startDestination=LatLng(args.startLocation.split(",")[0].toDouble(),args.startLocation.split(",")[1].toDouble() )
+
+        if (args.endLocation.isNotEmpty()){
+
+            val endDestination=LatLng(args.endLocation.split(",")[0].toDouble(),args.endLocation.split(",")[1].toDouble() )
+            latLngBounds.include(endDestination)
+        }
+
         latLngBounds.include(startDestination)
-        latLngBounds.include(endDestination)
+
 
         val cameraUpdate:CameraUpdate=CameraUpdateFactory.newLatLngBounds(latLngBounds.build(), dipToPixels(requireContext(), 30f).toInt())
         mMap.animateCamera(cameraUpdate, 10, object :GoogleMap.CancelableCallback{
@@ -705,39 +722,42 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
 
 
         getBackStackData<ArrayList<StationModel>>("CityNewStations", true) {
-            stationList = it
-            map.clear()
-            map.add(args.startLocation)
-            for (i in it.indices) {
-                map.add(it[i].stationLatLng)
+            if (args.endLocation.isNotEmpty()){
+                stationList = it
+                map.clear()
+                map.add(args.startLocation)
+                for (i in it.indices) {
+                    map.add(it[i].stationLatLng)
+                }
+                map.add(args.endLocation)
+                viewModel.cityTariffMainModel(headerMapUniversal(requireContext()), map)
+                val list = ArrayList<Double>()
+                list.add(startLong)
+                list.add(startLat)
+
+                val listEnd = ArrayList<Double>()
+                listEnd.add(endLong)
+                listEnd.add(endLat)
+                val listBig = ArrayList<ArrayList<Double>>()
+                listBig.add(list)
+                for (i in it.indices) {
+                    val stationList = ArrayList<Double>()
+                    val lng = it[i].stationLatLng.split(",")[1].toDouble()
+                    val lat = it[i].stationLatLng.split(",")[0].toDouble()
+                    locationsLatLng.add(LatLng(lat, lng))
+                    stationList.add(lng)
+                    stationList.add(lat)
+                    listBig.add(stationList)
+                }
+                listBig.add(listEnd)
+
+                val routingModel = RoutindDetails(false, listBig)
+
+                routeViewModel.mapGetRouting(headerMapUniversal(requireContext()), routingModel)
+
+                restoreState()
             }
-            map.add(args.endLocation)
-            viewModel.cityTariffMainModel(headerMapUniversal(requireContext()), map)
-            val list = ArrayList<Double>()
-            list.add(startLong)
-            list.add(startLat)
 
-            val listEnd = ArrayList<Double>()
-            listEnd.add(endLong)
-            listEnd.add(endLat)
-            val listBig = ArrayList<ArrayList<Double>>()
-            listBig.add(list)
-            for (i in it.indices) {
-                val stationList = ArrayList<Double>()
-                val lng = it[i].stationLatLng.split(",")[1].toDouble()
-                val lat = it[i].stationLatLng.split(",")[0].toDouble()
-                locationsLatLng.add(LatLng(lat, lng))
-                stationList.add(lng)
-                stationList.add(lat)
-                listBig.add(stationList)
-            }
-            listBig.add(listEnd)
-
-            val routingModel = RoutindDetails(false, listBig)
-
-            routeViewModel.mapGetRouting(headerMapUniversal(requireContext()), routingModel)
-
-            restoreState()
         }
 
         if (!isCityTariffPreviousBackstack) {
@@ -842,6 +862,9 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         )
     }
 
+    private fun bothLocationSelected():Boolean{
+        return args.endLocation.isNotEmpty()
+    }
     private var opt: Opt?=null
 
     override fun onCargoSelect(opt: Opt) {
@@ -857,6 +880,8 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         super.onDestroyView()
         _binding=null
     }
+
+
 
 
 }

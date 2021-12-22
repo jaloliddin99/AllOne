@@ -97,6 +97,9 @@ constructor(private val apiInterface: APIInterface) {
     suspend fun sendCode(token: Map<String, String>, phone: String) =
         apiInterface.sendCode(token, phone)
 
+    suspend fun changeLang(token: Map<String, String>, lang:String) =
+        apiInterface.changeLang(token, lang)
+
     suspend fun updatePhone(token: Map<String, String>, phone: String, code: String) =
         apiInterface.updatePhone(token, phone, code)
 

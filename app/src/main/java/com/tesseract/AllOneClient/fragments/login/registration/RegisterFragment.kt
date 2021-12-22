@@ -26,7 +26,6 @@ import com.tesseract.AllOneClient.constants.SaveData.saveUserId
 import com.tesseract.AllOneClient.databinding.FragmentRegisterBinding
 import com.tesseract.AllOneClient.dialogs.login.DialogDateOfBirth
 import com.tesseract.AllOneClient.dialogs.login.DialogPoll
-import com.tesseract.AllOneClient.dialogs.main.DialogShowTime
 import com.tesseract.AllOneClient.utils.xValue
 import com.tesseract.AllOneClient.utils.yValue
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,11 +153,6 @@ class RegisterFragment : Fragment(R.layout.fragment_register),
         }
     }
 
-    fun getLocationOnScreen(view: View): Point {
-        val location = IntArray(2)
-        view.getLocationOnScreen(location)
-        return Point(location[0], location[1])
-    }
 
     override fun userGender(gender: String, id: Int) {
         your_gender.text = gender

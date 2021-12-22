@@ -19,6 +19,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.chuckerteam.chucker.api.Chucker
 import com.google.android.material.navigation.NavigationView
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.ActivityMainBinding
@@ -36,8 +37,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        val intent = Chucker.getLaunchIntent(this)
-//        startActivity(intent)
+        val intent = Chucker.getLaunchIntent(this)
+        startActivity(intent)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)

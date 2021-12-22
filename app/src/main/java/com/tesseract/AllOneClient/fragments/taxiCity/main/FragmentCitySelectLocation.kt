@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -48,7 +49,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private var _binding:FragmentCityMapBinding?=null
     private val binding get() = _binding!!
 
-
     private var locationManager: LocationManager? = null
     private var locationListener: LocationListener? = null
     private lateinit var mMap: GoogleMap
@@ -63,6 +63,15 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private var endDestination=""
     private var startName=""
     private var endName=""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(requireActivity())
+        locationRequest = LocationRequest()
+        locationCallback=object :LocationCallback() {
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,6 +96,9 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
 
         binding.apply {
+
+            shimmerLayout.startShimmer()
+
             recyclerView.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             viewModel.savedLocations(headerMapUniversal(requireContext()))
 
@@ -111,8 +123,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             }
             goToTariffs.setOnClickListener {
                 if (this@FragmentCitySelectLocation.startDestination.isNotEmpty()&&
-                    this@FragmentCitySelectLocation.endDestination.isNotEmpty()&&
-                    startName.isNotEmpty()&&endName.isNotEmpty()){
+                    startName.isNotEmpty()){
 
                     val action=FragmentCitySelectLocationDirections.actionFragmentCityMapToFragmentCityOrderMaps(
                         this@FragmentCitySelectLocation.startDestination,
@@ -193,20 +204,11 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         })
     }
 
-    override fun onResume() {
-        super.onResume()
-        activity?.statusBarColor(
-            ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
-            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
-            false
-        )
-    }
-
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         val sydney = LatLng(41.00, 69.00)
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 18f))
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16f))
         mMap.uiSettings.isCompassEnabled=false
 
 
@@ -220,31 +222,49 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             return
         }
 
-       // askLocation()
         binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
         binding.endDestination.addTextChangedListener(startDestinationTextWatcher2)
+
+
 
         viewModelReverse.data.observe(viewLifecycleOwner, {
             startName= it.address.toString()
             binding.startDestination.setText(it.address)
             binding.yourAddress1.text=it.address
+            binding.shimmerLayout.stopShimmer()
 
         })
 
         isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (!isGPS){
             turnOnGPS()
+            getLocationUpdates()
         }else{
             getDeviceLocation()
         }
 
     }
 
+    private fun getLocationUpdates() {
+        locationRequest.interval = 20000
+        locationRequest.fastestInterval = 20000
+        locationRequest.smallestDisplacement = 170f //170 m = 0.1 mile
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //according to your app
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult.locations.isNotEmpty()) {
+                    askLocation(LatLng(locationResult.lastLocation.latitude, locationResult.lastLocation.longitude))
+                }
+            }
+        }
+    }
+
 
     private lateinit var mFusedLocationProviderClient:FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
 
     private fun getDeviceLocation(){
-        mFusedLocationProviderClient=LocationServices.getFusedLocationProviderClient(requireActivity())
         try {
             val location = mFusedLocationProviderClient.lastLocation
 
@@ -401,5 +421,36 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     companion object {
         private const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
+    override fun onResume() {
+        super.onResume()
+        activity?.statusBarColor(
+            ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
+            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
+            false
+        )
+        startLocationUpdates()
+    }
+    // Start location updates
+    private fun startLocationUpdates() {
+        mFusedLocationProviderClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.myLooper()!!
+        )
+    }
+
+    // Stop location updates
+    private fun stopLocationUpdates() {
+        mFusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    // Stop receiving location update when activity not visible/foreground
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+
+
 
 }

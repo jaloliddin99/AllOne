@@ -108,183 +108,192 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dimen_32dp"
-                    android:fontFamily="@font/inter_bold"
-                    android:text="@string/number_of_clients"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/text_size_18sp" />
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_padding_8dp"
-                    android:orientation="horizontal"
-                    android:paddingTop="@dimen/margin_padding_4dp">
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
+                    android:orientation="vertical"
+                    android:id="@+id/premium">
+                    <TextView
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/margin_padding_16dp"
-                        android:layout_weight="1">
+                        android:layout_marginTop="@dimen/dimen_32dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="@string/number_of_clients"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_size_18sp" />
 
-                        <TextView
-                            android:id="@+id/one_person"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:background="@drawable/background_grey"
-                            android:fontFamily="@font/inter_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/margin_padding_16"
-                            android:text="1"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_24sp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_padding_8dp"
-                        android:layout_marginEnd="@dimen/margin_padding_8dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/two_person"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:background="@drawable/background_grey"
-                            android:fontFamily="@font/inter_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/margin_padding_16"
-                            android:text="2"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_24sp" />
-
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_padding_8dp"
-                        android:layout_marginEnd="@dimen/margin_padding_8dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/three_person"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:background="@drawable/background_grey"
-                            android:fontFamily="@font/inter_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/margin_padding_16"
-                            android:text="3"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_24sp" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/margin_padding_16dp"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:id="@+id/four_person"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center"
-                            android:background="@drawable/background_grey"
-                            android:fontFamily="@font/inter_medium"
-                            android:gravity="center"
-                            android:padding="@dimen/margin_padding_16"
-                            android:text="4"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/text_size_24sp" />
-
-                    </RelativeLayout>
-
-
-                </androidx.appcompat.widget.LinearLayoutCompat>
-
-                <RelativeLayout
-                    android:id="@+id/choose_seat"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/item_height_56dp"
-                    android:layout_marginTop="@dimen/margin_padding_12dp"
-                    android:background="@drawable/green_bg_12dp">
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:orientation="horizontal">
+                        android:layout_marginTop="@dimen/margin_padding_8dp"
+                        android:orientation="horizontal"
+                        android:paddingTop="@dimen/margin_padding_4dp">
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/seat"
-                            android:layout_width="@dimen/icon_size_20dp"
-                            android:layout_height="@dimen/icon_size_20dp"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginStart="@dimen/icon_size_20dp"
-                            android:src="@drawable/ic_seat"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
-                        <androidx.appcompat.widget.LinearLayoutCompat
+                        <RelativeLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginHorizontal="@dimen/margin_padding_16"
-                            android:layout_weight="1"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toStartOf="@id/arrow"
-                            app:layout_constraintStart_toEndOf="@+id/seat"
-                            app:layout_constraintTop_toTopOf="parent">
+                            android:layout_marginEnd="@dimen/margin_padding_16dp"
+                            android:layout_weight="1">
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:ellipsize="end"
-                                android:fontFamily="@font/inter_regular"
-                                android:maxLines="1"
-                                android:text="@string/select_place"
+                            <TextView
+                                android:id="@+id/one_person"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:background="@drawable/background_grey"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:padding="@dimen/margin_padding_16"
+                                android:text="1"
                                 android:textColor="@color/black"
-                                android:textSize="@dimen/text_size_15sp" />
+                                android:textSize="@dimen/text_size_24sp" />
 
-                            <androidx.appcompat.widget.AppCompatTextView
-                                android:id="@+id/selectedSeatNumbers"
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_8dp"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/two_person"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:background="@drawable/background_grey"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:padding="@dimen/margin_padding_16"
+                                android:text="2"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_24sp" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_8dp"
+                            android:layout_marginEnd="@dimen/margin_padding_8dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/three_person"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:background="@drawable/background_grey"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:padding="@dimen/margin_padding_16"
+                                android:text="3"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_24sp" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/margin_padding_16dp"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:id="@+id/four_person"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center"
+                                android:background="@drawable/background_grey"
+                                android:fontFamily="@font/inter_medium"
+                                android:gravity="center"
+                                android:padding="@dimen/margin_padding_16"
+                                android:text="4"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/text_size_24sp" />
+
+                        </RelativeLayout>
+
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <RelativeLayout
+                        android:id="@+id/choose_seat"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/item_height_56dp"
+                        android:layout_marginTop="@dimen/margin_padding_12dp"
+                        android:background="@drawable/green_bg_12dp">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/seat"
+                                android:layout_width="@dimen/icon_size_20dp"
+                                android:layout_height="@dimen/icon_size_20dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="@dimen/icon_size_20dp"
+                                android:src="@drawable/ic_seat"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.appcompat.widget.LinearLayoutCompat
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginHorizontal="@dimen/margin_padding_16"
+                                android:layout_weight="1"
+                                android:orientation="vertical"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/arrow"
+                                app:layout_constraintStart_toEndOf="@+id/seat"
+                                app:layout_constraintTop_toTopOf="parent">
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:ellipsize="end"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:maxLines="1"
+                                    android:text="@string/select_place"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/text_size_15sp" />
+
+                                <androidx.appcompat.widget.AppCompatTextView
+                                    android:id="@+id/selectedSeatNumbers"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/margin_padding_4dp"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:text="@string/no_place_selected"
+                                    android:textSize="15sp" />
+                            </androidx.appcompat.widget.LinearLayoutCompat>
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/arrow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/margin_padding_4dp"
-                                android:fontFamily="@font/inter_semibold"
-                                android:text="@string/no_place_selected"
-                                android:textSize="15sp" />
-                        </androidx.appcompat.widget.LinearLayoutCompat>
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginEnd="22dp"
+                                android:src="@drawable/ic_arrow_right"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:tint="@color/color_grey2" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </RelativeLayout>
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                        <androidx.appcompat.widget.AppCompatImageView
-                            android:id="@+id/arrow"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:layout_marginEnd="22dp"
-                            android:src="@drawable/ic_arrow_right"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:tint="@color/color_grey2" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-                </RelativeLayout>
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"

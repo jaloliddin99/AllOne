@@ -49,7 +49,8 @@ class DialogDateOfBirth(
                 var day: String = ""
                 var month: String = ""
                 val dayOfMonth=binding?.datePicker1?.dayOfMonth
-                val monthOfYear=binding?.datePicker1?.month
+                val someValue= binding!!.datePicker1.month.toString().toInt()
+                val monthOfYear:Int= someValue +1
                 day = if (dayOfMonth in 0..9) {
                     "0$dayOfMonth"
                 } else {
@@ -71,17 +72,16 @@ class DialogDateOfBirth(
         binding?.datePicker1?.setOnDateChangedListener { view, year, monthOfYear, dayOfMonth ->
             isChanged=true
             var day: String = ""
-            var month: String = ""
             day = if (dayOfMonth in 0..9) {
                 "0$dayOfMonth"
             } else {
                 "$dayOfMonth"
             }
 
-            month = if (monthOfYear in 0..9) {
-                "0$monthOfYear"
+            val month: String = if ((monthOfYear+1) in 0..9) {
+                "0${(monthOfYear+1)}"
             } else {
-                "$monthOfYear"
+                "${(monthOfYear+1)}"
             }
 
             date= "$day.$month.$year"
@@ -102,7 +102,6 @@ class DialogDateOfBirth(
     override fun onStart() {
         super.onStart()
         val width = (resources.displayMetrics.widthPixels * 0.9).toInt()
-        val height = (resources.displayMetrics.heightPixels * 0.40).toInt()
         dialog!!.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
     }
 

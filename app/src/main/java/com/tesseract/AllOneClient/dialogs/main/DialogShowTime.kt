@@ -48,9 +48,7 @@ class DialogShowTime(
                 val month: String
                 val dayOfMonth= binding.datePicker1.dayOfMonth
 
-
                 val someValue=binding.datePicker1.month.toString().toInt()
-                Toast.makeText(context, "$someValue", Toast.LENGTH_SHORT).show()
                 val monthOfYear:Int= someValue +1
 
                 day = if (dayOfMonth in 0..9) {

@@ -6,8 +6,8 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MyApplication: MultiDexApplication() {
-//    override fun onCreate() {
-//        super.onCreate()
-//        Links.context = this
-//    }
+    override fun onCreate() {
+        super.onCreate()
+        Links.context = this
+    }
 }

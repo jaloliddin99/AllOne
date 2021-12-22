@@ -35,16 +35,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
-            <androidx.appcompat.widget.AppCompatTextView
+            <com.facebook.shimmer.ShimmerFrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/yourAddress"
+                android:id="@+id/shimmerLayout"
+                android:layout_gravity="center_horizontal">
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yourAddress"
+                    android:textSize="@dimen/text_size_12sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/inter_medium"
+                    android:id="@+id/yourAddress"/>
+            </com.facebook.shimmer.ShimmerFrameLayout>
 
-                android:layout_gravity="center_horizontal"
-                android:textSize="@dimen/text_size_12sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/inter_medium"
-                android:id="@+id/yourAddress"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -29,6 +29,7 @@ import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderHis
 import com.tesseract.AllOneClient.model.order.MessageEvent
 import com.tesseract.AllOneClient.model.order.MessageEventActiveOrder
 import com.tesseract.AllOneClient.pagination.EndlessRecyclerViewScrollListener
+import com.tesseract.AllOneClient.utils.StatefulFragment
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 import org.greenrobot.eventbus.EventBus
@@ -37,7 +38,7 @@ import org.greenrobot.eventbus.ThreadMode
 import java.lang.Exception
 
 @AndroidEntryPoint
-class OrderFragment : Fragment(R.layout.fragment_order),
+open class OrderFragment : Fragment(R.layout.fragment_order),
     DialogDateOfBirth.OnDaySelectListener {
     private var _fragmentOrderBinding: FragmentOrderBinding? = null
     private val fragmentOrderBinding get() = _fragmentOrderBinding!!

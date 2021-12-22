@@ -183,7 +183,6 @@ class FragmentActiveParcelOrder : Fragment() {
         }
 
         viewModel.errorM.observe(requireActivity(), {
-            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
             binding.loader.loader.visibility=View.GONE
         })
 
