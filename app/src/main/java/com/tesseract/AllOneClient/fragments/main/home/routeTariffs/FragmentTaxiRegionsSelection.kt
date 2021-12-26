@@ -8,8 +8,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.content.res.ResourcesCompat
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
@@ -57,14 +59,13 @@ class FragmentTaxiRegionsSelection : Fragment(),
         savedInstanceState: Bundle?
     ): View? {
         _binding= FragmentTarifBinding.inflate(inflater, container, false)
+        viewModel = ViewModelProvider(this).get(RouteTariffViewModel::class.java)
         return binding.root
     }
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModel = ViewModelProvider(this).get(RouteTariffViewModel::class.java)
 
         requireActivity().statusBarColor(
             ResourcesCompat.getColor(resources, R.color.white, requireActivity().theme),
@@ -83,14 +84,45 @@ class FragmentTaxiRegionsSelection : Fragment(),
             binding.endDestinationTextChange.text = getString(R.string.change)
         }
 
-        binding.apply {
-            viewModel.routeList.observe(requireActivity(), Observer {
-
-                if (it.isNullOrEmpty()){
-                    DialogTariffNotFound("${Common.startRegion} ${Common.startDistrict}","${Common.endRegion} ${Common.endDistrict}" )
-                        .show(parentFragmentManager, tag)
+        if (Common.startRegionId.isNotEmpty() && Common.endRegionId.isNotEmpty()
+            && Common.startDistrictId.isNotEmpty() && Common.endDistrictId.isNotEmpty()
+        ) {
+            binding.apply {
+                startDestinationChange.text = getString(R.string.change)
+                endDestinationTextChange.text = getString(R.string.change)
+                relativeView.visibility=View.GONE
+                btnTariffOrder.text = getString(R.string.continue_)
+                btnTariffOrder.backgroundTintList = context?.getColorStateList(R.color.dark_grey)
+                if (Common.startRegionId=="14"){
+                    startDestination.text = Common.startRegion
                 }else{
+                    startDestination.text = Common.startRegion + " " +Common.startDistrict
+                }
 
+                if (Common.endRegionId=="14"){
+                    endDestination.text = Common.endRegion
+                }else{
+                    endDestination.text = Common.endRegion + " " + Common.endDistrict
+                }
+
+                viewModel.getRouteTariff(headerMapUniversal(requireContext()),Common.startDistrictId, Common.endDistrictId)
+            }
+        }
+
+        var dialogShowing=false
+        binding.apply {
+            var dialog=DialogFragment()
+            viewModel.routeList.observe(viewLifecycleOwner, Observer {
+                if (it.isEmpty()){
+                    if (!dialogShowing){
+                        dialog=DialogTariffNotFound("${Common.startRegion} ${Common.startDistrict}","${Common.endRegion} ${Common.endDistrict}")
+                        dialog.show(parentFragmentManager, tag)
+                        dialogShowing=true
+                    }
+                }else{
+                    if (dialogShowing){
+                        dialog.dismiss()
+                    }
                     recyclerTariff.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
                     tariffAdapter = TariffAdapter(requireContext(), it, this@FragmentTaxiRegionsSelection)
                     recyclerTariff.adapter = tariffAdapter
@@ -134,30 +166,18 @@ class FragmentTaxiRegionsSelection : Fragment(),
 
         tariffOrder()
 
-        if (Common.startRegionId.isNotEmpty() && Common.endRegionId.isNotEmpty()
-            && Common.startDistrictId.isNotEmpty() && Common.endDistrictId.isNotEmpty()
-        ) {
-            binding.apply {
-                startDestinationChange.text = getString(R.string.change)
-                endDestinationTextChange.text = getString(R.string.change)
-                relativeView.visibility=View.GONE
-                btnTariffOrder.text = "Продолжить"
-                btnTariffOrder.backgroundTintList = context?.getColorStateList(R.color.dark_grey)
-                startDestination.text = Common.startRegion + " " +Common.startDistrict
-                endDestination.text = Common.endRegion + " " + Common.endDistrict
-                viewModel.getRouteTariff(headerMapUniversal(requireContext()),Common.startDistrictId, Common.endDistrictId)
-            }
-        }
         Common.isCurrentRegionFragment = true
 
         binding.startDestinationChange.setOnClickListener {
             Common.destination=0
+            dialogShowing=false
             val action = FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
             findNavController().navigate(action)
         }
 
         binding.endDestinationTextChange.setOnClickListener {
             Common.destination=1
+            dialogShowing=false
             val action = FragmentTaxiRegionsSelectionDirections.actionFragmentTaxiRegionsToFragmentRegions()
             findNavController().navigate(action)
 
@@ -242,6 +262,10 @@ class FragmentTaxiRegionsSelection : Fragment(),
     override fun onDestroyView() {
         super.onDestroyView()
         _binding=null
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
     }
 
 }

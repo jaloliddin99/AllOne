@@ -1,11 +1,11 @@
 package com.tesseract.AllOneClient.fragments.tourism.packagesView
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.model.tourism.packageView.PackageViewMainModel
 import com.tesseract.AllOneClient.repository.NetworkRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,9 @@ class PackageViewModel @Inject constructor(private val repository: NetworkReposi
 
     val addToFav=MutableLiveData<ClinicAddToFavouriteModel>()
     val errorFav=MutableLiveData<String>()
+    private val TAG = "PackageViewModel"
 
-    fun addToFavourite(token: Map<String, String>, id:Int)=viewModelScope.launch {
+    fun addToFavourite(token: Map<String, String>, id:String)=viewModelScope.launch {
         try {
             repository.packageAddToFav(token, id).let {
                 if (it.isSuccessful){
@@ -34,6 +35,7 @@ class PackageViewModel @Inject constructor(private val repository: NetworkReposi
                 }
             }
         }catch (e:Exception){
+            Log.i(TAG, "addToFavourite: ")
             errorFav.postValue(e.message)
         }
     }

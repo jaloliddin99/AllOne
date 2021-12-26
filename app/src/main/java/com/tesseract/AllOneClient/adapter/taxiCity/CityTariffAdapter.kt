@@ -72,8 +72,6 @@ class CityTariffAdapter(
                 itemBinding.mainBg.setBackgroundResource(R.drawable.bg_item_clicked_round_yellow)
                 listener.onItemClick(model, absoluteAdapterPosition)
             }
-
-
         }
 
     }

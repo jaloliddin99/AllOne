@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicAddToFavouriteModel
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.TourHotelView
 import com.tesseract.AllOneClient.model.tourism.hotels.roomView.RoomView
 import com.tesseract.AllOneClient.repository.NetworkRepository

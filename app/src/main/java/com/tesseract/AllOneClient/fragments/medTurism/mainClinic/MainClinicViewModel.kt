@@ -16,9 +16,9 @@ class MainClinicViewModel @Inject constructor(private val repository: NetworkRep
     val mainIndex=MutableLiveData<MedTurMainModel>()
     val errorM=MutableLiveData<String>()
 
-    fun mainIndex(token:Map<String, String>)=viewModelScope.launch {
+    fun mainIndex(token:Map<String, String>, lat:String, lng:String)=viewModelScope.launch {
         try {
-            repository.getMedTurIndex(token).let {
+            repository.getMedTurIndex(token, lat, lng).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         mainIndex.postValue(it.body())

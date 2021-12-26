@@ -283,6 +283,6 @@ object SaveData {
 
     fun getProfileImage(context: Context): String? {
         val sharedrefrence = context.getSharedPreferences("saveProfileImage", Context.MODE_PRIVATE)
-        return sharedrefrence.getString(context.getString(R.string.saveProfileImage), "")
+        return sharedrefrence.getString(context.getString(R.string.saveProfileImage), "0")
     }
 }

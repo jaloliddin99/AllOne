@@ -1,12 +1,10 @@
 package com.tesseract.AllOneClient.adapter.medTourism.clinics
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutRegionDriverCarImagesBinding
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.Content
 
 class ClinicImagesAdapter(
     private val dataList:List<String>

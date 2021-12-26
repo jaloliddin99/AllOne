@@ -587,7 +587,7 @@ interface APIInterface {
     @GET("med_tourism/clinic/{id}")
     suspend fun getClinicView(
         @HeaderMap headers: Map<String, String>,
-        @Query("id") id:Int
+        @Path("id") id:String
     ):Response<ClinicMainModel>
 
     @POST("med_tourism/{clinic}/{id}/add_to_favorites")
@@ -651,7 +651,9 @@ interface APIInterface {
 
     @GET("med_tourism")
     suspend fun getMedTurIndex(
-        @HeaderMap headers: Map<String, String>
+        @HeaderMap headers: Map<String, String>,
+        @Query("lat") lat:String,
+        @Query("lng") lng:String
     ):Response<MedTurMainModel>
 
     @GET("{med_tourism}/favorites")
@@ -697,10 +699,10 @@ interface APIInterface {
         @Path("packageId") location: Int
     ):Response<PackageViewMainModel>
 
-    @POST("tourism/tour_package/{id}/add_to_favorites")
+    @POST("tourism/tour_package/{packageId}/add_to_favorites")
     suspend fun addToFavTour(
         @HeaderMap headers: Map<String, String>,
-        @Path("packageId") location: Int
+        @Path("packageId") location: String
     ):Response<ClinicAddToFavouriteModel>
 
     @GET("tourism/explore")

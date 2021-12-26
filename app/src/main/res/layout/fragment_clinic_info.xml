@@ -169,6 +169,7 @@
                 android:layout_marginStart="@dimen/margin_padding_4dp"
                 android:background="@drawable/background_white_corner_12"
                 android:backgroundTint="#F6F6F6"
+                android:id="@+id/phoneNumberClicked"
                 android:orientation="vertical"
                 android:layout_weight="1">
 

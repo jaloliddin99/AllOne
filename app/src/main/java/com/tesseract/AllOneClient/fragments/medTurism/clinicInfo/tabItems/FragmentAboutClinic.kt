@@ -11,7 +11,6 @@ import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicImagesAdapter
 import com.tesseract.AllOneClient.databinding.FragmentMedTurAboutClinicBinding
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.ClinicMainModel
 import com.tesseract.AllOneClient.utils.gotoContact
 
 class FragmentAboutClinic:Fragment(), MedPhoneAdapter.OnClickListener {

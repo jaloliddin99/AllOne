@@ -101,12 +101,19 @@ class FragmentRegions: Fragment(), RegionRegionAdapter.OnItemClickListener {
         }
 
         if (searchItemBinding.direct==true){
-            if (Common.startRegionId.isNotEmpty()){
+
+
+            if (Common.destination == 0||Common.destination== 10) {
                 Common.startDistrictId="0"
+                Common.startDistrict=""
             }
-            if (Common.endRegionId.isNotEmpty()){
+
+            if (Common.destination == 1||Common.destination == 11) {
                 Common.endDistrictId="0"
+                Common.endDistrict=""
             }
+
+
             val regionPopbackStask=RegionPopbackStask(
                 regionName!!,
                 position.toInt(),

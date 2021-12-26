@@ -2,6 +2,7 @@ package com.tesseract.AllOneClient.fragments.medTurism.clinicInfo
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +17,7 @@ import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.PagerAdapter
 import com.tesseract.AllOneClient.databinding.FragmentClinicInfoBinding
+import com.tesseract.AllOneClient.dialogs.DialogContactPresenter
 import com.tesseract.AllOneClient.dialogs.medTur.DialogRate
 import com.tesseract.AllOneClient.fragments.main.home.payments.ShareDataViewModel
 import com.tesseract.AllOneClient.utils.headerMapUniversal
@@ -40,10 +42,16 @@ class FragmentClinicInfo:Fragment() {
         return binding.root
     }
 
+    private val TAG = "FragmentClinicInfo"
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.clinicMainModel(headerMapUniversal(requireContext()), args.clinicId)
+
+
+        Log.i(TAG, "onViewCreated: ${headerMapUniversal(requireContext())["Authorization"]}")
+
+        Log.i(TAG, "onViewCreated: ${args.clinicId}")
+        viewModel.clinicMainModel(headerMapUniversal(requireContext()), args.clinicId.toString())
 
         viewModel.errorAction.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
@@ -62,6 +70,8 @@ class FragmentClinicInfo:Fragment() {
                 backToHome.setOnClickListener {
                     findNavController().popBackStack()
                 }
+
+                name.text=it.content.name
 
                 isFavourite=it.content.is_favorite
                 if (it.content.is_favorite){
@@ -91,6 +101,13 @@ class FragmentClinicInfo:Fragment() {
                 val adapter = PagerAdapter(childFragmentManager, tabLayout.tabCount, requireContext())
                 viewPager.adapter = adapter
                 tabLayout.setupWithViewPager(viewPager)
+
+                phoneNumberClicked.setOnClickListener {hello->
+                    if (it.content.phone_number.isEmpty()){
+                        return@setOnClickListener
+                    }
+                    DialogContactPresenter(it.content.phone_number).show(parentFragmentManager, tag)
+                }
             }
         })
 

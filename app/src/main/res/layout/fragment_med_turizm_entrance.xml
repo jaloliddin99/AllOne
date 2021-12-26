@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
@@ -40,6 +41,7 @@
                 android:textSize="@dimen/text_size_20sp" />
 
         </RelativeLayout>
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
             android:layout_width="match_parent"
@@ -49,15 +51,18 @@
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
             app:queryHint="@string/search_doctors" />
+
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
-            android:scrollbars="none"
             android:layout_height="match_parent"
-            android:id="@+id/nestedScrollView">
+            android:scrollbars="none">
+
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerViewChip"
                     android:layout_width="match_parent"
@@ -73,9 +78,9 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/ambulance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/ambulance"
                     android:layout_marginHorizontal="@dimen/margin_padding_16"
                     android:layout_marginTop="@dimen/margin_padding_16"
                     android:background="@drawable/background_white_corner_12"
@@ -167,49 +172,54 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_right"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/alll"
-                        android:drawableTint="@color/green"
-                        android:drawablePadding="@dimen/margin_padding_8dp"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/famousCLinicNestedScroll"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/margin_padding_16"
-                    android:clipToPadding="false"
-                    android:paddingEnd="@dimen/margin_padding_8dp"
-                    android:id="@+id/recyclerViewPopular"/>
+                    android:scrollbars="none">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewPopular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingStart="@dimen/margin_padding_16"
+                        android:paddingEnd="@dimen/margin_padding_8dp" />
+                </androidx.core.widget.NestedScrollView>
+
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_padding_16"
+                    android:layout_marginTop="@dimen/dimen_32dp"
                     android:fontFamily="@font/inter_bold"
                     android:text="@string/famousDoctors"
                     android:textColor="@color/black"
-                    android:layout_marginStart="@dimen/margin_padding_16"
-                    android:layout_marginTop="@dimen/dimen_32dp"
                     android:textSize="@dimen/text_size_18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-                <androidx.recyclerview.widget.RecyclerView
-                    android:layout_width="match_parent"
+
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/famousDoctorsNestedScroll"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="@dimen/margin_padding_16"
-                    android:clipToPadding="false"
-                    android:paddingEnd="@dimen/margin_padding_8dp"
-                    android:id="@+id/recyclerViewDoctors"/>
+                    android:scrollbars="none">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerViewDoctors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="false"
+                        android:paddingStart="@dimen/margin_padding_16"
+                        android:paddingEnd="@dimen/margin_padding_8dp" />
+                </androidx.core.widget.NestedScrollView>
+
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -221,45 +231,30 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/inter_bold"
-                        android:text="@string/famousClinics"
+                        android:text="@string/nearClinicsToYOu"
                         android:textColor="@color/black"
                         android:textSize="@dimen/text_size_18sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableEnd="@drawable/ic_arrow_right"
-                        android:fontFamily="@font/inter_medium"
-                        android:text="@string/alll"
-                        android:drawableTint="@color/green"
-                        android:drawablePadding="@dimen/margin_padding_8dp"
-                        android:textColor="@color/green"
-                        android:textSize="@dimen/text_size_15sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewNear"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="@dimen/margin_padding_16"
                     android:clipToPadding="false"
-                    android:paddingBottom="@dimen/margin_padding_24dp"
-                    android:id="@+id/recyclerViewNear"/>
+                    android:paddingHorizontal="@dimen/margin_padding_16"
+                    android:paddingBottom="@dimen/margin_padding_24dp" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-    <include layout="@layout/loader_lottie"
-        android:id="@+id/loader"/>
-
-
+    <include
+        android:id="@+id/loader"
+        layout="@layout/loader_lottie" />
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

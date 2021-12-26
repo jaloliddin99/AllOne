@@ -57,20 +57,18 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
         }
     }
 
-
-
     val errorAction=MutableLiveData<String>()
-    fun clinicMainModel(token:Map<String, String>, id:Int)=viewModelScope.launch {
+    fun clinicMainModel(token:Map<String, String>, id:String)=viewModelScope.launch {
         try {
             repository.getClinicView(token, id).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         clinicMain.postValue(it.body())
                     }else{
-                        errorAction.postValue(it.body()?.message.toString())
+                        errorAction.postValue(it.message()+" ${it.code()}")
                     }
                 }else{
-                    errorAction.postValue(it.body()?.message.toString())
+                    errorAction.postValue(it.message()+" ${it.code()}")
                 }
             }
         }catch (e:Exception){

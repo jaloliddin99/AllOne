@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.tesseract.AllOneClient.adapter.medTourism.amb.AmbulanceAdapter
 import com.tesseract.AllOneClient.databinding.FragmentMedAmbulanceBinding
 import com.tesseract.AllOneClient.model.home.getDistricts.DistrictList
 import com.tesseract.AllOneClient.model.medTourism.ambulance.Content
+import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,6 +25,7 @@ class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener
     private val binding get() = _binding!!
     private lateinit var viewModel: AmbulanceViewModel
 
+    private lateinit var adapter:AmbulanceAdapter
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,8 +45,8 @@ class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener
             viewModel.ambulance.observe(viewLifecycleOwner, {
                 recyclerView.apply {
                     layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-
-                    adapter=AmbulanceAdapter(it.content, this@FragmentMedAmbulance)
+                    this@FragmentMedAmbulance.adapter=AmbulanceAdapter(it.content, this@FragmentMedAmbulance, requireContext())
+                    adapter=this@FragmentMedAmbulance.adapter
 
                     loader.loader.visibility=View.GONE
                 }
@@ -54,16 +57,27 @@ class FragmentMedAmbulance:Fragment() , AmbulanceAdapter.CategoriesClickListener
             findNavController().popBackStack()
         }
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
+
+        })
+
 
         getBackStackData<DistrictList>("districtSelected", true) {
-            binding.location.text = it.name
             binding.loader.loader.visibility = View.VISIBLE
-
         }
     }
 
     override fun onChipClicked(position: Content) {
-
+        gotoContact(position.phone_number, requireContext())
     }
 
     private fun <T> Fragment.getBackStackData(

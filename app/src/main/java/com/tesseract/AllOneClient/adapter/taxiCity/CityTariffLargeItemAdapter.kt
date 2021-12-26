@@ -42,8 +42,7 @@ class CityTariffLargeItemAdapter(
             itemBinding.tariff.text=model.title
             itemBinding.timeLeft.text=model.arrival_time
 
-
-            itemBinding.moreInfo.setOnClickListener {
+            itemBinding.cardItem.setOnClickListener {
                 listener.onShowViewPager(model)
             }
 

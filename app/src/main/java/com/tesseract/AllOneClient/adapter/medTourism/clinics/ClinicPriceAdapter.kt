@@ -3,9 +3,7 @@ package com.tesseract.AllOneClient.adapter.medTourism.clinics
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutMedTurClinicServicesBinding
-import com.tesseract.AllOneClient.databinding.LayoutRegionDriverCarImagesBinding
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Price
 
 class ClinicPriceAdapter (

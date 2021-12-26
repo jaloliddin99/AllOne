@@ -91,7 +91,14 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
                 loader.loader.visibility=View.GONE
                 Glide.with(requireContext()).load(Links.BASE_URL+"/image/bc207c28-626e-496e-9e7b-e0d43a152a3f?w=565")
                     .into(imageProfile)
+
+                SaveData.saveProfileImage(requireContext(), "1")
             })
+
+            if (SaveData.getProfileImage(requireContext())=="1"){
+                Glide.with(requireContext()).load(Links.BASE_URL+"/image/bc207c28-626e-496e-9e7b-e0d43a152a3f?w=565")
+                    .into(imageProfile)
+            }
 
 
 
@@ -182,21 +189,18 @@ class ProfileFragment : Fragment(R.layout.fragment_profile) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == PICK_IMAGE_INTENT) {
-
                 val selectedFile: Uri? = data?.data
-
                 if (selectedFile != null) {
                     val bitmap =
-                        MediaStore.Images.Media.getBitmap(
-                            requireContext().contentResolver,
-                            selectedFile
-                        )
+                        MediaStore.Images.Media.getBitmap(requireContext().contentResolver, selectedFile)
                     val outputStream = ByteArrayOutputStream()
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
                     val byteArray: ByteArray = outputStream.toByteArray()
                     val encodedString: String = Base64.encodeToString(byteArray, Base64.DEFAULT)
 
-                    viewModelProfile.updateAvatar(headerMapUniversal(requireContext()), encodedString)
+                    viewModelProfile.updateAvatar(headerMapUniversal(requireContext()),
+                        "data:image/png;base64$encodedString"
+                    )
                     binding.loader.loader.visibility=View.VISIBLE
 
 

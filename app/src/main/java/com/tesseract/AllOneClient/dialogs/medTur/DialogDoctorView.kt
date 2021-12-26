@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.databinding.DialogClinicDoctorBinding
+import com.tesseract.AllOneClient.dialogs.DialogContactPresenter
 import com.tesseract.AllOneClient.fragments.medTurism.doctorView.DoctorViewModel
 import com.tesseract.AllOneClient.utils.gotoContact
 import com.tesseract.AllOneClient.utils.headerMapUniversal
@@ -53,7 +54,12 @@ class DialogDoctorView(private val doctorId: Int) : BottomSheetDialogFragment(),
 
                 type.text = it.content.type
                 Picasso.get().load(it.content.poster).into(poster)
-                telegram.text = it.content.telegram
+                if (it.content.telegram.isEmpty()){
+                    telegramLinear.visibility=View.GONE
+                }else{
+                    telegramLinear.visibility=View.VISIBLE
+                    telegram.text = it.content.telegram
+                }
                 workTime.text = it.content.work_time
                 description.text = it.content.description
 
@@ -61,6 +67,13 @@ class DialogDoctorView(private val doctorId: Int) : BottomSheetDialogFragment(),
 
                 recyclerViewPhones.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 recyclerViewPhones.adapter=MedPhoneAdapter(it.content.phone_number, this@DialogDoctorView)
+
+                phoneNumberClicked.setOnClickListener {hello->
+                    if (it.content.phone_number.isEmpty()){
+                        return@setOnClickListener
+                    }
+                    DialogContactPresenter(it.content.phone_number).show(parentFragmentManager, tag)
+                }
             })
 
 

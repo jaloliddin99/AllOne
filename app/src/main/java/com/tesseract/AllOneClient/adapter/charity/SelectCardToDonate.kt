@@ -41,7 +41,6 @@ class SelectCardToDonate(
             val cardNumFormat=(card.cardNumber!!).replaceRange(6, 12, "******")
             itemBinding.itemCardNumber.text= SaveData.formatCard(cardNumFormat)
             itemBinding.mainCard.setBackgroundColor(Color.parseColor(card.cardColor))
-            itemBinding.balance.text=SaveData.formatPhone(card.balance!!)+" "+context.getString(R.string.summa1)
             if (card.type=="uzcard"){
                 itemBinding.logoBrand.setImageResource(R.drawable.uzcard)
             }else if (card.type=="humo"){

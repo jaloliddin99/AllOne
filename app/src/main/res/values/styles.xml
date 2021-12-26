@@ -41,6 +41,12 @@
         <item name="android:windowBackground">@drawable/popup_background</item>
     </style>
 
+    <style name="DialogAnimation23">
+        <item name="android:windowEnterAnimation">@anim/zoom_in</item>
+        <item name="android:windowExitAnimation">@anim/zoom_out</item>
+        <item name="android:windowBackground">@drawable/popup_background</item>
+    </style>
+
     <style name="lightStyle">
         <item name="fontFamily">@font/inter_light</item>
         <item name="android:textColor">@color/black</item>

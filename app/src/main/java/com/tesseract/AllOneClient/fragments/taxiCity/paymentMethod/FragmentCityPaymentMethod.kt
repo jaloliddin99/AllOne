@@ -26,8 +26,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class FragmentCityPaymentMethod : Fragment(), DialogBonusMoney.OnBonusSelected, SelectCardToDonate.OnItemClickListener{
     private var _binding: FragmentCityPaymentMethodBinding?=null
     private val binding get() = _binding!!
-
-
     private lateinit var viewModel2: GetCardViewModel
     private lateinit var addCardAdapter: SelectCardToDonate
     private lateinit var getCardData: List<GetCardData>

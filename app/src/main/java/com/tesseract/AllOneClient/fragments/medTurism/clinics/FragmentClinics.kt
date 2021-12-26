@@ -27,7 +27,6 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
     private val binding get() = _binding!!
     private lateinit var viewModel: ClinicsViewModel
     private lateinit var adapter: ClinicsAdapter
-    private var isCurrentFragment: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +35,7 @@ class FragmentClinics : Fragment(), ClinicsAdapter.OnClickListener {
     ): View {
         _binding = FragmentMedClinicsBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this).get(ClinicsViewModel::class.java)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

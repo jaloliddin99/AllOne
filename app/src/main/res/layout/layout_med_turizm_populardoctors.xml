@@ -5,6 +5,7 @@
     app:cardElevation="@dimen/dimens_0dp"
     android:layout_marginTop="@dimen/margin_padding_12dp"
     app:cardCornerRadius="@dimen/margin_padding_12dp"
+    app:rippleColor="@android:color/transparent"
     android:layout_marginEnd="@dimen/margin_padding_8dp"
     android:backgroundTint="@color/grey"
     android:layout_height="wrap_content">
@@ -20,9 +21,10 @@
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
+                android:src="@drawable/news_image"
                 android:id="@+id/poster"
                 app:layout_constraintTop_toTopOf="parent"
-                android:scaleType="centerCrop"/>
+                android:scaleType="centerInside"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -43,6 +45,8 @@
             android:layout_marginTop="@dimen/margin_padding_12dp"
             android:layout_marginStart="@dimen/margin_padding_16"
             android:id="@+id/profession"
+            android:maxLines="2"
+            android:ellipsize="end"
             android:textColor="#119E46"
             android:textSize="@dimen/text_size_12sp"
             android:fontFamily="@font/inter_regular"/>

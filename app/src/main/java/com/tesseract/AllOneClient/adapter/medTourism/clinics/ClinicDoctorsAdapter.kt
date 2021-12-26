@@ -3,14 +3,10 @@ package com.tesseract.AllOneClient.adapter.medTourism.clinics
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Filter
-import android.widget.Filterable
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.tesseract.AllOneClient.databinding.LayoutMedTurClinicBinding
-import com.tesseract.AllOneClient.model.medTourism.Doctors
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Doctor
-import com.tesseract.AllOneClient.model.medTourism.clinics.Data
 import java.util.*
 import kotlin.collections.ArrayList
 

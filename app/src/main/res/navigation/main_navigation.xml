@@ -648,10 +648,11 @@
         android:name="com.tesseract.AllOneClient.fragments.medTurism.clinics.FragmentClinics"
         android:label="fragment_med_clinics"
         tools:layout="@layout/fragment_med_clinics">
-        <action
-            android:id="@+id/action_fragmentClinics_to_fragmentClinicInfo"
-            app:destination="@id/fragmentClinicInfo" />
+
     </fragment>
+    <action
+        android:id="@+id/action_fragmentClinics_to_fragmentClinicInfo"
+        app:destination="@id/fragmentClinicInfo" />
 
     <fragment
         android:id="@+id/fragmentRegionMapFirst"
@@ -1043,10 +1044,11 @@
         android:name="com.tesseract.AllOneClient.fragments.medTurism.doctors.FragmentMedTurDoctors"
         android:label="fragment_med_tur_doctors"
         tools:layout="@layout/fragment_med_tur_doctors" >
-        <action
-            android:id="@+id/action_fragmentMedTurDoctors_to_fragmentDoctorView"
-            app:destination="@id/fragmentDoctorView" />
+
     </fragment>
+    <action
+        android:id="@+id/action_fragmentMedTurDoctors_to_fragmentDoctorView"
+        app:destination="@id/fragmentDoctorView" />
     <fragment
         android:id="@+id/fragmentDoctorView"
         android:name="com.tesseract.AllOneClient.fragments.medTurism.doctorView.FragmentDoctorView"

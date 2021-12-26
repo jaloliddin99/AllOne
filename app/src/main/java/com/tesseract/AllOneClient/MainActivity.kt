@@ -13,16 +13,21 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import com.bumptech.glide.Glide
 import com.chuckerteam.chucker.api.Chucker
 import com.google.android.material.navigation.NavigationView
+import com.tesseract.AllOneClient.constants.Links
 import com.tesseract.AllOneClient.constants.SaveData
 import com.tesseract.AllOneClient.databinding.ActivityMainBinding
+import com.tesseract.AllOneClient.fragments.profile.main.ProfileViewModel
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -33,10 +38,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-
+    private lateinit var viewModelProfile: ProfileViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        viewModelProfile= ViewModelProvider(this).get(ProfileViewModel::class.java)
         val intent = Chucker.getLaunchIntent(this)
         startActivity(intent)
 
@@ -48,6 +53,16 @@ class MainActivity : AppCompatActivity() {
         val view:View=navView.getHeaderView(0)
         val profileName=view.findViewById<TextView>(R.id.profileName)
         val profileUserTel=view.findViewById<TextView>(R.id.textView_phoneNumber)
+
+        val imageView=view.findViewById<AppCompatImageView>(R.id.imageView)
+
+        if (SaveData.getProfileImage(this)=="1"){
+            Glide.with(this).load(Links.BASE_URL+"/image/bc207c28-626e-496e-9e7b-e0d43a152a3f?w=565")
+                .into(imageView)
+        }else{
+
+        }
+
 
         val number = SaveData.getPhone1(this)
         profileName.text= SaveData.getName(this)

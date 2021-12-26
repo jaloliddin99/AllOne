@@ -1,10 +1,12 @@
 package com.tesseract.AllOneClient.fragments.parcel.selectLocation
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.content.IntentSender
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
@@ -13,6 +15,7 @@ import android.graphics.drawable.ColorDrawable
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
+import android.os.Looper
 import android.provider.Settings
 import android.util.Log
 import android.view.LayoutInflater
@@ -30,10 +33,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.google.android.gms.common.api.ResolvableApiException
+import com.google.android.gms.location.*
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
+import com.google.android.gms.tasks.Task
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.databinding.FragmentSelectLocationBinding
+import com.tesseract.AllOneClient.fragments.taxiCity.main.FragmentCitySelectLocation
 import com.tesseract.AllOneClient.utils.bitmapDescriptorFromVector
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import com.tesseract.AllOneClient.utils.statusBarColor
@@ -51,14 +58,12 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
     private lateinit var mMap: GoogleMap
     private var MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     private var isGPS = false
-    private val value: Float = 18f
+    private var value: Float = 18f
     var locationName:String=""
     lateinit var dialog: Dialog
 
     private lateinit var viewModel: SelectLocationViewModel
     private val args:FragmentSelectLocationArgs by navArgs()
-
-    private var marker: Marker? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -110,6 +115,7 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
                 Toast.makeText(context, latLngFinal, Toast.LENGTH_SHORT).show()
                 findNavController().navigate(action)
             }else{
+
                 setBackStackData("locationName11", "$usedSelectedLocation###$latLngFinal", true)
             }
 
@@ -127,18 +133,11 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
         )
     }
 
-    override fun onResume() {
-        super.onResume()
-        activity?.statusBarColor(
-            ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
-            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
-            false
-        )
-    }
 
     private var latLngFinal=""
     private var usedSelectedLocation=""
 
+    @SuppressLint("SetTextI18n")
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
@@ -157,12 +156,10 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
         }
 
         viewModel.data.observe(requireActivity(),  {
-            dialog.dismiss()
             try {
                 if (!it.address.isNullOrEmpty()){
                     binding?.textSelect?.text=it.address
                     usedSelectedLocation= it.address!!
-
                     Log.i(TAG, "onMapReady: $usedSelectedLocation $latLngFinal")
                 }else{
                     binding?.textSelect?.text="Not found"
@@ -173,27 +170,25 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
         })
 
 
+        var latLngVal: LatLng
+        var midLatLng = LatLng(0.0, 0.0)
+        mMap.setOnCameraIdleListener {
+            latLngVal = mMap.cameraPosition.target
+            if (latLngVal != midLatLng) {
+                askLocation(latLngVal)
+            }
+            midLatLng = mMap.cameraPosition.target
+
+        }
+
+
+
+
         viewModel.errorMessage.observe(requireActivity(),{
             dialog.dismiss()
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
         })
 
-        mMap.setOnMapClickListener {
-            marker?.remove()
-            loader()
-            latLngFinal = it.latitude.toString() + "," + it.longitude.toString()
-            viewModel.getLocationReverse(headerMapUniversal(requireContext()), latLngFinal)
-
-            marker = mMap.addMarker(
-                MarkerOptions()
-                    .position(LatLng(it.latitude, it.longitude))
-                    .draggable(true).visible(true).title(locationName)
-                    .icon(context?.bitmapDescriptorFromVector(R.drawable.ic_dest)))
-            val yourLocation = LatLng(it.latitude, it.longitude)
-            val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(yourLocation, value)
-            mMap.animateCamera(update)
-
-        }
 
         mMap.isMyLocationEnabled = true
 
@@ -216,8 +211,91 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
 
         isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (!isGPS) {
-            showSettingsAlert()
+            turnOnGPS()
+            getLocationUpdates()
+        } else {
+            getDeviceLocation()
         }
+
+
+    }
+
+    private fun getLocationUpdates() {
+        locationRequest.interval = 20000
+        locationRequest.fastestInterval = 20000
+        locationRequest.smallestDisplacement = 170f //170 m = 0.1 mile
+        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY //according to your app
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult) {
+                if (locationResult.locations.isNotEmpty()) {
+
+                    latLngFinal="${locationResult.lastLocation.latitude},${locationResult.lastLocation.longitude}"
+                    askLocation(
+                        LatLng(
+                            locationResult.lastLocation.latitude,
+                            locationResult.lastLocation.longitude
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+    private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
+
+    private fun getDeviceLocation() {
+        try {
+            val location = mFusedLocationProviderClient.lastLocation
+
+            location.addOnCompleteListener {
+                if (it.isSuccessful) {
+                    latLngFinal="${it.result.latitude},${it.result.longitude}"
+                    moveCamera(LatLng(it.result.latitude, it.result.longitude), 15f)
+                    askLocation(LatLng(it.result.latitude, it.result.longitude))
+                }
+            }
+
+        } catch (e: Exception) {
+
+        }
+
+    }
+
+    private fun turnOnGPS() {
+        val request = LocationRequest.create().apply {
+            interval = 2000
+            priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+        }
+        val builder = LocationSettingsRequest.Builder().addLocationRequest(request)
+        val client: SettingsClient = LocationServices.getSettingsClient(requireActivity())
+        val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
+        task.addOnFailureListener {
+            if (it is ResolvableApiException) {
+                try {
+                    it.startResolutionForResult(requireActivity(), 12345)
+                } catch (sendEx: IntentSender.SendIntentException) {
+                }
+            }
+        }.addOnSuccessListener {
+            getDeviceLocation()
+        }
+    }
+
+    private fun moveCamera(latLng: LatLng, zoom: Float) {
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, zoom))
+    }
+
+    private fun askLocation(latLng: LatLng) {
+        viewModel.getLocationReverse(
+            headerMapUniversal(requireContext()),
+            "${latLng.latitude},${latLng.longitude}"
+        )
+        value=mMap.cameraPosition.zoom
+        val yourLocation = LatLng(latLng.latitude, latLng.longitude)
+        val update: CameraUpdate = CameraUpdateFactory.newLatLngZoom(yourLocation, value)
+        mMap.animateCamera(update)
 
     }
 
@@ -236,8 +314,12 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
                 ) {
                     isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
                     if (!isGPS) {
-                        showSettingsAlert()
+                        turnOnGPS()
                     }
+                    Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT)
+                        .show()
                 }
                 return
             }
@@ -245,31 +327,51 @@ class FragmentSelectLocation : Fragment(), OnMapReadyCallback {
     }
 
 
-    private fun showSettingsAlert() {
-        val alertDialog = AlertDialog.Builder(requireContext())
-        alertDialog.setTitle(getString(R.string.gps_not_enabled))
-        alertDialog.setMessage(getString(R.string.doyou_want_turnOn))
-        alertDialog.setPositiveButton(getString(R.string.yes)) { _, _ ->
-            val intent = Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            startActivity(intent)
-        }
-        alertDialog.setNegativeButton(getString(R.string.no)) { dialog, _ -> dialog.cancel() }
-        alertDialog.show()
-    }
-
-    fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
+    private fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
         findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
         if (doBack)
             findNavController().popBackStack()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mFusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
+        locationRequest = LocationRequest()
+        locationCallback = object : LocationCallback() {
 
-    private fun loader(){
-        dialog = Dialog(requireActivity())
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(false)
-        dialog.setContentView(R.layout.loader)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog.show()
+        }
     }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.statusBarColor(
+            ResourcesCompat.getColor(resources, R.color.darker_color, activity?.theme),
+            ResourcesCompat.getColor(resources, R.color.white, activity?.theme),
+            false
+        )
+        startLocationUpdates()
+    }
+
+    // Start location updates
+    private fun startLocationUpdates() {
+        mFusedLocationProviderClient.requestLocationUpdates(
+            locationRequest,
+            locationCallback,
+            Looper.myLooper()!!
+        )
+    }
+
+    // Stop location updates
+    private fun stopLocationUpdates() {
+        mFusedLocationProviderClient.removeLocationUpdates(locationCallback)
+    }
+
+    // Stop receiving location update when activity not visible/foreground
+    override fun onPause() {
+        super.onPause()
+        stopLocationUpdates()
+    }
+
+
 }

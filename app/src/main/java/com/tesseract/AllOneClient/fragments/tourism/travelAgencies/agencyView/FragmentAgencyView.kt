@@ -1,5 +1,6 @@
 package com.tesseract.AllOneClient.fragments.tourism.travelAgencies.agencyView
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelPagerAdapter
 import com.tesseract.AllOneClient.adapter.tourism.travelAgency.AgencyPagerAdapter
 import com.tesseract.AllOneClient.databinding.FragmentAgencyViewBinding
+import com.tesseract.AllOneClient.dialogs.DialogContactPresenter
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.FragmentHotelView
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.HotelViewModel
 import com.tesseract.AllOneClient.utils.headerMapUniversal
@@ -45,6 +47,7 @@ class FragmentAgencyView:Fragment() {
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -85,6 +88,13 @@ class FragmentAgencyView:Fragment() {
                 val adapter = AgencyPagerAdapter(childFragmentManager, tabLayout.tabCount, requireContext())
                 viewPager2.adapter = adapter
                 tabLayout.setupWithViewPager(viewPager2)
+
+                phoneNumberClicked.setOnClickListener {hello->
+                    if (it.content.phone_number.isEmpty()){
+                        return@setOnClickListener
+                    }
+                    DialogContactPresenter(it.content.phone_number).show(parentFragmentManager, tag)
+                }
             }
         })
 

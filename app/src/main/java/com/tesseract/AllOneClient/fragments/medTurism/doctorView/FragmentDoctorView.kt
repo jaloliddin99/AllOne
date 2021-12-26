@@ -16,6 +16,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.MedPhoneAdapter
 import com.tesseract.AllOneClient.adapter.medTourism.doctors.DoctorsClinicAdapter
 import com.tesseract.AllOneClient.databinding.FragmentMedTurDoctorViewBinding
+import com.tesseract.AllOneClient.dialogs.DialogContactPresenter
 import com.tesseract.AllOneClient.dialogs.medTur.DialogRate
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.doctorView.Clinic
@@ -36,11 +37,10 @@ class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPh
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentMedTurDoctorViewBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(DoctorViewModel::class.java)
         viewModel2=ViewModelProvider(this).get(ClinicsViewModel::class.java)
-
         return binding.root
     }
 
@@ -75,12 +75,22 @@ class FragmentDoctorView:Fragment(), DoctorsClinicAdapter.OnClickListener, MedPh
                 Picasso.get().load(it.content.poster).into(poster)
 
 
-                addr.text=it.content.addr
                 recyclerViewPhones.layoutManager=LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 recyclerViewPhones.adapter=MedPhoneAdapter(it.content.phone_number, this@FragmentDoctorView)
 
+                phoneNumberClicked.setOnClickListener {hello->
+                    if (it.content.phone_number.isEmpty()){
+                        return@setOnClickListener
+                    }
+                    DialogContactPresenter(it.content.phone_number).show(parentFragmentManager, tag)
+                }
 
-                telegram.text=it.content.telegram
+                if (it.content.telegram.isEmpty()){
+                    telegramLinear.visibility=View.GONE
+                }else{
+                    telegramLinear.visibility=View.VISIBLE
+                    telegram.text=it.content.telegram
+                }
                 workTime.text=it.content.work_time
                 description.text=it.content.description
 

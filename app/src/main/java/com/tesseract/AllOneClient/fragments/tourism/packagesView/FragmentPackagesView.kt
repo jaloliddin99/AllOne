@@ -16,6 +16,7 @@ import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.tourPackages.GalleryAdapter
 import com.tesseract.AllOneClient.adapter.tourism.tourPackages.TourismPagerAdapter
 import com.tesseract.AllOneClient.databinding.FragmentTourPackagesViewBinding
+import com.tesseract.AllOneClient.dialogs.DialogContactPresenter
 import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,6 +82,12 @@ class FragmentPackagesView : Fragment() {
                 viewPager2.adapter = adapter
                 tabLayout.setupWithViewPager(viewPager2)
                 nestedScrollView.isFillViewport=true
+                phoneNumberClicked.setOnClickListener {hello->
+                    if (it.content.agency_phone_number.isEmpty()){
+                        return@setOnClickListener
+                    }
+                    DialogContactPresenter(it.content.agency_phone_number).show(parentFragmentManager, tag)
+                }
 
             }
 
@@ -93,7 +100,8 @@ class FragmentPackagesView : Fragment() {
         binding.save.setOnClickListener { someId ->
             try {
                 if (!isFavourite) {
-                    viewModel.addToFavourite(headerMapUniversal(requireContext()), args.packageId)
+                    Toast.makeText(context, "${args.packageId}", Toast.LENGTH_SHORT).show()
+                    viewModel.addToFavourite(headerMapUniversal(requireContext()), args.packageId.toString())
                     binding.loader.loader.visibility = View.VISIBLE
                 }
             } catch (e: Exception) {

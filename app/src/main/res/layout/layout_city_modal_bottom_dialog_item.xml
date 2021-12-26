@@ -6,6 +6,7 @@
     app:cardCornerRadius="@dimen/margin_padding_8dp"
     android:layout_marginStart="@dimen/margin_padding_16"
     app:cardElevation="@dimen/margin_padding_4dp"
+    android:id="@+id/cardItem"
     app:rippleColor="@android:color/transparent"
     android:layout_marginTop="@dimen/margin_padding_4dp"
     android:layout_marginBottom="@dimen/margin_padding_8dp"

@@ -10,10 +10,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.ClinicDoctorsAdapter
 import com.tesseract.AllOneClient.databinding.FragmentClinicDoctorsBinding
 import com.tesseract.AllOneClient.dialogs.medTur.DialogDoctorView
-import com.tesseract.AllOneClient.dialogs.medTur.DialogServices
 import com.tesseract.AllOneClient.fragments.medTurism.clinicInfo.ClinicsViewModel
 import com.tesseract.AllOneClient.model.medTourism.clinicServices.Doctor
-import com.tesseract.AllOneClient.model.medTourism.clinicServices.Service
 
 class FragmentClinicDoctors:Fragment(), ClinicDoctorsAdapter.OnClickListener {
     private var _binding:FragmentClinicDoctorsBinding?=null

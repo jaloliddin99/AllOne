@@ -368,7 +368,7 @@ constructor(private val apiInterface: APIInterface) {
     ) = apiInterface.getClinicsCategories(token)
 
     suspend fun getClinicView(
-        token: Map<String, String>, id: Int
+        token: Map<String, String>, id: String
     ) = apiInterface.getClinicView(token, id)
 
     suspend fun clinicAddToFavourite(
@@ -405,8 +405,9 @@ constructor(private val apiInterface: APIInterface) {
     )=apiInterface.getDoctorView(token, id)
 
     suspend fun getMedTurIndex(
-        token: Map<String, String>
-    )=apiInterface.getMedTurIndex(token)
+        token: Map<String, String>,
+        lat:String, lng:String
+    )=apiInterface.getMedTurIndex(token, lat, lng)
 
     suspend fun getFavourites(token: Map<String, String>, medOrTour:String, page: Int)=apiInterface.getFavourites(token, medOrTour, page)
 
@@ -442,7 +443,7 @@ constructor(private val apiInterface: APIInterface) {
 
     suspend fun packageView(token: Map<String, String>, packageId:Int)=apiInterface.tourPackageView(token, packageId)
 
-    suspend fun packageAddToFav(token: Map<String, String>, id: Int)=apiInterface.addToFavTour(token, id)
+    suspend fun packageAddToFav(token: Map<String, String>, id: String)=apiInterface.addToFavTour(token, id)
 
     suspend fun getTourExplore(token: Map<String, String>)=apiInterface.getTourExplore(token)
 

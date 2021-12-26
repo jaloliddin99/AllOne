@@ -123,16 +123,26 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         SocketHandler.establishConnection()
 
         val mSocket = SocketHandler.getSocket()
-
-
-
         binding.btnGotoSearch.setOnClickListener {
             if (isInProgress){
                 createNewOrder()
             }else{
                 demodifyUI()
             }
+        }
 
+
+        binding.apply {
+            startDestination.setOnClickListener {
+                setBackStackData("startDestination", args.startLocation+"###"+args.startName, true)
+            }
+            endDestination.setOnClickListener {
+                setBackStackData("endDestination", args.endLocation+"###"+args.endName, true)
+            }
+
+            backToHome.setOnClickListener {
+                findNavController().popBackStack()
+            }
         }
 
 
@@ -161,6 +171,7 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                         if (response.status=="client_cancelled"){
                             DialogOrderCancelled(this).show(parentFragmentManager, tag)
                         }
+
                         if (response.status=="client_cancelled"){
                             DialogOrderCancelled(this).show(parentFragmentManager, tag)
                         }
@@ -383,15 +394,18 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             val routingModel = RoutindDetails(false, listBig)
 
             routeViewModel.mapGetRouting(headerMapUniversal(requireContext()), routingModel)
-        }else{
-
         }
-
 
     }
 
     private lateinit var bottomSheet:View
     private fun modalDialogController() {
+
+
+        binding.wishes.setOnClickListener {
+            mBottomSheetBehavior?.state=BottomSheetBehavior.STATE_EXPANDED
+        }
+
         bottomSheet = requireView().findViewById(R.id.bottomSheetNestedScrollView)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         (mBottomSheetBehavior as BottomSheetBehavior<*>).setBottomSheetCallback(object :
@@ -665,18 +679,25 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
                 findNavController().navigate(action)
             }
             paymentMethod.setOnClickListener {
-                val action =
-                    FragmentCityTariffsDirections.actionFragmentCityOrderMapsToFragmentCityPaymentMethod()
+                val action = FragmentCityTariffsDirections.actionFragmentCityOrderMapsToFragmentCityPaymentMethod()
                 findNavController().navigate(action)
             }
 
+            paymentTypeM.setOnClickListener {
+                val action = FragmentCityTariffsDirections.actionFragmentCityOrderMapsToFragmentCityPaymentMethod()
+                findNavController().navigate(action)
+            }
         }
-
     }
 
+    private var previousId=-10
     private lateinit var content:Content
     override fun onItemClick(content: Content, position: Int) {
         this.content=content
+        if (content.id==previousId){
+            mBottomSheetBehavior?.state=BottomSheetBehavior.STATE_EXPANDED
+        }
+        previousId=content.id
         Common.cityTariffRecyclerView=position
         binding.recyclerBigCarImages.scrollToPosition(Common.cityTariffRecyclerView)
         arrivalTime.text=content.arrival_time
@@ -699,26 +720,33 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         val latLngBounds:LatLngBounds.Builder=LatLngBounds.Builder()
         val startDestination=LatLng(args.startLocation.split(",")[0].toDouble(),args.startLocation.split(",")[1].toDouble() )
 
-        if (args.endLocation.isNotEmpty()){
+        mMap.addMarker(
+            MarkerOptions().position(startDestination)
+                .icon(requireContext().bitmapDescriptorFromVector(R.drawable.ic_dest)))
+        mMap.setPadding(0, 0, 0, dipToPixels(requireContext(), 180f).toInt())
 
+
+        if (args.endLocation.isNotEmpty()){
             val endDestination=LatLng(args.endLocation.split(",")[0].toDouble(),args.endLocation.split(",")[1].toDouble() )
             latLngBounds.include(endDestination)
+            latLngBounds.include(startDestination)
+
+            val cameraUpdate:CameraUpdate=CameraUpdateFactory.newLatLngBounds(latLngBounds.build(), dipToPixels(requireContext(), 30f).toInt())
+            mMap.animateCamera(cameraUpdate, 10, object :GoogleMap.CancelableCallback{
+                override fun onFinish() {
+
+                }
+
+                override fun onCancel() {
+
+                }
+
+            })
+        }else{
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(startDestination, 18f))
         }
 
-        latLngBounds.include(startDestination)
 
-
-        val cameraUpdate:CameraUpdate=CameraUpdateFactory.newLatLngBounds(latLngBounds.build(), dipToPixels(requireContext(), 30f).toInt())
-        mMap.animateCamera(cameraUpdate, 10, object :GoogleMap.CancelableCallback{
-            override fun onFinish() {
-
-            }
-
-            override fun onCancel() {
-
-            }
-
-        })
 
 
         getBackStackData<ArrayList<StationModel>>("CityNewStations", true) {
@@ -862,9 +890,6 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         )
     }
 
-    private fun bothLocationSelected():Boolean{
-        return args.endLocation.isNotEmpty()
-    }
     private var opt: Opt?=null
 
     override fun onCargoSelect(opt: Opt) {
@@ -881,6 +906,12 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
         _binding=null
     }
 
+
+    fun <T> Fragment.setBackStackData(key: String, data: T, doBack: Boolean = false) {
+        findNavController().previousBackStackEntry?.savedStateHandle?.set(key, data)
+        if (doBack)
+            findNavController().popBackStack()
+    }
 
 
 

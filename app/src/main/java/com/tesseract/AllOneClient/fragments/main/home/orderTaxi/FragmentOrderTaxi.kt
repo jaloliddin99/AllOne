@@ -6,6 +6,7 @@ import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -174,6 +175,9 @@ class FragmentOrderTaxi : Fragment(),
 
         getBackStackData<String>("locationName11", true) {
             selectedLocationDisplay = it.split("###")[0]
+
+            Toast.makeText(context, "${it.split("###")[1]}", Toast.LENGTH_SHORT).show()
+
             selectedLocation = it.split("###")[1]
             isReady()
             restoreStateOf()
@@ -501,6 +505,7 @@ class FragmentOrderTaxi : Fragment(),
     private fun gotoPayments() {
 
         binding.goToPayment.setOnClickListener {
+            Toast.makeText(context, "${selectedLocation}", Toast.LENGTH_SHORT).show()
             if (!userNumberSelected || !dateSelected || selectedLocation.isEmpty()) {
                 return@setOnClickListener
             }

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/white_background_top_corner">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/line"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_padding_12dp"
+        android:src="@drawable/ic_line" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/cancel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="@dimen/dimen_32dp"
+        android:layout_height="@dimen/dimen_32dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:padding="@dimen/margin_padding_8dp"
+        android:elevation="@dimen/margin_padding_12dp"
+        android:layout_gravity="end"
+        android:layout_margin="@dimen/margin_padding_12dp"
+        android:background="?android:selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_ix_shape"
+        app:tint="@color/black" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:listitem="@layout/layout_med_phone_items"
+        app:layout_constraintTop_toBottomOf="@id/cancel"
+        app:layout_constraintStart_toStartOf="parent"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/margin_padding_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/recyclerView"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
