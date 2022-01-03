@@ -21,7 +21,7 @@ import com.tesseract.AllOneClient.utils.headerMapUniversal
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class DialogHotelRoomView(private val hotelId:Int, private val roomId:Int):BottomSheetDialogFragment() {
+class DialogHotelRoomView(private val hotelId:Int, private val roomId:Int, private val fromWhichLayout:Int):BottomSheetDialogFragment() {
 
     private var _binding:DialogHotelRoomViewBinding?=null
     private val binding get() = _binding!!
@@ -33,11 +33,14 @@ class DialogHotelRoomView(private val hotelId:Int, private val roomId:Int):Botto
         setStyle(STYLE_NORMAL, R.style.AppBottomSheetDialogTheme)
     }
 
+    private var tourismOrMed=""
+    private var hotelOrSan=""
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= DialogHotelRoomViewBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(HotelViewModel::class.java)
         return binding.root
@@ -45,6 +48,14 @@ class DialogHotelRoomView(private val hotelId:Int, private val roomId:Int):Botto
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (fromWhichLayout==0){
+            tourismOrMed="tourism"
+            hotelOrSan="hotel"
+        }else{
+            tourismOrMed="med_tourism"
+            hotelOrSan="sanatorium"
+        }
 
         viewModel.roomError.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
@@ -54,7 +65,7 @@ class DialogHotelRoomView(private val hotelId:Int, private val roomId:Int):Botto
             dialog?.dismiss()
         }
 
-        viewModel.roomView(headerMapUniversal(requireContext()), hotelId, roomId)
+        viewModel.roomView(headerMapUniversal(requireContext()),tourismOrMed, hotelOrSan, hotelId, roomId)
 
         viewModel.roomView.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE

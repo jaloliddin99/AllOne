@@ -780,9 +780,11 @@ interface APIInterface {
     /*===========HOTELS ===============*/
 
 
-    @GET("tourism/hotels")
+    @GET("{tourismOrMed}/{hotelOrSan}")
     suspend fun getHotelIndex(
         @HeaderMap headers: Map<String, String>,
+        @Path("tourismOrMed") tourismOrSan:String,
+        @Path("hotelOrSan") hotelOrSan:String,
         @Query("q") query:String,
         @Query("country_id") country_id: Int,
         @Query("currency_id") currency_id: Int,
@@ -790,24 +792,32 @@ interface APIInterface {
         @Query("page") page:Int
     ):Response<HotelIndex>
 
-    @GET("tourism/hotel/{id}")
+
+    @GET("{tourismOrMed}/{hotelOrSan}/{id}")
     suspend fun getHotelView(
         @HeaderMap headers: Map<String, String>,
+        @Path("tourismOrMed") tourismOrSan:String,
+        @Path("hotelOrSan") hotelOrSan:String,
         @Path("id") hotelId:Int
     ):Response<TourHotelView>
 
-    @POST("tourism/hotel/{id}/add_to_favorites")
+    @POST("{tourismOrMed}/{hotelOrSan}/{id}/add_to_favorites")
     suspend fun hotelAddToFav(
         @HeaderMap headers: Map<String, String>,
+        @Path("tourismOrMed") tourismOrSan:String,
+        @Path("hotelOrSan") hotelOrSan:String,
         @Path("id") location: Int
     ):Response<ClinicAddToFavouriteModel>
 
-    @GET("tourism/hotel/{hotelId}/room/{roomId}")
+    @GET("{tourismOrMed}/{hotelOrSan}/{hotelId}/room/{roomId}")
     suspend fun getRoomView(
         @HeaderMap headers: Map<String, String>,
+        @Path("tourismOrMed") tourismOrSan:String,
+        @Path("hotelOrSan") hotelOrSan:String,
         @Path("hotelId") hotelId: Int,
         @Path("roomId") roomId: Int
     ):Response<RoomView>
+
 
 
     /*=============AGENCY ===================*/
@@ -839,8 +849,6 @@ interface APIInterface {
         @HeaderMap headers: Map<String, String>,
         @Path("id") agencyId:Int
     ):Response<ClinicAddToFavouriteModel>
-
-
 
     /*******************************CHAT API*******************************************/
     /**Chat api*/

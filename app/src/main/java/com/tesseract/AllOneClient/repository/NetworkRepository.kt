@@ -477,17 +477,17 @@ constructor(private val apiInterface: APIInterface) {
 
     //HOTELS
 
-    suspend fun getHotelIndex(token: Map<String, String>, query: String, countryId: Int, currencyId: Int, sort: String, page: Int)=
-        apiInterface.getHotelIndex(token, query, countryId, currencyId, sort, page)
+    suspend fun getHotelIndex(token: Map<String, String>, tourismOrMed:String,hotelOrSan:String,  query: String, countryId: Int, currencyId: Int, sort: String, page: Int)=
+        apiInterface.getHotelIndex(token,tourismOrMed,hotelOrSan, query, countryId, currencyId, sort, page)
 
-    suspend fun getHotelView(token: Map<String, String>, hotelId:Int)=
-        apiInterface.getHotelView(token, hotelId)
+    suspend fun getHotelView(token: Map<String, String>,tourismOrMed:String,hotelOrSan:String, hotelId:Int)=
+        apiInterface.getHotelView(token,tourismOrMed, hotelOrSan, hotelId)
 
-    suspend fun hotelAddToFav(token: Map<String, String>, hotelId:Int)=
-        apiInterface.hotelAddToFav(token, hotelId)
+    suspend fun hotelAddToFav(token: Map<String, String>,tourismOrMed:String,hotelOrSan:String, hotelId:Int)=
+        apiInterface.hotelAddToFav(token,tourismOrMed, hotelOrSan, hotelId)
 
-    suspend fun getRoomView(token: Map<String, String>, hotelId: Int, roomId:Int)=
-        apiInterface.getRoomView(token, hotelId, roomId)
+    suspend fun getRoomView(token: Map<String, String>,tourismOrMed:String,hotelOrSan:String, hotelId: Int, roomId:Int)=
+        apiInterface.getRoomView(token,tourismOrMed, hotelOrSan, hotelId, roomId)
     /*=============AGENCY ===================*/
 
     suspend fun getTravelAgencies(token: Map<String, String>, query: String, countryId: Int, sort: String, page: Int)=

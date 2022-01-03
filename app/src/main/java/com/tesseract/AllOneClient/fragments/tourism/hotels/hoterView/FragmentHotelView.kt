@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.tabs.TabLayout
 import com.squareup.picasso.Picasso
+import com.tesseract.AllOneClient.Common.Common
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.clinics.PagerAdapter
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelPagerAdapter
@@ -31,14 +32,13 @@ class FragmentHotelView :Fragment() {
     private val binding get() = _binding!!
     private val args: FragmentHotelViewArgs by navArgs()
 
-
     private lateinit var viewModel: HotelViewModel
     private val shareViewModel: HotelViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentHotelViewBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(HotelViewModel::class.java)
         return binding.root
@@ -47,12 +47,25 @@ class FragmentHotelView :Fragment() {
     companion object{
         var hotelId:Int=-10
     }
+    private var tourismOrMed=""
+    private var hotelOrSan=""
 
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.fromWhichLayout==0){
+            Common.fromWhichLayout =0
+            tourismOrMed="tourism"
+            hotelOrSan="hotel"
+        }else{
+            Common.fromWhichLayout =1
+            tourismOrMed="med_tourism"
+            hotelOrSan="sanatorium"
+        }
+
         var isFavourite=false
-        viewModel.hotelView(headerMapUniversal(requireContext()), args.hotelId)
+        viewModel.hotelView(headerMapUniversal(requireContext()), tourismOrMed,hotelOrSan, args.hotelId)
 
         viewModel.errorM.observe(viewLifecycleOwner, {
             binding.loader.loader.visibility=View.GONE
@@ -104,7 +117,7 @@ class FragmentHotelView :Fragment() {
         binding.save.setOnClickListener { someId->
             try {
                 if (!isFavourite){
-                    viewModel.hotelAddToFav(headerMapUniversal(requireContext()),args.hotelId)
+                    viewModel.hotelAddToFav(headerMapUniversal(requireContext()),tourismOrMed,hotelOrSan,args.hotelId)
                     binding.loader.loader.visibility=View.VISIBLE
                 }
             }catch (e: Exception){

@@ -41,7 +41,7 @@
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="40dp"
+                android:layout_marginEnd="48dp"
                 android:layout_marginStart="@dimen/margin_padding_16"
                 android:fontFamily="@font/inter_semibold"
                 android:textColor="@color/black"

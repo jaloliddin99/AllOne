@@ -31,7 +31,7 @@ class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentHotelContactsItemBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -41,29 +41,21 @@ class FragmentHotelContacts:Fragment(), MedPhoneAdapter.OnClickListener {
 
         binding.apply {
             shareViewModel.mutableSearchItem.observe(viewLifecycleOwner, {
-
                 recyclerView.apply {
-                    layoutManager=
-                        LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                    layoutManager= LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter= ClinicImagesAdapter(it.content.gallery)
                 }
                 addr.text=it.content.addr
-                recyclerViewPhones.layoutManager=
-                    LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                recyclerViewPhones.layoutManager= LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 recyclerViewPhones.adapter= MedPhoneAdapter(it.content.phone_number, this@FragmentHotelContacts)
 
                 telegram.text=it.content.telegram
                 website.text=it.content.website
                 description.text=it.content.description
-
                 implementFlowLayout(it.content.hotel_facilities)
 
             })
         }
-
-
-
-
     }
 
     private fun implementFlowLayout(hotelFacility: List<HotelFacility>){

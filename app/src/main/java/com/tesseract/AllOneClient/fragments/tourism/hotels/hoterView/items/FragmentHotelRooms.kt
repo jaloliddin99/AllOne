@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tesseract.AllOneClient.Common.Common.fromWhichLayout
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelRoomAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelRoomsBinding
 import com.tesseract.AllOneClient.dialogs.tourism.DialogHotelRoomView
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.FragmentHotelView
 import com.tesseract.AllOneClient.fragments.tourism.hotels.hoterView.HotelViewModel
 import com.tesseract.AllOneClient.model.tourism.hotels.hotelView.HotelRoom
-import dagger.hilt.android.AndroidEntryPoint
 
 class FragmentHotelRooms : Fragment(), HotelRoomAdapter.OnChipClickListener {
 
@@ -26,7 +24,7 @@ class FragmentHotelRooms : Fragment(), HotelRoomAdapter.OnChipClickListener {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHotelRoomsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -36,21 +34,16 @@ class FragmentHotelRooms : Fragment(), HotelRoomAdapter.OnChipClickListener {
 
         binding.apply {
             shareViewModel.mutableSearchItem.observe(viewLifecycleOwner, {
-
                 recyclerView.apply {
-                    layoutManager =
-                        LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                    layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                     adapter = HotelRoomAdapter(this@FragmentHotelRooms, it.content.hotel_rooms)
                 }
-
             })
         }
-
-
     }
 
     override fun onItemClicked(position: HotelRoom) {
-        DialogHotelRoomView(FragmentHotelView.hotelId, position.id).show(parentFragmentManager, tag)
+        DialogHotelRoomView(FragmentHotelView.hotelId, position.id, fromWhichLayout).show(parentFragmentManager, tag)
     }
 
 }

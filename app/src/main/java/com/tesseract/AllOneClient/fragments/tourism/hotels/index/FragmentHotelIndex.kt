@@ -13,6 +13,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.Common.Common
+import com.tesseract.AllOneClient.Common.Common.fromWhichLayout
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.tourism.hotel.HotelIndexAdapter
 import com.tesseract.AllOneClient.databinding.FragmentHotelIndexBinding
@@ -36,11 +37,15 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
     private var isFirst:Boolean=true
     private var isFirstView:Boolean=true
 
+    private var tourismOrMed=""
+    private var hotelOrSan=""
+
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding= FragmentHotelIndexBinding.inflate(inflater, container, false)
         viewModel=ViewModelProvider(this).get(HotelINdexViewModel::class.java)
         return binding.root
@@ -48,6 +53,21 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (args.fromWhichLayout==0){
+            fromWhichLayout=0
+            tourismOrMed="tourism"
+            hotelOrSan="hotels"
+            binding.toolbarTitle.text=getString(R.string.hotels)
+            binding.searchView.queryHint=getString(R.string.search_hotels)
+        }else{
+            fromWhichLayout=1
+            tourismOrMed="med_tourism"
+            hotelOrSan="sanatoriums"
+            binding.toolbarTitle.text=getString(R.string.sanatoriums)
+            binding.searchView.queryHint=getString(R.string.searchSanatoriums)
+        }
+
         Common.hotelIndexPager = 1
 
         if (currencyContent.name.isNotEmpty()){
@@ -67,10 +87,10 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
             sorting=args.defaultSort
             countryContent.id=args.uzbId
             currencyContent.id=args.uzbDefaultCurrencyId
-            viewModel.startHotelIndex(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting)
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()),tourismOrMed, hotelOrSan, queryTextChange, countryContent.id, currencyContent.id, sorting)
         }
         if (!isFirstView&&!isFirst){
-            viewModel.startHotelIndex(headerMapUniversal(requireContext()), queryTextChange, countryContent.id, currencyContent.id, sorting)
+            viewModel.startHotelIndex(headerMapUniversal(requireContext()), tourismOrMed, hotelOrSan,queryTextChange, countryContent.id, currencyContent.id, sorting)
         }
 
         adapter=HotelIndexAdapter(this, mutableSetOf())
@@ -91,6 +111,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                 override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
                     viewModel.hotelIndex(
                         headerMapUniversal(requireContext()),
+                        tourismOrMed, hotelOrSan,
                         queryTextChange,
                         countryContent.id,
                         currencyContent.id,
@@ -148,6 +169,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
         Common.hotelIndexPager = 1
         viewModel.hotelIndex(
             headerMapUniversal(requireContext()),
+            tourismOrMed, hotelOrSan,
             queryTextChange,
             countryContent.id,
             currencyContent.id,
@@ -189,7 +211,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
 
     override fun onChipClicked(position: Data) {
 
-        val action=FragmentHotelIndexDirections.actionFragmentHotelIndexToFragmentHotelView(position.id)
+        val action=FragmentHotelIndexDirections.actionFragmentHotelIndexToFragmentHotelView(position.id, args.fromWhichLayout)
         isFirstView=false
         findNavController().navigate(action)
 
@@ -242,6 +264,7 @@ class FragmentHotelIndex:Fragment(), HotelIndexAdapter.OnChipClickListener {
                     queryTextChange=newText!!
                     viewModel.hotelIndex(
                         headerMapUniversal(requireContext()),
+                        tourismOrMed, hotelOrSan,
                         queryTextChange,
                         countryContent.id,
                         currencyContent.id,

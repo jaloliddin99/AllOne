@@ -711,6 +711,9 @@
     <string name="please_enter_receiver_number">Пожалуйста, введите номер телефона получателя</string>
     <string name="please_enter_receiver_name">Пожалуйста, введите имя получателя</string>
     <string name="nearClinicsToYOu">Клиники рядом с вами</string>
+    <string name="camera_and_location_rationale">give permission to contacts and location request</string>
+    <string name="sanatoriums">"Cанатории "</string>
+    <string name="searchSanatoriums">поиск санаториев</string>
 
     <string-array name="sort_array">
         <item>by_popularity</item>

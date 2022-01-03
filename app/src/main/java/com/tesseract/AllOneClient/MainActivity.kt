@@ -4,6 +4,7 @@ import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.app.Activity
+import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
 import android.os.Build
@@ -12,7 +13,9 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
@@ -30,11 +33,14 @@ import com.tesseract.AllOneClient.databinding.ActivityMainBinding
 import com.tesseract.AllOneClient.fragments.profile.main.ProfileViewModel
 import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
+import pub.devrel.easypermissions.AfterPermissionGranted
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import java.util.*
 
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
@@ -47,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         val navView=findViewById<NavigationView>(R.id.navView)
         val view:View=navView.getHeaderView(0)
@@ -59,8 +65,6 @@ class MainActivity : AppCompatActivity() {
         if (SaveData.getProfileImage(this)=="1"){
             Glide.with(this).load(Links.BASE_URL+"/image/bc207c28-626e-496e-9e7b-e0d43a152a3f?w=565")
                 .into(imageView)
-        }else{
-
         }
 
 
@@ -95,7 +99,6 @@ class MainActivity : AppCompatActivity() {
 //            .build()
 
         languageConfig()
-        getPermissions()
 
         binding.navView.setNavigationItemSelectedListener (object :NavigationView.OnNavigationItemSelectedListener{
             override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -351,12 +354,9 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
         binding.bottomNav.setOnNavigationItemReselectedListener {}
 
-
-
-
+        methodRequiresTwoPermission()
 
     }
 
@@ -415,6 +415,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun setLocale(activity: Activity, languageCode: String) {
         val locale = Locale(languageCode)
         Locale.setDefault(locale)
@@ -424,13 +425,62 @@ class MainActivity : AppCompatActivity() {
         resources.updateConfiguration(config, resources.displayMetrics)
     }
 
-    private fun getPermissions() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            requestPermissions(
-                arrayOf(
-                    Manifest.permission.READ_CONTACTS
-                ), 1
+//    private fun getPermissions() {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            requestPermissions(
+//                arrayOf(
+//                    Manifest.permission.READ_CONTACTS
+//                ), 1
+//            )
+//        }
+//    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        // Forward results to EasyPermissions
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+
+    }
+
+    @AfterPermissionGranted(123)
+    private fun methodRequiresTwoPermission() {
+        val perms = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.ACCESS_FINE_LOCATION)
+        if (EasyPermissions.hasPermissions(this, *perms)) {
+            // Already have permission, do the thing
+
+        } else {
+            // Do not have permissions, request them now
+
+            EasyPermissions.requestPermissions(
+                this, getString(R.string.camera_and_location_rationale),
+                123, *perms
             )
         }
     }
+
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if (EasyPermissions.somePermissionDenied(this, *perms.map { it }.toTypedArray())){
+            AppSettingsDialog.Builder(this).build().show()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode==AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE){
+
+        }
+    }
+
+
 }

@@ -1207,6 +1207,9 @@
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/fade_out"/>
 
+        <argument android:name="fromWhichLayout"
+             app:argType="integer"/>
+
         <argument
             android:name="uzbId"
             app:argType="integer" />
@@ -1227,6 +1230,8 @@
         android:label="fragment_hotel_view"
         tools:layout="@layout/fragment_hotel_view">
         <argument android:name="hotelId"
+            app:argType="integer"/>
+        <argument android:name="fromWhichLayout"
             app:argType="integer"/>
     </fragment>
     <fragment

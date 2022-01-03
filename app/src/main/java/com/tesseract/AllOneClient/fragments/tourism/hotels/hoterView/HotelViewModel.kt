@@ -20,9 +20,9 @@ class HotelViewModel @Inject constructor(private val repository: NetworkReposito
 
     val errorM=MutableLiveData<String>()
 
-    fun hotelView(token: Map<String, String>, hotelId:Int)=viewModelScope.launch {
+    fun hotelView(token: Map<String, String>,tourismOrMed:String,hotelOrSan:String, hotelId:Int)=viewModelScope.launch {
         try {
-            repository.getHotelView(token, hotelId).let {
+            repository.getHotelView(token,tourismOrMed, hotelOrSan, hotelId).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         hotelModel.postValue(it.body())
@@ -41,9 +41,9 @@ class HotelViewModel @Inject constructor(private val repository: NetworkReposito
     val hotelAddToFav=MutableLiveData<ClinicAddToFavouriteModel>()
     val hotelError=MutableLiveData<String>()
 
-    fun hotelAddToFav(token: Map<String, String>, hotelId: Int)=viewModelScope.launch {
+    fun hotelAddToFav(token: Map<String, String>, tourismOrMed:String,hotelOrSan:String,hotelId: Int)=viewModelScope.launch {
         try {
-            repository.hotelAddToFav(token, hotelId).let {
+            repository.hotelAddToFav(token,tourismOrMed, hotelOrSan, hotelId).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         hotelAddToFav.postValue(it.body())
@@ -62,9 +62,9 @@ class HotelViewModel @Inject constructor(private val repository: NetworkReposito
     val roomView=MutableLiveData<RoomView>()
     val roomError=MutableLiveData<String>()
 
-    fun roomView(token: Map<String, String>, hotelId: Int, roomId:Int)=viewModelScope.launch {
+    fun roomView(token: Map<String, String>,tourismOrMed:String,hotelOrSan:String, hotelId: Int, roomId:Int)=viewModelScope.launch {
         try {
-            repository.getRoomView(token, hotelId, roomId).let {
+            repository.getRoomView(token,tourismOrMed, hotelOrSan, hotelId, roomId).let {
                 if (it.isSuccessful){
                     if (it.body()?.success==true){
                         roomView.postValue(it.body())

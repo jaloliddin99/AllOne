@@ -1,10 +1,7 @@
 package com.tesseract.AllOneClient.fragments.medTurism.mainClinic
 
-import android.Manifest
 import android.content.Context
 import android.content.IntentSender
-import android.content.pm.PackageManager
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.Looper
@@ -12,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -22,19 +17,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.common.api.ResolvableApiException
 import com.google.android.gms.location.*
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.tasks.Task
 import com.tesseract.AllOneClient.R
 import com.tesseract.AllOneClient.adapter.medTourism.*
 import com.tesseract.AllOneClient.databinding.FragmentMedTurizmEntranceBinding
-import com.tesseract.AllOneClient.fragments.taxiCity.main.FragmentCitySelectLocation
 import com.tesseract.AllOneClient.model.medTourism.MainMedModel
 import com.tesseract.AllOneClient.model.medTourism.medMain.NearbyClinic
 import com.tesseract.AllOneClient.model.medTourism.medMain.PopularCategory
 import com.tesseract.AllOneClient.model.medTourism.medMain.PopularClinic
 import com.tesseract.AllOneClient.model.medTourism.medMain.PopularDoctor
 import com.tesseract.AllOneClient.utils.headerMapUniversal
-import com.tesseract.AllOneClient.utils.statusBarColor
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,17 +54,6 @@ class FragmentMainClinic : Fragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
 
         binding.backToHome.setOnClickListener {
             findNavController().popBackStack()
@@ -102,6 +83,10 @@ class FragmentMainClinic : Fragment(),
         binding.apply {
 
             viewModel.mainIndex.observe(viewLifecycleOwner, {
+                worldDefCurrId=it.content.world_default_currency_id
+                uzbCountryId=it.content.uzb_country_id
+                uzbDefCurrId=it.content.uzb_default_currency_id
+                defSort=it.content.default_sort
                 recyclerViewChip.apply {
                     layoutManager=LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                     adapter= ChipAdapter(this@FragmentMainClinic, it.content.popular_categories)
@@ -213,39 +198,13 @@ class FragmentMainClinic : Fragment(),
                     viewModel.mainIndex(headerMapUniversal(requireContext()), it.result.latitude.toString(), it.result.longitude.toString())
                 }
             }
-
         } catch (e: java.lang.Exception) {
 
         }
 
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-        when (requestCode) {
-            FragmentCitySelectLocation.MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-
-                if (grantResults.isNotEmpty()
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                ) {
-                    isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                    if (!isGPS) {
-                        turnOnGPS()
-                    }
-                    Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                return
-            }
-        }
-    }
 
     private fun loadItems(){
         mainMedModel= listOf(
@@ -256,13 +215,22 @@ class FragmentMainClinic : Fragment(),
         )
     }
 
+    var uzbCountryId="-11"
+    var uzbDefCurrId="-11"
+    var worldDefCurrId="-11"
+    var defSort="-11"
+
     override fun onItemClick(position: Int) {
         if (position==0){
             val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentClinics()
             findNavController().navigate(action)
         }
-        if (position==0){
-            val action=FragmentMainClinicDirections.actionFragmentMainClinicToFragmentClinics()
+        if (position==1){
+
+            if (defSort=="-11"||uzbCountryId=="-11"||defSort=="-11")
+                return
+
+            val action=FragmentMainClinicDirections.actionGlobalHotelIndex(1,uzbCountryId.toInt(), uzbDefCurrId.toInt(), defSort)
             findNavController().navigate(action)
         }
 
@@ -327,9 +295,5 @@ class FragmentMainClinic : Fragment(),
     }
 
 
-
-    companion object {
-        private const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-    }
 
 }

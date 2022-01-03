@@ -101,7 +101,7 @@ class FragmentTourismMain : Fragment(),
                 findNavController().navigate(action)
             }
             view4.setOnClickListener {
-                val action=FragmentTourismMainDirections.actionGlobalHotelIndex(uzbId, uzb_default_currency_id, default_sort)
+                val action=FragmentTourismMainDirections.actionGlobalHotelIndex(0,uzbId, uzb_default_currency_id, default_sort)
                 findNavController().navigate(action)
 
             }

@@ -17,13 +17,13 @@ class HotelINdexViewModel @Inject constructor(private val repository: NetworkRep
     val errorM=MutableLiveData<String>()
     val hotelIndex=MutableLiveData<HotelIndex>()
 
-    fun startHotelIndex(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String){
-        hotelIndex(token, query, countryId, currencyId, sort)
+    fun startHotelIndex(token:Map<String, String>, tourismOrMed:String,hotelOrSan:String, query:String, countryId:Int, currencyId:Int, sort:String){
+        hotelIndex(token, tourismOrMed, hotelOrSan, query, countryId, currencyId, sort)
     }
 
-    fun hotelIndex(token:Map<String, String>, query:String, countryId:Int, currencyId:Int, sort:String)=viewModelScope.launch {
+    fun hotelIndex(token:Map<String, String>, tourismOrMed:String,hotelOrSan:String, query:String, countryId:Int, currencyId:Int, sort:String)=viewModelScope.launch {
         try {
-            repository.getHotelIndex(token, query, countryId, currencyId, sort, Common.hotelIndexPager).let {
+            repository.getHotelIndex(token,tourismOrMed, hotelOrSan, query, countryId, currencyId, sort, Common.hotelIndexPager).let {
                 if (it.isSuccessful){
                     Common.hotelIndexPager++
                     if (it.body()?.success==true){

@@ -51,7 +51,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private val binding get() = _binding!!
 
     private var locationManager: LocationManager? = null
-    private var locationListener: LocationListener? = null
     private lateinit var mMap: GoogleMap
     private var isGPS = false
     private var value: Float = 15F
@@ -238,24 +237,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
     private fun bottomSheetListeners() {
         locationManager = context?.getSystemService(Context.LOCATION_SERVICE) as LocationManager
 
-        if (context?.let {
-                ContextCompat.checkSelfPermission(
-                    it,
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                )
-            } != PackageManager.PERMISSION_GRANTED) {
-            activity?.let {
-                ActivityCompat.requestPermissions(
-                    it, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION
-                )
-            }
-        } else {
-            locationListener?.let {
-                locationManager?.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 0f, it)
-            }
-        }
-
 
         val bottomSheet: View = requireView().findViewById(R.id.bottomSheetNestedScrollView)
         mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
@@ -279,18 +260,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         val sydney = LatLng(41.00, 69.00)
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, 16f))
         mMap.uiSettings.isCompassEnabled = false
-
-
-        if (ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            return
-        }
 
 
         binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
@@ -440,33 +409,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
 
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-
-        when (requestCode) {
-            MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION -> {
-
-                if (grantResults.isNotEmpty()
-                    && grantResults[0] == PackageManager.PERMISSION_GRANTED
-                ) {
-                    isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                    if (!isGPS) {
-                        turnOnGPS()
-                    }
-                    Toast.makeText(context, "Permission granted", Toast.LENGTH_SHORT).show()
-                } else {
-                    Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT)
-                        .show()
-                }
-                return
-            }
-        }
-    }
-
     override fun onItemClick(type: SavedLocationData) {
         if (!binding.endDestination.hasFocus()) {
             binding.startDestination.setText(type.address)
@@ -552,9 +494,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         _binding = null
     }
 
-    companion object {
-        const val MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-    }
+
 
     override fun onResume() {
         super.onResume()

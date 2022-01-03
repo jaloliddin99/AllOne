@@ -9,6 +9,7 @@ import java.util.*
 
 object Common {
 
+    var fromWhichLayout=0
     var getAllPonusesPage=1
     var agencyPackagesPager=1
     var travelPagerId=1
