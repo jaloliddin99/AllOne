@@ -57,6 +57,7 @@ class AddCardAdapter(
             val card:GetCardData=cardList[adapterPosition]
             if (adapterPosition!= RecyclerView.NO_POSITION){
                 listener.onItemClick(card)
+
             }
         }
     }

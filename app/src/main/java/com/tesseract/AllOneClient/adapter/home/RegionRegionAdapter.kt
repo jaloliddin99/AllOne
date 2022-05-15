@@ -35,7 +35,6 @@ class RegionRegionAdapter(
 
     override fun onBindViewHolder(holder: RegionItemViewHolder, position: Int) {
         val searchItem : GetRegionDetails =locationFilter[position]
-        Log.i("location size ", ""+locationFilter.size)
         holder.bind(searchItem)
     }
 

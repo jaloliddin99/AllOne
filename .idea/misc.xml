@@ -82,6 +82,7 @@
         <entry key="..\:/Users/User/AndroidStudioProjects/MyTaxiUz/app/src/main/res/layout/layout_saved_addresses.xml" value="0.153125" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyTaxiUz/app/src/main/res/layout/layout_search_item.xml" value="0.15135135135135136" />
         <entry key="..\:/Users/User/AndroidStudioProjects/MyTaxiUz/app/src/main/res/menu/drawer_bottom_nav_menu.xml" value="0.12916666666666668" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable-v24/bg_edit_text.xml" value="0.2495" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable-v24/ic_blackout.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable-v24/shape_payment.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/background_green_corner_12.xml" value="0.269140625" />
@@ -105,27 +106,55 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/gray_radius.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/green_radius.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_add_card.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_arrow_left.xml" value="0.31666666666666665" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_arrow_right_green.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_bigger_user_icon.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_box.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_btn_loc.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_cancel_icon_checked.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car1.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car2.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car3.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car4.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car5.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_icon.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_icon_grey.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_icon_horizontal.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_image_your_tax.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_top.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_top_30_degree.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_top_svg.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_car_without_top.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_chat_color.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_female_vip_car.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_first_wave.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_girls_car.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_item_contener_border.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_location.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_location_on_place.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_location_sma.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_locationn.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_male_vip_car.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_my_car_found.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_paper.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_parment_card_add.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_people.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_profile_user.xml" value="0.265" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_small_car_icon.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_sms_chat_outlined.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_standard_car.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_star.xml" value="0.3081081081081081" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_technical_support.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_tour_avto_procat.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_tour_uzb.xml" value="0.35625" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_travel_big_car.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_user.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_wave_card.xml" value="0.2671875" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_white_car.xml" value="0.2671875" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_work_bag.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/ic_yellow_star_small.xml" value="0.279" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/img_foregraund.xml" value="0.279" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/interior_chat_me.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/interior_chat_you.xml" value="0.35625" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/drawable/progress_circle.xml" value="0.2671875" />
@@ -385,6 +414,7 @@
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/layout/www_test.xml" value="0.22" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/menu/activity_main_drawer.xml" value="0.3359375" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/menu/drawer_bottom_nav_menu.xml" value="0.3359375" />
+        <entry key="..\:/projects/MyTaxiUz/app/src/main/res/menu/notification.xml" value="0.2986111111111111" />
         <entry key="..\:/projects/MyTaxiUz/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3081081081081081" />
       </map>
     </option>

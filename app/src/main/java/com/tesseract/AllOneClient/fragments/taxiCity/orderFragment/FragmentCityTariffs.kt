@@ -406,38 +406,38 @@ class FragmentCityTariffs : Fragment(), OnMapReadyCallback,
             mBottomSheetBehavior?.state=BottomSheetBehavior.STATE_EXPANDED
         }
 
-        bottomSheet = requireView().findViewById(R.id.bottomSheetNestedScrollView)
-        mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
-        (mBottomSheetBehavior as BottomSheetBehavior<*>).setBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() {
-            override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
-                when (newState) {
-                    BottomSheetBehavior.STATE_COLLAPSED -> {
-                        binding.stateExpand.alpha = 0f
-                        binding.layoutLinear.alpha = 1f
+            bottomSheet = requireView().findViewById(R.id.bottomSheetNestedScrollView)
+            mBottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+            (mBottomSheetBehavior as BottomSheetBehavior<*>).setBottomSheetCallback(object :
+                BottomSheetBehavior.BottomSheetCallback() {
+                override fun onStateChanged(@NonNull bottomSheet: View, newState: Int) {
+                    when (newState) {
+                        BottomSheetBehavior.STATE_COLLAPSED -> {
+                            binding.stateExpand.alpha = 0f
+                            binding.layoutLinear.alpha = 1f
 
+                        }
+                        BottomSheetBehavior.STATE_EXPANDED -> {
+                            binding.stateExpand.alpha = 1f
+                            binding.layoutLinear.alpha = 0f
+
+                        }
                     }
-                    BottomSheetBehavior.STATE_EXPANDED -> {
-                        binding.stateExpand.alpha = 1f
-                        binding.layoutLinear.alpha = 0f
+                }
+
+                @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
+                override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {
+                    binding.bottomSheetBackgroundLayer.alpha = slideOffset
+                    if (slideOffset <= 0.5) {
+                        binding.layoutLinear.alpha = 2 * (0.5f - slideOffset)
+                        binding.layoutLinear.elevation = 50 * 2 * (0.5f - slideOffset)
+                    } else {
+                        binding.stateExpand.elevation = 50 * 2 * (slideOffset - 0.5f)
+                        binding.stateExpand.alpha = 2 * (slideOffset - 0.5f)
 
                     }
                 }
-            }
-
-            @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-            override fun onSlide(@NonNull bottomSheet: View, slideOffset: Float) {
-                binding.bottomSheetBackgroundLayer.alpha = slideOffset
-                if (slideOffset <= 0.5) {
-                    binding.layoutLinear.alpha = 2 * (0.5f - slideOffset)
-                    binding.layoutLinear.elevation = 50 * 2 * (0.5f - slideOffset)
-                } else {
-                    binding.stateExpand.elevation = 50 * 2 * (slideOffset - 0.5f)
-                    binding.stateExpand.alpha = 2 * (slideOffset - 0.5f)
-
-                }
-            }
-        })
+            })
 
 
         val bottomSheet2: View = requireView().findViewById(R.id.bottomSheetNestedScrollView2)

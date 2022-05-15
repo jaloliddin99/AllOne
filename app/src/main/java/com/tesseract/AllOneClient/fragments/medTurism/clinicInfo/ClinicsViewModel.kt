@@ -21,6 +21,7 @@ class ClinicsViewModel @Inject constructor(private val repository: NetworkReposi
     val errorFav=MutableLiveData<String>()
     val errorRating= MutableLiveData<String>()
 
+
     fun ratingObserver(token: Map<String, String>, name: String, id: Int, rating:Int, comment: String)=viewModelScope.launch {
         try {
             repository.medTourismClinicRate(token,name, id, rating, comment).let {

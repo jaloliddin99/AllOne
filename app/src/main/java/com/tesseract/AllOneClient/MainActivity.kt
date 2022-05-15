@@ -7,13 +7,11 @@ import android.app.Activity
 import android.content.Intent
 import android.content.res.Configuration
 import android.content.res.Resources
-import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.AppCompatImageView
@@ -43,7 +41,7 @@ import java.util.*
 class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var navController: NavController
+        private lateinit var navController: NavController
     private lateinit var viewModelProfile: ProfileViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,7 +51,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
 
         val navView=findViewById<NavigationView>(R.id.navView)
         val view:View=navView.getHeaderView(0)
@@ -87,54 +85,38 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.findNavController()
         binding.bottomNav.setupWithNavController(navController)
-
-//        binding.bottomNav.getOrCreateBadge(R.id.orderFragment).number = 3
-//        val radius = resources.getDimension(R.dimen.margin_padding_12dp)
-
-//        val bottomBarBackground = binding.bottomNav.background as MaterialShapeDrawable
-//        bottomBarBackground.shapeAppearanceModel = bottomBarBackground.shapeAppearanceModel
-//            .toBuilder()
-//            .setTopRightCorner(CornerFamily.ROUNDED, radius)
-//            .setTopLeftCorner(CornerFamily.ROUNDED, radius)
-//            .build()
-
         languageConfig()
+        binding.navView.setNavigationItemSelectedListener { item ->
+            when (item.itemId) {
 
-        binding.navView.setNavigationItemSelectedListener (object :NavigationView.OnNavigationItemSelectedListener{
-            override fun onNavigationItemSelected(item: MenuItem): Boolean {
-                when(item.itemId){
-
-                    R.id.bonusCard->{
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_bonusFragment2)
-                        binding.drawerLayout.closeDrawers()
-                    }
-                    R.id.paymentMethod->{
-
-                    }
-//                    R.id.charity->{
-//                       // findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_charity)
-//                        val navigationView=binding.bottomNav
-//                        navigationView.menu.findItem(R.id.fragmentGoodMain).isChecked = true
-//                        navigationView.menu.performIdentifierAction(R.id.fragmentGoodMain, 0)
-//
-//                        binding.drawerLayout.closeDrawers()
-//                    }
-                    R.id.language->{
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_changeLanguageFragment)
-                        binding.drawerLayout.closeDrawers()
-                    }
-                    R.id.aboutProgram->{
-                        findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_aboutProgramFragment)
-                        binding.drawerLayout.closeDrawers()
-                    }
+                R.id.bonusCard -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_bonusFragment2)
+                    binding.drawerLayout.closeDrawers()
+                }
+                R.id.paymentMethod -> {
 
                 }
+                //                    R.id.charity->{
+                //                       // findNavController(R.id.nav_host_fragment).navigate(R.id.action_global_charity)
+                //                        val navigationView=binding.bottomNav
+                //                        navigationView.menu.findItem(R.id.fragmentGoodMain).isChecked = true
+                //                        navigationView.menu.performIdentifierAction(R.id.fragmentGoodMain, 0)
+                //
+                //                        binding.drawerLayout.closeDrawers()
+                //                    }
+                R.id.language -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_changeLanguageFragment)
+                    binding.drawerLayout.closeDrawers()
+                }
+                R.id.aboutProgram -> {
+                    findNavController(R.id.nav_host_fragment).navigate(R.id.action_profileFragment_to_aboutProgramFragment)
+                    binding.drawerLayout.closeDrawers()
+                }
 
-                return true
             }
 
-        })
-
+            true
+        }
         binding.apply {
             navController.addOnDestinationChangedListener { _, destination, _ ->
 
@@ -309,6 +291,7 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
                     R.id.fragmentOrderCityAboutTrip->{
                         hideBottomNav()
                     }
+
                     R.id.fragmentOrderParcelAboutTrip->{
                         hideBottomNav()
                     }
@@ -374,7 +357,6 @@ class MainActivity : AppCompatActivity(),EasyPermissions.PermissionCallbacks {
         binding.run {
             bottomAppBar.performShow()
             bottomAppBar.visibility=View.VISIBLE
-
         }
     }
 

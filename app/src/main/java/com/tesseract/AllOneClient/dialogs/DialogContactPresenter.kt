@@ -13,9 +13,10 @@ import com.tesseract.AllOneClient.databinding.DialogContactPresenterBinding
 import com.tesseract.AllOneClient.model.medTourism.doctorView.Content
 import com.tesseract.AllOneClient.utils.gotoContact
 
-class DialogContactPresenter(private val phoneNumber:List<String>):BottomSheetDialogFragment(), MedPhoneAdapter.OnClickListener {
+class DialogContactPresenter(private val phoneNumber: List<String>) : BottomSheetDialogFragment(),
+    MedPhoneAdapter.OnClickListener {
 
-    private var _binding:DialogContactPresenterBinding?=null
+    private var _binding: DialogContactPresenterBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -23,7 +24,7 @@ class DialogContactPresenter(private val phoneNumber:List<String>):BottomSheetDi
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding= DialogContactPresenterBinding.inflate(inflater, container, false)
+        _binding = DialogContactPresenterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -33,9 +34,9 @@ class DialogContactPresenter(private val phoneNumber:List<String>):BottomSheetDi
 
 
         binding.apply {
-            recyclerView.layoutManager=
+            recyclerView.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            recyclerView.adapter= MedPhoneAdapter(phoneNumber, this@DialogContactPresenter)
+            recyclerView.adapter = MedPhoneAdapter(phoneNumber, this@DialogContactPresenter)
 
 
             cancel.setOnClickListener {
@@ -62,7 +63,7 @@ class DialogContactPresenter(private val phoneNumber:List<String>):BottomSheetDi
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding=null
+        _binding = null
     }
 
 

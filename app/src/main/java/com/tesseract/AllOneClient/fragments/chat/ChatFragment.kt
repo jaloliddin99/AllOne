@@ -96,19 +96,17 @@ class ChatFragment : Fragment() {
     }
 
     private fun listener() {
-        chatWriteModel.chatModel.observe(requireActivity(), {
-            binding.loader.loader.visibility=View.GONE
+        chatWriteModel.chatModel.observe(requireActivity()) {
+            binding.loader.loader.visibility = View.GONE
 
             Picasso.get().load(it.content.driver_avatar).into(binding.imageAvater)
             binding.txtName.text = it.content.driver_name
 
-
-            println(it)
-            adapter=ChatAdapter(it.content.messages as ArrayList<Message>)
+            adapter = ChatAdapter(it.content.messages as ArrayList<Message>)
             Toast.makeText(context, "${it.content.messages.size}", Toast.LENGTH_SHORT).show()
             binding.recyclerview.adapter = adapter
 
-        })
+        }
 
         chatWriteModel.error.observe(requireActivity(), {
             binding.loader.loader.visibility=View.GONE

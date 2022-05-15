@@ -49,13 +49,13 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
             true
         )
 
-        binding?.txtSignIn?.setOnTouchListener(OnTouchListener { _, _ ->
-            if (binding?.txtSignIn?.text?.isEmpty()==true){
+        binding?.txtSignIn?.setOnTouchListener { _, _ ->
+            if (binding?.txtSignIn?.text?.isEmpty() == true) {
                 binding?.txtSignIn?.setText("+998 ")
                 binding?.txtSignIn?.text?.length?.let { binding?.txtSignIn?.setSelection(it) }
             }
             false
-        })
+        }
 
         binding?.txtSignIn?.addTextChangedListener(object :TextWatcher{
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -88,23 +88,23 @@ class SignInFragment : Fragment(R.layout.fragment_sign_in) {
 
         }
 
-        viewModel.text.observe(requireActivity(), {
-            if (it.equals("Ok")){
-                if (SaveData.isSignInFragment){
+        viewModel.text.observe(requireActivity()) {
+            if (it.equals("Ok")) {
+                if (SaveData.isSignInFragment) {
                     val action =
                         SignInFragmentDirections.actionSignInFragmentToConfirmPhoneFragment(
                             phoneNumber
                         )
-                    SaveData.isSignInFragment=false
+                    SaveData.isSignInFragment = false
                     findNavController().navigate(action)
-                }else {
-                    SaveData.isSignInFragment=true
+                } else {
+                    SaveData.isSignInFragment = true
                 }
 
-            }else{
+            } else {
                 Toast.makeText(context, "error", Toast.LENGTH_LONG).show()
             }
-        })
+        }
 
     }
 

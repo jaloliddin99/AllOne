@@ -110,18 +110,19 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
 
         }
 
-        viewModel.cardDataList.observe(requireActivity(),  {
-            binding.loader.loader.visibility=View.GONE
-            getCardData=it
-            addCardAdapter= SelectCardToDonate(it as ArrayList<GetCardData>, this, requireContext())
-            binding.recyclerView.adapter=addCardAdapter
+        viewModel.cardDataList.observe(requireActivity()) {
+            binding.loader.loader.visibility = View.GONE
+            getCardData = it
+            addCardAdapter =
+                SelectCardToDonate(it as ArrayList<GetCardData>, this, requireContext())
+            binding.recyclerView.adapter = addCardAdapter
 
             binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                     super.onScrollStateChanged(recyclerView, newState)
                     if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                         val position = getCurrentItem()
-                        clientCardId= getCardData[position].id!!
+                        clientCardId = getCardData[position].id!!
 
                     }
                 }
@@ -129,7 +130,7 @@ class FragmentChooseYourCars: Fragment(),SelectCardToDonate.OnItemClickListener 
 
             binding.recyclerView.onFlingListener = null
             PagerSnapHelper().attachToRecyclerView(binding.recyclerView)
-        })
+        }
 
     }
 

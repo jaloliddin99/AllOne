@@ -60,7 +60,7 @@ class ChangeLanguageFragment: Fragment() {
             binding.english.isChecked=true
         }
 
-        viewModel.changeLang.observe(viewLifecycleOwner, {
+        viewModel.changeLang.observe(viewLifecycleOwner) {
             when (language) {
                 "uz" -> {
                     SaveData.setIsUzbek(requireContext(), true)
@@ -84,7 +84,7 @@ class ChangeLanguageFragment: Fragment() {
                     restartActivity()
                 }
             }
-        })
+        }
 
 
         binding.russian.setOnClickListener {

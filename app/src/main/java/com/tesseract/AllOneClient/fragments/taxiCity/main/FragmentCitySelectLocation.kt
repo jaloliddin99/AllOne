@@ -132,10 +132,10 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             viewModel.savedLocations(headerMapUniversal(requireContext()))
 
-            viewModel.savedLocations.observe(viewLifecycleOwner, {
+            viewModel.savedLocations.observe(viewLifecycleOwner) {
                 recyclerView.adapter =
                     CityAddressesHistoryAdapter(it, this@FragmentCitySelectLocation)
-            })
+            }
 
             viewModel.locationList.observe(viewLifecycleOwner, {
                 try {
@@ -181,7 +181,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         keyboardListener()
     }
 
-    fun View.hideKeyboard() {
+    private fun View.hideKeyboard() {
         val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(windowToken, 0)
     }
@@ -265,26 +265,26 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
         binding.startDestination.addTextChangedListener(startDestinationTextWatcher)
         binding.endDestination.addTextChangedListener(startDestinationTextWatcher2)
 
-        viewModelReverse.data.observe(viewLifecycleOwner, {
+        viewModelReverse.data.observe(viewLifecycleOwner) {
 
 
             when {
                 binding.startDestination.hasFocus() -> {
                     startName = it.address.toString()
                     binding.startDestination.setText(it.address)
-                    binding.startDestination.isPressed=true
+                    binding.startDestination.isPressed = true
                     binding.startDestination.setSelection(binding.startDestination.text.toString().length)
                 }
                 binding.endDestination.hasFocus() -> {
                     endName = it.address.toString()
                     binding.endDestination.setText(it.address)
-                    binding.endDestination.isPressed=true
+                    binding.endDestination.isPressed = true
                     binding.endDestination.setSelection(binding.endDestination.text.toString().length)
                 }
                 else -> {
                     startName = it.address.toString()
                     binding.startDestination.setText(it.address)
-                    binding.startDestination.isPressed=true
+                    binding.startDestination.isPressed = true
                     binding.startDestination.setSelection(binding.startDestination.text.toString().length)
                 }
             }
@@ -292,7 +292,7 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             binding.yourAddress1.text = it.address
             binding.shimmerLayout.stopShimmer()
 
-        })
+        }
 
         isGPS = locationManager!!.isProviderEnabled(LocationManager.GPS_PROVIDER)
         if (!isGPS) {
@@ -302,7 +302,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             getDeviceLocation()
         }
         binding.requestFocus.setOnClickListener {
-
             getDeviceLocation()
         }
 
@@ -337,8 +336,6 @@ class FragmentCitySelectLocation : Fragment(), OnMapReadyCallback,
             }
         }
     }
-
-
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback

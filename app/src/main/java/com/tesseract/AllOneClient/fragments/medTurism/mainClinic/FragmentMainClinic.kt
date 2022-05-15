@@ -153,6 +153,7 @@ class FragmentMainClinic : Fragment(),
             getDeviceLocation()
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mFusedLocationProviderClient =
@@ -172,13 +173,7 @@ class FragmentMainClinic : Fragment(),
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
                 if (locationResult.locations.isNotEmpty()) {
-                    Toast.makeText(
-                        context,
-                        "${locationResult.lastLocation.latitude.toString()}",
-                        Toast.LENGTH_SHORT
-                    ).show()
                     viewModel.mainIndex(headerMapUniversal(requireContext()), locationResult.lastLocation.latitude.toString(), locationResult.lastLocation.longitude.toString())
-
                 }
             }
         }

@@ -6,9 +6,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tesseract.AllOneClient.constants.SaveData
-import com.tesseract.AllOneClient.databinding.*
+import com.tesseract.AllOneClient.databinding.LayoutActiveOrderCityBinding
+import com.tesseract.AllOneClient.databinding.LayoutActiveOrderParcelItemBinding
+import com.tesseract.AllOneClient.databinding.LayoutActiveOrderRegionItemBinding
 import com.tesseract.AllOneClient.model.home.interAreaOrderHistoryModel.OrderList
-import com.tesseract.AllOneClient.model.order.MessageEvent
 import com.tesseract.AllOneClient.model.order.MessageEventActiveOrder
 import org.greenrobot.eventbus.EventBus
 
@@ -24,7 +25,6 @@ class HomeAdapter(
 
 
     override fun getItemViewType(position: Int): Int {
-
         var value = -1
         value = when {
             activeDataList[position].orderType.equals("interarea_parcel_delivery") -> {
@@ -35,7 +35,6 @@ class HomeAdapter(
             }
             else -> City_item
         }
-
         return value
     }
 
@@ -103,8 +102,7 @@ class HomeAdapter(
         @SuppressLint("SetTextI18n")
         fun parcelBind(order: OrderList) {
             itemBinding.parcel.podrobne.setOnClickListener {
-                EventBus.getDefault()
-                    .post(MessageEventActiveOrder(order.orderType, order.id))
+                EventBus.getDefault().post(MessageEventActiveOrder(order.orderType, order.id))
             }
             itemBinding.parcel.title.text = order.title
             itemBinding.parcel.tariff.text = order.tariff+": "

@@ -34,14 +34,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
+                android:layout_marginHorizontal="@dimen/margin_padding_60dp"
                 android:fontFamily="@font/inter_medium"
                 android:text="@string/change_profile"
                 android:textAlignment="center"
-                android:layout_marginHorizontal="@dimen/margin_padding_60dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_20sp" />
 
         </RelativeLayout>
+
 
 
         <androidx.core.widget.NestedScrollView
